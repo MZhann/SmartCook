@@ -12,7 +12,7 @@ const SignUp = () => {
                     <h1 className="text-lg font-bold">Sign up</h1>
                     <p className="text-xs mt-1">
                         Already have an account?
-                        <Link href="#" className="text-[#80CC2D] hover:border-b-[#AAE06E] border-white border-b-2">&nbsp;Log in&nbsp;</Link>
+                        <Link href="/sign-in" className="text-[#80CC2D] hover:border-b-[#AAE06E] border-white border-b-2">&nbsp;Log in&nbsp;</Link>
                     </p>
                     <p className="text-sm mt-5">First name</p>
                     <input

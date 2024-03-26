@@ -12,7 +12,7 @@ const SignIn = () => {
                     <h1 className="text-lg font-bold">Log in</h1>
                     <p className="text-xs mt-1">
                         New user?
-                        <Link href="#" className="text-[#80CC2D] hover:border-b-[#AAE06E] border-white border-b-2">&nbsp;Sign up&nbsp;</Link>
+                        <Link href="/sign-up" className="text-[#80CC2D] hover:border-b-[#AAE06E] border-white border-b-2">&nbsp;Sign up&nbsp;</Link>
                     </p>
                     <p className="text-sm mt-5">Enter your email</p>
                     <input
@@ -31,7 +31,7 @@ const SignIn = () => {
                         placeholder="password"
                         
                     />
-                    <p className="text-[#80CC2D] text-xs mt-2 self-end border-b-2 border-white cursor-pointer hover:border-b-[#AAE06E]">Forgot password?</p>
+                    <Link href='/forgot-password' className="text-[#80CC2D] text-xs mt-2 self-end border-b-2 border-white cursor-pointer hover:border-b-[#AAE06E]">Forgot password?</Link>
                     <button className="text-white bg-[#AAE06E] w-full h-10 rounded-3xl mt-5">Log in</button>
                 </div>
             </div>
