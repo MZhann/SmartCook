@@ -13,9 +13,9 @@ const Navbar = () => {
                 <Link href="#">AI RECIPES</Link>
                 <Link href="#">CHALLENGES</Link>
                 <Link href="#">LEADERBOARD</Link>
-                <div>
+                <Link href={'/sign-in'}>
                     <Image src={enter} className="w-[25px]" alt="log in" />
-                </div>
+                </Link>
             </div>
         </div>
     );
