@@ -5,12 +5,15 @@ import enter from "../../public/images/enter.png";
 import {useRouter} from "next/router";
 
 
-const Navbar = () => {
+const Navbar = ({loggedin, textcolor}) => {
     const router = useRouter();
+   
     return (
         <div className="w-full flex items-center justify-between z-10 mt-5">
-            <Image src={logo} alt="logo" className="w-[150px]" />
-            <div className={`flex space-x-5 ${router.pathname === '/reciept-make' && 'text-white' }`}>
+            <Link href="/main">
+                <Image  src={logo} alt="logo" className="w-[150px]" />
+            </Link>
+            <div className={`flex space-x-5 ${router.pathname === '/reciept-make' || router.pathname === '/ai-generation' ? 'text-white' : 'text-black'}`}>
                 <Link href="#">ALL RECIPES</Link>
                 <Link href="#">AI RECIPES</Link>
                 <Link href="#">CHALLENGES</Link>

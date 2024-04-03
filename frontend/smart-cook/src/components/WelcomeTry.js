@@ -5,6 +5,7 @@ import pan from "../../public/images/pan.png"
 import cheese from "../../public/images/cheese.png"
 import avocado from "../../public/images/avocado.png"
 import oil from "../../public/images/oil.png"
+import Link from "next/link";
 
 const WelcomeTry = () => {
     return (
@@ -16,8 +17,8 @@ const WelcomeTry = () => {
                 <div className="text-white text-5xl tracking-wide">Are you ready for <br></br> culinary challenges?</div>
                 <div className="text-white text-xl mt-5 tracking-wide">Welcome to our unique culinary portal<br></br> where taste, creativity and fun meet!</div>
                 <div className="flex mt-6">
-                    <button className="text-white rounded-3xl px-3 bg-[#AAE06E] p-2 font-bold tracking-wide">Create Recipe</button>
-                    <button className="ml-5 rounded-3xl flex items-center px-5 bg-white tracking-wide"><Image className="mr-3 w-[20px]" src={generateAI} alt="generateImg" /> Recipe Generate</button>
+                    <Link href="/reciept-make" className="text-white rounded-3xl px-3 bg-[#AAE06E] p-2 font-bold tracking-wide">Create Recipe</Link>
+                    <Link href="/ai-generation" className="ml-5 rounded-3xl flex items-center px-5 bg-white tracking-wide"><Image className="mr-3 w-[20px]" src={generateAI} alt="generateImg" /> Recipe Generate</Link>
                 </div>
             </div>
             <div>
