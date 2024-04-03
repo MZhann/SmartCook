@@ -1,6 +1,8 @@
 import React from "react";
 import { useState } from "react";
 import Dropdown from "./Dropdown";
+import magic from "../../../public/images/magic.png";
+import Image from "next/image";
 
 const Options = () => {
     const dishOptions = [
@@ -116,9 +118,10 @@ const Options = () => {
                 </div>
             </div>
             <button
-                className="mt-10 px-4 py-2 bg-[#AAE06E] w-[450px] h-[60px] rounded-full text-white hover:bg-gray-600"
+                className="flex justify-center items-center mt-10 px-4 py-2 bg-[#AAE06E] w-[450px] h-[60px] rounded-full text-white hover:bg-green-400"
                 onClick={handleSubmit}
             >
+                <Image src={magic} alt="magic" className="w-[35px] ml-[-20px] mr-3 " />
                 Create
             </button>
         </div>
