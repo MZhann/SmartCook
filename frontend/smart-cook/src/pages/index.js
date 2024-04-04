@@ -23,9 +23,7 @@ const Main = () => {
                 <MiniGames/>
                 <div className={`flex flex-row justify-around`}>
                     <EightPuzzle/>
-
                     <DynamicQuiz/>
-
                 </div>
                 <FollowAlong/>
                 <Footer/>
