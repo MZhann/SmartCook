@@ -43,7 +43,7 @@ const SignUp = () => {
         if (validate()) {
             const requestBody = {
                 first_name: name,
-                phone_number: phone,
+                last_name: phone,
                 email: email,
                 password: password
             };
@@ -98,6 +98,15 @@ const SignUp = () => {
                         value={name}
                         onChange={(e) => setName(e.target.value)}
                     />
+                    <p className="text-sm mt-5">Last name</p>
+                    <input
+                        id="last_name"
+                        className={`w-full rounded-3xl border-2 h-10 shadow-gray-500 text-xs p-3 mt-2`}
+                        placeholder="your.email@gmail.com"
+                        type="text"
+                        value={phone}
+                        onChange={(e) => setPhone(e.target.value)}
+                    />
                     <p className="text-sm mt-5">Email</p>
                     <input
                         id="email"
@@ -106,15 +115,6 @@ const SignUp = () => {
                         type="email"
                         value={email}
                         onChange={(e) => setEmail(e.target.value)}
-                    />
-                    <p className="text-sm mt-5">Phone</p>
-                    <input
-                        id="email"
-                        className={`w-full rounded-3xl border-2 h-10 shadow-gray-500 text-xs p-3 mt-2`}
-                        placeholder="your.email@gmail.com"
-                        type="email"
-                        value={phone}
-                        onChange={(e) => setPhone(e.target.value)}
                     />
                     <p className="text-sm mt-5">Create a password</p>
                     <input

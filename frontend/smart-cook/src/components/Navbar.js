@@ -13,7 +13,7 @@ const Navbar = ({loggedin, textcolor}) => {
             <Link href="/main">
                 <Image  src={logo} alt="logo" className="w-[150px]" />
             </Link>
-            <div className={`flex space-x-5 ${router.pathname === '/reciept-make' || router.pathname === '/ai-generation' ? 'text-white' : 'text-black'}`}>
+            <div className={`flex space-x-5 ${router.pathname !== '/reciept-make' ? 'text-white' : 'text-black'}`}>
                 <Link href="#">ALL RECIPES</Link>
                 <Link href="#">AI RECIPES</Link>
                 <Link href="#">CHALLENGES</Link>

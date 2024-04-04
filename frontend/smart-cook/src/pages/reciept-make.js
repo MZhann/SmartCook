@@ -33,6 +33,59 @@ const RecieptMake = () => {
                             </div>
                         </div>
                         <div
+                            className="w-[750px] mt-[30px] p-[24px]  bg-white flex flex-col rounded-lg ">
+                            <h1 className={'text-[24px]'}>Dish details</h1>
+                            <div className="">
+                                <div className={'flex flex-col'}>
+                                    <div>
+                                        <p className="text-[16px] mt-5 ">Title</p>
+                                        <div className={'w-full justify-between flex-row flex items-center'}>
+                                            <input
+                                                id="ingredient"
+                                                className={`w-full rounded-3xl border-2 h-10 shadow-gray-500 text-xs p-3 mt-2`}
+                                                placeholder="Enter text here"
+                                                type="text"
+                                            />
+                                        </div>
+                                    </div>
+                                    <div className={`flex flex-row w-full gap-7`}>
+                                        <div className={`w-1/2`}>
+                                            <p className="text-[16px] mt-5 ">Serves</p>
+                                            <div className={'w-full justify-between flex-row flex items-center'}>
+                                                <input
+                                                    id="ingredient"
+                                                    className={`w-full rounded-3xl border-2 h-10 shadow-gray-500 text-xs p-3 mt-2`}
+                                                    placeholder="Enter text here"
+                                                    type="text"
+                                                />
+                                            </div>
+                                        </div>
+                                        <div className={`w-1/2`}>
+                                            <p className="text-[16px] mt-5 ">Cook time</p>
+                                            <div className={'w-full justify-between flex-row flex items-center'}>
+                                                <input
+                                                    id="ingredient"
+                                                    className={`w-full rounded-3xl border-2 h-10 shadow-gray-500 text-xs p-3 mt-2`}
+                                                    placeholder="Enter text here"
+                                                    type="text"
+                                                />
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <p className="text-[16px] mt-5 ">Description</p>
+                                        <div className={'w-full justify-between flex-row flex items-center'}>
+                                            <textarea
+                                                id="ingredient"
+                                                className={`w-full min-h-[151px] rounded-3xl border-2 shadow-gray-500 text-xs p-3 mt-2`}
+                                                placeholder="Enter text here"
+                                            />
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div
                             className="w-[750px] mt-[30px] p-[24px] h-[346px] bg-white flex flex-col rounded-lg ">
                             <h1 className={'text-[24px]'}>Ingredients</h1>
                             <div className="">

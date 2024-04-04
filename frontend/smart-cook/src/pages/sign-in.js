@@ -27,7 +27,7 @@ const SignIn = () => {
                 .then((res) => {
                     localStorage.setItem("accessToken", res.data.access);
                     localStorage.setItem("refreshToken", res.data.refresh);
-                    window.location.href = '/main'
+                    window.location.href = '/'
                 })
                 .catch((error) => {
                     console.error(error);
