@@ -6,6 +6,7 @@ import React, { useState } from "react";
 import Image from "next/image"
 import axios from "axios";
 import {config} from "../../config";
+import Footer from "@/components/Footer";
 
 const RecipeMake = () => {
     const [title, setTitle] = useState("");
@@ -50,14 +51,22 @@ const RecipeMake = () => {
     const [selectedImage, setSelectedImage] = useState(null);
 
     const handleStepImageChange = (index, event) => {
-        const imageUrl = event.target.value;
-        const updatedSteps = [...steps];
-        updatedSteps[index].image = imageUrl;
-        setSteps(updatedSteps);
+        const file = event.target.files[0]; 
+        const reader = new FileReader();
+        
+        reader.onload = () => {
+            const imageUrl = reader.result;
+            const updatedSteps = [...steps];
+            updatedSteps[index].image = null; 
+            setSteps(updatedSteps); 
+            setSelectedImage(imageUrl); 
+        };
+        
+        if (file) {
+            reader.readAsDataURL(file);
+        }
     };
-
     const handlePublish = () => {
-        // Prepare the recipe data
         const recipeData = {
             title: title,
             serves: serves,
@@ -227,11 +236,10 @@ const RecipeMake = () => {
                                             </div>
                                             <div className={'relative'}>
                                                 <input
-                                                    value={step.image}
-                                                    onChange={(event) => handleStepImageChange(index, event)}
                                                     className={`w-[650px] rounded-3xl border-2 h-10 shadow-gray-500 text-xs p-3 mt-2`}
-                                                    placeholder="Enter image URL here"
-                                                    type="text"
+                                                    type="file"
+                                                    accept="image/*" // Restrict file types to images
+                                                    onChange={(event) => handleStepImageChange(index, event)} // Call handleStepImageChange function when the image is uploaded
                                                 />
                                                 {!selectedImage &&
                                                     <Image src={instax} alt={'upload'} width={120} height={120}
@@ -257,7 +265,6 @@ const RecipeMake = () => {
                                 </div>
                             </div>
                         </div>
-                        {/* Publish button */}
                         <button
                             onClick={handlePublish}
                             className={'mb-[100px] self-center mt-7 items-center flex gap-3 text-white text-[28px] justify-center w-[450px] h-[60px] rounded-[30px] bg-[#AAE06E]'}>
@@ -265,6 +272,7 @@ const RecipeMake = () => {
                         </button>
                     </div>
                 </div>
+                <Footer />
             </div>
         </MainContainer>
     );
