@@ -38,21 +38,33 @@ import spaghetti from "../../../public/images/spaghetti.png";
 import sugar from "../../../public/images/sugar.png";
 import tomato from "../../../public/images/tomato.png";
 import water from "../../../public/images/water.png";
-import Options from "../ai-generation-page/Options"
+import Options from "../ai-generation-page/Options";
 
 const ChooseDetails = () => {
     const [checkboxes, setCheckboxes] = useState(Array(36).fill(false));
+    const [ingredients, setIngredients] = useState([]);
 
-    const handleCheckboxChange = (index) => {
+    const handleCheckboxChange = (index, name) => {
         console.log("PRESSED");
         const newCheckboxes = [...checkboxes];
         newCheckboxes[index] = !newCheckboxes[index];
         console.log(newCheckboxes[index]);
         setCheckboxes(newCheckboxes);
+
+        if (newCheckboxes[index]) {
+            setIngredients((prevIngredients) => [
+                ...prevIngredients,
+                { name: name },
+            ]);
+        } else {
+            setIngredients((prevIngredients) =>
+                prevIngredients.filter((ingredient) => ingredient.name !== name)
+            );
+        }
     };
 
     return (
-        <div >
+        <div>
             <div className="w-full flex flex-wrap justify-between">
                 <Ingredient
                     image={apple}
@@ -60,7 +72,7 @@ const ChooseDetails = () => {
                     key={0}
                     id={0}
                     checked={checkboxes[0]}
-                    onChange={() => handleCheckboxChange(0)}
+                    onChange={() => handleCheckboxChange(0, "apple")}
                 />
                 <Ingredient
                     image={avocado}
@@ -68,7 +80,7 @@ const ChooseDetails = () => {
                     id={1}
                     key={1}
                     checked={checkboxes[1]}
-                    onChange={() => handleCheckboxChange(1)}
+                    onChange={() => handleCheckboxChange(1, "avocado")}
                 />
                 <Ingredient
                     image={banana}
@@ -76,7 +88,7 @@ const ChooseDetails = () => {
                     key={2}
                     id={2}
                     checked={checkboxes[2]}
-                    onChange={() => handleCheckboxChange(2)}
+                    onChange={() => handleCheckboxChange(2, "banana")}
                 />
                 <Ingredient
                     image={bacon}
@@ -84,7 +96,7 @@ const ChooseDetails = () => {
                     key={3}
                     id={3}
                     checked={checkboxes[3]}
-                    onChange={() => handleCheckboxChange(3)}
+                    onChange={() => handleCheckboxChange(3, "bacon")}
                 />
                 <Ingredient
                     image={bread}
@@ -92,7 +104,7 @@ const ChooseDetails = () => {
                     id={4}
                     key={4}
                     checked={checkboxes[4]}
-                    onChange={() => handleCheckboxChange(4)}
+                    onChange={() => handleCheckboxChange(4, "bread")}
                 />
                 <Ingredient
                     image={broccoli}
@@ -100,7 +112,7 @@ const ChooseDetails = () => {
                     id={5}
                     key={5}
                     checked={checkboxes[5]}
-                    onChange={() => handleCheckboxChange(5)}
+                    onChange={() => handleCheckboxChange(5, "broccoli")}
                 />
                 <Ingredient
                     image={butter}
@@ -108,7 +120,7 @@ const ChooseDetails = () => {
                     id={6}
                     key={6}
                     checked={checkboxes[6]}
-                    onChange={() => handleCheckboxChange(6)}
+                    onChange={() => handleCheckboxChange(6, "butter")}
                 />
                 <Ingredient
                     image={carrot}
@@ -116,7 +128,7 @@ const ChooseDetails = () => {
                     id={7}
                     key={7}
                     checked={checkboxes[7]}
-                    onChange={() => handleCheckboxChange(7)}
+                    onChange={() => handleCheckboxChange(7, "carrot")}
                 />
                 <Ingredient
                     image={cheese}
@@ -124,7 +136,7 @@ const ChooseDetails = () => {
                     id={8}
                     key={8}
                     checked={checkboxes[8]}
-                    onChange={() => handleCheckboxChange(8)}
+                    onChange={() => handleCheckboxChange(8, "cheese")}
                 />
                 <Ingredient
                     image={chicken}
@@ -132,7 +144,7 @@ const ChooseDetails = () => {
                     id={9}
                     key={9}
                     checked={checkboxes[9]}
-                    onChange={() => handleCheckboxChange(9)}
+                    onChange={() => handleCheckboxChange(9, "chicken")}
                 />
                 <Ingredient
                     image={corn}
@@ -140,7 +152,7 @@ const ChooseDetails = () => {
                     id={10}
                     key={10}
                     checked={checkboxes[10]}
-                    onChange={() => handleCheckboxChange(10)}
+                    onChange={() => handleCheckboxChange(10, "corn")}
                 />
                 <Ingredient
                     image={cucumber}
@@ -148,7 +160,7 @@ const ChooseDetails = () => {
                     id={11}
                     key={11}
                     checked={checkboxes[11]}
-                    onChange={() => handleCheckboxChange(11)}
+                    onChange={() => handleCheckboxChange(11, "cucumber")}
                 />
                 <Ingredient
                     image={egg}
@@ -156,7 +168,7 @@ const ChooseDetails = () => {
                     key={12}
                     id={12}
                     checked={checkboxes[12]}
-                    onChange={() => handleCheckboxChange(12)}
+                    onChange={() => handleCheckboxChange(12, "egg")}
                 />
                 <Ingredient
                     image={eggplant}
@@ -164,7 +176,7 @@ const ChooseDetails = () => {
                     key={13}
                     id={13}
                     checked={checkboxes[13]}
-                    onChange={() => handleCheckboxChange(13)}
+                    onChange={() => handleCheckboxChange(13, "eggplant")}
                 />
                 <Ingredient
                     image={fish}
@@ -172,7 +184,7 @@ const ChooseDetails = () => {
                     id={14}
                     key={14}
                     checked={checkboxes[14]}
-                    onChange={() => handleCheckboxChange(14)}
+                    onChange={() => handleCheckboxChange(14, "fish")}
                 />
                 <Ingredient
                     image={garlic}
@@ -180,7 +192,7 @@ const ChooseDetails = () => {
                     key={15}
                     id={15}
                     checked={checkboxes[15]}
-                    onChange={() => handleCheckboxChange(15)}
+                    onChange={() => handleCheckboxChange(15, "garlic")}
                 />
                 <Ingredient
                     image={honey}
@@ -188,7 +200,7 @@ const ChooseDetails = () => {
                     key={16}
                     id={16}
                     checked={checkboxes[16]}
-                    onChange={() => handleCheckboxChange(16)}
+                    onChange={() => handleCheckboxChange(16, "honey")}
                 />
                 <Ingredient
                     image={lemon}
@@ -196,7 +208,7 @@ const ChooseDetails = () => {
                     key={17}
                     id={17}
                     checked={checkboxes[17]}
-                    onChange={() => handleCheckboxChange(17)}
+                    onChange={() => handleCheckboxChange(17, "lemon")}
                 />
                 <Ingredient
                     image={lettuce}
@@ -204,7 +216,7 @@ const ChooseDetails = () => {
                     key={18}
                     id={18}
                     checked={checkboxes[18]}
-                    onChange={() => handleCheckboxChange(18)}
+                    onChange={() => handleCheckboxChange(18, "lettuce")}
                 />
                 <Ingredient
                     image={meat}
@@ -212,7 +224,7 @@ const ChooseDetails = () => {
                     key={19}
                     id={19}
                     checked={checkboxes[19]}
-                    onChange={() => handleCheckboxChange(19)}
+                    onChange={() => handleCheckboxChange(19, "meat")}
                 />
                 <Ingredient
                     image={milk}
@@ -220,7 +232,7 @@ const ChooseDetails = () => {
                     key={20}
                     id={20}
                     checked={checkboxes[20]}
-                    onChange={() => handleCheckboxChange(20)}
+                    onChange={() => handleCheckboxChange(20, "milk")}
                 />
                 <Ingredient
                     image={mushroom}
@@ -228,7 +240,7 @@ const ChooseDetails = () => {
                     key={21}
                     id={21}
                     checked={checkboxes[21]}
-                    onChange={() => handleCheckboxChange(21)}
+                    onChange={() => handleCheckboxChange(21, "mushroom")}
                 />
                 <Ingredient
                     image={olive}
@@ -236,7 +248,7 @@ const ChooseDetails = () => {
                     key={22}
                     id={22}
                     checked={checkboxes[22]}
-                    onChange={() => handleCheckboxChange(22)}
+                    onChange={() => handleCheckboxChange(22, "olive")}
                 />
                 <Ingredient
                     image={onion}
@@ -244,7 +256,7 @@ const ChooseDetails = () => {
                     key={23}
                     id={23}
                     checked={checkboxes[23]}
-                    onChange={() => handleCheckboxChange(23)}
+                    onChange={() => handleCheckboxChange(23, "onion")}
                 />
                 <Ingredient
                     image={orange}
@@ -252,7 +264,7 @@ const ChooseDetails = () => {
                     key={24}
                     id={24}
                     checked={checkboxes[24]}
-                    onChange={() => handleCheckboxChange(24)}
+                    onChange={() => handleCheckboxChange(24, "orange")}
                 />
                 <Ingredient
                     image={peach}
@@ -260,7 +272,7 @@ const ChooseDetails = () => {
                     key={25}
                     id={25}
                     checked={checkboxes[25]}
-                    onChange={() => handleCheckboxChange(25)}
+                    onChange={() => handleCheckboxChange(25, "peach")}
                 />
                 <Ingredient
                     image={peanuts}
@@ -268,7 +280,7 @@ const ChooseDetails = () => {
                     key={26}
                     id={26}
                     checked={checkboxes[26]}
-                    onChange={() => handleCheckboxChange(26)}
+                    onChange={() => handleCheckboxChange(26, "peanuts")}
                 />
                 <Ingredient
                     image={hot}
@@ -276,7 +288,7 @@ const ChooseDetails = () => {
                     key={27}
                     id={27}
                     checked={checkboxes[27]}
-                    onChange={() => handleCheckboxChange(27)}
+                    onChange={() => handleCheckboxChange(27, "hot")}
                 />
                 <Ingredient
                     image={potato}
@@ -284,7 +296,7 @@ const ChooseDetails = () => {
                     key={28}
                     id={28}
                     checked={checkboxes[28]}
-                    onChange={() => handleCheckboxChange(28)}
+                    onChange={() => handleCheckboxChange(28, "potato")}
                 />
                 <Ingredient
                     image={rice}
@@ -292,7 +304,7 @@ const ChooseDetails = () => {
                     key={29}
                     id={29}
                     checked={checkboxes[29]}
-                    onChange={() => handleCheckboxChange(29)}
+                    onChange={() => handleCheckboxChange(29, "rice")}
                 />
                 <Ingredient
                     image={salt}
@@ -300,7 +312,7 @@ const ChooseDetails = () => {
                     id={30}
                     key={30}
                     checked={checkboxes[30]}
-                    onChange={() => handleCheckboxChange(30)}
+                    onChange={() => handleCheckboxChange(30, "salt")}
                 />
                 <Ingredient
                     image={shrimp}
@@ -308,7 +320,7 @@ const ChooseDetails = () => {
                     id={31}
                     key={31}
                     checked={checkboxes[31]}
-                    onChange={() => handleCheckboxChange(31)}
+                    onChange={() => handleCheckboxChange(31, "shrimp")}
                 />
                 <Ingredient
                     image={spaghetti}
@@ -316,7 +328,7 @@ const ChooseDetails = () => {
                     id={32}
                     key={32}
                     checked={checkboxes[32]}
-                    onChange={() => handleCheckboxChange(32)}
+                    onChange={() => handleCheckboxChange(32, "spaghetti")}
                 />
                 <Ingredient
                     image={sugar}
@@ -324,7 +336,7 @@ const ChooseDetails = () => {
                     id={33}
                     key={33}
                     checked={checkboxes[33]}
-                    onChange={() => handleCheckboxChange(33)}
+                    onChange={() => handleCheckboxChange(33, "sugar")}
                 />
                 <Ingredient
                     image={tomato}
@@ -332,7 +344,7 @@ const ChooseDetails = () => {
                     key={34}
                     id={34}
                     checked={checkboxes[34]}
-                    onChange={() => handleCheckboxChange(34)}
+                    onChange={() => handleCheckboxChange(34, "tomato")}
                 />
                 <Ingredient
                     image={water}
@@ -340,10 +352,10 @@ const ChooseDetails = () => {
                     id={35}
                     key={35}
                     checked={checkboxes[35]}
-                    onChange={() => handleCheckboxChange(35)}
+                    onChange={() => handleCheckboxChange(35, "water")}
                 />
             </div>
-            <Options />
+            <Options ingredients={ingredients} />
         </div>
     );
 };

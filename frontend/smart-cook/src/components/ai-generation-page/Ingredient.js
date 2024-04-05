@@ -3,11 +3,6 @@ import { useState } from "react";
 import Image from "next/image";
 
 const Ingredient = ({ image, name, checked, onChange, id }) => {
-    // const [isChecked, setIsChecked] = useState(checked);
-    console.log
-    // const toggleCheckbox = () => {
-    //     setIsChecked(!isChecked);
-    // };
 
     let bgColor = checked ? "bg-[#AAE06E]" : "bg-white";
 
@@ -23,7 +18,7 @@ const Ingredient = ({ image, name, checked, onChange, id }) => {
                 onChange={onChange}
             />
                 
-            <div  htmlFor={id} className="cursor-pointer transition-colors transition duration-150 flex flex-col justify-center items-center">
+            <div  htmlFor={id} className="cursor-pointer transition-colors  duration-150 flex flex-col justify-center items-center">
                 <div className="h-[50px] flex">
                     <Image src={image} className="w-[52px]" alt="ingredient" />
                 </div>
