@@ -54,10 +54,8 @@ const Options = ({ ingredients }) => {
 
             const lowerLine = line.toLowerCase();
             if (lowerLine.includes("title:")) {
-                parsedRecipe.title = line
-                    .substring(line.indexOf(":") + 1)
-                    .trim();
-            } else if (lowerLine.includes("serves:")) {
+                parsedRecipe.title = "AI " + line.substring(line.indexOf(":") + 1).trim();
+            } else if (lowerLine.includes("serves:") || lowerLine.includes("number:") ) {
                 parsedRecipe.serves = parseInt(
                     line.substring(line.indexOf(":") + 1).trim()
                 );

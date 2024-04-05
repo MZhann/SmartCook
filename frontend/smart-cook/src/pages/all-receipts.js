@@ -10,7 +10,7 @@ import fav from "@/../public/images/favorite.png";
 import potato from "@/../public/images/potato.jpg";
 import Recipe from "@/components/Recipe";
 
-const HumanReciept = () => {
+const AllReceipts = () => {
     return (
         <MainContainer>
             <div className=" w-full max-w-[1195px] relative flex flex-col items-center">
@@ -55,4 +55,4 @@ const HumanReciept = () => {
     );
 };
 
-export default HumanReciept;
+export default AllReceipts;
