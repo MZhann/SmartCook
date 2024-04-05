@@ -1,8 +1,9 @@
-import React from "react";
+import React, {useEffect} from "react";
 import { useState } from "react";
 import Dropdown from "./Dropdown";
 import magic from "../../../public/images/magic.png";
 import Image from "next/image";
+import {config} from "../../../config";
 
 const Options = ({ ingredients }) => {
     const [responseText, setResponseText] = useState("");
@@ -31,7 +32,7 @@ const Options = ({ ingredients }) => {
         setBanIngredients(event.target.value);
     };
 
-    const [recipe, setRecipe] = useState(null);
+    const [recipe, setRecipe] = useState({});
 
     const parseRecipe = (text) => {
         const lines = text.split("\n");
@@ -84,7 +85,7 @@ const Options = ({ ingredients }) => {
                 } else if (currentSection === "steps") {
                     parsedRecipe.steps.push({
                         step_text: line.trim(),
-                        image: "",
+                        image: null,
                     });
                 }
             }
@@ -92,8 +93,12 @@ const Options = ({ ingredients }) => {
 
         setRecipe(parsedRecipe);
         console.log(parsedRecipe);
-        console.log(recipe);
+        console.log("recipe", recipe);
     };
+
+    useEffect(() => {
+        console.log("recipe", recipe); // This will log the updated state value
+    }, [recipe]);
 
     const handleSubmit = async () => {
         const formData = {
@@ -110,9 +115,7 @@ const Options = ({ ingredients }) => {
             "ingredients are: " + ingredients.map((obj) => obj.name).join(", ");
 
         console.log(ingredientsString);
-
-        //сюда поставь ключ апишки, в телегу тебе скинул.
-        //сюда апиюрл
+        // const APIKEY
 
         let prompt = `You are an experienced Nutritionist who can make recipes according to requests, taking into account all requirements. Given a list of ingredients, create me recipe for ${selectedDish}. I am ${selectedCook} cook, dish should be ${selectedType}, selected world cuisine is ${selectedWorld}, ${ingredientsString}, extra ingredients are ${extraIngredients}, banned ingredients are ${banIngredients}. Generate at first title, then number of serves, then cook time, then short description of dish in 20-30 words, then ingredients with quantity, then direction/steps of cooking. Put every article of response on a new line, and number each article. Divide title, serves, cooktime, description, ingredients, directions by typing it's name`;
 
@@ -135,13 +138,33 @@ const Options = ({ ingredients }) => {
             setResponseText(text);
             console.log(responseText);
             console.log(text);
-            parseRecipe(text);
+            parseRecipe(text)
         } catch (error) {
             console.error(error.response?.data ?? error.toJSON?.() ?? error);
             console.error("API error", error);
         }
 
-        console.log(formData);
+        try {
+
+            const response = await fetch(`${config.baseUrl}/api/v1/recipes/`, {
+                method: 'POST',
+                headers: {
+                    Authorization: `Bearer ` + localStorage.getItem("accessToken"),
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(recipe)
+            });
+
+            if (response.ok) {
+                const data = await response.json();
+                console.log('Recipe posted successfully:', data);
+                // Optionally, you can reset the form or perform any other action upon successful posting
+            } else {
+                console.error('Failed to post recipe:', response.statusText);
+            }
+        } catch (error) {
+            console.error('Error posting recipe:', error);
+        }
     };
 
     return (
