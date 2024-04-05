@@ -69,23 +69,25 @@ const Options = ({ ingredients }) => {
                 parsedRecipe.description = line
                     .substring(line.indexOf(":") + 1)
                     .trim();
-            } else if (
-                lowerLine === "ingredients:" ||
-                lowerLine.startsWith("- ")
-            ) {
+            } else if (lowerLine.includes("ingredients")) {
                 currentSection = "ingredients";
-            } else if (
-                lowerLine === "directions:" ||
-                lowerLine.startsWith("6.")
-            ) {
+            } else if (lowerLine.includes("directions")) {
                 currentSection = "steps";
-            } else {
+            } else if (lowerLine.startsWith("- ") || /^\d+\. /.test(line)) {
                 if (currentSection === "ingredients") {
-                    parsedRecipe.ingredients.push({ name: line.trim() });
+                    parsedRecipe.ingredients.push({
+                        name: line
+                            .replace(/^\d+\. /, "")
+                            .replace("- ", "")
+                            .trim(),
+                    });
                 } else if (currentSection === "steps") {
                     parsedRecipe.steps.push({
-                        step_text: line.trim(),
-                        image: null,
+                        step_text: line
+                            .replace(/^\d+\. /, "")
+                            .replace("- ", "")
+                            .trim(),
+                        image: "",
                     });
                 }
             }
@@ -115,9 +117,10 @@ const Options = ({ ingredients }) => {
             "ingredients are: " + ingredients.map((obj) => obj.name).join(", ");
 
         console.log(ingredientsString);
-        // const APIKEY
+        // const APIКЕЙ
+        // const APIЮРЛ
 
-        let prompt = `You are an experienced Nutritionist who can make recipes according to requests, taking into account all requirements. Given a list of ingredients, create me recipe for ${selectedDish}. I am ${selectedCook} cook, dish should be ${selectedType}, selected world cuisine is ${selectedWorld}, ${ingredientsString}, extra ingredients are ${extraIngredients}, banned ingredients are ${banIngredients}. Generate at first title, then number of serves, then cook time, then short description of dish in 20-30 words, then ingredients with quantity, then direction/steps of cooking. Put every article of response on a new line, and number each article. Divide title, serves, cooktime, description, ingredients, directions by typing it's name`;
+        let prompt = `You are an experienced Nutritionist who can make recipes according to requests, taking into account all requirements. Given a list of ingredients, create me recipe for ${selectedDish}. I am ${selectedCook} cook, dish should be ${selectedType}, selected world cuisine is ${selectedWorld}, ${ingredientsString}, extra ingredients are ${extraIngredients}, banned ingredients are ${banIngredients}. Generate at first 1) "title:", then 2) "number:" of serves, then 3) "cook time:", then short 4) "description:" of dish in 20-30 words, then 5) "ingredients:" with quantity, then 6) "direction:"/steps of cooking. Put every article of response on a new line, and number each article. Start title, serves, cooktime, description, ingredients, directions with part's name, like "title: name of receipt", "serves: 3" and so on, put "-" before each ingredient and direction`;
 
         try {
             const response = await fetch(APIURL, {
