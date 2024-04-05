@@ -10,7 +10,7 @@ const Navbar = ({loggedin, textcolor}) => {
    
     return (
         <div className="w-full flex items-center justify-between z-10 mt-5">
-            <Link href="/main">
+            <Link href="/">
                 <Image  src={logo} alt="logo" className="w-[150px]" />
             </Link>
             <div className={`flex space-x-5 ${router.pathname !== '/' ? 'text-white' : 'text-black'}`}>
