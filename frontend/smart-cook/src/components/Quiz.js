@@ -100,7 +100,7 @@ const DynamicQuiz = () => {
                     <div className={'flex flex-col gap-5 w-full h-[350px] justify-center items-center text-center'}>
                         <Image className={'flex justify-center'} src={win} width={150} height={150} alt={'win'} />
                         <h1 className={'text-2xl'}>Congratulations!</h1>
-                        <p>You have won <span className={'text-[#80CC2D]'}>+1 chance</span> for additional recipe generation! Use it when you're ready.</p>
+                        <p>You have won <span className={'text-[#80CC2D]'}>+1 chance</span> for additional recipe generation! Use it when you&apos;re ready.</p>
                     </div>
                 ) : (loadNextQuestion())}
                 {currentQuestionIndex === null && (<div>
