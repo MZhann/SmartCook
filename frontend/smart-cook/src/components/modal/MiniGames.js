@@ -1,6 +1,6 @@
 import puzzle from "@/../public/images/puzzle.png";
 import Image from "next/image";
-import game from "@/../public/images/EightPuzzle.jpg";
+import game from "@/../public/images/eightPuzzle.jpg";
 import {useState} from "react";
 import DynamicQuiz from "@/components/DynamicQuiz";
 import EightPuzzle from "@/components/EightPuzzle";
