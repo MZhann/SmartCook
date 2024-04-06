@@ -7,9 +7,6 @@ import starAward from "../../public/images/star-award.png"
 import cook from "../../public/images/cook-award.png"
 import logout from "../../public/images/Logout.png"
 import WaitingOpponent from "@/components/modal/battle-cards/profile-battle-cards/WaitingOpponent";
-import cookBattle from "../../public/images/cookBattle.png"
-import trophy from "../../public/images/trophy.png"
-import rank from "../../public/images/ranking.png"
 import Statistics from "@/components/profile-page/Statistics";
 
 const Profile = () => {
