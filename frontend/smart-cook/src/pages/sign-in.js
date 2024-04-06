@@ -4,7 +4,7 @@ import Image from "next/image";
 import cook from "../../public/images/cook.png";
 import cooker from "../../public/images/cooker.png";
 import Link from "next/link";
-import {useState} from "react";
+import {useEffect, useState} from "react";
 import axios from "axios";
 import {config} from "../../config";
 

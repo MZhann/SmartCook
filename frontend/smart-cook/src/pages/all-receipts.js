@@ -28,13 +28,13 @@ const AllReceipts = () => {
                     </p>
                 </div>
 
-                <div class="flex items-center space-x-4 mt-10">
+                <div className="flex items-center space-x-4 mt-10">
                     <input
                         type="text"
-                        class="px-4 py-2 rounded-full border border-gray-300 focus:outline-none w-[375px] h-[42px]"
+                        className="px-4 py-2 rounded-full border border-gray-300 focus:outline-none w-[375px] h-[42px]"
                         placeholder="Search"
                     />
-                    <button class="px-4 py-2 rounded-full bg-[#AAE06E] text-white hover:bg-green-600 focus:outline-none w-[135px] h-[42px]">
+                    <button className="px-4 py-2 rounded-full bg-[#AAE06E] text-white hover:bg-green-600 focus:outline-none w-[135px] h-[42px]">
                         Search
                     </button>
                 </div>

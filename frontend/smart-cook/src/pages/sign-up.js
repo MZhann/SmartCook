@@ -50,9 +50,9 @@ const SignUp = () => {
 
             try {
                 setIsLoading(true);
-                await axios.post(`http://127.0.0.1:8000/api/v1/register/`, requestBody)
+                await axios.post(`${config.baseUrl}/api/v1/register/`, requestBody);
                 setIsLoading(false);
-                window.location.href = '/sign-in'
+                await handleLogin();
             } catch (error) {
                 if (error.response && error.response.data && error.response.data.error) {
                     setErrorMessage(error.response.data.error)
@@ -61,6 +61,32 @@ const SignUp = () => {
             }
         }
     };
+    async function handleLogin() {
+        const requestBody = {
+            email: email,
+            password: password
+        };
+
+        try {
+            setIsLoading(true);
+            axios.post(`${config.baseUrl}/api/v1/login/`, requestBody)
+                .then((res) => {
+                    localStorage.setItem("accessToken", res.data.access);
+                    localStorage.setItem("refreshToken", res.data.refresh);
+                    window.location.href = '/'
+                })
+                .catch((error) => {
+                    console.error(error);
+                    if (error.response && error.response.data && error.response.data.error) {
+                        setErrorMessage(error.response.data.error)
+                    }
+                });
+            setIsLoading(false);
+            window.location.href = "/";
+        } catch (error) {
+            console.error(error);
+        }
+    }
     return (
         <div className="w-full flex flex-col items-center bg-[#2A293B] min-h-screen ">
             <Image
