@@ -3,7 +3,7 @@ import Image from "next/image";
 import game from "@/../public/images/eightPuzzle.jpg";
 import {useState} from "react";
 import Quiz from "@/components/Quiz";
-import EightPuzzle from "@/components/eightPuzzle";
+import EightPuzzle from "@/components/EightPuzzle";
 
 const MiniGames = () => {
     const [whatGame, setGame] = useState("choice");
