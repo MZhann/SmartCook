@@ -15,8 +15,6 @@ const Main = () => {
                 <Navbar textcolor={"white"} loggedin={true}/>
                 <FoodAI />
                 <ChooseDetails />
-
-
                 <Footer/>
             </div>
 

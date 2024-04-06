@@ -1,4 +1,16 @@
 /** @type {import('next').NextConfig} */
-const nextConfig = {};
+export default {
+    // Custom webpack configuration
+    webpack: (config, { isServer }) => {
+        // Extend webpack config here (if needed)
+        return config;
+    },
 
-export default nextConfig;
+    // Environment variables
+    env: {
+        APIURL: process.env.APIURL,
+        APIKEY: process.env.APIKEY,
+    },
+
+    // Other Next.js configuration options (if needed)
+};
