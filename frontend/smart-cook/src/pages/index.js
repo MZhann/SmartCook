@@ -10,7 +10,8 @@ import FollowAlong from "@/components/FollowAlong";
 import Footer from "@/components/Footer";
 import EightPuzzle from "@/components/EightPuzzle";
 import DynamicQuiz from "@/components/Quiz";
-import MiniGames from "@/components/MiniGames";
+import MiniGames from "@/components/modal/MiniGames";
+import CreatingReceipt from "@/components/modal/CreatingReceipt";
 
 const Main = () => {
     return (
@@ -20,7 +21,12 @@ const Main = () => {
                 <Navbar/>
                 <WelcomeTry/>
                 <RecentlyAdded/>
-                <MiniGames/>
+                {/* <MiniGames/> */}
+                
+                <div className="w-full flex justify-center">
+                    <CreatingReceipt/>
+                </div>
+
                 <div className={`flex flex-row justify-around`}>
                     <EightPuzzle/>
                     <DynamicQuiz/>
