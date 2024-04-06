@@ -1,6 +1,6 @@
 import Image from "next/image";
 import logo from "../../public/images/SmartCookLogo.png";
-// import blogo from "../../public/images/blac-logo.png"
+import blogo from "../../public/images/blac-logo.png"
 import Link from "next/link";
 import defaultAvatar from "../../public/images/avatarka.png"
 import {useRouter} from "next/router";
@@ -19,9 +19,9 @@ const Navbar = () => {
     return (
         <div className="w-full flex items-center justify-between z-10 mt-5">
             <Link href="/">
-                <Image src={router.pathname === '/profile' || router.pathname === '/challenges' ? (logo) : (logo)} alt="logo" className="w-[150px]" />
+                <Image src={router.pathname === '/profile' || router.pathname === '/challenges' ? (blogo) : (logo)} alt="logo" className="w-[150px]" />
             </Link>
-            <div className={`flex space-x-5 ${router.pathname !== '/' ? 'text-white' : 'text-black'}`}>
+            <div className={`flex space-x-5 ${router.pathname === '/' || router.pathname === '/profile' || router.pathname === '/challenges' ? 'text-black' : 'text-white'}`}>
                 <Link href="">ALL RECIPES</Link>
                 <Link href="#">AI RECIPES</Link>
                 <Link href="#">CHALLENGES</Link>
@@ -42,6 +42,7 @@ const Navbar = () => {
                     (<Link href={'/profile'}>
                         <Image className={'-mt-1'} src={defaultAvatar} alt={"default"} width={30} height={30} />
                     </Link>)
+                    
                 }
             </div>
         </div>
