@@ -2,7 +2,7 @@ import puzzle from "@/../public/images/puzzle.png";
 import Image from "next/image";
 import game from "@/../public/images/EightPuzzle.jpg";
 import {useState} from "react";
-import Quiz from "@/components/Quiz";
+import DynamicQuiz from "@/components/DynamicQuiz";
 import EightPuzzle from "@/components/EightPuzzle";
 
 const MiniGames = () => {
@@ -82,7 +82,7 @@ const MiniGames = () => {
                                     </div>
                                 </div>
                             </>), quiz: (<>
-                                <Quiz/>
+                                <DynamicQuiz/>
                             </>), puzzle: <EightPuzzle/>,
                     }[whatGame]}
                 </div>)}

@@ -100,6 +100,10 @@ const Options = ({ ingredients }) => {
         console.log("recipe", recipe);
     };
 
+    useEffect(() => {
+        console.log("recipe", recipe); // This will log the updated state value
+    }, [recipe]);
+
     const handleSubmit = async () => {
         const formData = {
             selectedDish,
@@ -115,18 +119,15 @@ const Options = ({ ingredients }) => {
             "ingredients are: " + ingredients.map((obj) => obj.name).join(", ");
 
         console.log(ingredientsString);
-
-        const apiUrl = process.env.APIURL;
-        const apiKey = process.env.APIKEY;
-        console.log("apiUrl",apiUrl)
-        console.log("apiKey",apiKey)
+        // const APIКЕЙ
+        // const APIЮРЛ
         let prompt = `You are an experienced Nutritionist who can make recipes according to requests, taking into account all requirements. Given a list of ingredients, create me recipe for ${selectedDish}. I am ${selectedCook} cook, dish should be ${selectedType}, selected world cuisine is ${selectedWorld}, ${ingredientsString}, extra ingredients are ${extraIngredients}, banned ingredients are ${banIngredients}. Generate at first 1) "title:", then 2) "number:" of serves, then 3) "cook time:", then short 4) "description:" of dish in 20-30 words, then 5) "ingredients:" with quantity, then 6) "direction:"/steps of cooking. Put every article of response on a new line, and number each article. Start title, serves, cooktime, description, ingredients, directions with part's name, like "title: name of receipt", "serves: 3" and so on, put "-" before each ingredient and direction`;
 
         try {
-            const response = await fetch(apiUrl, {
+            const response = await fetch(APIURL, {
                 method: "POST",
                 headers: {
-                    Authorization: `Bearer ${apiKey}`,
+                    Authorization: `Bearer ${APIKEY}`,
                     "Content-Type": "application/json",
                 },
                 body: JSON.stringify({
