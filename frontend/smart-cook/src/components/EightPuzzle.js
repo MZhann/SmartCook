@@ -1,6 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import Image from "next/image";
 import win from "../../public/images/win.jpg";
+import YouWon from './modal/YouWon';
 
 const EightPuzzle = () => {
     const [isClient, setIsClient] = useState(false)
@@ -97,12 +98,7 @@ const EightPuzzle = () => {
                         Reset
                     </button>
                 </div> :
-                <div className={'flex flex-col gap-5 w-full h-[400px] justify-center items-center text-center'}>
-                    <Image className={'flex justify-center'} src={win} width={150} height={150} alt={'win'}/>
-                    <h1 className={'text-2xl'}>Congratulations!</h1>
-                    <p>You have won <span className={'text-[#80CC2D]'}>+1 chance</span> for additional recipe
-                        generation! Use it when you&apos;re ready.</p>
-                </div>
+                <YouWon />
             }
         </div>
 

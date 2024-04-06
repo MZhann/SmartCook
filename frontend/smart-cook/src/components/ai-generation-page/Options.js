@@ -1,9 +1,9 @@
-import React, {useEffect} from "react";
+import React, { useEffect } from "react";
 import { useState } from "react";
 import Dropdown from "./Dropdown";
 import magic from "../../../public/images/magic.png";
 import Image from "next/image";
-import {config} from "../../../config";
+import { config } from "../../../config";
 
 const Options = ({ ingredients }) => {
     const [responseText, setResponseText] = useState("");
@@ -54,8 +54,12 @@ const Options = ({ ingredients }) => {
 
             const lowerLine = line.toLowerCase();
             if (lowerLine.includes("title:")) {
-                parsedRecipe.title = "AI " + line.substring(line.indexOf(":") + 1).trim();
-            } else if (lowerLine.includes("serves:") || lowerLine.includes("number:") ) {
+                parsedRecipe.title =
+                    "AI " + line.substring(line.indexOf(":") + 1).trim();
+            } else if (
+                lowerLine.includes("serves:") ||
+                lowerLine.includes("number:")
+            ) {
                 parsedRecipe.serves = parseInt(
                     line.substring(line.indexOf(":") + 1).trim()
                 );
@@ -138,32 +142,32 @@ const Options = ({ ingredients }) => {
             setResponseText(text);
             console.log(responseText);
             console.log(text);
-            parseRecipe(text)
+            parseRecipe(text);
         } catch (error) {
             console.error(error.response?.data ?? error.toJSON?.() ?? error);
             console.error("API error", error);
         }
 
         try {
-
             const response = await fetch(`${config.baseUrl}/api/v1/recipes/`, {
-                method: 'POST',
+                method: "POST",
                 headers: {
-                    Authorization: `Bearer ` + localStorage.getItem("accessToken"),
-                    'Content-Type': 'application/json'
+                    Authorization:
+                        `Bearer ` + localStorage.getItem("accessToken"),
+                    "Content-Type": "application/json",
                 },
-                body: JSON.stringify(recipe)
+                body: JSON.stringify(recipe),
             });
 
             if (response.ok) {
                 const data = await response.json();
-                console.log('Recipe posted successfully:', data);
+                console.log("Recipe posted successfully:", data);
                 // Optionally, you can reset the form or perform any other action upon successful posting
             } else {
-                console.error('Failed to post recipe:', response.statusText);
+                console.error("Failed to post recipe:", response.statusText);
             }
         } catch (error) {
-            console.error('Error posting recipe:', error);
+            console.error("Error posting recipe:", error);
         }
     };
 

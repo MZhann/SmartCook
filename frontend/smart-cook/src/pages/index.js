@@ -9,9 +9,11 @@ import RecentlyAdded from "@/components/RecentlyAdded";
 import FollowAlong from "@/components/FollowAlong";
 import Footer from "@/components/Footer";
 import EightPuzzle from "@/components/EightPuzzle";
-import DynamicQuiz from "@/components/Quiz";
+import DynamicQuiz from "@/components/DynamicQuiz";
 import MiniGames from "@/components/modal/MiniGames";
 import CreatingReceipt from "@/components/modal/CreatingReceipt";
+import YouWon from "@/components/modal/YouWon";
+import NoBattle from "@/components/modal/battle-cards/profile-battle-cards/NoBattle";
 
 const Main = () => {
     return (
@@ -23,9 +25,13 @@ const Main = () => {
                 <RecentlyAdded/>
                 {/* <MiniGames/> */}
                 
+                {/* <NoBattle /> */}
+
                 <div className="w-full flex justify-center">
                     <CreatingReceipt/>
                 </div>
+
+
 
                 <div className={`flex flex-row justify-around`}>
                     <EightPuzzle/>

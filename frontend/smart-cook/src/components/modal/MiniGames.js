@@ -2,7 +2,7 @@ import puzzle from "@/../public/images/puzzle.jpg";
 import Image from "next/image";
 import game from "@/../public/images/8game.jpg";
 import { useState } from "react";
-import Quiz from "@/components/Quiz";
+import Quiz from "@/components/DynamicQuiz";
 import EightPuzzle from "@/components/EightPuzzle";
 const MiniGames = () => {
     const [whatGame, setGame] = useState("choice");
