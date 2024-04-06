@@ -6,7 +6,7 @@ import opponentReceiptImage from "../../../../../public/images/opponentReceiptPh
 
 const AcceptedBattle = () => {
     return (
-        <div className="w-[574px] h-[546px] rounded-3xl text-white bg-[#2A293B] flex flex-col items-center justify-between">
+        <div className="w-[574px] h-[546px] rounded-3xl text-white bg-[#2A293B] flex flex-col items-center mt-10 justify-between">
             <Image
                 src={cookBattle}
                 alt="Cook Battle"

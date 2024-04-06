@@ -19,13 +19,13 @@ const Navbar = () => {
     return (
         <div className="w-full flex items-center justify-between z-10 mt-5">
             <Link href="/">
-                <Image src={router.pathname === '/profile' || router.pathname === '/challenges' ? (blogo) : (logo)} alt="logo" className="w-[150px]" />
+                <Image src={router.pathname === '/profile' || router.pathname === '/challenges' || router.pathname === '/leaderboard' ? (blogo) : (logo)} alt="logo" className="w-[150px]" />
             </Link>
-            <div className={`flex space-x-5 ${router.pathname === '/' || router.pathname === '/profile' || router.pathname === '/challenges' ? 'text-black' : 'text-white'}`}>
-                <Link href="">ALL RECIPES</Link>
-                <Link href="#">AI RECIPES</Link>
-                <Link href="#">CHALLENGES</Link>
-                <Link href="#">LEADERBOARD</Link>
+            <div className={`flex space-x-5 ${router.pathname === '/' || router.pathname === '/profile' || router.pathname === '/challenges' || router.pathname === '/leaderboard' ? 'text-black' : 'text-white'}`}>
+                <Link href="/all-receipts">ALL RECIPES</Link>
+                <Link href="/ai-receipts">AI RECIPES</Link>
+                <Link href="/challenges">CHALLENGES</Link>
+                <Link href="/leaderboard">LEADERBOARD</Link>
                 {!isLoggedIn ?
                     <Link href={'/sign-in'}>
                         <svg className={'-mt-1'} width={30} height={30} viewBox="0 0 21 21" xmlns="http://www.w3.org/2000/svg">
@@ -42,6 +42,7 @@ const Navbar = () => {
                     (<Link href={'/profile'}>
                         <Image className={'-mt-1'} src={defaultAvatar} alt={"default"} width={30} height={30} />
                     </Link>)
+                    
                 }
             </div>
         </div>
