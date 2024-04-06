@@ -29,7 +29,7 @@ const Leaderboard = () => {
                         />
 
                         <h1
-                            className={`flex self-center text-3xl mt-3 font-bold`}
+                            className={`flex self-center text-3xl mt-[-10px] font-bold`}
                         >
                             Liderboard
                         </h1>
