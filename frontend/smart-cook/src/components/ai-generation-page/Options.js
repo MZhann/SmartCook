@@ -7,7 +7,8 @@ import { config } from "../../../config";
 
 const Options = ({ ingredients }) => {
     const [responseText, setResponseText] = useState("");
-
+    const apiUrl = process.env.APIURL;
+    const apikey = process.env.APIKEY;
     const dishOptions = [
         "Breakfast",
         "Lunch",
@@ -16,7 +17,10 @@ const Options = ({ ingredients }) => {
         "Dessert",
         "Salad",
     ];
-
+    useEffect(()=>{
+        console.log(apiUrl  );
+        console.log(apikey);
+    })
     const [selectedDish, setSelectedDish] = useState(null);
     const [selectedCook, setSelectedCook] = useState(null);
     const [selectedType, setSelectedType] = useState(null);
@@ -119,8 +123,6 @@ const Options = ({ ingredients }) => {
             "ingredients are: " + ingredients.map((obj) => obj.name).join(", ");
 
         console.log(ingredientsString);
-        // const APIКЕЙ
-        // const APIЮРЛ
         let prompt = `You are an experienced Nutritionist who can make recipes according to requests, taking into account all requirements. Given a list of ingredients, create me recipe for ${selectedDish}. I am ${selectedCook} cook, dish should be ${selectedType}, selected world cuisine is ${selectedWorld}, ${ingredientsString}, extra ingredients are ${extraIngredients}, banned ingredients are ${banIngredients}. Generate at first 1) "title:", then 2) "number:" of serves, then 3) "cook time:", then short 4) "description:" of dish in 20-30 words, then 5) "ingredients:" with quantity, then 6) "direction:"/steps of cooking. Put every article of response on a new line, and number each article. Start title, serves, cooktime, description, ingredients, directions with part's name, like "title: name of receipt", "serves: 3" and so on, put "-" before each ingredient and direction`;
 
         try {
@@ -162,7 +164,6 @@ const Options = ({ ingredients }) => {
             if (response.ok) {
                 const data = await response.json();
                 console.log("Recipe posted successfully:", data);
-                // Optionally, you can reset the form or perform any other action upon successful posting
             } else {
                 console.error("Failed to post recipe:", response.statusText);
             }
