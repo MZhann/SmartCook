@@ -9,7 +9,7 @@ export default {
     // Environment variables
     env: {
         APIURL: process.env.APIURL,
-        APIKEY: "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",
+        APIKEY: process.env.APIKEY,
     },
 
     // Other Next.js configuration options (if needed)
