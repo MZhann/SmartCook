@@ -7,6 +7,11 @@ import {useEffect, useState} from "react";
 
 const AiReceipts = () => {
     const [recipes, setRecipes] = useState(null);
+    const [displayedRecipes, setDisplayedRecipes] = useState(8); // Initial number of recipes displayed
+
+    const loadMoreRecipes = () => {
+        setDisplayedRecipes(prevCount => prevCount + 4); // Increment by 4 each time the button is clicked
+    };
 
     useEffect(() => {
         fetchData();
@@ -34,11 +39,11 @@ const AiReceipts = () => {
                 </div>
 
                 <div className="flex flex-wrap justify-between mt-6">
-                    {recipes && recipes.map((recipe, index) => (
+                    {recipes && recipes.slice(0, displayedRecipes).map((recipe, index) => (
                         <Recipe key={index} recipe={recipe} />
                     ))}
                 </div>
-                <button className="text-white bg-[#AAE06E] self-start w-[250px] h-[48px] rounded-3xl text-lg font-bold mb-20 mt-2">Load More</button>
+                <button onClick={loadMoreRecipes} className="text-white bg-[#AAE06E] self-start w-[250px] h-[48px] rounded-3xl text-lg font-bold mb-20 mt-2">Load More</button>
             </div>
         </MainContainer>
     );

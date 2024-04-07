@@ -7,7 +7,7 @@ import Image from "next/image"
 import axios from "axios";
 import {config} from "../../config";
 import Footer from "@/components/Footer";
-import {Upload} from "antd";
+// import {Upload} from "antd";
 
 
 const RecipeMake = () => {
@@ -23,6 +23,10 @@ const RecipeMake = () => {
 
     const handleAddIngredient = () => {
         setIngredients([...ingredients, { name: "" }]);
+    };
+
+    const handleAddStep = () => {
+        setSteps([...steps, { step_text: "", image: null }]);
     };
     const handleDescriptionChange = (event) => {
         setDescription(event.target.value);
@@ -45,9 +49,7 @@ const RecipeMake = () => {
         updatedIngredients.splice(index, 1);
         setIngredients(updatedIngredients);
     };
-    const handleAddStep = () => {
-        setSteps([...steps, { step_text: "", image: null }]);
-    };
+
 
     const handleRemoveStep = index => {
         const updatedSteps = [...steps];
@@ -85,16 +87,17 @@ const RecipeMake = () => {
         formData.append("serves", serves);
         formData.append("cook_time", cookTime);
         formData.append("description", description);
-        formData.append("ingredients", ingredients);
-        console.log(ingredients);
-        console.log(steps);
+        ingredients.forEach((ingredient, index) => {
+            formData.append(`ingredients[${index}][name]`, ingredient.name);
+        });
 
-        const stepsData = steps.map(step => ({
-            step_text: step.step_text,
-            image: step.image,
-        }));
-        formData.append("steps", JSON.stringify(stepsData));
-
+        // Append steps
+        steps.forEach((step, index) => {
+            formData.append(`steps[${index}][step_text]`, step.step_text);
+            if (step.image) {
+                formData.append(`steps[${index}][image]`, step.image);
+            }
+        });
 
 
         for (const [key, value] of formData.entries()) {
@@ -129,25 +132,22 @@ const RecipeMake = () => {
                         </div>
                         <div
                             className="w-[750px] mt-[50px] h-[400px] bg-white flex justify-center items-center rounded-lg">
-                            <Upload
-                                action="https://660d2bd96ddfa2943b33731c.mockapi.io/api/upload"
-                                listType="picture-card"
-                                onChange={handleMainImageChange}
-                                onRemove={handleMainImageRemove}
-                                className="uploader"
-                            >
-                                {mainImage ? (
-                                    <Image src={URL.createObjectURL(mainImage)} alt="Main Image" width={250} height={250} />
-                                ) : (
-                                    <div>
-                                        <Image className="ml-[18px]" src={instax} alt="instax" width={250} height={250} />
-                                        <h1 className="mt-5 text-[24px]">Upload finished food photo</h1>
-                                    </div>
-                                )}
-                            </Upload>
-                        </div>
-                        <div
-                            className="w-[750px] mt-[30px] p-[24px]  bg-white flex flex-col rounded-lg ">
+                            <input
+                                type="file"
+                                onChange={(event) => handleMainImageChange({fileList: [event.target.files[0]]})}
+                            />
+                            {mainImage ? (
+                                <Image src={URL.createObjectURL(mainImage)} alt="Main Image" width={250} height={250}/>
+                            ) : (
+                                <div>
+                                    <Image className="ml-[18px]" src={instax} alt="instax" width={250} height={250}/>
+                                    <h1 className="mt-5 text-[24px]">Upload finished food photo</h1>
+                                </div>
+                            )}
+
+                    </div>
+                    <div
+                        className="w-[750px] mt-[30px] p-[24px]  bg-white flex flex-col rounded-lg ">
                             <h1 className={'text-[24px]'}>Dish details</h1>
                             <div className="">
                                 <div className={'flex flex-col'}>
@@ -255,21 +255,18 @@ const RecipeMake = () => {
                                                        onClick={() => handleRemoveStep(index)}/>
                                             </div>
                                             <div className={''}>
-                                                    <Upload
-                                                        customRequest={({ file }) => handleStepImageChange(index, file)}
-                                                        listType="picture-card"
-                                                        fileList={step.image ? [step.image] : []}
-                                                        onChange={() => {}}
-                                                    >
-                                                        {fileList.length < 1 && (
-                                                            <div>
-                                                                <Image src={instax} alt="instax" width={250} height={250} />
-                                                                <h1 className="mt-5 text-[24px]">Upload finished food photo</h1>
-                                                            </div>
-                                                        )}
-                                                    </Upload>
-                                                {!previewImage && (
+                                                <input
+                                                    type="file"
+                                                    onChange={(event) => handleStepImageChange(index, event.target.files[0])}
+                                                />
+                                                {fileList.length < 1 && (
                                                     <div>
+                                                        <Image src={instax} alt="instax" width={250} height={250}/>
+                                                        <h1 className="mt-5 text-[24px]">Upload finished food photo</h1>
+                                                    </div>
+                                                )}
+                                            {!previewImage && (
+                                                <div>
                                                         <Image src={instax} alt="instax" width={250} height={250} />
                                                         <h1 className="mt-5 text-[24px]">Upload finished food photo</h1>
                                                     </div>
