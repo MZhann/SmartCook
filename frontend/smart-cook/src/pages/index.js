@@ -24,9 +24,7 @@ const Main = () => {
                 <Navbar/>
                 <WelcomeTry/>
                 <RecentlyAdded/>
-                {/* <MiniGames/> */}
                 
-                {/* <NoBattle /> */}
 
                 <div className="w-full flex justify-center">
                     <CreatingReceipt/>
