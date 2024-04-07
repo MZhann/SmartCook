@@ -16,7 +16,9 @@ const YouWon = () => {
                 height={150}
                 alt={"win"}
             />
-            <h1 className={"text-2xl font-bold"}>Congratulations!</h1>
+            <div className={'w-full flex justify-center items-center'}>
+                <h1 className={"text-2xl font-bold text-black justify-center flex"}>Congratulations!</h1>
+            </div>
             <p>
                 You have won <span className={"text-[#80CC2D]"}>+1 chance</span>{" "}
                 for additional recipe<br></br> generation! Use it when you&apos;re ready.
