@@ -41,18 +41,22 @@ const Options = ({ ingredients }) => {
             title: "",
             serves: 0,
             cook_time: 0,
+            world_cuisine: "",
+            dish_type: "",
             description: "",
             ingredients: [],
             steps: [],
         };
 
         let currentSection = "";
-
+        parsedRecipe.world_cuisine = selectedWorld;
+        parsedRecipe.dish_type = selectedDish;
         for (let line of lines) {
             line = line.trim();
             if (line === "") continue;
 
             const lowerLine = line.toLowerCase();
+        
             if (lowerLine.includes("title:")) {
                 parsedRecipe.title =
                     "AI " + line.substring(line.indexOf(":") + 1).trim();
