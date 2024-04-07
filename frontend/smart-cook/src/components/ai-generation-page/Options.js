@@ -5,9 +5,20 @@ import magic from "../../../public/images/magic.png";
 import Image from "next/image";
 import { config } from "../../../config";
 import CreatingReceipt from "../modal/CreatingReceipt";
+import { OpenAI } from "openai";
 
 const Options = ({ ingredients }) => {
     const [isModalOpen, setIsModalOpen] = useState(false);
+    const [imageURL, setImageURL] = useState(null);
+    const [selectedDish, setSelectedDish] = useState(null);
+    const [selectedCook, setSelectedCook] = useState(null);
+    const [selectedType, setSelectedType] = useState(null);
+    const [selectedWorld, setSelectedWorld] = useState(null);
+    const [extraIngredients, setExtraIngredients] = useState("");
+    const [banIngredients, setBanIngredients] = useState("");
+    const [isLoading, setIsLoading] = useState(false);
+    const [responseText, setResponseText] = useState("");
+
     const openModal = () => {
         setIsModalOpen(true);
     };
@@ -16,25 +27,11 @@ const Options = ({ ingredients }) => {
         setIsModalOpen(false);
     };
 
-    const [isLoading, setIsLoading] = useState(false);
-    const [responseText, setResponseText] = useState("");
+   
     const apiUrl = process.env.APIURL;
     const apikey = process.env.APIKEY;
-    const dishOptions = [
-        "Breakfast",
-        "Lunch",
-        "Dinner",
-        "Snack",
-        "Dessert",
-        "Salad",
-    ];
 
-    const [selectedDish, setSelectedDish] = useState(null);
-    const [selectedCook, setSelectedCook] = useState(null);
-    const [selectedType, setSelectedType] = useState(null);
-    const [selectedWorld, setSelectedWorld] = useState(null);
-    const [extraIngredients, setExtraIngredients] = useState("");
-    const [banIngredients, setBanIngredients] = useState("");
+ 
 
     const handleExtraIngredientsChange = (event) => {
         setExtraIngredients(event.target.value);
@@ -43,6 +40,61 @@ const Options = ({ ingredients }) => {
     const handleBanIngredientsChange = (event) => {
         setBanIngredients(event.target.value);
     };
+
+    // Image generation Started
+
+    const generateImage = async (promptTextForImage) => {
+        const options = {
+            method: "POST",
+            headers: {
+                Authorization: `Bearer ${apikey}`,
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+                prompt: promptTextForImage,
+                n: 1,
+                size: "512x512",
+            }),
+        };
+
+        try {
+            const response = await fetch(
+                "https://api.openai.com/v1/images/generations",
+                options
+            );
+            const data = await response.json();
+            console.log(data)
+            const urlOfImage = await response.data.data[0].url;
+            setImageURL(urlOfImage);
+            
+            setIsLoading(false);    
+
+        } catch (error) {
+            console.error(error);
+        }
+    };
+
+    const extractImagePrompt = (recipeText) => {
+        const startIndex = recipeText.indexOf("Description:");
+        const endIndex = recipeText.indexOf("Ingredients:");
+
+        if (startIndex === -1 || endIndex === -1 || startIndex >= endIndex) {
+            return "Directions and description not found.";
+        }
+
+        const directions = recipeText
+            .substring(endIndex + "Ingredients:".length, startIndex)
+            .trim();
+        const description = recipeText
+            .substring(startIndex + "Description:".length)
+            .trim();
+
+        const text = directions + ". " + description;
+        console.log("extracted text:" + text )
+        return text;
+    };
+
+    // Image generation Ended
 
     const [recipe, setRecipe] = useState({});
 
@@ -63,6 +115,7 @@ const Options = ({ ingredients }) => {
         let currentSection = "";
         parsedRecipe.world_cuisine = selectedWorld;
         parsedRecipe.dish_type = selectedDish;
+        parsedRecipe.image = imageURL;
         for (let line of lines) {
             line = line.trim();
             if (line === "") continue;
@@ -159,24 +212,27 @@ const Options = ({ ingredients }) => {
             setResponseText(text);
             console.log(responseText);
             console.log(text);
+            const promptTextForImage = extractImagePrompt(text);
+            generateImage(promptTextForImage);
             parseRecipe(text);
-            setIsLoading(false);
-            console.log(isLoading);
         } catch (error) {
             console.error(error.response?.data ?? error.toJSON?.() ?? error);
             console.error("API error", error);
         }
 
         try {
-            const response = await fetch(`${config.baseUrl}/api/v1/recipes/`, {
-                method: "POST",
-                headers: {
-                    Authorization:
-                        `Bearer ` + localStorage.getItem("accessToken"),
-                    "Content-Type": "application/json",
-                },
-                body: JSON.stringify(recipe),
-            });
+            const response = await fetch(
+                `${config.baseUrl}/api/v1/recipes/ai/`,
+                {
+                    method: "POST",
+                    headers: {
+                        Authorization:
+                            `Bearer ` + localStorage.getItem("accessToken"),
+                        "Content-Type": "application/json",
+                    },
+                    body: JSON.stringify(recipe),
+                }
+            );
 
             if (response.ok) {
                 const data = await response.json();
@@ -191,7 +247,12 @@ const Options = ({ ingredients }) => {
 
     return (
         <div className="flex flex-col items-center">
-            <CreatingReceipt isLoading={isLoading} isModalOpen={isModalOpen}  onClose={closeModal} closeModal={closeModal}/>
+            <CreatingReceipt
+                isLoading={isLoading}
+                isModalOpen={isModalOpen}
+                onClose={closeModal}
+                closeModal={closeModal}
+            />
             <div className="w-full h-[328px] rounded-3xl bg-white mt-20 p-4">
                 <div>
                     <div className="font-bold text-3xl">Options</div>
@@ -200,7 +261,7 @@ const Options = ({ ingredients }) => {
                         <div>
                             <div>What dish you want to cook?</div>
                             <Dropdown
-                                options={dishOptions}
+                                options={["Breakfast", "Lunch", "Dinner", "Snack", "Dessert", "Salad"]}
                                 placeholder="Select a dish"
                                 onSelect={setSelectedDish}
                             />

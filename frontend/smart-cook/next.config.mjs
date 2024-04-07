@@ -16,8 +16,6 @@ export default {
 
     // Image configuration
     images: {
-        domains: ['www.google.com', 'media.geeksforgeeks.org', 'geeksforgeeks.org'],
-    },
-
-    // Other Next.js configuration options (if needed)
+        domains: ['www.google.com', 'media.geeksforgeeks.org', 'geeksforgeeks.org', 'oaidalleapiprodscus.blob.core.windows.net'],
+    }
 };
