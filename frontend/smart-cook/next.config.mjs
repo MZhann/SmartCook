@@ -16,7 +16,7 @@ export default {
 
     // Image configuration
     images: {
-        domains: ['www.google.com', 'media.geeksforgeeks.org', 'geeksforgeeks.org'],
+        domains: ['www.google.com', 'media.geeksforgeeks.org', 'geeksforgeeks.org', 'web-production-ad96.up.railway.app'],
     },
 
     // Other Next.js configuration options (if needed)

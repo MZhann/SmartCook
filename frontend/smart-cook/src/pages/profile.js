@@ -93,21 +93,7 @@ useEffect(() => {
                   <WaitingOpponent />
                   <Statistics />
               </div>
-              <Chooser chose/>
-              <div className={`flex flex-wrap gap-[47px] mt-5`}>
-                  <div className={`bg-[#2A293B] flex flex-col text-white w-[280px] h-[317px] rounded-3xl`}>
-                      <Image className={`object-contain rounded-t-3xl`} src={potato} alt={'potato'} width={574}
-                             height={382}/>
-                      <div className={`p-4`}>
-                          <div className={'flex flex-row'}>
-                              <Image className={'mr-2 rounded-full object-fit h-[20px] w-[20px]'} src={defaultAvatar}  alt={'default'} />
-                              <h1 className={'text-[17px] font-[500]'}>{userProfile?.first_name} {userProfile?.last_name}</h1>
-                          </div>
-                          <h1 className={`text-[24px] mb-3`}>Step 1/5</h1>
-                          <Like count={3}/>
-                      </div>
-                  </div>
-              </div>
+              <Chooser userProfile={userProfile}/>
           </div>
       </MainContainer>
     );
