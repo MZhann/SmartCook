@@ -4,8 +4,19 @@ import Dropdown from "./Dropdown";
 import magic from "../../../public/images/magic.png";
 import Image from "next/image";
 import { config } from "../../../config";
+import CreatingReceipt from "../modal/CreatingReceipt";
 
 const Options = ({ ingredients }) => {
+    const [isModalOpen, setIsModalOpen] = useState(false);
+    const openModal = () => {
+        setIsModalOpen(true);
+    };
+
+    const closeModal = () => {
+        setIsModalOpen(false);
+    };
+
+    const [isLoading, setIsLoading] = useState(false);
     const [responseText, setResponseText] = useState("");
     const apiUrl = process.env.APIURL;
     const apikey = process.env.APIKEY;
@@ -17,10 +28,7 @@ const Options = ({ ingredients }) => {
         "Dessert",
         "Salad",
     ];
-    useEffect(()=>{
-        console.log(apiUrl  );
-        console.log(apikey);
-    })
+
     const [selectedDish, setSelectedDish] = useState(null);
     const [selectedCook, setSelectedCook] = useState(null);
     const [selectedType, setSelectedType] = useState(null);
@@ -60,7 +68,7 @@ const Options = ({ ingredients }) => {
             if (line === "") continue;
 
             const lowerLine = line.toLowerCase();
-        
+
             if (lowerLine.includes("title:")) {
                 parsedRecipe.title =
                     "AI " + line.substring(line.indexOf(":") + 1).trim();
@@ -113,6 +121,9 @@ const Options = ({ ingredients }) => {
     }, [recipe]);
 
     const handleSubmit = async () => {
+        openModal();
+        setIsLoading(!isLoading);
+        console.log("isLoading now: " + isLoading);
         const formData = {
             selectedDish,
             selectedCook,
@@ -130,10 +141,10 @@ const Options = ({ ingredients }) => {
         let prompt = `You are an experienced Nutritionist who can make recipes according to requests, taking into account all requirements. Given a list of ingredients, create me recipe for ${selectedDish}. I am ${selectedCook} cook, dish should be ${selectedType}, selected world cuisine is ${selectedWorld}, ${ingredientsString}, extra ingredients are ${extraIngredients}, banned ingredients are ${banIngredients}. Generate at first 1) "title:", then 2) "number:" of serves, then 3) "cook time:", then short 4) "description:" of dish in 20-30 words, then 5) "ingredients:" with quantity, then 6) "direction:"/steps of cooking. Put every article of response on a new line, and number each article. Start title, serves, cooktime, description, ingredients, directions with part's name, like "title: name of receipt", "serves: 3" and so on, put "-" before each ingredient and direction`;
 
         try {
-            const response = await fetch(APIURL, {
+            const response = await fetch(apiUrl, {
                 method: "POST",
                 headers: {
-                    Authorization: `Bearer ${APIKEY}`,
+                    Authorization: `Bearer ${apikey}`,
                     "Content-Type": "application/json",
                 },
                 body: JSON.stringify({
@@ -149,6 +160,8 @@ const Options = ({ ingredients }) => {
             console.log(responseText);
             console.log(text);
             parseRecipe(text);
+            setIsLoading(false);
+            console.log(isLoading);
         } catch (error) {
             console.error(error.response?.data ?? error.toJSON?.() ?? error);
             console.error("API error", error);
@@ -178,6 +191,7 @@ const Options = ({ ingredients }) => {
 
     return (
         <div className="flex flex-col items-center">
+            <CreatingReceipt isLoading={isLoading} isModalOpen={isModalOpen}  onClose={closeModal} closeModal={closeModal}/>
             <div className="w-full h-[328px] rounded-3xl bg-white mt-20 p-4">
                 <div>
                     <div className="font-bold text-3xl">Options</div>
