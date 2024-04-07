@@ -2,8 +2,10 @@ import puzzle from "@/../public/images/puzzle.png";
 import Image from "next/image";
 import game from "@/../public/images/eightPuzzle.jpg";
 import { useState, useEffect } from "react";
-import DynamicQuiz from "@/components/DynamicQuiz";
+import "../App.css"
 import EightPuzzle from "@/components/EightPuzzle";
+import MemoryGame from "@/components/MemoryGame";
+import DynamicQuiz from "@/components/DynamicQuiz";
 
 const MiniGames = ({
     setIsHidden,
@@ -30,7 +32,6 @@ const MiniGames = ({
     const handlePuzzle = () => {
         setWhatGame("puzzle");
     };
-
 
     return (
         <>

@@ -7,25 +7,44 @@ import Image from "next/image"
 import axios from "axios";
 import {config} from "../../config";
 import Footer from "@/components/Footer";
+import {Upload} from "antd";
+
 
 const RecipeMake = () => {
+    const [steps, setSteps] = useState([{ step_text: "", image: null }]);
+    const [previewImage, setPreviewImage] = useState(null);
+    const [fileList, setFileList] = useState([]);
     const [title, setTitle] = useState("");
     const [serves, setServes] = useState();
     const [cookTime, setCookTime] = useState();
     const [description, setDescription] = useState("");
     const [ingredients, setIngredients] = useState([{ name: "" }]);
-    const [steps, setSteps] = useState([{ step_text: "", image: "" }]);
+    const [mainImage, setMainImage] = useState(null);
 
     const handleAddIngredient = () => {
         setIngredients([...ingredients, { name: "" }]);
     };
-
+    const handleDescriptionChange = (event) => {
+        setDescription(event.target.value);
+    };
+    const handleCookTimeChange = (event) => {
+        setCookTime(event.target.value);
+    };
+    const handleTitleChange = (event) => {
+        setTitle(event.target.value);
+    };
+    const handleServesChange = (event) => {
+        setServes(event.target.value);
+    };
+    const handleMainImageChange = ({fileList: newFileList}) => setFileList(newFileList);
+    const handleMainImageRemove = () => {
+        setMainImage(null);
+    };
     const handleRemoveIngredient = index => {
         const updatedIngredients = [...ingredients];
         updatedIngredients.splice(index, 1);
         setIngredients(updatedIngredients);
     };
-
     const handleAddStep = () => {
         setSteps([...steps, { step_text: "", image: null }]);
     };
@@ -48,35 +67,40 @@ const RecipeMake = () => {
         setSteps(updatedSteps);
     };
 
-    const [selectedImage, setSelectedImage] = useState(null);
 
-    const handleStepImageChange = (index, event) => {
-        const file = event.target.files[0]; 
-        const reader = new FileReader();
-        
-        reader.onload = () => {
-            const imageUrl = reader.result;
-            const updatedSteps = [...steps];
-            updatedSteps[index].image = null; 
-            setSteps(updatedSteps); 
-            setSelectedImage(imageUrl); 
-        };
-        
-        if (file) {
-            reader.readAsDataURL(file);
-        }
+    const handleStepImageChange = (index, file) => {
+        const updatedSteps = [...steps];
+        updatedSteps[index].image = file; // Directly set the file object as image
+        setSteps(updatedSteps);
     };
-    const handlePublish = () => {
-        const recipeData = {
-            title: title,
-            serves: serves,
-            cook_time: cookTime,
-            description: description,
-            ingredients: ingredients,
-            steps: steps
-        };
 
-        axios.post(`${config.baseUrl}/api/v1/recipes/`, recipeData,
+    const handlePublish = () => {
+        const formData = new FormData();
+
+        if (fileList.length > 0) {
+            const file = fileList[0].originFileObj;
+            formData.append("image", file);
+        }
+        formData.append("title", title);
+        formData.append("serves", serves);
+        formData.append("cook_time", cookTime);
+        formData.append("description", description);
+        formData.append("ingredients", ingredients);
+        console.log(ingredients);
+        console.log(steps);
+
+        const stepsData = steps.map(step => ({
+            step_text: step.step_text,
+            image: step.image,
+        }));
+        formData.append("steps", JSON.stringify(stepsData));
+
+
+
+        for (const [key, value] of formData.entries()) {
+            console.log(`${key}: ${value}`);
+        }
+        axios.post(`${config.baseUrl}/api/v1/recipes/`, formData,
             {headers: {
                 Authorization: 'Bearer ' + localStorage.getItem('accessToken'),
                 }})
@@ -89,22 +113,6 @@ const RecipeMake = () => {
                 alert('Error publishing recipe. Please try again later.');
             });
     };
-
-    const handleDescriptionChange = (event) => {
-        setDescription(event.target.value);
-    };
-
-    const handleCookTimeChange = (event) => {
-        setCookTime(event.target.value);
-    };
-
-    const handleTitleChange = (event) => {
-        setTitle(event.target.value);
-    };
-
-    const handleServesChange = (event) => {
-        setServes(event.target.value);
-    }
 
     return (
         <MainContainer>
@@ -121,10 +129,22 @@ const RecipeMake = () => {
                         </div>
                         <div
                             className="w-[750px] mt-[50px] h-[400px] bg-white flex justify-center items-center rounded-lg">
-                            <div className="text-center justify-center items-center">
-                                <Image className={'ml-[18px]'} src={instax} alt="instax" width={250} height={250}/>
-                                <h1 className={'mt-5 text-[24px]'}>Upload finished food photo</h1>
-                            </div>
+                            <Upload
+                                action="https://660d2bd96ddfa2943b33731c.mockapi.io/api/upload"
+                                listType="picture-card"
+                                onChange={handleMainImageChange}
+                                onRemove={handleMainImageRemove}
+                                className="uploader"
+                            >
+                                {mainImage ? (
+                                    <Image src={URL.createObjectURL(mainImage)} alt="Main Image" width={250} height={250} />
+                                ) : (
+                                    <div>
+                                        <Image className="ml-[18px]" src={instax} alt="instax" width={250} height={250} />
+                                        <h1 className="mt-5 text-[24px]">Upload finished food photo</h1>
+                                    </div>
+                                )}
+                            </Upload>
                         </div>
                         <div
                             className="w-[750px] mt-[30px] p-[24px]  bg-white flex flex-col rounded-lg ">
@@ -234,26 +254,26 @@ const RecipeMake = () => {
                                                 <Image src={trash} height={24} width={24} alt={'trash'}
                                                        onClick={() => handleRemoveStep(index)}/>
                                             </div>
-                                            <div className={'relative'}>
-                                                <input
-                                                    className={`w-[650px] rounded-3xl border-2 h-10 shadow-gray-500 text-xs p-3 mt-2`}
-                                                    type="file"
-                                                    accept="image/*" // Restrict file types to images
-                                                    onChange={(event) => handleStepImageChange(index, event)} // Call handleStepImageChange function when the image is uploaded
-                                                />
-                                                {!selectedImage &&
-                                                    <Image src={instax} alt={'upload'} width={120} height={120}
-                                                           className={`rounded-3xl border-2 shadow-gray-500 text-xs p-3 mt-2`}/>}
-                                                {selectedImage && (
-                                                    <Image
-                                                        src={selectedImage}
-                                                        alt={'upload'}
-                                                        width={120}
-                                                        height={120}
-                                                        className={`rounded-3xl border-2 shadow-gray-500 text-xs p-3 mt-2`}
-                                                    />
+                                            <div className={''}>
+                                                    <Upload
+                                                        customRequest={({ file }) => handleStepImageChange(index, file)}
+                                                        listType="picture-card"
+                                                        fileList={step.image ? [step.image] : []}
+                                                        onChange={() => {}}
+                                                    >
+                                                        {fileList.length < 1 && (
+                                                            <div>
+                                                                <Image src={instax} alt="instax" width={250} height={250} />
+                                                                <h1 className="mt-5 text-[24px]">Upload finished food photo</h1>
+                                                            </div>
+                                                        )}
+                                                    </Upload>
+                                                {!previewImage && (
+                                                    <div>
+                                                        <Image src={instax} alt="instax" width={250} height={250} />
+                                                        <h1 className="mt-5 text-[24px]">Upload finished food photo</h1>
+                                                    </div>
                                                 )}
-
                                             </div>
                                         </div>
                                     ))}

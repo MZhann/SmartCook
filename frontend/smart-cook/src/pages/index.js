@@ -14,6 +14,7 @@ import MiniGames from "@/components/modal/MiniGames";
 import CreatingReceipt from "@/components/modal/CreatingReceipt";
 import YouWon from "@/components/modal/YouWon";
 import NoBattle from "@/components/modal/battle-cards/profile-battle-cards/NoBattle";
+import MemoryGame from "@/components/MemoryGame";
 
 const Main = () => {
     return (
@@ -34,8 +35,9 @@ const Main = () => {
 
 
                 <div className={`flex flex-row justify-around`}>
-                    <EightPuzzle/>
-                    <DynamicQuiz/>
+                    {/*<EightPuzzle/>*/}
+                    {/*<DynamicQuiz/>*/}
+                    <MemoryGame />
                 </div>
                 <FollowAlong/>
                 <Footer/>

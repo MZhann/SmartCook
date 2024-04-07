@@ -8,8 +8,40 @@ import cook from "../../public/images/cook-award.png"
 import logout from "../../public/images/Logout.png"
 import WaitingOpponent from "@/components/modal/battle-cards/profile-battle-cards/WaitingOpponent";
 import Statistics from "@/components/profile-page/Statistics";
+import Chooser from "@/components/profile-page/Choose";
+import {config} from "../../config.js";
+import axios from "axios";
+import {useEffect, useState} from "react";
+
 
 const Profile = () => {
+    const [userProfile, setUserProfile] = useState(null);
+
+    useEffect(() => {
+        fetchProfile();
+    }, []);
+useEffect(() => {
+  console.log(userProfile)
+})
+    const fetchProfile = () => {
+        try {
+            axios.get(`${config.baseUrl}/api/v1/user/profile`, {
+                headers: {
+                    Authorization: 'Bearer ' + localStorage.getItem('accessToken'),
+                }
+            })
+                .then(response => {
+                    setUserProfile(response.data);
+                    console.log(userProfile)// Set user profile data in state
+                })
+                .catch(error => {
+                    console.error(error);
+                });
+        } catch (error) {
+            console.error(error);
+        }
+    }
+
     return (
       <MainContainer>
           <div className="w-full max-w-[1195px] relative flex flex-col">
@@ -22,10 +54,10 @@ const Profile = () => {
                       </div>
                       <div className={'w-full flex-col flex gap-0.5 mt-2'}>
                           <div>
-                              <h1 className={`text-white text-[20px] font-[700]`}>Mariya Kim</h1>
+                              <h1 className={`text-white text-[20px] font-[700]`}>{userProfile?.first_name} {userProfile?.last_name}</h1>
                           </div>
                           <div>
-                              <p className={`text-white text-[12px] font-[400]`}>mariyakim@gmail.com</p>
+                              <p className={`text-white text-[12px] font-[400]`}>{userProfile?.email}</p>
                           </div>
                       </div>
                       <div className={'mt-7'}>
@@ -59,21 +91,7 @@ const Profile = () => {
                   <WaitingOpponent />
                   <Statistics />
               </div>
-              <div className={'w-[1196px] h-[97px] py-[24px] px-[40px] flex flex-row bg-[#2A293B] rounded-3xl mt-6'}>
-                  <div
-                      className={'px-[38px] w-[220px] h-[49px] text-[#2A293B] text-[24px] font-[500] flex justify-center items-center rounded-3xl bg-gradient-to-r from-[#AAE06E] to-[#CDE7B1]'}>Past
-                      battles
-                  </div>
-                  <div
-                      className={'px-[38px] w-[190px] h-[49px] text-[#2A293B] text-[24px] font-[500] flex justify-center items-center rounded-3xl bg-gradient-to-r from-[#AAE06E] to-[#CDE7B1]'}>
-                      My recipe
-                  </div>
-                  <div
-                      className={'px-[38px] w-[220px] h-[49px] text-[#2A293B] text-[24px] font-[500] flex justify-center items-center rounded-3xl bg-gradient-to-r from-[#AAE06E] to-[#CDE7B1]'}>
-                      Saved recipe
-                  </div>
-
-              </div>
+              <Chooser />
           </div>
       </MainContainer>
     );
