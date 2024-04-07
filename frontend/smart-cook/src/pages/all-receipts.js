@@ -1,16 +1,27 @@
 import MainContainer from "@/components/MainContainer";
 import Navbar from "@/components/Navbar";
-import food from "@/../public/images/food.jpg";
-import Image from "next/image";
-import clock from "@/../public/images/clock.svg";
-import people from "@/../public/images/profile-2user.svg";
-import avatar from "@/../public/images/avatar.jpg";
-import love from "@/../public/images/love.png";
-import fav from "@/../public/images/favorite.png";
-import potato from "@/../public/images/potato.jpg";
 import Recipe from "@/components/Recipe";
+import axios from "axios";
+import {config} from "../../config";
+import {useEffect, useState} from "react";
 
 const AllReceipts = () => {
+    const [recipes, setRecipes] = useState(null);
+
+    useEffect(() => {
+        fetchData();
+    }, [])
+
+    const fetchData = async () => {
+        try {
+            const data = await axios.get(`${config.baseUrl}/api/v1/all-recipes/`);
+            setRecipes(data.data);
+            console.log(recipes)
+        } catch (error) {
+            console.error(error);
+        }
+    }
+
     return (
         <MainContainer>
             <div className=" w-full max-w-[1195px] relative flex flex-col items-center">
@@ -40,14 +51,9 @@ const AllReceipts = () => {
                 </div>
 
                 <div className="flex flex-wrap justify-between mt-10">
-                    <Recipe /> 
-                    <Recipe /> 
-                    <Recipe /> 
-                    <Recipe /> 
-                    <Recipe /> 
-                    <Recipe /> 
-                    <Recipe /> 
-                    <Recipe /> 
+                    {recipes && recipes.map((recipe, index) => (
+                        <Recipe key={index} recipe={recipe} />
+                    ))}
                 </div>
                 <div className="h-[400px]"></div>
             </div>

@@ -29,7 +29,7 @@ const Navbar = () => {
                 {!isLoggedIn ?
                     <Link href={'/sign-in'}>
                         <svg className={'-mt-1'} width={30} height={30} viewBox="0 0 21 21" xmlns="http://www.w3.org/2000/svg">
-                            <g fill="none" fill-rule="evenodd" stroke={router.pathname === '/' ? "#000000" : "white"} stroke-linecap="round"
+                            <g fill="none" fill-rule="evenodd" stroke={router.pathname === '/' || router.pathname === '/profile' || router.pathname === '/challenges' || router.pathname === '/leaderboard' ? "#000000" : "white"} stroke-linecap="round"
                                stroke-linejoin="round" transform="translate(3 3)">
                                 <path d="m6.5 10.5 3-3-3-3"/>
                                 <path d="m5 3v9" transform="matrix(0 1 -1 0 12.5 2.5)"/>

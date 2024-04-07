@@ -12,6 +12,8 @@ import Chooser from "@/components/profile-page/Choose";
 import {config} from "../../config.js";
 import axios from "axios";
 import {useEffect, useState} from "react";
+import potato from "../../public/images/potato.jpg";
+import Like from "@/components/Like";
 
 
 const Profile = () => {
@@ -91,7 +93,7 @@ useEffect(() => {
                   <WaitingOpponent />
                   <Statistics />
               </div>
-              <Chooser />
+              <Chooser userProfile={userProfile}/>
           </div>
       </MainContainer>
     );

@@ -8,6 +8,7 @@ import avatar from "@/../public/images/avatar.jpg"
 import love from "@/../public/images/love.png"
 import fav from "@/../public/images/favorite.png"
 import potato from "@/../public/images/potato.jpg"
+import Like from "@/components/Like";
 
 const HumanReciept = () => {
     return (
@@ -34,9 +35,7 @@ const HumanReciept = () => {
                                 <h1 className={'flex flex-row'}>Aigul Sarsenova</h1>
                             </div>
                             <div className={`flex flex-row gap-4 items-center`}>
-                                <div
-                                    className={'items-center bg-white w-[65px] h-[35px] rounded-3xl py-2 px-2 text-black flex-row justify-evenly flex'}>
-                                    <Image src={love} alt={'like'} width={16} height={16}/><p>3</p></div>
+                                <Like count={3}/>
                                 <div
                                     className={'items-center bg-white w-[65px] h-[35px] rounded-3xl flex-row justify-evenly flex'}>
                                     <Image src={fav} alt={'fav'} width={16} height={16}/></div>
