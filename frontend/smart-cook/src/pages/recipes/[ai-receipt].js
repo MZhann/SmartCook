@@ -8,6 +8,8 @@ import avatar from "@/../public/images/avatar.jpg";
 import love from "@/../public/images/love.png";
 import fav from "@/../public/images/favorite.png";
 import potato from "@/../public/images/potato.jpg";
+import {useRouter} from "next/router";
+import axios from "axios";
 
 const AiReceipt = () => {
     return (

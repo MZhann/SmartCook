@@ -6,6 +6,7 @@ import Image from "next/image";
 import { config } from "../../../config";
 import CreatingReceipt from "../modal/CreatingReceipt";
 import { OpenAI } from "openai";
+import Link from "next/link";
 
 const Options = ({ ingredients }) => {
     const [isModalOpen, setIsModalOpen] = useState(false);
@@ -18,7 +19,7 @@ const Options = ({ ingredients }) => {
     const [banIngredients, setBanIngredients] = useState("");
     const [isLoading, setIsLoading] = useState(false);
     const [responseText, setResponseText] = useState("");
-
+    let aiRecipeId = 0;
     let urlOfImage = "";
     // useEffect(() => {
     //     if (imageURL !== null) {
@@ -34,11 +35,8 @@ const Options = ({ ingredients }) => {
         setIsModalOpen(false);
     };
 
-   
     const apiUrl = process.env.APIURL;
     const apikey = process.env.APIKEY;
-
- 
 
     const handleExtraIngredientsChange = (event) => {
         setExtraIngredients(event.target.value);
@@ -70,14 +68,14 @@ const Options = ({ ingredients }) => {
                 options
             );
             const data = await response.json();
-            console.log("data of generatedImage is below: ")
-            console.log(data)
+            console.log("data of generatedImage is below: ");
+            console.log(data);
             urlOfImage = data.data[0].url;
 
             console.log("urlOfImage " + urlOfImage);
             setImageURL(urlOfImage);
-            
-            setIsLoading(false);    
+
+            setIsLoading(false);
         } catch (error) {
             console.error(error);
         }
@@ -93,13 +91,14 @@ const Options = ({ ingredients }) => {
             console.log("Directions not found in the text");
         }
 
-
         if (startIndex === -1 || endIndex === -1 || startIndex >= endIndex) {
-            startIndex = recipeText.indexOf("description")
+            startIndex = recipeText.indexOf("description");
             // endIndex = recipeText.indexOf("ingredients")
             return "Directions and description not found.";
         }
-        const directions = recipeText.substring(directionsStartIndex + "Directions:".length).trim();
+        const directions = recipeText
+            .substring(directionsStartIndex + "Directions:".length)
+            .trim();
         const description = recipeText
             .substring(startIndex + "Description:".length, endIndex)
             .trim();
@@ -114,7 +113,7 @@ const Options = ({ ingredients }) => {
 
     const parseRecipe = (text, imageUrl) => {
         const lines = text.split("\n");
-        console.log("IN parseRecipe method")
+        console.log("IN parseRecipe method");
         let parsedRecipe = {
             title: "",
             serves: 0,
@@ -124,14 +123,14 @@ const Options = ({ ingredients }) => {
             description: "",
             ingredients: [],
             steps: [],
-            image: ""
+            image: "",
         };
 
         let currentSection = "";
         parsedRecipe.image = urlOfImage;
         parsedRecipe.world_cuisine = selectedWorld;
         parsedRecipe.dish_type = selectedDish;
-        console.log("IN parseRecipe: assigned imageURL")
+        console.log("IN parseRecipe: assigned imageURL");
         console.log(parsedRecipe.image);
 
         for (let line of lines) {
@@ -176,14 +175,13 @@ const Options = ({ ingredients }) => {
                             .replace(/^\d+\. /, "")
                             .replace("- ", "")
                             .trim(),
-                        
                     });
                 }
             }
         }
 
         setRecipe(parsedRecipe);
-        console.log("parsedRecipe is below")
+        console.log("parsedRecipe is below");
         console.log(parsedRecipe);
         console.log("recipe", recipe);
         postReceipt(parsedRecipe);
@@ -193,9 +191,8 @@ const Options = ({ ingredients }) => {
     //     console.log("recipe", recipe); // This will log the updated state value
     // }, [recipe]);
 
-
     const postReceipt = async (parsedReceipt) => {
-        console.log("posting this recipe:")
+        console.log("posting this recipe:");
         console.log(parsedReceipt);
         try {
             const response = await fetch(
@@ -214,19 +211,23 @@ const Options = ({ ingredients }) => {
             if (response.ok) {
                 const data = await response.json();
                 console.log("Recipe posted successfully:", data);
+                console.log("data id: " + data.id)
+                aiRecipeId = data.id;
+
+                console.log("id: " + aiRecipeId);
             } else {
                 console.error("Failed to post recipe:", response.statusText);
             }
         } catch (error) {
             console.error("Error posting recipe:", error);
         }
-    }
+    };
 
     const handleSubmit = async () => {
         openModal();
         setIsLoading(true);
         console.log("isLoading now: " + isLoading);
-      
+
         const ingredientsString =
             "ingredients are: " + ingredients.map((obj) => obj.name).join(", ");
 
@@ -255,19 +256,16 @@ const Options = ({ ingredients }) => {
             await generateImage(promptTextForImage);
 
             // setTimeout(() => {
-            //     parseRecipe(text, imageURL);       
+            //     parseRecipe(text, imageURL);
             //     console.log("Waited for 5 seconds!");
-            // }, 2000); 
-           
-            parseRecipe(text, imageURL);       
-           
+            // }, 2000);
 
+            parseRecipe(text, imageURL);
         } catch (error) {
             console.error(error.response?.data ?? error.toJSON?.() ?? error);
             console.error("API error", error);
         }
 
-       
         // postReceipt();
     };
 
@@ -287,7 +285,14 @@ const Options = ({ ingredients }) => {
                         <div>
                             <div>What dish you want to cook?</div>
                             <Dropdown
-                                options={["Breakfast", "Lunch", "Dinner", "Snack", "Dessert", "Salad"]}
+                                options={[
+                                    "Breakfast",
+                                    "Lunch",
+                                    "Dinner",
+                                    "Snack",
+                                    "Dessert",
+                                    "Salad",
+                                ]}
                                 placeholder="Select a dish"
                                 onSelect={setSelectedDish}
                             />
@@ -357,17 +362,21 @@ const Options = ({ ingredients }) => {
                     </div>
                 </div>
             </div>
-            <button
+            {/* <Link href="/recipes/[recipeTitle]" as={`/recipes/${recipe.id}`} passHref></Link> */}
+            <Link
+                href="/recipes/[ai-receipt]"
+                as={`/recipes/${aiRecipeId}`}
                 className="flex justify-center items-center mt-10 px-4 py-2 bg-[#AAE06E] w-[450px] h-[60px] rounded-full text-white hover:bg-green-400"
                 onClick={handleSubmit}
             >
+           
                 <Image
                     src={magic}
                     alt="magic"
                     className="w-[35px] ml-[-20px] mr-3 "
                 />
                 Create
-            </button>
+            </Link>
         </div>
     );
 };
