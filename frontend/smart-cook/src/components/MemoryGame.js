@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import YouWon from "@/components/modal/YouWon";
-import Data from "./data";
+import Data from "./Data";
 import Card from "./Card";
 import Image from "next/image";
 import lossImage from "../../public/images/over.jpg";
