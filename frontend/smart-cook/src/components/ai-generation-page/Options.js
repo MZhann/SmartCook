@@ -364,7 +364,7 @@ const Options = ({ ingredients }) => {
             </div>
             {/* <Link href="/recipes/[recipeTitle]" as={`/recipes/${recipe.id}`} passHref></Link> */}
             <Link
-                href="/recipes/[ai-receipt]"
+                href="/recipes-ai/[recipeAi]"
                 as={`/recipes/${aiRecipeId}`}
                 className="flex justify-center items-center mt-10 px-4 py-2 bg-[#AAE06E] w-[450px] h-[60px] rounded-full text-white hover:bg-green-400"
                 onClick={handleSubmit}

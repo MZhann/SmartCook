@@ -2,6 +2,7 @@ import React, {useEffect, useState} from "react";
 import Recipe from "./Recipe";
 import axios from "axios";
 import {config} from "../../config";
+import Link from "next/link";
 
 
 const RecentlyAdded = () => {
@@ -30,7 +31,9 @@ const RecentlyAdded = () => {
             <div className="text-white text-4xl ">Recently added recipes</div>
             <div className="mt-10 flex justify-between flex-wrap">
                 {recipes && recipes.slice(0, displayedRecipes).map((recipe, index) => (
-                    <Recipe key={index} recipe={recipe} />
+                    <Link href="/recipes/[recipeTitle]" as={`/recipes/${recipe.id}`} passHref>
+                        <Recipe key={index} recipe={recipe} />
+                    </Link>
                 ))}
             </div>
             <button onClick={loadMoreRecipes} className="w-max text-white px-16 font-bold py-2 mt-4 rounded-3xl tracking-wide bg-[#AAE06E]">Load More</button>

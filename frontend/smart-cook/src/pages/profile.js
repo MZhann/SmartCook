@@ -48,7 +48,7 @@ useEffect(() => {
       <MainContainer>
           <div className="w-full max-w-[1195px] relative flex flex-col">
               <Navbar/>
-              <div className={`flex justify-center items-center w-full text-black text-[40px] font-[600] mt-7`}><h1>Profile</h1></div>
+              <div className={`flex justify-center items-center w-full text-black text-[40px] font-[600] mt-7`}><h1 className={'text-black'}>Profile</h1></div>
               <div className={'flex flex-row justify-between mt-4'}>
                   <div className={'w-[278px] h-[546px] px-6 py-5 bg-[#2A293B] rounded-3xl'}>
                       <div className={`w-full`}>

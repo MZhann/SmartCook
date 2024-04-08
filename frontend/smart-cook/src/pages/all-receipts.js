@@ -4,6 +4,7 @@ import Recipe from "@/components/Recipe";
 import axios from "axios";
 import {config} from "../../config";
 import {useEffect, useState} from "react";
+import Link from "next/link";
 
 const AllReceipts = () => {
     const [recipes, setRecipes] = useState(null);
@@ -57,7 +58,9 @@ const AllReceipts = () => {
                 </div>
                 <div className="flex flex-wrap justify-between mt-10">
                     {recipes && recipes.slice(0, displayedRecipes).map((recipe, index) => (
-                        <Recipe key={index} recipe={recipe}/>
+                        <Link href="/recipes/[recipeTitle]" as={`/recipes/${recipe.id}`} passHref>
+                            <Recipe key={index} recipe={recipe}/>
+                        </Link>
                     ))}
                 </div>
                 <div className={'w-full justify-start'}>
