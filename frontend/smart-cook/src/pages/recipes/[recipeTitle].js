@@ -102,18 +102,18 @@ const RecipeTitle = () => {
                     <h1 className={`text-[#AAE06E] text-[28px]`}>Ingredients</h1>
                     <ul className={`flex flex-col text-white text-[24px] gap-1 font-[400] mt-8`}>
                         {recipe && recipe.ingredients.map((item, index) => (
-                            <li>{index+1}. {item.name}</li>
+                            <li key={index}>{index+1}. {item.name}</li>
                         ))}
                     </ul>
                 </div>
                 <div className={`flex flex-col w-full mt-8`}>
                     <h1 className={`text-[#AAE06E] text-[28px]`}>Direction</h1>
                     <div className={`flex flex-wrap gap-[47px] mt-5`}>
-                        <div className={`bg-white flex flex-col w-[574px] h-[564px] rounded-3xl`}>
-                            {recipe && recipe.steps.map((item, index) => (
-                                <StepCard item={item} index={index}/>
-                            ))}
-                        </div>
+                        {recipe && recipe.steps.map((item, index) => (
+                                <div key={index}>
+                                    <StepCard item={item} index={index}/>
+                                </div>
+                        ))}
                     </div>
                 </div>
             </div>

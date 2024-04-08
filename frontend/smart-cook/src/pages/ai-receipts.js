@@ -41,8 +41,8 @@ const AiReceipts = () => {
 
                 <div className="flex w-full flex-wrap justify-between mt-6">
                     {recipes && recipes.slice(0, displayedRecipes).map((recipe, index) => (
-                        <Link href="/recipes-ai/[recipeAi]" as={`/recipes-ai/${recipe.id}`} passHref>
-                            <Recipe key={index} recipe={recipe}/>
+                        <Link key={index} href="/recipes-ai/[recipeAi]" as={`/recipes-ai/${recipe.id}`} passHref>
+                            <Recipe recipe={recipe}/>
                         </Link>
                     ))}
                 </div>

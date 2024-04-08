@@ -4,15 +4,11 @@ import Image from "next/image";
 import loading from "../../../public/loading.gif";
 import { useState } from "react";
 import MiniGames from "./MiniGames";
+import Link from "next/link";
 
-const CreatingReceipt = ({ isLoading, isModalOpen, onClose, closeModal }) => {
+const CreatingReceipt = ({ isLoading, isModalOpen, onClose, closeModal, recipeId }) => {
     const [isHidden, setIsHidden] = useState(false);
     const [isGamesHidden, setIsGamesHidden] = useState(true);
-    // const [counter, setCounter] = useState(0);
-    // useEffect(() => {
-    //     setIsHidden(false);
-    // }, [counter]);
-    
 
     const handleClick = () => {
         setIsHidden(true);
@@ -60,15 +56,15 @@ const CreatingReceipt = ({ isLoading, isModalOpen, onClose, closeModal }) => {
                             <div className="text-3xl font-bold text-[#AAE06E]">
                                 Your Receipt is Created
                             </div>
-                            <button className="mt-4 w-[250px] h-[35px] bg-[#AAE06E] flex justify-center items-center text-white rounded-2xl hover:bg-green-500">
+                            <Link href={`/recipes-ai/[recipeAi]`} as={`/recipes-ai/${recipeId && recipeId}`} passHref className="mt-4 w-[250px] h-[35px] bg-[#AAE06E] flex justify-center items-center text-white rounded-2xl hover:bg-green-500">
                                 See Result
-                            </button>
+                            </Link>
                         </div>
                     )}
 
                     <div className="flex w-full justify-between px-7 mt-14 items-center">
                         <div className="text-sm">
-                            You can play our eciting games!
+                            You can play our exciting games!
                         </div>
                         <button
                             onClick={handleClick}

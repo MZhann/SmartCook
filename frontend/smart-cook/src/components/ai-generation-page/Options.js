@@ -19,7 +19,7 @@ const Options = ({ ingredients }) => {
     const [banIngredients, setBanIngredients] = useState("");
     const [isLoading, setIsLoading] = useState(false);
     const [responseText, setResponseText] = useState("");
-    let aiRecipeId = 0;
+    const [recipeId, setRecipeId] = useState();
     let urlOfImage = "";
     // useEffect(() => {
     //     if (imageURL !== null) {
@@ -212,8 +212,7 @@ const Options = ({ ingredients }) => {
                 const data = await response.json();
                 console.log("Recipe posted successfully:", data);
                 console.log("data id: " + data.id)
-                aiRecipeId = data.id;
-
+                setRecipeId(data.id);
                 console.log("id: " + aiRecipeId);
             } else {
                 console.error("Failed to post recipe:", response.statusText);
@@ -272,6 +271,7 @@ const Options = ({ ingredients }) => {
     return (
         <div className="flex flex-col items-center">
             <CreatingReceipt
+                recipeId={recipeId && recipeId}
                 isLoading={isLoading}
                 isModalOpen={isModalOpen}
                 onClose={closeModal}
@@ -362,21 +362,17 @@ const Options = ({ ingredients }) => {
                     </div>
                 </div>
             </div>
-            {/* <Link href="/recipes/[recipeTitle]" as={`/recipes/${recipe.id}`} passHref></Link> */}
-            <Link
-                href="/recipes-ai/[recipeAi]"
-                as={`/recipes/${aiRecipeId}`}
+            <button
                 className="flex justify-center items-center mt-10 px-4 py-2 bg-[#AAE06E] w-[450px] h-[60px] rounded-full text-white hover:bg-green-400"
                 onClick={handleSubmit}
             >
-           
                 <Image
                     src={magic}
                     alt="magic"
                     className="w-[35px] ml-[-20px] mr-3 "
                 />
                 Create
-            </Link>
+            </button>
         </div>
     );
 };

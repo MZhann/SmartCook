@@ -11,6 +11,23 @@ import {useEffect, useState} from "react";
 const RecipeAi = () => {
     const [recipe, setRecipe] = useState(null);
     const {query} = useRouter();
+    const [isLoading, setIsLoading] = useState('');
+
+    const deleteRecipe = () => {
+        try {
+            setIsLoading('loading');
+            axios.delete(`https://web-production-ad96.up.railway.app/api/v1/recipes/ai/${query.recipeAi}/`, {
+                headers: {
+                    Authorization: 'Bearer ' + localStorage.getItem('accessToken')
+                }
+            })
+            window.location.hash = '/';
+            setIsLoading('done');
+        } catch (err) {
+            console.log(err)
+        }
+    }
+
     useEffect(() => {
         const fetchRecipe = async () => {
             try {
@@ -28,7 +45,7 @@ const RecipeAi = () => {
 
         <MainContainer>
             <div className=" w-full max-w-[1195px] relative flex flex-col ">
-                <Navbar />
+                <Navbar/>
                 <div
                     className={`gap-4 mt-5 flex flex-col items-center justify-center text-center text-white`}
                 >
@@ -50,7 +67,7 @@ const RecipeAi = () => {
                                 className={`rounded-[20px] object-cover`}
                                 src={`${recipe?.image}`}
                                 alt={"food"}
-                            />:
+                            /> :
                             <Image
                                 className={`rounded-[20px] w-[400px] h-[400px] object-cover`}
                                 src={food}
@@ -63,11 +80,11 @@ const RecipeAi = () => {
                             <div
                                 className={`ml-3 flex flex-row items-center gap-3`}
                             >
-                                <Image src={clock} alt={"clocl"} />
+                                <Image src={clock} alt={"clocl"}/>
                                 <p>{recipe?.cook_time} minutes</p>
                             </div>
                             <div className={`flex flex-row items-center gap-3`}>
-                                <Image src={people} alt={"people"} />
+                                <Image src={people} alt={"people"}/>
                                 <p>for {recipe?.serve} people</p>
                             </div>
                         </div>
@@ -76,10 +93,12 @@ const RecipeAi = () => {
                         <div
                             className={`w-3/5 flex flex-row items-center space-x-4`}
                         >
-                            <div className="w-[100[x] h-[36px] bg-[#DAE8FF] text-[#203878] text-lg flex justify-center items-center rounded-full p-4">
+                            <div
+                                className="w-[100[x] h-[36px] bg-[#DAE8FF] text-[#203878] text-lg flex justify-center items-center rounded-full p-4">
                                 {recipe?.world_cuisine}
                             </div>
-                            <div className="w-[120px] h-[36px] bg-[#FFE3F3] text-[#872D51] text-lg flex justify-center items-center rounded-full p-4 ">
+                            <div
+                                className="w-[120px] h-[36px] bg-[#FFE3F3] text-[#872D51] text-lg flex justify-center items-center rounded-full p-4 ">
                                 {recipe?.dish_type}
                             </div>
                         </div>
@@ -96,10 +115,24 @@ const RecipeAi = () => {
                             </p>
                         </div>
                         <div className="flex space-x-5">
-                            <button className="w-[210px] h-[48px] text-white text-lg bg-[#FF5858] flex justify-center items-center rounded-full mt-10">
-                                Delete
-                            </button>
-                            <button className="w-[210px] h-[48px] text-white text-lg bg-[#C3F48D] flex justify-center items-center rounded-full mt-10">
+                            {isLoading === '' ?
+                                <button onClick={deleteRecipe}
+                                        className="w-[210px] h-[48px] text-white text-lg bg-[#FF5858] flex justify-center items-center rounded-full mt-10">
+                                    Delete
+                                </button> :
+                                isLoading === 'loading' ?
+                                    <button
+                                        className="w-[210px] h-[48px] text-white text-lg bg-[#FF5858] flex justify-center items-center rounded-full mt-10">
+                                        Being deleted, wait
+                                    </button> :
+                                    isLoading === 'done' && <button
+                                        className="w-[210px] h-[48px] text-white text-lg bg-[#FF5858] flex justify-center items-center rounded-full mt-10">
+                                        Deleted!
+                                    </button>
+
+                            }
+                            <button
+                                className="w-[210px] h-[48px] text-white text-lg bg-[#C3F48D] flex justify-center items-center rounded-full mt-10">
                                 Save Recipe
                             </button>
                         </div>
@@ -114,7 +147,7 @@ const RecipeAi = () => {
                             className={`flex flex-col text-white text-[24px] gap-1 font-[400] mt-8`}
                         >
                             {recipe && recipe.ingredients.map((item, index) => (
-                                <li>{index+1}. {item.name}</li>
+                                <li key={index}>{index + 1}. {item.name}</li>
                             ))}
                         </ul>
                     </div>
@@ -123,13 +156,17 @@ const RecipeAi = () => {
                             Direction
                             <ol className="list-decimal text-white w-[630px] text-xl">
                                 {recipe && recipe.steps.map((item, index) => (
-                                    <li>{item.step_text}</li>
+                                    <li key={index}>{item.step_text}</li>
                                 ))}
                             </ol>
                         </h1>
                     </div>
                 </div>
-                <div className="w-[953px] h-[75px] border-2 border-[#AAE06E] rounded-2xl self-center mt-16 mb-16 text-center text-[#AAE06E] text-md flex justify-center items-center">NOTE: This recipe is AI-generated and DishGen has not verified it for accuracy or safety. It may contain errors. <br></br> Always use your best judgement when making AI-generated dishes.</div>
+                <div
+                    className="w-[953px] h-[75px] border-2 border-[#AAE06E] rounded-2xl self-center mt-16 mb-16 text-center text-[#AAE06E] text-md flex justify-center items-center">NOTE:
+                    This recipe is AI-generated and DishGen has not verified it for accuracy or safety. It may contain
+                    errors. <br></br> Always use your best judgement when making AI-generated dishes.
+                </div>
 
             </div>
         </MainContainer>
