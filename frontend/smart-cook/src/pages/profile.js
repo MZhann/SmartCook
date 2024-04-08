@@ -13,10 +13,34 @@ import {config} from "../../config.js";
 import axios from "axios";
 import {useEffect, useState} from "react";
 import EditProfile from "@/components/modal/EditProfile";
+import NoBattle from "@/components/modal/battle-cards/profile-battle-cards/NoBattle";
+import DeclinedBattle from "@/components/modal/battle-cards/profile-battle-cards/DeclinedBattle";
+import AcceptDecline from "@/components/modal/battle-cards/profile-battle-cards/AcceptDecline";
+import AcceptedBattle from "@/components/modal/battle-cards/profile-battle-cards/AcceptedBattle";
 
 const Profile = () => {
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [userProfile, setUserProfile] = useState(null);
+    const [battle, setBattle] = useState(null);
+    useEffect(() => {
+        const fetchBattle = async () => {
+            try {
+                const res = await axios.get(`${config.baseUrl}/api/v1/clashes/current/`,
+                    {
+                        headers: {
+                            Authorization: 'Bearer ' + localStorage.getItem('accessToken'),
+                        }
+                    })
+
+                setBattle(res.data)
+                console.log(battle[0]?.status)
+            } catch(error) {
+                console.error(error)
+            }
+        }
+
+        fetchBattle();
+    })
 
     const openModal = () => {
         setIsModalOpen(true);
@@ -101,7 +125,19 @@ const Profile = () => {
                             </button>
                         </div>
                     </div>
-                    <WaitingOpponent/>
+                    {battle && userProfile &&
+                    battle && battle[0]?.status === 'pending' && battle[0]?.initiator === userProfile?.id ? (
+                            <WaitingOpponent />
+                        ) : battle && battle[0]?.status === 'accepted' && battle[0]?.initiator === userProfile?.id ? (
+                            <AcceptedBattle
+                                battle={battle}
+                            />
+                        ) :battle && battle[0]?.status === 'accepted' ? (
+                            <AcceptedBattle />
+                        ) : battle && battle[0]?.status === 'declined' ? (
+                            <DeclinedBattle />
+                        ) : <NoBattle />
+                    }
                     <Statistics/>
                     <EditProfile
                         userProfile={userProfile}

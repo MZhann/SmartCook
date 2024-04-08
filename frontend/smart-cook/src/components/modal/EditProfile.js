@@ -45,10 +45,10 @@ const EditProfile = ({isModalOpen, onClose, closeModal, userProfile}) => {
             requestBody.email = email;
         }
         if (firstName !== userProfile.first_name) {
-            requestBody.firstName = firstName;
+            requestBody.first_name = firstName;
         }
         if (lastName !== userProfile.last_name) {
-            requestBody.lastName = lastName;
+            requestBody.last_name = lastName;
         }
         if (newPassword !== "") {
             requestBody.password = newPassword;
@@ -60,11 +60,16 @@ const EditProfile = ({isModalOpen, onClose, closeModal, userProfile}) => {
                 headers: {
                     Authorization: 'Bearer ' + localStorage.getItem('accessToken')
                 },
-            });
+            }).then((res) => {
+                console.log(res.data)
+                setTimeout(() => {
+                    window.location.reload();
+                },[2000])
+            })
             console.log("Profile updated successfully");
-            setTimeout(()=>{
-                window.location.reload();
-            },[1500])
+            // setTimeout(()=>{
+            //     // window.location.reload();
+            // },[1500])
         } catch (error) {
             console.error("Error updating profile:", error);
             if (error.response && error.response.data && error.response.data.error) {
@@ -79,15 +84,15 @@ const EditProfile = ({isModalOpen, onClose, closeModal, userProfile}) => {
     const validate = () => {
         let error = "";
 
-       if (firstName.trim() === "") {
+       if (firstName === "") {
             error = "First name is required.";
-        } else if (lastName.trim() === "") {
+        } else if (lastName === "") {
             error = "Last name is required.";
-        } else if (currentPassword.trim() === "") {
+        } else if (currentPassword === "") {
             error = "Current password is required.";
-        } else if (newPassword.trim() !== "" && newPassword.length < 6) {
+        } else if (newPassword !== "" && newPassword.length < 6) {
             error = "New password must be at least 6 characters long.";
-        } else if (newPassword.trim() !== repeatPassword.trim()) {
+        } else if (newPassword !== repeatPassword) {
             error = "New password and repeat password do not match.";
         }
 
