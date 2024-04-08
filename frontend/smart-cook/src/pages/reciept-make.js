@@ -15,32 +15,44 @@ const RecipeMake = () => {
     const [previewImage, setPreviewImage] = useState(null);
     const [fileList, setFileList] = useState([]);
     const [title, setTitle] = useState("");
-    const [serves, setServes] = useState();
-    const [cookTime, setCookTime] = useState();
+    const [serves, setServes] = useState(0);
+    const [cookTime, setCookTime] = useState(0);
     const [description, setDescription] = useState("");
     const [ingredients, setIngredients] = useState([{ name: "" }]);
     const [mainImage, setMainImage] = useState(null);
+    const ingredientObjects = [];
 
-    const handleAddIngredient = () => {
-        setIngredients([...ingredients, { name: "" }]);
+    const handleIngredientChange = (index, event) => {
+        const updatedIngredients = [...ingredients];
+        updatedIngredients[index].name = event.target.value;
+        setIngredients(updatedIngredients);
     };
 
     const handleAddStep = () => {
         setSteps([...steps, { step_text: "", image: null }]);
+        console.log(steps)
     };
     const handleDescriptionChange = (event) => {
         setDescription(event.target.value);
     };
+    const handleAddIngredient = () => {
+        setIngredients([...ingredients, { name: "" }]);
+        console.log(ingredients)
+    };
+
     const handleCookTimeChange = (event) => {
         setCookTime(event.target.value);
     };
     const handleTitleChange = (event) => {
         setTitle(event.target.value);
+        console.log(title);
     };
     const handleServesChange = (event) => {
         setServes(event.target.value);
     };
-    const handleMainImageChange = ({fileList: newFileList}) => setFileList(newFileList);
+    const handleMainImageChange = (event) => {
+        setMainImage(event.target.files[0]);
+    };
     const handleMainImageRemove = () => {
         setMainImage(null);
     };
@@ -57,12 +69,6 @@ const RecipeMake = () => {
         setSteps(updatedSteps);
     };
 
-    const handleIngredientChange = (index, event) => {
-        const updatedIngredients = [...ingredients];
-        updatedIngredients[index].name = event.target.value;
-        setIngredients(updatedIngredients);
-    };
-
     const handleStepTextChange = (index, event) => {
         const updatedSteps = [...steps];
         updatedSteps[index].step_text = event.target.value;
@@ -77,21 +83,23 @@ const RecipeMake = () => {
     };
 
     const handlePublish = () => {
-        const formData = new FormData();
 
-        if (fileList.length > 0) {
-            const file = fileList[0].originFileObj;
-            formData.append("image", file);
-        }
+
+        const formData = new FormData();
         formData.append("title", title);
         formData.append("serves", serves);
         formData.append("cook_time", cookTime);
         formData.append("description", description);
-        ingredients.forEach((ingredient, index) => {
-            formData.append(`ingredients[${index}][name]`, ingredient.name);
-        });
 
-        // Append steps
+        ingredients.forEach(ingredient => {
+            const ingredientObject = { name: ingredient.name };
+            ingredientObjects.push(ingredientObject);
+        });
+        formData.append('ingredients', JSON.stringify(ingredientObjects));
+        console.log(ingredientObjects);
+
+
+
         steps.forEach((step, index) => {
             formData.append(`steps[${index}][step_text]`, step.step_text);
             if (step.image) {
@@ -99,14 +107,21 @@ const RecipeMake = () => {
             }
         });
 
+        console.log("formData is BELOW");
+        console.log(formData);
 
+        if (fileList.length > 0) {
+            const file = fileList[0].originFileObj;
+            formData.append("image", file);
+        }
         for (const [key, value] of formData.entries()) {
             console.log(`${key}: ${value}`);
         }
-        axios.post(`${config.baseUrl}/api/v1/recipes/`, formData,
-            {headers: {
-                Authorization: 'Bearer ' + localStorage.getItem('accessToken'),
-                }})
+        axios.post(`${config.baseUrl}/api/v1/recipes/`, formData, {
+            headers: {
+                Authorization: 'Bearer ' + localStorage.getItem('accessToken')
+            }
+        })
             .then(response => {
                 console.log('Recipe published successfully:', response.data);
                 alert('Recipe published successfully!');
@@ -116,6 +131,7 @@ const RecipeMake = () => {
                 alert('Error publishing recipe. Please try again later.');
             });
     };
+
 
     return (
         <MainContainer>
@@ -134,7 +150,7 @@ const RecipeMake = () => {
                             className="w-[750px] mt-[50px] h-[400px] bg-white flex justify-center items-center rounded-lg">
                             <input
                                 type="file"
-                                onChange={(event) => handleMainImageChange({fileList: [event.target.files[0]]})}
+                                onChange={handleMainImageChange}
                             />
                             {mainImage ? (
                                 <Image src={URL.createObjectURL(mainImage)} alt="Main Image" width={250} height={250}/>
