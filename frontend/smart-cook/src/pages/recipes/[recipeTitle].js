@@ -102,7 +102,7 @@ const RecipeTitle = () => {
                     <h1 className={`text-[#AAE06E] text-[28px]`}>Ingredients</h1>
                     <ul className={`flex flex-col text-white text-[24px] gap-1 font-[400] mt-8`}>
                         {recipe && recipe.ingredients.map((item, index) => (
-                            <li>{index+1}. {item.name}</li>
+                            <li key={index}>{index+1}. {item.name}</li>
                         ))}
                     </ul>
                 </div>
