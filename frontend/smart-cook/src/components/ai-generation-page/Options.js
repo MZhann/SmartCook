@@ -19,6 +19,13 @@ const Options = ({ ingredients }) => {
     const [isLoading, setIsLoading] = useState(false);
     const [responseText, setResponseText] = useState("");
 
+    let urlOfImage = "";
+    // useEffect(() => {
+    //     if (imageURL !== null) {
+    //         parseRecipe(responseText, imageURL);
+    //     }
+    // }, [imageURL, responseText]);
+
     const openModal = () => {
         setIsModalOpen(true);
     };
@@ -63,34 +70,41 @@ const Options = ({ ingredients }) => {
                 options
             );
             const data = await response.json();
+            console.log("data of generatedImage is below: ")
             console.log(data)
-            const urlOfImage = await response.data.data[0].url;
+            urlOfImage = data.data[0].url;
+
+            console.log("urlOfImage " + urlOfImage);
             setImageURL(urlOfImage);
             
             setIsLoading(false);    
-
         } catch (error) {
             console.error(error);
         }
     };
 
     const extractImagePrompt = (recipeText) => {
-        const startIndex = recipeText.indexOf("Description:");
+        let startIndex = recipeText.indexOf("Description:");
         const endIndex = recipeText.indexOf("Ingredients:");
+        let directionsStartIndex = recipeText.indexOf("Directions:");
 
-        if (startIndex === -1 || endIndex === -1 || startIndex >= endIndex) {
-            return "Directions and description not found.";
+        if (directionsStartIndex === -1) {
+            directionsStartIndex = recipeText.indexOf("directions");
+            console.log("Directions not found in the text");
         }
 
-        const directions = recipeText
-            .substring(endIndex + "Ingredients:".length, startIndex)
-            .trim();
+
+        if (startIndex === -1 || endIndex === -1 || startIndex >= endIndex) {
+            startIndex = recipeText.indexOf("description")
+            // endIndex = recipeText.indexOf("ingredients")
+            return "Directions and description not found.";
+        }
+        const directions = recipeText.substring(directionsStartIndex + "Directions:".length).trim();
         const description = recipeText
-            .substring(startIndex + "Description:".length)
+            .substring(startIndex + "Description:".length, endIndex)
             .trim();
 
         const text = directions + ". " + description;
-        console.log("extracted text:" + text )
         return text;
     };
 
@@ -98,9 +112,9 @@ const Options = ({ ingredients }) => {
 
     const [recipe, setRecipe] = useState({});
 
-    const parseRecipe = (text) => {
+    const parseRecipe = (text, imageUrl) => {
         const lines = text.split("\n");
-
+        console.log("IN parseRecipe method")
         let parsedRecipe = {
             title: "",
             serves: 0,
@@ -110,12 +124,16 @@ const Options = ({ ingredients }) => {
             description: "",
             ingredients: [],
             steps: [],
+            image: ""
         };
 
         let currentSection = "";
+        parsedRecipe.image = urlOfImage;
         parsedRecipe.world_cuisine = selectedWorld;
         parsedRecipe.dish_type = selectedDish;
-        parsedRecipe.image = imageURL;
+        console.log("IN parseRecipe: assigned imageURL")
+        console.log(parsedRecipe.image);
+
         for (let line of lines) {
             line = line.trim();
             if (line === "") continue;
@@ -158,35 +176,57 @@ const Options = ({ ingredients }) => {
                             .replace(/^\d+\. /, "")
                             .replace("- ", "")
                             .trim(),
-                        image: "",
+                        
                     });
                 }
             }
         }
 
         setRecipe(parsedRecipe);
+        console.log("parsedRecipe is below")
         console.log(parsedRecipe);
         console.log("recipe", recipe);
+        postReceipt(parsedRecipe);
     };
 
-    useEffect(() => {
-        console.log("recipe", recipe); // This will log the updated state value
-    }, [recipe]);
+    // useEffect(() => {
+    //     console.log("recipe", recipe); // This will log the updated state value
+    // }, [recipe]);
+
+
+    const postReceipt = async (parsedReceipt) => {
+        console.log("posting this recipe:")
+        console.log(parsedReceipt);
+        try {
+            const response = await fetch(
+                `${config.baseUrl}/api/v1/recipes/ai/`,
+                {
+                    method: "POST",
+                    headers: {
+                        Authorization:
+                            `Bearer ` + localStorage.getItem("accessToken"),
+                        "Content-Type": "application/json",
+                    },
+                    body: JSON.stringify(parsedReceipt),
+                }
+            );
+
+            if (response.ok) {
+                const data = await response.json();
+                console.log("Recipe posted successfully:", data);
+            } else {
+                console.error("Failed to post recipe:", response.statusText);
+            }
+        } catch (error) {
+            console.error("Error posting recipe:", error);
+        }
+    }
 
     const handleSubmit = async () => {
         openModal();
-        setIsLoading(!isLoading);
+        setIsLoading(true);
         console.log("isLoading now: " + isLoading);
-        const formData = {
-            selectedDish,
-            selectedCook,
-            selectedType,
-            selectedWorld,
-            extraIngredients,
-            banIngredients,
-            ingredients,
-        };
-
+      
         const ingredientsString =
             "ingredients are: " + ingredients.map((obj) => obj.name).join(", ");
 
@@ -207,42 +247,28 @@ const Options = ({ ingredients }) => {
             });
 
             const data = await response.json();
-            console.log("API response:", data.choices[0]);
             const text = data.choices[0].text;
-            setResponseText(text);
-            console.log(responseText);
             console.log(text);
+            setResponseText(text);
+
             const promptTextForImage = extractImagePrompt(text);
-            generateImage(promptTextForImage);
-            parseRecipe(text);
+            await generateImage(promptTextForImage);
+
+            // setTimeout(() => {
+            //     parseRecipe(text, imageURL);       
+            //     console.log("Waited for 5 seconds!");
+            // }, 2000); 
+           
+            parseRecipe(text, imageURL);       
+           
+
         } catch (error) {
             console.error(error.response?.data ?? error.toJSON?.() ?? error);
             console.error("API error", error);
         }
 
-        try {
-            const response = await fetch(
-                `${config.baseUrl}/api/v1/recipes/ai/`,
-                {
-                    method: "POST",
-                    headers: {
-                        Authorization:
-                            `Bearer ` + localStorage.getItem("accessToken"),
-                        "Content-Type": "application/json",
-                    },
-                    body: JSON.stringify(recipe),
-                }
-            );
-
-            if (response.ok) {
-                const data = await response.json();
-                console.log("Recipe posted successfully:", data);
-            } else {
-                console.error("Failed to post recipe:", response.statusText);
-            }
-        } catch (error) {
-            console.error("Error posting recipe:", error);
-        }
+       
+        // postReceipt();
     };
 
     return (
