@@ -5,7 +5,7 @@ const StepCard = ({item, index}) => {
     return (
         <>
             {item && item.image ?
-                <Image className={`object-contain rounded-t-3xl w-[574px] h-[382px]`} src={item.image} alt={'potato'}/>
+                <Image className={`object-contain rounded-t-3xl`} width={574} height={382} src={item.image} alt={'potato'}/>
                 :
                 <Image className={`object-contain rounded-t-3xl`} src={potato} alt={'potato'} width={574} height={382}/>
             }

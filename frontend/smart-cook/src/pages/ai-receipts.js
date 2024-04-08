@@ -4,6 +4,7 @@ import Recipe from "@/components/Recipe";
 import axios from "axios";
 import {config} from "../../config";
 import {useEffect, useState} from "react";
+import Link from "next/link";
 
 const AiReceipts = () => {
     const [recipes, setRecipes] = useState(null);
@@ -28,8 +29,8 @@ const AiReceipts = () => {
     }
     return (
         <MainContainer>
-            <div className=" w-full max-w-[1195px] relative flex flex-col items-center">
-                <Navbar />
+            <div className="w-full max-w-[1195px] relative flex flex-col items-center">
+                <Navbar/>
                 <div
                     className={`gap-4 mt-5 flex flex-col items-center justify-center text-center text-white`}
                 >
@@ -38,12 +39,17 @@ const AiReceipts = () => {
                     </h1>
                 </div>
 
-                <div className="flex flex-wrap justify-between mt-6">
+                <div className="flex w-full flex-wrap justify-between mt-6">
                     {recipes && recipes.slice(0, displayedRecipes).map((recipe, index) => (
-                        <Recipe key={index} recipe={recipe} />
+                        <Link href="/recipes-ai/[recipeAi]" as={`/recipes-ai/${recipe.id}`} passHref>
+                            <Recipe key={index} recipe={recipe}/>
+                        </Link>
                     ))}
                 </div>
-                <button onClick={loadMoreRecipes} className="text-white bg-[#AAE06E] self-start w-[250px] h-[48px] rounded-3xl text-lg font-bold mb-20 mt-2">Load More</button>
+                <button onClick={loadMoreRecipes}
+                        className="text-white bg-[#AAE06E] self-start w-[250px] h-[48px] rounded-3xl text-lg font-bold mb-20 mt-2">Load
+                    More
+                </button>
             </div>
         </MainContainer>
     );

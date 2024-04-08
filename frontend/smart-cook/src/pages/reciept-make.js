@@ -7,7 +7,6 @@ import Image from "next/image";
 import axios from "axios";
 import { config } from "../../config";
 import Footer from "@/components/Footer";
-// import {Upload} from "antd";
 
 const RecipeMake = () => {
     const [steps, setSteps] = useState([{ step_text: "", image: null }]);
