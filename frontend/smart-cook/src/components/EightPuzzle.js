@@ -109,7 +109,7 @@ const EightPuzzle = ({setIsHidden, setWhatGame}) => {
 
     return (
         <div
-            className={`w-[500px] flex-col p-4 mt-14 flex justify-around bg-white rounded-3xl ${
+            className={`w-[500px] flex-col p-4 mt-14 flex justify-around items-center bg-white rounded-3xl ${
                 isOpen ? "block" : "hidden"
             }`}
         >

@@ -99,68 +99,61 @@ const RecipeMake = () => {
             console.error("Error posting recipe:", error);
         }
     };
+    
     const handlePublish = async () => {
-
-        const formData = new FormData();
-        formData.append("image", mainImage)
-
-        let publishForm = {
-            title: "",
-            serves: 0,
-            cook_time: 0,
-            description: "",
-            image: formData,
-            likes_count: "",
-            ingredients: [
-                {
-                    name: "string",
-                },
-            ],
-            steps: [
-                {
-                    step_text: "string",
-                    image: null,
-                },
-            ],
-        };
-
-        publishForm.title = title;
-        publishForm.serves = serves;
-        publishForm.cook_time = cookTime;
-        publishForm.description = description;
-        publishForm.image = mainImage;
-        (publishForm.ingredients = ingredients.map((ingredient) => ({
-            name: ingredient.name,
-        }))),
-            (publishForm.steps = steps.map((step) => ({
-                step_text: step.step_text,
-                image: step.image,
-            })));
-
-        console.log("checking publishForm: ", publishForm);
-        Upload(publishForm);
-
-        console.log("checking formData: ", formData);
-
-        try {
-            const response = await fetch(
-                "https://web-production-ad96.up.railway.app/api/v1/recipes/",
-                {
-                    method: "POST",
-                    body: formData,
+        const reader = new FileReader();
+        reader.readAsDataURL(mainImage); // mainImage should be a Blob or File object
+    
+        reader.onload = async () => {
+            const base64Image = reader.result.split(",")[1]; // Extract base64-encoded data
+    
+            // Define your publishForm object
+            const publishForm = {
+                title: title,
+                serves: serves,
+                cook_time: cookTime,
+                description: description,
+                image: base64Image, // Assign base64-encoded image string to the image field
+                likes_count: "",
+                ingredients: ingredients.map((ingredient) => ({
+                    name: ingredient.name,
+                })),
+                steps: steps.map((step) => ({
+                    step_text: step.step_text,
+                    image: step.image, // Placeholder for step image (not yet implemented)
+                })),
+            };
+    
+            console.log("publishForm:", publishForm);
+    
+            try {
+                const response = await fetch(
+                    "https://web-production-ad96.up.railway.app/api/v1/recipes/",
+                    {
+                        method: "POST",
+                        headers: {
+                            "Content-Type": "application/json",
+                        },
+                        body: JSON.stringify(publishForm),
+                    }
+                );
+    
+                if (response.ok) {
+                    const data = await response.json();
+                    console.log("Recipe posted successfully:", data);
+                } else {
+                    console.error("Failed to post recipe:", response.statusText);
                 }
-            );
-
-            if (response.ok) {
-                const data = await response.json();
-                console.log("Recipe posted successfully:", data);
-            } else {
-                console.error("Failed to post recipe:", response.statusText);
+            } catch (error) {
+                console.error("Error posting recipe:", error);
             }
-        } catch (error) {
-            console.error("Error posting recipe:", error);
-        }
+        };
+    
+        reader.onerror = (error) => {
+            console.error("Error reading the file:", error);
+        };
     };
+    
 
     return (
         <MainContainer>

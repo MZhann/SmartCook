@@ -2,29 +2,23 @@ import puzzle from "@/../public/images/puzzle.png";
 import Image from "next/image";
 import game from "@/../public/images/eightPuzzle.jpg";
 import { useState, useEffect } from "react";
-import "../App.css"
+import "../App.css";
 import EightPuzzle from "@/components/EightPuzzle";
 import MemoryGame from "@/components/MemoryGame";
 import DynamicQuiz from "@/components/DynamicQuiz";
 
-const MiniGames = ({
-    setIsHidden,
-    setIsGamesHidden,
-    isGamesHidden
-}) => {
+const MiniGames = ({ setIsHidden, setIsGamesHidden, isGamesHidden }) => {
     const [whatGame, setWhatGame] = useState("choice");
     const [isMiniGamesHidden, setIsMiniGamesHidden] = useState(isGamesHidden);
     // const [isMiniHidden, setIsMiniHidden] = useState(false);  это и есть setIsGamesHidden
     // console.log("check:" + isGamesHidden);
 
-    const handleQuiz = () => {
-        setGame("quiz");
-        
+    const handleMemoryGame = () => {
+        setWhatGame("memory");
     };
 
-
     const handleClose = () => {
-        setIsMiniGamesHidden(false)
+        setIsMiniGamesHidden(false);
         setIsGamesHidden(true);
         setIsHidden(false);
     };
@@ -78,7 +72,7 @@ const MiniGames = ({
                                                 className={
                                                     "mt-4 flex flex-col text-center cursor-pointer"
                                                 }
-                                                onClick={handleQuiz}
+                                                onClick={handleMemoryGame}
                                             >
                                                 <Image
                                                     className={
@@ -112,16 +106,17 @@ const MiniGames = ({
                                     </div>
                                 </>
                             ),
-                            quiz: (
-                                <>
-                                    <DynamicQuiz />
-                                </>
+                            memory: (
+                                <MemoryGame
+                                    setIsHidden={setIsHidden}
+                                    setWhatGame={setWhatGame}
+                                    setIsMiniGamesHidden={setIsMiniGamesHidden}
+                                />
                             ),
                             puzzle: (
                                 <EightPuzzle
-                                    setIsHidden = {setIsHidden}
-                                    setWhatGame = {setWhatGame}
-                                   
+                                    setIsHidden={setIsHidden}
+                                    setWhatGame={setWhatGame}
                                 />
                             ),
                         }[whatGame]
