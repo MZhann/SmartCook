@@ -31,8 +31,8 @@ const RecentlyAdded = () => {
             <div className="text-white text-4xl ">Recently added recipes</div>
             <div className="mt-10 flex justify-between flex-wrap">
                 {recipes && recipes.slice(0, displayedRecipes).map((recipe, index) => (
-                    <Link href="/recipes/[recipeTitle]" as={`/recipes/${recipe.id}`} passHref>
-                        <Recipe key={index} recipe={recipe} />
+                    <Link key={index} href="/recipes/[recipeTitle]" as={`/recipes/${recipe.id}`} passHref>
+                        <Recipe  recipe={recipe} />
                     </Link>
                 ))}
             </div>

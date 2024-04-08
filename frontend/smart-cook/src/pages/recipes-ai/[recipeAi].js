@@ -114,7 +114,7 @@ const RecipeAi = () => {
                             className={`flex flex-col text-white text-[24px] gap-1 font-[400] mt-8`}
                         >
                             {recipe && recipe.ingredients.map((item, index) => (
-                                <li>{index+1}. {item.name}</li>
+                                <li key={index}>{index+1}. {item.name}</li>
                             ))}
                         </ul>
                     </div>
@@ -123,7 +123,7 @@ const RecipeAi = () => {
                             Direction
                             <ol className="list-decimal text-white w-[630px] text-xl">
                                 {recipe && recipe.steps.map((item, index) => (
-                                    <li>{item.step_text}</li>
+                                    <li key={index}>{item.step_text}</li>
                                 ))}
                             </ol>
                         </h1>
