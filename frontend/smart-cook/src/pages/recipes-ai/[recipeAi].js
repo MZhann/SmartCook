@@ -7,7 +7,7 @@ import people from "../../../public/images/profile-2user.svg";
 import {useRouter} from "next/router";
 import axios from "axios";
 import {useEffect, useState} from "react";
-import Link from 'next/Link'
+import Link from 'next/link'
 
 const RecipeAi = () => {
     const [recipe, setRecipe] = useState(null);

@@ -120,7 +120,7 @@ const Options = ({ ingredients }) => {
         if (startIndex === -1 || endIndex === -1 || startIndex >= endIndex) {
             startIndex = recipeText.indexOf("description");
             // endIndex = recipeText.indexOf("ingredients")
-            return "Directions and description not found.";
+            // return "Directions and description not found.";
         }
         const directions = recipeText
             .substring(directionsStartIndex + "Directions:".length)
@@ -129,7 +129,9 @@ const Options = ({ ingredients }) => {
             .substring(startIndex + "Description:".length, endIndex)
             .trim();
 
-        const text = directions + ". " + description;
+        const firstWords = "GENERATE A PHOTO OF A DISH with these Ingredients: "
+        
+        const text = firstWords + directions + ". " + description;
         return text;
     };
 
@@ -276,6 +278,9 @@ const Options = ({ ingredients }) => {
             setResponseText(text);
 
             const promptTextForImage = extractImagePrompt(text);
+            console.log("GENERATION IMAGE PROMT: ");
+            console.log(promptTextForImage);
+
             await generateImage(promptTextForImage);
 
             // setTimeout(() => {
