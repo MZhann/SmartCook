@@ -2,6 +2,7 @@ import Image from "next/image";
 import cookBattle from "../../../public/images/cookBattle.png";
 import trophy from "../../../public/images/trophy.png";
 import rank from "../../../public/images/ranking.png";
+import Link from "next/link";
 
 const Statistics = () => {
     return (
@@ -24,10 +25,10 @@ const Statistics = () => {
                     <h1><span className={'text-[20px] font-[600]'}>10</span> places</h1>
                 </div>
             </div>
-            <button
+            <Link href={'/challenges'}
                 className={'mt-8 flex bg-[#AAE06E] w-[230px] h-[36px] rounded-3xl justify-center items-center'}>
                 <span className={'text-[16px] font-[500] text-white'}>Challenge</span>
-            </button>
+            </Link>
         </div>
     );
 };

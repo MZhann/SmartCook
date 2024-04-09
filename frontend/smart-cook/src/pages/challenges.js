@@ -1,17 +1,18 @@
 import MainContainer from "@/components/MainContainer";
 import Navbar from "@/components/Navbar";
-import food from "@/../public/images/food.jpg";
-import Image from "next/image";
-import clock from "@/../public/images/clock.svg";
-import people from "@/../public/images/profile-2user.svg";
-import avatar from "@/../public/images/avatar.jpg";
-import love from "@/../public/images/love.png";
-import fav from "@/../public/images/favorite.png";
-import potato from "@/../public/images/potato.jpg";
-import Recipe from "@/components/Recipe";
 import AcceptedBattle from "@/components/modal/battle-cards/profile-battle-cards/AcceptedBattle"
+import SelectTitleCard from "@/components/modal/battle-cards/choose-opponent-cards/SelectTitileCard";
+import {useState} from "react";
+import SelectOpponent from "@/components/modal/battle-cards/choose-opponent-cards/SelectOpponentCard";
+import SelectOpponentCard from "@/components/modal/battle-cards/choose-opponent-cards/SelectOpponentCard";
 
 const Challenges = () => {
+    const [modalStage, setModalStage] = useState(0); // 0: none, 1: SelectTitleCard, 2: SelectOpponent
+
+    const openModal = () => setModalStage(1);
+    const goToSelectOpponent = () => setModalStage(2);
+    const closeModal = () => setModalStage(0);
+
     return (
         <MainContainer>
             <div className=" w-full max-w-[1195px] relative flex flex-col items-center">
@@ -32,7 +33,7 @@ const Challenges = () => {
                 </div>
 
                 <div className="flex items-center space-x-4 mt-10">
-                    <button className="px-4 py-2 rounded-full bg-[#AAE06E] hover:bg-green-500 focus:outline-none w-[450px] text-white text-xl font-bold h-[60px]">
+                    <button onClick={openModal} className="px-4 py-2 rounded-full bg-[#AAE06E] hover:bg-green-500 focus:outline-none w-[450px] text-white text-xl font-bold h-[60px]">
                         Let&apos;s Battle
                     </button>
                 </div>
@@ -42,14 +43,20 @@ const Challenges = () => {
                 </h1>
 
                 <div className="flex flex-wrap justify-between">
-                   <AcceptedBattle />
-                   <AcceptedBattle />
-                   <AcceptedBattle />
-                   <AcceptedBattle />
+                    <AcceptedBattle />
                 </div>
                 <button className="text-white bg-[#AAE06E] self-start w-[250px] h-[48px] rounded-3xl text-lg font-bold mb-20 mt-10">Load More</button>
-                
+                <SelectTitleCard
+                    isModalOpen={modalStage === 1}
+                    onClose={closeModal}
+                    openNext={goToSelectOpponent}
+                />
+                <SelectOpponent
+                    isModalOpen={modalStage === 2}
+                    onClose={closeModal}
+                />
             </div>
+
         </MainContainer>
     );
 };
