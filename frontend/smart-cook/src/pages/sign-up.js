@@ -53,7 +53,7 @@ const SignUp = () => {
                 await axios.post(`${config.baseUrl}/api/v1/register/`, requestBody).then((res) => {
                         localStorage.setItem("accessToken", res.data.access);
                         localStorage.setItem("refreshToken", res.data.refresh);
-                        window.location.href = '/'
+
                     })
                 setIsLoading(false);
                 await handleLogin();

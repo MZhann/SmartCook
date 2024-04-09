@@ -84,7 +84,7 @@ const SignIn = () => {
                         </Link>
                     </p>
                     {errorMessage && (
-                        <p className="text-red-500 text-xs mt-2">{errorMessage}</p>
+                        <p className="text-red-500 text-xs mt-2">{errorMessage && errorMessage}</p>
                     )}
                     <p className="text-sm mt-5">Enter your email</p>
                     <input
