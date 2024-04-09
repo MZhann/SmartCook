@@ -1,6 +1,6 @@
 import MainContainer from "@/components/MainContainer";
 import Navbar from "@/components/Navbar";
-import food from "../../../public/images/food.jpg"
+import defaultFood from "../../../public/images/defaultFood.png"
 import Image from "next/image";
 import clock from "../../../public/images/clock.svg"
 import people from "../../../public/images/profile-2user.svg"
@@ -65,7 +65,7 @@ const RecipeTitle = () => {
                             (<Image
                                     className={'rounded-tl-[8px] rounded-tr-[8px]'} width={400} height={285} src={recipe.image}
                                     alt="Food"/>) :
-                            <Image className={`rounded-[20px]`} src={food} alt={'food'} width={400} height={285}/>}
+                            <Image className={`rounded-[20px]`} src={defaultFood} alt={'food'} width={400} height={285}/>}
                         <div className={`flex flex-row items-center text-[20px] gap-7 font-[300]`}>
                             <div className={`ml-3 flex flex-row items-center gap-3`}><Image width={32} height={32} src={clock} alt={'clock'}/>
                                 <p>{recipe && recipe.cook_time} minutes</p>

@@ -1,6 +1,6 @@
 import MainContainer from "@/components/MainContainer";
 import Navbar from "@/components/Navbar";
-import food from "../../../public/images/food.jpg";
+import defaultFood from "../../../public/images/defaultFood.png";
 import Image from "next/image";
 import clock from "../../../public/images/clock.svg";
 import people from "../../../public/images/profile-2user.svg";
@@ -71,7 +71,7 @@ const RecipeAi = () => {
                             /> :
                             <Image
                                 className={`rounded-[20px] w-[400px] h-[400px] object-cover`}
-                                src={food}
+                                src={defaultFood}
                                 alt={"food"}
                             />
                         }
