@@ -36,7 +36,7 @@ const RecentlyAdded = () => {
                     </Link>
                 ))}
             </div>
-            <button onClick={loadMoreRecipes} className="w-max text-white px-16 font-bold py-2 mt-4 rounded-3xl tracking-wide bg-[#AAE06E]">Load More</button>
+            <Link href={"/all-receipts"} className="w-max text-white px-16 font-bold py-2 mt-4 rounded-3xl tracking-wide bg-[#AAE06E]">Load More</Link>
         </div>
     )
 }

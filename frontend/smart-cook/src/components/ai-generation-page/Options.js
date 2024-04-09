@@ -9,6 +9,8 @@ import { OpenAI } from "openai";
 import Link from "next/link";
 import MiniGames from "../modal/MiniGames";
 
+
+
 import { getTokenCount, decrementTokenCount } from "../../utils/token";
 
 const Options = ({ ingredients }) => {
@@ -26,6 +28,7 @@ const Options = ({ ingredients }) => {
     let urlOfImage = "";
     const [isMiniGamesOpen, setIsMiniGamesOpen] = useState(false);
     const [tokenCount, setTokenCount] = useState(0); //TOKEN
+
 
     //TOKEN LOGIC
     
@@ -246,7 +249,8 @@ const Options = ({ ingredients }) => {
         } catch (error) {
             console.error("Error posting recipe:", error);
         }
-    };
+    }
+     
 
     const handleSubmit = async () => {
         openModal();
@@ -419,6 +423,7 @@ const Options = ({ ingredients }) => {
                 </span>{" "}
                 tokens remaining
             </div>
+            <div className="text-white text-xs">win the minigame to gain one generation <span className="text-green-500">token for free</span></div>
         </div>
     );
 };
