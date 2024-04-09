@@ -67,7 +67,7 @@ const Leaderboard = () => {
                     />
                     <LeadersCard
                         isLeader={false}
-                        name={"Tokaev Mal"}
+                        name={"Barak Obama"}
                         score={350}
                     />
                     <LeadersCard
