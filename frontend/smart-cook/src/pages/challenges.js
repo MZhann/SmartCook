@@ -4,7 +4,6 @@ import AcceptedBattle from "@/components/modal/battle-cards/profile-battle-cards
 import SelectTitleCard from "@/components/modal/battle-cards/choose-opponent-cards/SelectTitileCard";
 import {useState} from "react";
 import SelectOpponent from "@/components/modal/battle-cards/choose-opponent-cards/SelectOpponentCard";
-import SelectOpponentCard from "@/components/modal/battle-cards/choose-opponent-cards/SelectOpponentCard";
 
 const Challenges = () => {
     const [modalStage, setModalStage] = useState(0); // 0: none, 1: SelectTitleCard, 2: SelectOpponent

@@ -58,7 +58,6 @@ const Navbar = () => {
                 console.error("Error fetching user profile data:", error);
             }
         };
-
         fetchUserData();
     }, []);
 

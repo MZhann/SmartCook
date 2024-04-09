@@ -14,6 +14,8 @@ const SelectOpponent = ({isModalOpen, onClose}) => {
         onClose();
     };
 
+
+
     if (!isModalOpen) return null;
 
 
@@ -40,7 +42,6 @@ const SelectOpponent = ({isModalOpen, onClose}) => {
                                 value={inputValue}
                                 onChange={(e) => setInputValue(e.target.value)}
                                 placeholder="Find Opponent"
-                                required
                             />
                             <button
                                 className="w-[50px] h-[36px] flex justify-center bg-[#AAE06E] items-center rounded-e-3xl">
@@ -53,7 +54,7 @@ const SelectOpponent = ({isModalOpen, onClose}) => {
                             Random
                         </button>
                     </form>
-                    <ScrollBlock/>
+                    <ScrollBlock inputValue={inputValue}/>
                     <div className="flex space-x-5">
                         <button onClick={onClose}
                                 className="border-2 border-[#AAE06E] text-[#AAE06E] w-[150px] h-[36px] rounded-full">Back

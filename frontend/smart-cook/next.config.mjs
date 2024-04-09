@@ -16,6 +16,6 @@ export default {
 
     // Image configuration
     images: {
-        domains: ['www.google.com', 'media.geeksforgeeks.org', 'geeksforgeeks.org', 'oaidalleapiprodscus.blob.core.windows.net', 'web-production-ad96.up.railway.app'],
+        domains: ['abeu.s3.amazonaws.com', 'www.google.com', 'media.geeksforgeeks.org', 'geeksforgeeks.org', 'oaidalleapiprodscus.blob.core.windows.net', 'web-production-ad96.up.railway.app'],
     }
 };
