@@ -13,7 +13,7 @@ const Like = ({count, id}) => {
         try {
             await axios.post(`${config.baseUrl}/api/v1/recipes/${id}/like/`, id,{
                 headers: {
-                    Authorization: 'Bearer ' + localStorage.getItem('accessToken')
+                    Authorization: 'Bearer ' + localStorage.getItem('accessToken'),
                 }
             })
             setLike(like + 1);
@@ -26,7 +26,7 @@ const Like = ({count, id}) => {
         <div
             onClick={handleLike}
             className={`cursor-pointer ${router.route !== "/recipes/[recipeTitle]" && "absolute"} ${router.pathname !== "/all-receipts" || router.pathname !== "/ai-receipts" ? 'top-20' : 'top-18' } items-center bg-white w-[65px] h-[35px] rounded-3xl py-2 px-2 text-black flex-row justify-evenly flex`}>
-            <Image src={love} alt={'like'} width={16} height={16}/><p>{like}</p></div>
+            <Image className={`hover:size-5`} src={love} alt={'like'} width={16} height={16}/><p>{like}</p></div>
     )
 }
 

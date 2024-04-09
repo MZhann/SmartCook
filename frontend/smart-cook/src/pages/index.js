@@ -27,7 +27,9 @@ const Main = () => {
                 <Navbar/>
                 <WelcomeTry/>
                 <RecentlyAdded/>
-                <DoYouWannaPlay isQuizOpen={isQuizOpen} setIsQuizOpen={setIsQuizOpen} closeQuiz={closeQuiz} />
+                {typeof localStorage !== 'undefined' && localStorage.getItem('accessToken') &&
+                    <DoYouWannaPlay isQuizOpen={isQuizOpen} setIsQuizOpen={setIsQuizOpen} closeQuiz={closeQuiz} />
+                }
                 <div className="w-full flex justify-center">
                     <CreatingReceipt/>
                 </div>

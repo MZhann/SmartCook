@@ -4,8 +4,6 @@ import defaultAvatar from "../../../public/images/avatarka.png";
 import Like from "@/components/Like";
 
 const ChoiceCards = ({ userProfile, recipes }) => {
-    console.log(userProfile);
-
     return (
         <div className={`flex flex-wrap justify-between mt-5`}>
             {recipes && recipes.map((recipe) => (

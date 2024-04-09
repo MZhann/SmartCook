@@ -22,6 +22,8 @@ const NavbarDropdown = ({ photo, name, surname, score }) => {
                                     src={photo}
                                     className="w-[50px] h-[50px] object-cover"
                                     alt="avatar"
+                                    width={50}
+                                    height={50}
                                 />
                             </div>
                         ) : (

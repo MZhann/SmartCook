@@ -97,7 +97,7 @@ const DynamicQuiz = ({setIsQuizStarted, isQuizStarted}) => {
         isQuizStarted &&
         <div className={`w-[500px] flex-col p-4 mt-14 flex justify-around bg-white rounded-3xl`}>
             <div className={'flex justify-center w-full relative'}>
-                {!quizCompleted && <h1 className={`flex justify-center text-xl mb-3`}>Quiz game</h1>}
+                {!quizCompleted && <h1 className={`flex justify-center text-black text-xl mb-3`}>Quiz game</h1>}
                 <div  className={'absolute top-0 right-2 cursor-pointer'} onClick={() => setIsQuizStarted(false)}>
                     <svg width="25" height="25" viewBox="0 0 25 25" fill="none"
                          xmlns="http://www.w3.org/2000/svg">
