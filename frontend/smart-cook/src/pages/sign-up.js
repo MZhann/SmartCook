@@ -4,13 +4,13 @@ import Image from "next/image";
 import cook from "../../public/images/cook.png";
 import cooker from "../../public/images/cooker.png";
 import Link from "next/link";
-import {useState} from "react";
+import { useState } from "react";
 import axios from "axios";
-import {config} from "../../config";
+import { config } from "../../config";
+import show from "../../public/images/show.png";
+import hide from "../../public/images/hide.png";
+import loading from "../../public/loading.gif";
 import {useRouter} from "next/router";
-import show from "../../public/images/show.png"
-import hide from "../../public/images/hide.png"
-import loading from "../../public/loading.gif"
 
 const SignUp = () => {
     const [isLoading, setIsLoading] = useState(false);
@@ -38,69 +38,83 @@ const SignUp = () => {
     };
 
     const validateEmail = (email) => {
-        const re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+        const re =
+            /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
         return re.test(String(email).toLowerCase());
     };
 
     const handleSubmit = async (e) => {
         e.preventDefault();
 
-        const isValidPassword = (password) => /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/.test(password) && /^[A-Za-z]/.test(password);
+        const isValidPassword = (password) =>
+            /^[A-Za-z](?=.*\d)[A-Za-z\d]{7,39}$/.test(password);
 
-        if(isValidPassword){
-            setIsPasswordValidated(isValidPassword)
-        }else{
-            setIsPasswordValidated(isValidPassword)
-            return
+        console.log(isValidPassword(password));
+        if (isValidPassword(password)) {
+            setIsPasswordValidated(true);
+        } else {
+            setIsPasswordValidated(false);
+            return;
         }
-
-
 
         if (validate()) {
             const requestBody = {
                 first_name: name,
                 last_name: phone,
                 email: email,
-                password: password
+                password: password,
             };
 
             try {
                 setIsLoading(true);
-                await axios.post(`${config.baseUrl}/api/v1/register/`, requestBody).then((res) => {
+                await axios
+                    .post(`${config.baseUrl}/api/v1/register/`, requestBody)
+                    .then((res) => {
                         localStorage.setItem("accessToken", res.data.access);
                         localStorage.setItem("refreshToken", res.data.refresh);
-
-                    })
+                    });
                 setIsLoading(false);
                 await handleLogin();
             } catch (error) {
                 setIsLoading(false);
-                if (error.response && error.response.data && error.response.data.error) {
-                    setErrorMessage(error.response.data.error)
+                if (
+                    error.response &&
+                    error.response.data &&
+                    error.response.data.error
+                ) {
+                    setErrorMessage(error.response.data.error);
                 }
                 console.error(error);
             }
         }
     };
     const router = useRouter();
-
     async function handleLogin() {
         const requestBody = {
             email: email,
-            password: password
+            password: password,
         };
 
         try {
             setIsLoading(true);
-            const response = await axios.post(`${config.baseUrl}/api/v1/login/`, requestBody);
+            const response = await axios.post(
+                `${config.baseUrl}/api/v1/login/`,
+                requestBody
+            );
             localStorage.setItem("accessToken", response.data.access);
             localStorage.setItem("refreshToken", response.data.refresh);
             setIsLoading(false);
-            await router.push('/');
+
+            // Redirect to home page
+            router.push("/");
         } catch (error) {
             setIsLoading(false);
             console.error(error);
-            if (error.response && error.response.data && error.response.data.error) {
+            if (
+                error.response &&
+                error.response.data &&
+                error.response.data.error
+            ) {
                 setErrorMessage(error.response.data.error);
             }
         }
@@ -131,7 +145,9 @@ const SignUp = () => {
                         </Link>
                     </p>
                     {errorMessage && (
-                        <p className="text-red-500 text-xs mt-2">{errorMessage}</p>
+                        <p className="text-red-500 text-xs mt-2">
+                            {errorMessage}
+                        </p>
                     )}
                     <p className="text-sm mt-5">First name</p>
                     <input
@@ -170,27 +186,51 @@ const SignUp = () => {
                             placeholder="password"
                             value={password}
                             onChange={(e) => setPassword(e.target.value)}
-                            type={passwordShown ? 'text' : 'password'}
+                            type={passwordShown ? "text" : "password"}
                         />
-                        {
-                            passwordShown ? (
-                                <Image onClick={() => setPasswordShown(false)} src={hide} alt="eye_closed" className="w-[20px] h-[20px] absolute top-[18px] right-3"/>
-                            ) : (
-                                <Image onClick={() => setPasswordShown(true)} src={show} alt="eye" className="w-[20px] h-[20px] absolute top-[18px] right-3" />
-                            )
-                        }
-                        {!isPasswordValidated ? <div className="text-red-600 text-xs mt-2">Password should be more than 8 symbols, start with a letter and contain at least one number.</div> : <></> }
+                        {passwordShown ? (
+                            <Image
+                                onClick={() => setPasswordShown(false)}
+                                src={hide}
+                                alt="eye_closed"
+                                className="w-[20px] h-[20px] absolute top-[18px] right-3"
+                            />
+                        ) : (
+                            <Image
+                                onClick={() => setPasswordShown(true)}
+                                src={show}
+                                alt="eye"
+                                className="w-[20px] h-[20px] absolute top-[18px] right-3"
+                            />
+                        )}
+                        {!isPasswordValidated ? (
+                            <div className="text-red-600 text-xs mt-2">
+                                Password should be more than 8 and less than 40
+                                symbols, start with capital letter and contain
+                                at least one number
+                            </div>
+                        ) : (
+                            <></>
+                        )}
                     </div>
 
                     <div className="flex justify-between items-center">
-                        {isLoading ? <Image src={loading} alt="loading" className="w-[20px] h-[20px]"/> : <></>}
+                        {isLoading ? (
+                            <Image
+                                src={loading}
+                                alt="loading"
+                                className="w-[20px] h-[20px]"
+                            />
+                        ) : (
+                            <></>
+                        )}
                         <p className="text-[#80CC2D] text-xs mt-2 self-end border-b-2 border-white cursor-pointer hover:border-b-[#AAE06E]">
-                            <Link href={'/forgot-password'}>
+                            <Link href={"/forgot-password"}>
                                 Forgot password?
                             </Link>
                         </p>
-                    </div> 
-                   
+                    </div>
+
                     <button
                         className={`text-white bg-[#AAE06E] w-full h-10 rounded-3xl mt-5 ${
                             errorMessage && "disabled" // Disable button if there's an error
