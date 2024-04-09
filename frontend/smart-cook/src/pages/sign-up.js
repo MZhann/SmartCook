@@ -7,6 +7,9 @@ import Link from "next/link";
 import {useState} from "react";
 import axios from "axios";
 import {config} from "../../config";
+import show from "../../public/images/show.png"
+import hide from "../../public/images/hide.png"
+import loading from "../../public/loading.gif"
 
 const SignUp = () => {
     const [isLoading, setIsLoading] = useState(false);
@@ -16,7 +19,8 @@ const SignUp = () => {
     const [password, setPassword] = useState("");
     const [errorMessage, setErrorMessage] = useState("");
     const [phone, setPhone] = useState("");
-
+    const [passwordShown, setPasswordShown] = useState(false);
+    const [isPasswordValidated, setIsPasswordValidated] = useState(true);
     const validate = () => {
         let error = "";
 
@@ -39,7 +43,17 @@ const SignUp = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-
+        
+        const isValidPassword = (password) => /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/.test(password) && /^[A-Za-z]/.test(password);
+        
+        if(isValidPassword){
+            setIsPasswordValidated(isValidPassword)
+        }else{
+            setIsPasswordValidated(isValidPassword)
+            return
+        }
+        
+        
         if (validate()) {
             const requestBody = {
                 first_name: name,
@@ -58,6 +72,7 @@ const SignUp = () => {
                 setIsLoading(false);
                 await handleLogin();
             } catch (error) {
+                setIsLoading(false);
                 if (error.response && error.response.data && error.response.data.error) {
                     setErrorMessage(error.response.data.error)
                 }
@@ -132,7 +147,7 @@ const SignUp = () => {
                     <input
                         id="last_name"
                         className={`w-full rounded-3xl border-2 h-10 shadow-gray-500 text-xs p-3 mt-2`}
-                        placeholder="your.email@gmail.com"
+                        placeholder="surname"
                         type="text"
                         value={phone}
                         onChange={(e) => setPhone(e.target.value)}
@@ -147,19 +162,36 @@ const SignUp = () => {
                         onChange={(e) => setEmail(e.target.value)}
                     />
                     <p className="text-sm mt-5">Create a password</p>
-                    <input
-                        id="password"
-                        type="password"
-                        className={`w-full rounded-3xl border-2 h-10 shadow-gray-500 text-xs p-3 mt-2 `}
-                        placeholder="password"
-                        value={password}
-                        onChange={(e) => setPassword(e.target.value)}
-                    />
-                    <p className="text-[#80CC2D] text-xs mt-2 self-end border-b-2 border-white cursor-pointer hover:border-b-[#AAE06E]">
-                        <Link href={'/forgot-password'}>
-                            Forgot password?
-                        </Link>
-                    </p>
+                    <div className="relative">
+                        <input
+                            id="password"
+                            className={`w-full rounded-3xl border-2 h-10 shadow-gray-500 text-xs p-3 mt-2 ${
+                                password.length < 6 && "border-red-500"
+                            }`}
+                            placeholder="password"
+                            value={password}
+                            onChange={(e) => setPassword(e.target.value)}
+                            type={passwordShown ? 'text' : 'password'}
+                        />
+                        {
+                            passwordShown ? (
+                                <Image onClick={() => setPasswordShown(false)} src={hide} alt="eye_closed" className="w-[20px] h-[20px] absolute top-[18px] right-3"/>
+                            ) : (
+                                <Image onClick={() => setPasswordShown(true)} src={show} alt="eye" className="w-[20px] h-[20px] absolute top-[18px] right-3" />
+                            )
+                        }
+                        {!isPasswordValidated ? <div className="text-red-600 text-xs mt-2">Password should be more than 8 symbols, start with a letter and contain at least one number.</div> : <></> }
+                    </div>
+
+                    <div className="flex justify-between items-center">
+                        {isLoading ? <Image src={loading} alt="loading" className="w-[20px] h-[20px]"/> : <></>}
+                        <p className="text-[#80CC2D] text-xs mt-2 self-end border-b-2 border-white cursor-pointer hover:border-b-[#AAE06E]">
+                            <Link href={'/forgot-password'}>
+                                Forgot password?
+                            </Link>
+                        </p>
+                    </div> 
+                   
                     <button
                         className={`text-white bg-[#AAE06E] w-full h-10 rounded-3xl mt-5 ${
                             errorMessage && "disabled" // Disable button if there's an error
