@@ -7,20 +7,29 @@ import EightPuzzle from "@/components/EightPuzzle";
 import MemoryGame from "@/components/MemoryGame";
 import DynamicQuiz from "@/components/DynamicQuiz";
 
-const MiniGames = ({ setIsHidden, setIsGamesHidden, isGamesHidden }) => {
+const MiniGames = ({setIsMiniGamesOpen, setIsHidden, setIsGamesHidden, isGamesHidden }) => {
     const [whatGame, setWhatGame] = useState("choice");
     const [isMiniGamesHidden, setIsMiniGamesHidden] = useState(isGamesHidden);
     // const [isMiniHidden, setIsMiniHidden] = useState(false);  это и есть setIsGamesHidden
     // console.log("check:" + isGamesHidden);
+
 
     const handleMemoryGame = () => {
         setWhatGame("memory");
     };
 
     const handleClose = () => {
+        if (setIsMiniGamesOpen !== undefined && setIsMiniGamesOpen !== null && setIsMiniGamesOpen !== '') {
+            setIsMiniGamesOpen(false)          
+        }
         setIsMiniGamesHidden(false);
-        setIsGamesHidden(true);
-        setIsHidden(false);
+        
+        if (setIsGamesHidden !== undefined && setIsGamesHidden !== null && setIsGamesHidden !== '') {
+            setIsGamesHidden(true);            
+        }
+        if (setIsHidden !== undefined && setIsHidden !== null && setIsHidden !== '') {
+            setIsHidden(false);            
+        }
     };
 
     const handlePuzzle = () => {

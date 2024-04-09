@@ -2,6 +2,9 @@ import {useState} from 'react';
 import Image from "next/image";
 import win from "@/../public/images/win.jpg";
 import loss from "@/../public/images/over.jpg";
+import { incrementTokenCount } from "../utils/token";
+
+
 
 const DynamicQuiz = ({setIsQuizStarted, isQuizStarted}) => {
     const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
@@ -39,6 +42,8 @@ const DynamicQuiz = ({setIsQuizStarted, isQuizStarted}) => {
         if (selectedOption === currentQuestion.correctAnswer) {
             if (currentQuestionIndex === questions.length - 1) {
                 setQuizCompleted(true);
+                incrementTokenCount();
+
             } else {
                 setCurrentQuestionIndex(currentQuestionIndex + 1);
                 setAttemptsRemaining(3);

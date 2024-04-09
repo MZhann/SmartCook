@@ -7,6 +7,9 @@ import { config } from "../../../config";
 import CreatingReceipt from "../modal/CreatingReceipt";
 import { OpenAI } from "openai";
 import Link from "next/link";
+import MiniGames from "../modal/MiniGames";
+
+import { getTokenCount, decrementTokenCount } from "../../utils/token";
 
 const Options = ({ ingredients }) => {
     const [isModalOpen, setIsModalOpen] = useState(false);
@@ -21,7 +24,34 @@ const Options = ({ ingredients }) => {
     const [responseText, setResponseText] = useState("");
     const [recipeId, setRecipeId] = useState();
     let urlOfImage = "";
-   
+    const [isMiniGamesOpen, setIsMiniGamesOpen] = useState(false);
+    const [tokenCount, setTokenCount] = useState(0); //TOKEN
+
+    //TOKEN LOGIC
+    
+    
+    useEffect(() => {
+        const initialCount = getTokenCount();
+        setTokenCount(initialCount);
+    }, []);
+
+    const handleGenerateReceipt = () => {
+        // Check if tokens are available
+        if (tokenCount > 0) {
+            handleSubmit();
+            // Call API to generate receipt
+            // Assuming an API call here to generate receipt
+            // After successful generation, decrement token count
+            decrementTokenCount();
+            setTokenCount((prevCount) => prevCount - 1);
+        } else {
+            alert(
+                "You have no tokens left. Please wait for the next day. Or play games gain them"
+            );
+            setIsMiniGamesOpen(true);
+        }
+    };
+    //TOKEN LOGIC END
 
     const openModal = () => {
         setIsModalOpen(true);
@@ -155,7 +185,10 @@ const Options = ({ ingredients }) => {
                     .trim();
             } else if (lowerLine.includes("ingredients")) {
                 currentSection = "ingredients";
-            } else if (lowerLine.includes("directions")) {
+            } else if (
+                lowerLine.includes("directions") ||
+                lowerLine.includes("direction")
+            ) {
                 currentSection = "steps";
             } else if (lowerLine.startsWith("- ") || /^\d+\. /.test(line)) {
                 if (currentSection === "ingredients") {
@@ -183,10 +216,6 @@ const Options = ({ ingredients }) => {
         postReceipt(parsedRecipe);
     };
 
-    // useEffect(() => {
-    //     console.log("recipe", recipe); // This will log the updated state value
-    // }, [recipe]);
-
     const postReceipt = async (parsedReceipt) => {
         console.log("posting this recipe:");
         console.log(parsedReceipt);
@@ -207,9 +236,8 @@ const Options = ({ ingredients }) => {
             if (response.ok) {
                 const data = await response.json();
                 console.log("Recipe posted successfully:", data);
-                console.log("data id: " + data.id)
+                console.log("data id: " + data.id);
                 setRecipeId(data.id);
-                console.log("id: " + aiRecipeId);
             } else {
                 console.error("Failed to post recipe:", response.statusText);
             }
@@ -227,7 +255,7 @@ const Options = ({ ingredients }) => {
             "ingredients are: " + ingredients.map((obj) => obj.name).join(", ");
 
         console.log(ingredientsString);
-        let prompt = `You are an experienced Nutritionist who can make recipes according to requests, taking into account all requirements. Given a list of ingredients, create me recipe for ${selectedDish}. I am ${selectedCook} cook, dish should be ${selectedType}, selected world cuisine is ${selectedWorld}, ${ingredientsString}, extra ingredients are ${extraIngredients}, banned ingredients are ${banIngredients}. Generate at first 1) "title:", then 2) "number:" of serves, then 3) "cook time:", then short 4) "description:" of dish in 20-30 words, then 5) "ingredients:" with quantity, then 6) "direction:"/steps of cooking. Put every article of response on a new line, and number each article. Start title, serves, cooktime, description, ingredients, directions with part's name, like "title: name of receipt", "serves: 3" and so on, put "-" before each ingredient and direction`;
+        let prompt = `You are an experienced Nutritionist who can make recipes according to requests, taking into account all requirements. Given a list of ingredients, create me recipe for ${selectedDish}. I am ${selectedCook} cook, dish should be ${selectedType}, selected world cuisine is ${selectedWorld}, ${ingredientsString}, extra ingredients are ${extraIngredients}, banned ingredients are ${banIngredients}. Generate at first 1) "title:", then 2) "number:" of serves, then 3) "cook time:", then short 4) "description:" of dish in 20-30 words, then 5) "ingredients:" with quantity, then 6) "direction:"/steps of cooking. Put every article of response on a new line, and number each article. Start title, serves, cooktime, description, ingredients, directions parts WITH IT'A PART'S NAME, like "title: name of receipt", "serves: 3" and so on, put "-" before each ingredient and direction`;
 
         try {
             const response = await fetch(apiUrl, {
@@ -273,6 +301,14 @@ const Options = ({ ingredients }) => {
                 onClose={closeModal}
                 closeModal={closeModal}
             />
+
+            {isMiniGamesOpen && (
+                <div
+                    className={`fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50`}
+                >
+                    <MiniGames setIsMiniGamesOpen={setIsMiniGamesOpen}/>
+                </div>
+            )}
             <div className="w-full h-[328px] rounded-3xl bg-white mt-20 p-4">
                 <div>
                     <div className="font-bold text-3xl">Options</div>
@@ -360,7 +396,7 @@ const Options = ({ ingredients }) => {
             </div>
             <button
                 className="flex justify-center items-center mt-10 px-4 py-2 bg-[#AAE06E] w-[450px] h-[60px] rounded-full text-white hover:bg-green-400"
-                onClick={handleSubmit}
+                onClick={handleGenerateReceipt}
             >
                 <Image
                     src={magic}
@@ -370,7 +406,14 @@ const Options = ({ ingredients }) => {
                 Create
             </button>
 
-            <div className="text-white mt-4 underline"> You have <span className="text-green-500 text-2xl">3</span> tokens remaining</div>
+            <div className="text-white mt-4 underline">
+                {" "}
+                You have{" "}
+                <span className="text-green-500 text-2xl">
+                    {tokenCount}
+                </span>{" "}
+                tokens remaining
+            </div>
         </div>
     );
 };

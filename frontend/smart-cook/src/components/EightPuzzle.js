@@ -2,6 +2,8 @@ import React, { useEffect, useState } from "react";
 import Image from "next/image";
 import win from "../../public/images/win.jpg";
 import YouWon from "./modal/YouWon";
+import { incrementTokenCount } from "../utils/token";
+
 
 const EightPuzzle = ({setIsHidden, setWhatGame}) => {
     const [isClient, setIsClient] = useState(false);
@@ -17,7 +19,10 @@ const EightPuzzle = ({setIsHidden, setWhatGame}) => {
         // console.log("isGamesHidden: " + isGamesHidden);
         setIsOpen(false);
         // console.log("isHidden before:" + isHidden)
-        setIsHidden(true);
+        if (setIsHidden !== undefined && setIsHidden !== null && setIsHidden !== '') {
+            setIsHidden(true);
+                       
+        }
         
     };
 
@@ -57,6 +62,7 @@ const EightPuzzle = ({setIsHidden, setWhatGame}) => {
 
             if (isPuzzleCompleted(newTiles)) {
                 setIsWin(true);
+                incrementTokenCount();
                 console.log(isWin);
             }
         }

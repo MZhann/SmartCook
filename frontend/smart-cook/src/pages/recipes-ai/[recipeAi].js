@@ -7,6 +7,7 @@ import people from "../../../public/images/profile-2user.svg";
 import {useRouter} from "next/router";
 import axios from "axios";
 import {useEffect, useState} from "react";
+import Link from 'next/Link'
 
 const RecipeAi = () => {
     const [recipe, setRecipe] = useState(null);
@@ -131,10 +132,10 @@ const RecipeAi = () => {
                                     </button>
 
                             }
-                            <button
+                            <Link href="/ai-generation"
                                 className="w-[210px] h-[48px] text-white text-lg bg-[#C3F48D] flex justify-center items-center rounded-full mt-10">
                                 Save Recipe
-                            </button>
+                            </Link>
                         </div>
                     </div>
                 </div>

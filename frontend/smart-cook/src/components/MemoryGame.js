@@ -4,6 +4,8 @@ import Data from "./Data";
 import Card from "./Card";
 import Image from "next/image";
 import lossImage from "../../public/images/over.jpg";
+import { incrementTokenCount } from "../utils/token";
+
 
 function MemoryGame({ setIsHidden, setWhatGame, setIsMiniGamesHidden }) {
     const [cardsArray, setCardsArray] = useState([]);
@@ -28,7 +30,9 @@ function MemoryGame({ setIsHidden, setWhatGame, setIsMiniGamesHidden }) {
         // setIsOpen(false);
         setIsMemoryGameHidden(true);
         // console.log("isHidden before:" + isHidden)
-        setIsHidden(true);
+        if (setIsHidden !== undefined && setIsHidden !== null && setIsHidden !== '') {
+            setIsHidden(true);            
+        }
     };
 
     useEffect(() => {
@@ -65,6 +69,7 @@ function MemoryGame({ setIsHidden, setWhatGame, setIsMiniGamesHidden }) {
                     );
                     if (isGameWon) {
                         setWon(true);
+                        incrementTokenCount();
                     }
                     return updatedArray;
                 });
