@@ -72,7 +72,7 @@ const SignIn = () => {
             />
             <Image src={logo} alt="logo" className="w-[300px] mt-6 mb-8"/>
             <div className="w-[450px] py-8 bg-white rounded-xl flex justify-center">
-                <div className="w-8/12 flex flex-col">
+                <div className="w-8/12 text-black flex flex-col">
                     <h1 className="text-lg font-bold">Log in</h1>
                     <p className="text-xs mt-1">
                         New user?
