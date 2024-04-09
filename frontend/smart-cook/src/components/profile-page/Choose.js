@@ -8,8 +8,19 @@ const Chooser = ({userProfile}) => {
     const [myRecipes, setMyRecipes] = useState(null);
     const [pastBattles, setPastBattles] = useState(null);
     const [savedRecipes, setSavedRecipes] = useState(null);
-    const handlePBClick = () => {
+    const handlePBClick = async () => {
         setActiveOption('Past battles');
+        try {
+            const response = await axios.get(`${config.baseUrl}/api/v1/user/clash-history/`, {
+                headers: {
+                    Authorization: 'Bearer ' + localStorage.getItem('accessToken'),
+                }
+            });
+            setPastBattles(response.data);
+            console.log(response.data); // Make sure to access the response data properly
+        } catch (error) {
+            console.error(error);
+        }
     };
 
     const handleMRClick = async () => {
@@ -30,7 +41,7 @@ const Chooser = ({userProfile}) => {
     const handleSRClick = async () => {
         setActiveOption('Saved recipe');
         try {
-            const response = await axios.get(`${config.baseUrl}/api/v1/user/favorites/`, {
+            const response = await axios.get(`${config.baseUrl}/api/v1/recipes/ai/`, {
                 headers: {
                     Authorization: 'Bearer ' + localStorage.getItem('accessToken'),
                 }

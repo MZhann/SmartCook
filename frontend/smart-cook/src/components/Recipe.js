@@ -1,6 +1,6 @@
 import React, {useState} from "react";
 import Image from "next/image";
-import food from "../../public/images/food1.png";
+import defaultFood from "../../public/images/defaultFood.png";
 import person from "../../public/images/person1.png";
 import Like from "@/components/Like";
 import axios from "axios";
@@ -76,7 +76,7 @@ const Recipe = ({recipe}) => {
                         className={'w-[px] h-[211px] rounded-tl-[8px] rounded-tr-[8px]'} src={recipe.image}
                         alt="Food"/>
                 ) :
-                (<Image src={food} alt="Food"/>)
+                (<Image className="w-[280xp] h-[211px] object-cover" src={defaultFood}  alt="Food"/>)
             }
         </div>
     <div className="relative w-full h-[107px] rounded-b-lg p-4">

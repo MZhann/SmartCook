@@ -5,18 +5,15 @@ import close from "../../../../../public/images/Close.svg";
 import search from "../../../../../public/images/Search.png";
 import ScrollBlock from "./ScrollBlock";
 
-const SelectOpponent = ({isModalOpen, onClose}) => {
+const SelectOpponent = ({isModalOpen, onClose, openNext, setOpponent, goBack}) => {
     const [inputValue, setInputValue] = useState("");
 
     const handleSubmit = (event) => {
         event.preventDefault();
         console.log("Selected Opponent:", inputValue);
-        onClose();
+        openNext();
     };
-
     if (!isModalOpen) return null;
-
-
     return (
         <div
             className={`overflow-auto fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50 ${isModalOpen ? "" : "hidden"}`}
@@ -32,7 +29,7 @@ const SelectOpponent = ({isModalOpen, onClose}) => {
                         Culinary Clash 145
                     </div>
                     <div className="mt-2 mb-6">Step 2: Choose your opponent</div>
-                    <form onSubmit={handleSubmit} className="flex">
+                    <form className="flex">
                         <div className="flex w-5/6">
                             <input
                                 type="text"
@@ -40,7 +37,6 @@ const SelectOpponent = ({isModalOpen, onClose}) => {
                                 value={inputValue}
                                 onChange={(e) => setInputValue(e.target.value)}
                                 placeholder="Find Opponent"
-                                required
                             />
                             <button
                                 className="w-[50px] h-[36px] flex justify-center bg-[#AAE06E] items-center rounded-e-3xl">
@@ -53,12 +49,12 @@ const SelectOpponent = ({isModalOpen, onClose}) => {
                             Random
                         </button>
                     </form>
-                    <ScrollBlock/>
+                    <ScrollBlock inputValue={inputValue} setOpponent={setOpponent}/>
                     <div className="flex space-x-5">
-                        <button onClick={onClose}
+                        <button onClick={goBack}
                                 className="border-2 border-[#AAE06E] text-[#AAE06E] w-[150px] h-[36px] rounded-full">Back
                         </button>
-                        <button className="border-2 text-white w-[150px] bg-[#AAE06E] h-[36px] rounded-full">Next
+                        <button onClick={handleSubmit} className="border-2 text-white w-[150px] bg-[#AAE06E] h-[36px] rounded-full">Next
                         </button>
                     </div>
                 </div>

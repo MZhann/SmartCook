@@ -4,15 +4,23 @@ import AcceptedBattle from "@/components/modal/battle-cards/profile-battle-cards
 import SelectTitleCard from "@/components/modal/battle-cards/choose-opponent-cards/SelectTitileCard";
 import {useState} from "react";
 import SelectOpponent from "@/components/modal/battle-cards/choose-opponent-cards/SelectOpponentCard";
-import SelectOpponentCard from "@/components/modal/battle-cards/choose-opponent-cards/SelectOpponentCard";
+import CreateReceiptCard from "@/components/modal/battle-cards/choose-opponent-cards/CreateReceiptCard";
 
 const Challenges = () => {
     const [modalStage, setModalStage] = useState(0); // 0: none, 1: SelectTitleCard, 2: SelectOpponent
-
+    const [title, setTitle] = useState('');
+    const [opponent, setOpponent] = useState('');
+    const [recipe, setRecipe] = useState({});
     const openModal = () => setModalStage(1);
     const goToSelectOpponent = () => setModalStage(2);
+    const goToCreateReciept = () => setModalStage(3);
     const closeModal = () => setModalStage(0);
-
+    const goBack = () => setModalStage(modalStage - 1);
+    const handleCreateRecipe = () => {
+        console.log(title)
+        console.log(opponent)
+        console.log('End!')
+    }
     return (
         <MainContainer>
             <div className=" w-full max-w-[1195px] relative flex flex-col items-center">
@@ -50,10 +58,21 @@ const Challenges = () => {
                     isModalOpen={modalStage === 1}
                     onClose={closeModal}
                     openNext={goToSelectOpponent}
+                    setTitle={setTitle}
                 />
                 <SelectOpponent
                     isModalOpen={modalStage === 2}
                     onClose={closeModal}
+                    openNext={goToCreateReciept}
+                    setOpponent={setOpponent}
+                    goBack={goBack}
+                />
+                <CreateReceiptCard
+                    isModalOpen={modalStage === 3}
+                    onClose={closeModal}
+                    setRecipe={setRecipe}
+                    goBack={goBack}
+                    handlCreateRecipe={handleCreateRecipe}
                 />
             </div>
 

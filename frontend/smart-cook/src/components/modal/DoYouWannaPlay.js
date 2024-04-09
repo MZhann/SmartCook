@@ -30,7 +30,6 @@ const DoYouWannaPlay = ({ isQuizOpen, closeQuiz, setIsQuizOpen }) => {
 
     if(timeStarted){
         setTimeout(() => {
-            // Code to be executed after 10 seconds
             console.log("This code executes after 10 seconds");
             setIsQuizOpen(true);
         }, 5000);

@@ -15,7 +15,6 @@ import {useEffect, useState} from "react";
 import EditProfile from "@/components/modal/EditProfile";
 import NoBattle from "@/components/modal/battle-cards/profile-battle-cards/NoBattle";
 import DeclinedBattle from "@/components/modal/battle-cards/profile-battle-cards/DeclinedBattle";
-import AcceptDecline from "@/components/modal/battle-cards/profile-battle-cards/AcceptDecline";
 import AcceptedBattle from "@/components/modal/battle-cards/profile-battle-cards/AcceptedBattle";
 
 const Profile = () => {
@@ -33,7 +32,6 @@ const Profile = () => {
                     })
 
                 setBattle(res.data)
-                console.log(battle[0]?.status)
             } catch(error) {
                 console.error(error)
             }
@@ -52,29 +50,29 @@ const Profile = () => {
 
 
     useEffect(() => {
+        const fetchProfile = () => {
+            try {
+                axios.get(`${config.baseUrl}/api/v1/user/profile`, {
+                    headers: {
+                        Authorization: 'Bearer ' + localStorage.getItem('accessToken'),
+                    }
+                })
+                    .then(response => {
+                        console.log(response.data)
+                        setUserProfile(response.data);
+                    })
+                    .catch(error => {
+                        console.error(error);
+                    });
+            } catch (error) {
+                console.error(error);
+            }
+        }
+
         fetchProfile();
     }, []);
-    useEffect(() => {
-        console.log(userProfile)
-    })
-    const fetchProfile = () => {
-        try {
-            axios.get(`${config.baseUrl}/api/v1/user/profile`, {
-                headers: {
-                    Authorization: 'Bearer ' + localStorage.getItem('accessToken'),
-                }
-            })
-                .then(response => {
-                    setUserProfile(response.data);
-                    console.log(userProfile)// Set user profile data in state
-                })
-                .catch(error => {
-                    console.error(error);
-                });
-        } catch (error) {
-            console.error(error);
-        }
-    }
+
+
 
     return (
         <MainContainer>
@@ -85,8 +83,13 @@ const Profile = () => {
                 <div className={'flex flex-row justify-between mt-4'}>
                     <div className={'w-[278px] h-[546px] px-6 py-5 bg-[#2A293B] rounded-3xl'}>
                         <div className={`w-full`}>
-                            <Image className={'rounded-full object-fit border-white border-[3px] h-[101px] w-[101px]'}
-                                   src={defaultAvatar} alt={'default'}/>
+                            {userProfile && userProfile.photo ?
+                                <Image className={'rounded-full object-fit border-white border-[3px] h-[101px] w-[101px]'}
+                                       src={userProfile && userProfile?.photo} width={101} height={101} alt={'default'}/>
+                                :
+                                <Image className={'rounded-full object-fit border-white border-[3px] h-[101px] w-[101px]'}
+                                       src={defaultAvatar} alt={'default'}/>
+                            }
                         </div>
                         <div className={'w-full flex-col flex gap-0.5 mt-2'}>
                             <div>

@@ -1,16 +1,38 @@
-import React, { useRef } from "react";
-import avatar1 from "../../../../../public/images/avatar1.png";
-import avatar2 from "../../../../../public/images/avatar2.png";
-import avatar3 from "../../../../../public/images/avatar3.png";
-import avatar from "../../../../../public/images/avatar.jpg";
-import egg from "../../../../../public/images/egg.png";
+import React, {useEffect, useRef, useState} from "react";
+import defaultAvatar from "../../../../../public/images/avatarka.png";
 import Avatar from "../choose-opponent-cards/Avatar";
 import Image from "next/image";
 import left from "../../../../../public/images/left.png";
 import right from "../../../../../public/images/right.png";
-
-const ScrollBlock = () => {
+import axios from "axios";
+const ScrollBlock = ({inputValue, setOpponent}) => {
     const scrollRef = useRef(null);
+    const [users, setUsers] = useState([]);
+    const [selectedAvatarIndex, setSelectedAvatarIndex] = useState(null);
+
+    const handleAvatarClick = (index, userId) => {
+        setSelectedAvatarIndex(index);
+        setOpponent(userId);
+        console.log(userId)
+    };
+
+    useEffect(() => {
+        const fetchData = async () => {
+            try {
+                const res = await axios.get('https://web-production-ad96.up.railway.app/api/v1/users/all/');
+                setUsers(res.data);
+                console.log(res.data);
+            } catch (err) {
+                console.error(err);
+            }
+        };
+
+        fetchData();
+    }, []);
+
+    const filteredUsers = users.filter(user =>
+        `${user.first_name} ${user.last_name}`.toLowerCase().includes(inputValue.toLowerCase())
+    );
 
     const scrollLeft = () => {
         if (scrollRef.current) {
@@ -53,24 +75,19 @@ const ScrollBlock = () => {
                     className="overflow-x-scroll w-[420px] p-4 scrollbar-hide"
                     ref={scrollRef}
                 >
-                    <div className="flex">
-                        <Avatar image={avatar1} name={"Anna Kravich"} />
-                        <Avatar image={avatar2} name={"Oleg Tinkovv"} />
-                        <Avatar image={avatar3} name={"Zhanbolat Mukan"} />
-                        <Avatar image={avatar1} name={"Anna Kravich"} />
-                        <Avatar image={avatar3} name={"Zhanbolat Mukan"} />
-                        <Avatar image={avatar} name={"Zhannurkhan Josh"} />
-                        <Avatar image={avatar2} name={"Oleg Tinkovv"} />
-                        <Avatar image={avatar1} name={"Anna Kravich"} />
-                        <Avatar image={avatar3} name={"Zhanbolat Mukan"} />
-
-                        <Avatar image={egg} name={"John Lennon"} />
+                    <div className={`flex`}>
+                        {filteredUsers && filteredUsers.map((user, index) => (
+                            <Avatar
+                                key={index}
+                                onClick={() => handleAvatarClick(index, user.id)} // Pass user.id here
+                                isChecked={selectedAvatarIndex === index}
+                                image={user.photo ? user.photo : defaultAvatar}
+                                name={`${user.first_name} ${user.last_name}`}
+                            />
+                        ))}
                     </div>
                 </div>
-
-                {/* Custom CSS to hide the scrollbar */}
                 <style jsx>{`
-                    /* Hide the scrollbar */
                     .scrollbar-hide::-webkit-scrollbar {
                         display: none;
                     }
