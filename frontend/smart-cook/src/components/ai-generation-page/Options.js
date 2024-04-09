@@ -21,11 +21,7 @@ const Options = ({ ingredients }) => {
     const [responseText, setResponseText] = useState("");
     const [recipeId, setRecipeId] = useState();
     let urlOfImage = "";
-    // useEffect(() => {
-    //     if (imageURL !== null) {
-    //         parseRecipe(responseText, imageURL);
-    //     }
-    // }, [imageURL, responseText]);
+   
 
     const openModal = () => {
         setIsModalOpen(true);
@@ -373,6 +369,8 @@ const Options = ({ ingredients }) => {
                 />
                 Create
             </button>
+
+            <div className="text-white mt-4 underline"> You have <span className="text-green-500 text-2xl">3</span> tokens remaining</div>
         </div>
     );
 };

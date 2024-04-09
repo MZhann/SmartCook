@@ -1,5 +1,5 @@
 import MainContainer from "@/components/MainContainer";
-import React from "react";
+import React, { useState } from "react";
 import "../app/globals.css";
 import bg from "../../public/images/greenBg.svg"
 import Image from "next/image";
@@ -10,8 +10,16 @@ import FollowAlong from "@/components/FollowAlong";
 import Footer from "@/components/Footer";
 import CreatingReceipt from "@/components/modal/CreatingReceipt";
 import MemoryGame from "@/components/MemoryGame";
+import DoYouWannaPlay from "@/components/modal/DoYouWannaPlay";
 
 const Main = () => {
+
+
+    const [isQuizOpen, setIsQuizOpen] = useState(false);
+    const closeQuiz = () => {
+        setIsQuizOpen(false);
+    }
+
     return (
         <MainContainer>
             <Image src={bg} className="absolute w-2/3 right-0 top-0 z-0" alt="background"/>
@@ -19,11 +27,9 @@ const Main = () => {
                 <Navbar/>
                 <WelcomeTry/>
                 <RecentlyAdded/>
+                <DoYouWannaPlay isQuizOpen={isQuizOpen} setIsQuizOpen={setIsQuizOpen} closeQuiz={closeQuiz} />
                 <div className="w-full flex justify-center">
                     <CreatingReceipt/>
-                </div>
-                <div className={`flex flex-row justify-around`}>
-                    <MemoryGame />
                 </div>
                 <FollowAlong/>
                 <Footer/>
