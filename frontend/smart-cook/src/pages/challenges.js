@@ -20,7 +20,7 @@ const Challenges = () => {
                 <div
                     className={`gap-4 mt-5 flex flex-col items-center justify-center text-center `}
                 >
-                    <h1 className={`flex self-center text-3xl mt-3 font-black`}>
+                    <h1 className={`flex self-center text-black text-3xl mt-3 font-black`}>
                         Culinary Clash: Battle Royale of Flavors
                     </h1>
                     <p className={" font-[400]"}>
@@ -38,7 +38,7 @@ const Challenges = () => {
                     </button>
                 </div>
 
-                <h1 className={`self-start text-3xl mt-10 font-bold`}>
+                <h1 className={`self-start text-black text-3xl mt-10 font-bold`}>
                     Current Battles
                 </h1>
 
