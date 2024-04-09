@@ -15,7 +15,6 @@ import {useEffect, useState} from "react";
 import EditProfile from "@/components/modal/EditProfile";
 import NoBattle from "@/components/modal/battle-cards/profile-battle-cards/NoBattle";
 import DeclinedBattle from "@/components/modal/battle-cards/profile-battle-cards/DeclinedBattle";
-import AcceptDecline from "@/components/modal/battle-cards/profile-battle-cards/AcceptDecline";
 import AcceptedBattle from "@/components/modal/battle-cards/profile-battle-cards/AcceptedBattle";
 
 const Profile = () => {
@@ -33,7 +32,6 @@ const Profile = () => {
                     })
 
                 setBattle(res.data)
-                // console.log(battle[0]?.status)
             } catch(error) {
                 console.error(error)
             }

@@ -5,13 +5,15 @@ import Image from "next/image";
 import left from "../../../../../public/images/left.png";
 import right from "../../../../../public/images/right.png";
 import axios from "axios";
-const ScrollBlock = ({inputValue}) => {
+const ScrollBlock = ({inputValue, setOpponent}) => {
     const scrollRef = useRef(null);
     const [users, setUsers] = useState([]);
     const [selectedAvatarIndex, setSelectedAvatarIndex] = useState(null);
 
-    const handleAvatarClick = (index) => {
+    const handleAvatarClick = (index, userId) => {
         setSelectedAvatarIndex(index);
+        setOpponent(userId);
+        console.log(userId)
     };
 
     useEffect(() => {
@@ -74,9 +76,14 @@ const ScrollBlock = ({inputValue}) => {
                     ref={scrollRef}
                 >
                     <div className={`flex`}>
-                        {filteredUsers && filteredUsers?.map((user, index) => (
-                            <Avatar onClick={() => handleAvatarClick(index)}
-                                    isChecked={selectedAvatarIndex === index} key={index} image={user.photo ? user.photo : defaultAvatar} name={`${user.first_name} ${user.last_name}`}/>
+                        {filteredUsers && filteredUsers.map((user, index) => (
+                            <Avatar
+                                key={index}
+                                onClick={() => handleAvatarClick(index, user.id)} // Pass user.id here
+                                isChecked={selectedAvatarIndex === index}
+                                image={user.photo ? user.photo : defaultAvatar}
+                                name={`${user.first_name} ${user.last_name}`}
+                            />
                         ))}
                     </div>
                 </div>

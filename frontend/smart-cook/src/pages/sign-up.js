@@ -7,6 +7,7 @@ import Link from "next/link";
 import {useState} from "react";
 import axios from "axios";
 import {config} from "../../config";
+import {useRouter} from "next/router";
 
 const SignUp = () => {
     const [isLoading, setIsLoading] = useState(false);
@@ -65,6 +66,8 @@ const SignUp = () => {
             }
         }
     };
+    const router = useRouter();
+
     async function handleLogin() {
         const requestBody = {
             email: email,
@@ -73,22 +76,19 @@ const SignUp = () => {
 
         try {
             setIsLoading(true);
-            axios.post(`${config.baseUrl}/api/v1/login/`, requestBody)
-                .then((res) => {
-                    localStorage.setItem("accessToken", res.data.access);
-                    localStorage.setItem("refreshToken", res.data.refresh);
-                    window.location.href = '/'
-                })
-                .catch((error) => {
-                    console.error(error);
-                    if (error.response && error.response.data && error.response.data.error) {
-                        setErrorMessage(error.response.data.error)
-                    }
-                });
+            const response = await axios.post(`${config.baseUrl}/api/v1/login/`, requestBody);
+            localStorage.setItem("accessToken", response.data.access);
+            localStorage.setItem("refreshToken", response.data.refresh);
             setIsLoading(false);
-            window.location.href = "/";
+
+            await router.push('/');
+
         } catch (error) {
+            setIsLoading(false);
             console.error(error);
+            if (error.response && error.response.data && error.response.data.error) {
+                setErrorMessage(error.response.data.error);
+            }
         }
     }
     return (

@@ -8,10 +8,10 @@ import edit from "../../../public/images/edit-pen.png"
 
 const EditProfile = ({isModalOpen, onClose, closeModal, userProfile}) => {
     const [imagePreview, setImagePreview] = useState(null);
-    const [email, setEmail] = useState(userProfile?.email);
+    const [email, setEmail] = useState(userProfile?.email || "");
     const [password, setPassword] = useState("");
-    const [firstName, setFirstName] = useState(userProfile?.first_name);
-    const [lastName, setLastName] = useState(userProfile?.last_name);
+    const [firstName, setFirstName] = useState(userProfile?.first_name || "");
+    const [lastName, setLastName] = useState(userProfile?.last_name || "");
     const [currentPassword, setCurrentPassword] = useState("");
     const [newPassword, setNewPassword] = useState("");
     const [repeatPassword, setRepeatPassword] = useState("");
@@ -19,7 +19,6 @@ const EditProfile = ({isModalOpen, onClose, closeModal, userProfile}) => {
     const [isLoading, setIsLoading] = useState(false);
 
     const validateEmail = (email) => {
-        // Regular expression for validating email address
         const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
         return emailRegex.test(email);
     };
@@ -32,22 +31,23 @@ const EditProfile = ({isModalOpen, onClose, closeModal, userProfile}) => {
     const handleSubmit = async (e) => {
         e.preventDefault();
 
-        if (!validate()) {
-            return;
-        }
-
         const requestBody = new FormData();
 
         if (imagePreview && imagePreview !== userProfile?.photo) {
+            // Convert data URL to Blob
             const blob = dataURLtoBlob(imagePreview);
             requestBody.append("photo", blob, "avatar.jpg");
         }
-        requestBody.append("first_name", firstName);
-        requestBody.append("last_name", lastName);
-        if (newPassword !== "") {
-            requestBody.append("password", newPassword);
+        if (firstName.trim() !== "") {
+            requestBody.append("first_name", firstName.trim());
         }
-        console.log(requestBody)
+        if (lastName.trim() !== "") {
+            requestBody.append("last_name", lastName.trim());
+        }
+        if (newPassword.trim() !== "") {
+            requestBody.append("password", newPassword.trim());
+        }
+
         try {
             setIsLoading(true);
             await axios.patch(`${config.baseUrl}/api/v1/user/profile/`, requestBody, {
@@ -68,6 +68,7 @@ const EditProfile = ({isModalOpen, onClose, closeModal, userProfile}) => {
             setIsLoading(false);
         }
     };
+
 
     const dataURLtoBlob = (dataURL) => {
         const arr = dataURL.split(',');
@@ -164,7 +165,7 @@ const EditProfile = ({isModalOpen, onClose, closeModal, userProfile}) => {
                         className={`w-full rounded-3xl border-2 h-10 shadow-gray-500 text-xs p-3 mt-2`}
                         placeholder="Enter your surname"
                         type="text"
-                        value={userProfile?.first_name}
+                        value={firstName}
                         onChange={(e) => setFirstName(e.target.value)}
                     />
                     <p className="text-sm mt-5">Last name</p>

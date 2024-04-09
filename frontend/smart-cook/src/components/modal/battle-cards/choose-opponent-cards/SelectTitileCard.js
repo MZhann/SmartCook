@@ -2,16 +2,15 @@ import Image from "next/image";
 import cookBattle from "../../../../../public/images/cookBattle.png";
 import close from "../../../../../public/images/Close.svg";
 import {useState} from "react";
-import axios from "axios";
 import SelectOpponentCard from "@/components/modal/battle-cards/choose-opponent-cards/SelectOpponentCard";
 
-const SelectTitleCard = ({isModalOpen, onClose, openNext}) => {
+const SelectTitleCard = ({isModalOpen, onClose, openNext, setTitle}) => {
     const [inputValue, setInputValue] = useState("");
 
     const handleSubmit = (event) => {
         event.preventDefault();
         console.log("Submitted value:", inputValue);
-        setInputValue("");
+        setTitle(inputValue);
         openNext();
     };
 
@@ -42,9 +41,6 @@ const SelectTitleCard = ({isModalOpen, onClose, openNext}) => {
                     </button>
                 </form>
             </div>
-            <SelectOpponentCard
-                onClose={onClose}
-                closeModal={onClose}/>
         </div>
     );
 };
