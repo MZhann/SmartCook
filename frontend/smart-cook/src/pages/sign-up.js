@@ -96,9 +96,7 @@ const SignUp = () => {
             localStorage.setItem("accessToken", response.data.access);
             localStorage.setItem("refreshToken", response.data.refresh);
             setIsLoading(false);
-
             await router.push('/');
-
         } catch (error) {
             setIsLoading(false);
             console.error(error);
