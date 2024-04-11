@@ -101,7 +101,7 @@ const Navbar = () => {
                         >
                             <g
                                 fill="none"
-                                fill-rule="evenodd"
+                                fillRule="evenodd"
                                 stroke={
                                     router.pathname === "/" ||
                                     router.pathname === "/profile" ||
@@ -110,8 +110,8 @@ const Navbar = () => {
                                         ? "#000000"
                                         : "white"
                                 }
-                                stroke-linecap="round"
-                                stroke-linejoin="round"
+                                strokeLinecap="round"
+                                strokeLinejoin="round"
                                 transform="translate(3 3)"
                             >
                                 <path d="m6.5 10.5 3-3-3-3" />
