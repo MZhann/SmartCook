@@ -66,9 +66,9 @@ const Challenges = () => {
                 </h1>
 
                 <div className="grid grid-cols-2 w-full">
-                    {/*{clashes && clashes.slice(0,4).map((clash, index) => (*/}
-                    {/*    <AcceptedBattle key={index} />*/}
-                    {/*))}*/}
+                    {clashes && clashes.slice(0,4).map((clash, index) => (
+                        <AcceptedBattle key={index} />
+                    ))}
                 </div>
                 <button className="text-white bg-[#AAE06E] self-start w-[250px] h-[48px] rounded-3xl text-lg font-bold mb-20 mt-10">Load More</button>
                 <SelectTitleCard

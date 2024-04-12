@@ -53,7 +53,7 @@ const Leaderboard = () => {
                 </div>
                 <div>
                     {leaders && leaders.slice(0, displayedLeaders).map((leader, index) => (
-                        <LeadersCard index={index} isLeader={index < 3} name={`${leader.first_name} ${leader.last_name}`} score={leader.score} />
+                        <LeadersCard index={index} key={index} isLeader={index < 3} name={`${leader.first_name} ${leader.last_name}`} score={leader.score} />
                     ))
                     }
                 </div>
