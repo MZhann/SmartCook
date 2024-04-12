@@ -193,14 +193,14 @@ const SignUp = () => {
                                 onClick={() => setPasswordShown(false)}
                                 src={hide}
                                 alt="eye_closed"
-                                className="w-[20px] h-[20px] absolute top-[18px] right-3"
+                                className="cursor-pointer w-[20px] h-[20px] absolute top-[18px] right-3"
                             />
                         ) : (
                             <Image
                                 onClick={() => setPasswordShown(true)}
                                 src={show}
                                 alt="eye"
-                                className="w-[20px] h-[20px] absolute top-[18px] right-3"
+                                className="cursor-pointer w-[20px] h-[20px] absolute top-[18px] right-3"
                             />
                         )}
                         {!isPasswordValidated ? (

@@ -20,7 +20,7 @@ const AiReceipts = () => {
 
     const fetchData = async () => {
         try {
-            const data = await axios.get(`${config.baseUrl}/api/v1/recipes/ai/`);
+            const data = await axios.get(`${config.baseUrl}/api/v1/recipes/ai/all`);
             setRecipes(data.data);
             console.log(recipes)
         } catch (error) {
@@ -39,7 +39,7 @@ const AiReceipts = () => {
                     </h1>
                 </div>
 
-                <div className="flex w-full flex-wrap justify-between mt-6">
+                <div className="grid grid-cols-4 w-full">
                     {recipes && recipes.slice(0, displayedRecipes).map((recipe, index) => (
                         <Link key={index} href="/recipes-ai/[recipeAi]" as={`/recipes-ai/${recipe.id}`} passHref>
                             <Recipe recipe={recipe}/>

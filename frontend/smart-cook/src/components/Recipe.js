@@ -83,7 +83,10 @@ const Recipe = ({recipe}) => {
         <div className="flex items-center">
             {recipe && router.pathname !== '/ai-receipts' ?
                             (<>
-                                <Image src={person} className="mr-2 rounded-5xl" alt="profile avatar"/>
+                                {recipe.user.photo ?
+                                    <Image src={user?.photo} height={40} w={40} className="mr-2 object-contain rounded-5xl" alt="profile avatar"/> :
+                                    <Image src={defaultFood} alt={'avatar'} className={'object-contain size-[40px]'}/>
+                                }
                                 <div className="text-xs">{recipe.user.first_name} {recipe.user.last_name}</div>
                             </>) :
                             (<>

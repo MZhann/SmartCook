@@ -29,10 +29,10 @@ const RecentlyAdded = () => {
     return (
         <div className="mt-32 flex flex-col">
             <div className="text-white text-4xl ">Recently added recipes</div>
-            <div className="mt-10 flex justify-between flex-wrap">
+            <div className="mt-10 grid grid-cols-4 w-full">
                 {recipes && recipes.slice(0, displayedRecipes).map((recipe, index) => (
                     <Link key={index} href="/recipes/[recipeTitle]" as={`/recipes/${recipe.id}`} passHref>
-                        <Recipe  recipe={recipe} />
+                        <Recipe recipe={recipe} />
                     </Link>
                 ))}
             </div>

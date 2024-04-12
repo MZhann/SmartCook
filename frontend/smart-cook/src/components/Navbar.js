@@ -53,7 +53,6 @@ const Navbar = () => {
                     photo: photo,
                 });
 
-                console.log(userData);
             } catch (error) {
                 console.error("Error fetching user profile data:", error);
             }

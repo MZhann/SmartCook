@@ -1,19 +1,29 @@
 import MainContainer from "@/components/MainContainer";
 import Navbar from "@/components/Navbar";
-import food from "@/../public/images/food.jpg";
 import Image from "next/image";
-import clock from "@/../public/images/clock.svg";
-import people from "@/../public/images/profile-2user.svg";
-import avatar from "@/../public/images/avatar.jpg";
-import love from "@/../public/images/love.png";
-import fav from "@/../public/images/favorite.png";
-import potato from "@/../public/images/potato.jpg";
-import Recipe from "@/components/Recipe";
 import leaderboard from "../../public/images/leaderboard.png";
-import AcceptedBattle from "@/components/modal/battle-cards/profile-battle-cards/AcceptedBattle";
 import LeadersCard from "@/components/LeadersCard";
+import {useEffect, useState} from "react";
+import axios from "axios";
 
 const Leaderboard = () => {
+    const [leaders, setLeaders] = useState(null);
+    const [displayedLeaders, setDisplayedLeaders] = useState(8);
+
+    useEffect(() => {
+        const fetchData = () => {
+            axios.get('https://web-production-ad96.up.railway.app/api/v1/users/top/').then((r) => {
+                setLeaders(r.data);
+        }
+            ).catch((err) => console.log(err));
+        }
+        fetchData();
+    })
+
+    const handleLoadMore = () => {
+        setDisplayedLeaders(displayedLeaders + 4);
+    };
+
     return (
         <MainContainer>
             <div className=" w-full max-w-[1195px] relative flex flex-col items-center">
@@ -41,48 +51,14 @@ const Leaderboard = () => {
                         the top spot in the ultimate culinary rankings.
                     </p>
                 </div>
-                {/* ({ isLeader, name, score })  */}
                 <div>
-                    {/* Логику isLeader надо переписать, просто трем верхним дать а от параметров убрать */}
-                    {/* Места дашь с помощью индексов */}
-                    <LeadersCard
-                        isLeader={true}
-                        name={"Erkin Tilavberdiyev"}
-                        score={550}
-                    />
-                    <LeadersCard
-                        isLeader={true}
-                        name={"Anna Kim"}
-                        score={500}
-                    />
-                    <LeadersCard
-                        isLeader={true}
-                        name={"Denis Ten"}
-                        score={450}
-                    />
-                    <LeadersCard
-                        isLeader={false}
-                        name={"Alexey Navalny"}
-                        score={400}
-                    />
-                    <LeadersCard
-                        isLeader={false}
-                        name={"Barak Obama"}
-                        score={350}
-                    />
-                    <LeadersCard
-                        isLeader={false}
-                        name={"Askhat Niyazov"}
-                        score={300}
-                    />
-                    <LeadersCard
-                        isLeader={false}
-                        name={"Mukan Zhanbolat"}
-                        score={250}
-                    />
+                    {leaders && leaders.slice(0, displayedLeaders).map((leader, index) => (
+                        <LeadersCard index={index} isLeader={index < 3} name={`${leader.first_name} ${leader.last_name}`} score={leader.score} />
+                    ))
+                    }
                 </div>
                 <div className="w-[900px]">
-                    <button className="text-white  bg-[#AAE06E] self-start w-[250px] h-[48px] rounded-3xl text-lg font-bold mb-20 mt-10">
+                    <button onClick={handleLoadMore} className="text-white  bg-[#AAE06E] self-start w-[250px] h-[48px] rounded-3xl text-lg font-bold mb-20 mt-10">
                         Load More
                     </button>
                 </div>

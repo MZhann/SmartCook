@@ -156,8 +156,9 @@ const RecipeMake = () => {
                                 </p>
                             </div>
                             <div
-                                className="w-[750px] mt-[50px] h-[400px] bg-white flex justify-center items-center rounded-lg">
+                                className="w-[750px] relative mt-[50px] h-[400px] bg-white flex justify-center items-center rounded-lg">
                                 <input
+                                    className={'absolute h-[250px] w-[250px] cursor-pointer bg-opacity-0 opacity-0'}
                                     type="file"
                                     onChange={handleMainImageChange}
                                 />
@@ -177,7 +178,7 @@ const RecipeMake = () => {
                                             width={250}
                                             height={250}
                                         />
-                                        <h1 className="mt-5 text-[24px]">
+                                        <h1 className="mt-5 text-black text-[24px]">
                                             Upload finished food photo
                                         </h1>
                                     </div>

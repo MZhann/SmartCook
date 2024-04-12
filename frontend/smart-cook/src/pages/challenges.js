@@ -2,11 +2,13 @@ import MainContainer from "@/components/MainContainer";
 import Navbar from "@/components/Navbar";
 import AcceptedBattle from "@/components/modal/battle-cards/profile-battle-cards/AcceptedBattle"
 import SelectTitleCard from "@/components/modal/battle-cards/choose-opponent-cards/SelectTitileCard";
-import {useState} from "react";
+import {useEffect, useState} from "react";
 import SelectOpponent from "@/components/modal/battle-cards/choose-opponent-cards/SelectOpponentCard";
 import CreateReceiptCard from "@/components/modal/battle-cards/choose-opponent-cards/CreateReceiptCard";
+import axios from "axios";
 
 const Challenges = () => {
+    const [clashes, setClashes] = useState(null)
     const [modalStage, setModalStage] = useState(0); // 0: none, 1: SelectTitleCard, 2: SelectOpponent
     const [title, setTitle] = useState('');
     const [opponent, setOpponent] = useState('');
@@ -21,6 +23,19 @@ const Challenges = () => {
         console.log(opponent)
         console.log('End!')
     }
+
+    const [displayedLeaders, setDisplayedLeaders] = useState(8);
+
+    useEffect(() => {
+        const fetchData = () => {
+            axios.get('https://web-production-ad96.up.railway.app/api/v1/clashee/all').then((r) => {
+                    setClashes(r.data);
+                }
+            ).catch((err) => console.log(err));
+        }
+        fetchData();
+    })
+
     return (
         <MainContainer>
             <div className=" w-full max-w-[1195px] relative flex flex-col items-center">
@@ -50,8 +65,10 @@ const Challenges = () => {
                     Current Battles
                 </h1>
 
-                <div className="flex flex-wrap justify-between">
-                    <AcceptedBattle />
+                <div className="grid grid-cols-2 w-full">
+                    {clashes && clashes.slice(0,4).map((clash, index) => (
+                        <AcceptedBattle key={index} />
+                    ))}
                 </div>
                 <button className="text-white bg-[#AAE06E] self-start w-[250px] h-[48px] rounded-3xl text-lg font-bold mb-20 mt-10">Load More</button>
                 <SelectTitleCard
