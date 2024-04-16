@@ -12,6 +12,8 @@ const Avatar = ({ onClick, image, name, isChecked }) => {
             <Image
                 src={image}
                 alt="avatar"
+                width={70}
+                height={70}
                 className={`mb-3 w-[70px] h-[70px] rounded-full ${
                     isChecked ? "border-[#AAE06E] border-2" : ""}`}
             />

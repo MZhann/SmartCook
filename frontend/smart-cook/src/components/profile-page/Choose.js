@@ -26,7 +26,7 @@ const Chooser = ({userProfile}) => {
     const handleMRClick = async () => {
         setActiveOption('My recipe');
         try {
-            const response = await axios.get(`${config.baseUrl}/api/v1/recipes/`, {
+            const response = await axios.get(`${config.baseUrl}/api/v1/my-recipes/`, {
                 headers: {
                     Authorization: 'Bearer ' + localStorage.getItem('accessToken'),
                 }

@@ -40,7 +40,7 @@ const CreateReceiptCard = ({isModalOpen, handlCreateRecipe, onClose}) => {
                     </div>
                     <div className="mt-2 mb-6">Step 3: Create a recipe for a battle</div>
 
-                    <button onClick={handlCreateRecipe} className="w-[150px] h-[36px] text-white bg-[#AAE06E] rounded-3xl">Create</button>
+                    <button onClick={(e) => handlCreateRecipe(e)} className="w-[150px] h-[36px] text-white bg-[#AAE06E] rounded-3xl">Create</button>
                 </div>
             </div>
         </div>
