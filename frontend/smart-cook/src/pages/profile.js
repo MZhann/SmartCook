@@ -193,7 +193,7 @@ const Profile = () => {
                         <WaitingOpponent />
                     ) : battle &&
                       battle[0]?.status === "accepted" &&
-                      battle[0]?.initiator === userProfile?.id ? (
+                      battle[0]?.initiator.id === userProfile?.id ? (
                         <AcceptedBattle battle={battle} />
                     ) : battle && battle[0]?.status === "accepted" ? (
                         <AcceptedBattle />
