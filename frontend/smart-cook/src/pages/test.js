@@ -1,23 +1,17 @@
+import "../app/globals.css";
 
-const Test = ({ ingredients }) => {
+import AIchef from "@/components/awards/IDidIt";
+
+const Test = () => {
  
 
     return (
-        <div className="flex flex-col items-center">
+        <div>
             JUST
+            <AIchef />
         </div>
     );
 };
 
 export default Test;
 
-
-// const formData = {
-//     selectedDish,
-//     selectedCook,
-//     selectedType,
-//     selectedWorld,
-//     extraIngredients,
-//     banIngredients,
-//     ingredients,
-// };
