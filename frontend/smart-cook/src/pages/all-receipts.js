@@ -58,9 +58,9 @@ const AllReceipts = () => {
                 </div>
                 <div className="grid grid-cols-4 w-full">
                     {recipes && recipes.slice(0, displayedRecipes).map((recipe, index) => (
-                        <Link key={index} href="/recipes/[recipeTitle]" as={`/recipes/${recipe.id}`} passHref>
-                            <Recipe  recipe={recipe}/>
-                        </Link>
+                        // <Link key={index} href="/recipes/[recipeTitle]" as={`/recipes/${recipe.id}`} passHref>
+                            <Recipe  recipe={recipe} key={index}/>
+                        // </Link>
                     ))}
                 </div>
                 <div className={'w-full justify-start'}>

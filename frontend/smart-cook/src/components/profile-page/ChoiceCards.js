@@ -7,21 +7,23 @@ const ChoiceCards = ({ userProfile, recipes }) => {
     return (
         <div className={`flex flex-wrap justify-between mt-5`}>
             {recipes && recipes.map((recipe) => (
-                <div key={recipe.title} className={`bg-[#2A293B] flex flex-col text-white w-[280px] h-[317px] rounded-3xl mt-5`}>
+                <div key={recipe.title} className={`bg-[#2A293B] object-contain flex flex-col text-white w-[280px] h-[317px] rounded-3xl mt-5`}>
                     {recipe.image ?
-                        <Image
-                            className={`object-contain rounded-t-3xl`}
-                            src={recipe.image}
-                            alt={recipe.title}
-                            width={574}
-                            height={382}
-                        /> :
+                        <div className={'w-[280px] object-contain h-[200px] overflow-hidden flex justify-center items-center'}>
+                            <Image
+                                className={`object-contain rounded-t-3xl`}
+                                src={recipe.image}
+                                alt={recipe.title}
+                                width={574}
+                                height={317}
+                            />
+                        </div> :
                         <Image
                             className={`object-contain rounded-t-3xl`}
                             src={potato}
                             alt={recipe.title}
                             width={574}
-                            height={382}
+                            height={317}
                         />
                     }
                     <div className={`p-4 relative`}>

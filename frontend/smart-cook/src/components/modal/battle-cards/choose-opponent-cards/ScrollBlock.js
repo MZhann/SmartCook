@@ -5,34 +5,16 @@ import Image from "next/image";
 import left from "../../../../../public/images/left.png";
 import right from "../../../../../public/images/right.png";
 import axios from "axios";
-const ScrollBlock = ({inputValue, setOpponent}) => {
+const ScrollBlock = ({setOpponent, filteredUsers}) => {
     const scrollRef = useRef(null);
-    const [users, setUsers] = useState([]);
+
     const [selectedAvatarIndex, setSelectedAvatarIndex] = useState(null);
 
     const handleAvatarClick = (index, userId) => {
         setSelectedAvatarIndex(index);
         setOpponent(userId);
-        console.log(userId)
+        console.log(userId);
     };
-
-    useEffect(() => {
-        const fetchData = async () => {
-            try {
-                const res = await axios.get('https://web-production-ad96.up.railway.app/api/v1/users/all/');
-                setUsers(res.data);
-                console.log(res.data);
-            } catch (err) {
-                console.error(err);
-            }
-        };
-
-        fetchData();
-    }, []);
-
-    const filteredUsers = users.filter(user =>
-        `${user.first_name} ${user.last_name}`.toLowerCase().includes(inputValue.toLowerCase())
-    );
 
     const scrollLeft = () => {
         if (scrollRef.current) {

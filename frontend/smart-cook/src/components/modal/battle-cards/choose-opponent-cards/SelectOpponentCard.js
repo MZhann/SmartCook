@@ -1,12 +1,31 @@
 import Image from "next/image";
-import {useState} from "react";
+import {useEffect, useState} from "react";
 import cookBattle from "../../../../../public/images/cookBattle.png";
 import close from "../../../../../public/images/Close.svg";
 import search from "../../../../../public/images/Search.png";
 import ScrollBlock from "./ScrollBlock";
+import axios from "axios";
 
-const SelectOpponent = ({isModalOpen, onClose, openNext, setOpponent, goBack}) => {
+const SelectOpponent = ({ isModalOpen, onClose, openNext, setOpponent, goBack }) => {
     const [inputValue, setInputValue] = useState("");
+    const [users, setUsers] = useState([]);
+
+    const filteredUsers = users.filter(user =>
+        `${user.first_name} ${user.last_name}`.toLowerCase().includes(inputValue.toLowerCase())
+    );
+
+    useEffect(() => {
+        const fetchData = async () => {
+            try {
+                const res = await axios.get('https://web-production-ad96.up.railway.app/api/v1/users/all/');
+                setUsers(res.data);
+                console.log(res.data);
+            } catch (err) {
+                console.error(err);
+            }
+        };
+        fetchData();
+    }, []);
 
     const handleSubmit = (event) => {
         event.preventDefault();
@@ -14,6 +33,26 @@ const SelectOpponent = ({isModalOpen, onClose, openNext, setOpponent, goBack}) =
         openNext();
     };
     if (!isModalOpen) return null;
+
+    function shuffle(array) {
+        for (let i = array.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            [array[i], array[j]] = [array[j], array[i]];
+        }
+        return array;
+    }
+
+    const handleRandomClick = (e) => {
+        e.preventDefault();
+        const randomUser = shuffle(users);
+        if (filteredUsers.length > 0) {
+            setInputValue(`${randomUser[0].first_name} ${randomUser[0].last_name}`);
+            console.log(randomUser)
+            console.log(inputValue)
+        }
+    };
+
+
     return (
         <div
             className={`overflow-auto fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50 ${isModalOpen ? "" : "hidden"}`}
@@ -45,11 +84,12 @@ const SelectOpponent = ({isModalOpen, onClose, openNext, setOpponent, goBack}) =
                         </div>
 
                         <button
+                            onClick={(e) => handleRandomClick(e)}
                             className="w-[135px] h-[36px] bg-[#AAE06E] flex justify-center items-center font-bold text-white rounded-3xl self-center hover:bg-green-500">
                             Random
                         </button>
                     </form>
-                    <ScrollBlock inputValue={inputValue} setOpponent={setOpponent}/>
+                    <ScrollBlock filteredUsers={filteredUsers} users={users} inputValue={inputValue} setOpponent={setOpponent}/>
                     <div className="flex space-x-5">
                         <button onClick={goBack}
                                 className="border-2 border-[#AAE06E] text-[#AAE06E] w-[150px] h-[36px] rounded-full">Back
