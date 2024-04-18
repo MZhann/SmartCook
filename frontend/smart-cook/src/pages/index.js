@@ -9,12 +9,9 @@ import RecentlyAdded from "@/components/RecentlyAdded";
 import FollowAlong from "@/components/FollowAlong";
 import Footer from "@/components/Footer";
 import CreatingReceipt from "@/components/modal/CreatingReceipt";
-import MemoryGame from "@/components/MemoryGame";
 import DoYouWannaPlay from "@/components/modal/DoYouWannaPlay";
 
 const Main = () => {
-
-
     const [isQuizOpen, setIsQuizOpen] = useState(false);
     const closeQuiz = () => {
         setIsQuizOpen(false);
@@ -23,7 +20,7 @@ const Main = () => {
     return (
         <MainContainer>
             <Image src={bg} className="hidden sm:block absolute w-2/3 right-0 top-0 z-0" alt="background"/>
-            <div className="px-3 sm:px-0 w-full max-w-[1195px] relative flex flex-col ">
+            <div className="px-3 sm:px-5 w-full max-w-[1195px] relative flex flex-col ">
                 <Navbar/>
                 <WelcomeTry/>
                 <RecentlyAdded/>

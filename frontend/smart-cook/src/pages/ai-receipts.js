@@ -29,17 +29,17 @@ const AiReceipts = () => {
     }
     return (
         <MainContainer>
-            <div className="w-full max-w-[1195px] relative flex flex-col items-center">
+            <div className="px-4 lg:px-0 w-full max-w-[1195px] relative flex flex-col items-center">
                 <Navbar/>
                 <div
                     className={`gap-4 mt-5 flex flex-col items-center justify-center text-center text-white`}
                 >
-                    <h1 className={`flex self-center text-3xl mt-3`}>
+                    <h1 className={`flex flex-col md:flex-row self-center text-3xl mt-3`}>
                         Discover &nbsp;<span className="text-[#AAE06E]">2534</span>&nbsp; AI-Generated Recipes
                     </h1>
                 </div>
 
-                <div className="grid grid-cols-4 w-full">
+                <div className="grid grid-cols-1 md:grid-cols-2 px-8 md:px-0 lg:grid-cols-4 w-full">
                     {recipes && recipes.slice(0, displayedRecipes).map((recipe, index) => (
                         <Link key={index} href="/recipes-ai/[recipeAi]" as={`/recipes-ai/${recipe.id}`} passHref>
                             <Recipe recipe={recipe}/>

@@ -7,7 +7,7 @@ import location from "../../public/images/location.png";
 const Footer = () => {
     return (
         <div>
-            <div className="w-full text-white flex h-[300px] mt-10">
+            <div className="hidden w-full text-white lg:flex h-[300px] mt-10">
                 <div className="h-full w-4/12 border-r-2 border-gray-100 flex flex-col justify-center">
                     <div className="">
                         <div className="text-2xl mb-4">SmartCook</div>
