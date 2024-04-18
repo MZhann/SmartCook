@@ -24,7 +24,6 @@ const RecipeMake = () => {
             const updatedIngredients = [...ingredients];
             updatedIngredients[index].name = event.target.value;
             setIngredients(updatedIngredients);
-
         };
         const handleAddIngredient = () => {
             setIngredients([...ingredients, {"name": ""}]);

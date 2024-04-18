@@ -6,10 +6,14 @@ import React, {useEffect, useState} from "react";
 import Image from "next/image";
 import axios from "axios";
 import Footer from "@/components/Footer";
+import {useRouter} from "next/router";
 
-const apiUrl = "https://web-production-ad96.up.railway.app/api/v1/clashes/initiator/create/";
+const initiatorCreateUrl = "https://web-production-ad96.up.railway.app/api/v1/clashes/initiator/create/";
+const apiUrl = "https://web-production-ad96.up.railway.app/api/v1/recipes/";
+
 
 const ClashRecipeMake = () => {
+
         const [steps, setSteps] = useState([{step_text: "", image: null}]);
         const [title, setTitle] = useState("");
         const [serves, setServes] = useState(0);
@@ -94,7 +98,7 @@ const ClashRecipeMake = () => {
             };
             const accessToken = 'Bearer ' + localStorage.getItem('accessToken');
 
-            axios.post(apiUrl, formData, config).then((response) => {
+            axios.post(initiatorCreateUrl, formData, config).then((response) => {
                 ingredients.forEach((item) => {
                     axios.post(apiUrl + `${response.data.id}/ingredients/`, item, {
                         headers: {
@@ -116,7 +120,7 @@ const ClashRecipeMake = () => {
                         console.log(r.data);
                         if (index === steps.length - 1) {
                             setIsLoading(false);
-                            window.location.replace(`/recipes/${response.data.id}`);
+                            window.location.replace(`/profile`);
                         }
                     }).catch((error) => {
                         setIsLoading(false);
@@ -431,7 +435,8 @@ const ClashRecipeMake = () => {
                                                     Publishing....
                                                 </button>
                                         }
-                                    </> : <div className={'text-lg text-[#AAE06E] mt-5'}>For publishing recipe enter title, description, serves and cook time</div>
+                                    </> : <div className={'text-lg text-[#AAE06E] mt-5'}>For publishing recipe enter title,
+                                        description, serves and cook time</div>
                             }
                         </div>
                     </div>

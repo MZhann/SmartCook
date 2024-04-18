@@ -3,7 +3,7 @@ import cookBattle from "../../../../../public/images/cookBattle.png";
 import close from "../../../../../public/images/Close.svg";
 import {useState} from "react";
 
-const CreateReceiptCard = ({isModalOpen, handlCreateRecipe, onClose}) => {
+const CreateReceiptCard = ({isModalOpen, handleCreateRecipe, onClose}) => {
     const [isHidden, setIsHidden] = useState('');
     const [inputValue, setInputValue] = useState("");
     const handleSubmit = (event) => {
@@ -36,11 +36,11 @@ const CreateReceiptCard = ({isModalOpen, handlCreateRecipe, onClose}) => {
                     />
                     <Image src={cookBattle} className="w-[80px] h-[80px] mt-14" alt={'cookBattle'}/>
                     <div className="font-bold tracking-[0.1px] mt-5 text-lg">
-                        Culinary Clash 145
+                        Culinary Clash
                     </div>
                     <div className="mt-2 mb-6">Step 3: Create a recipe for a battle</div>
 
-                    <button onClick={(e) => handlCreateRecipe(e)} className="w-[150px] h-[36px] text-white bg-[#AAE06E] rounded-3xl">Create</button>
+                    <button onClick={(e) => handleCreateRecipe(e)} className="w-[150px] h-[36px] text-white bg-[#AAE06E] rounded-3xl">Create</button>
                 </div>
             </div>
         </div>

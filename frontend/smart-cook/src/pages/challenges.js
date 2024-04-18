@@ -16,7 +16,7 @@ const Challenges = () => {
     const [recipe, setRecipe] = useState({});
     const openModal = () => setModalStage(1);
     const goToSelectOpponent = () => setModalStage(2);
-    const goToCreateReciept = () => setModalStage(3);
+    const goToCreateRecipe = () => setModalStage(3);
     const closeModal = () => setModalStage(0);
     const goBack = () => setModalStage(modalStage - 1);
     const handleCreateClash = (e) => {
@@ -30,9 +30,13 @@ const Challenges = () => {
                 Authorization: 'Bearer ' + localStorage.getItem("accessToken"),
             }
         }).then(r => {
-            console.log(r);
-            window.location.href = 'clashes/recipe-make';
-        }).catch((err) => console.error(err)).finally(() => console.log('hello'))
+            console.log("clash create response", r);
+            window.location.replace(`/clashes`);
+        }).catch((err) => {
+            console.error(err)
+            setModalStage(0);
+            alert(err.response.data.non_field_errors[0]);
+        }).finally(() => console.log('hello'))
     }
 
     const [displayedLeaders, setDisplayedLeaders] = useState(8);
@@ -98,7 +102,7 @@ const Challenges = () => {
                 <SelectOpponent
                     isModalOpen={modalStage === 2}
                     onClose={closeModal}
-                    openNext={goToCreateReciept}
+                    openNext={goToCreateRecipe}
                     setOpponent={setOpponent}
                     goBack={goBack}
                 />
@@ -107,7 +111,7 @@ const Challenges = () => {
                     onClose={closeModal}
                     setRecipe={setRecipe}
                     goBack={goBack}
-                    handlCreateRecipe={handleCreateClash}
+                    handleCreateRecipe={handleCreateClash}
                 />
             </div>
 
