@@ -2,9 +2,6 @@ import MainContainer from "@/components/MainContainer";
 import Navbar from "@/components/Navbar";
 import defaultAvatar from "../../public/images/avatarka.png";
 import Image from "next/image";
-import sandwich from "../../public/images/holding-sandwich.png";
-import starAward from "../../public/images/star-award.png";
-import cook from "../../public/images/cook-award.png";
 import logout from "../../public/images/Logout.png";
 import WaitingOpponent from "@/components/modal/battle-cards/profile-battle-cards/WaitingOpponent";
 import Statistics from "@/components/profile-page/Statistics";
@@ -189,8 +186,8 @@ const Profile = () => {
                     userProfile &&
                     battle &&
                     battle[0]?.status === "pending" &&
-                    battle[0]?.initiator === userProfile?.id ? (
-                        <WaitingOpponent />
+                    battle[0]?.initiator.id === userProfile?.id ? (
+                        <WaitingOpponent title={battle[0].title} initiatorRecipe={battle[0].initiator_recipe} opponentRecipe={battle[0].opponent_recipe} time={battle[0].created_at} />
                     ) : battle &&
                       battle[0]?.status === "accepted" &&
                       battle[0]?.initiator === userProfile?.id ? (

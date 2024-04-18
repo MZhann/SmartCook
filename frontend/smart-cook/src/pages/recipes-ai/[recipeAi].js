@@ -86,7 +86,7 @@ const RecipeAi = () => {
                             </div>
                             <div className={`flex flex-row items-center gap-3`}>
                                 <Image src={people} alt={"people"}/>
-                                <p>for {recipe?.serve} people</p>
+                                <p>for {recipe?.serves} people</p>
                             </div>
                         </div>
                     </div>
