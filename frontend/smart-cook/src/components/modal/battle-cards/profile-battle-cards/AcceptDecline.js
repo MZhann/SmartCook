@@ -4,8 +4,23 @@ import BattleReceiptCard from "./BattleReceiptCard";
 import vs from "../../../../../public/images/vs.png";
 import accept from "../../../../../public/images/accept.png";
 import decline from "../../../../../public/images/decline.png";
+import axios from "axios";
+import {config} from "../../../../../config"
 
 const AcceptDecline = () => {
+
+    const handleBattleRespond = (string) => {
+        axios.patch(`${config.baseUrl}/api/v1/clashes/respond/`, {
+            status: string,
+        }, {
+            headers: {
+                Authorization: 'Bearer ' + localStorage.getItem('accessToken')
+            }
+        }).then(r => {
+            console.log(r);
+        }).catch(err => console.error(err));
+    }
+
     return (
         <div className="w-[574px] h-[546px] rounded-3xl text-white bg-[#2A293B] flex flex-col items-center justify-between">
             <Image
@@ -24,11 +39,11 @@ const AcceptDecline = () => {
                 <BattleReceiptCard />
                 <Image src={vs} alt="vs" className="w-[50px] h-[50px]" />
                 <div className="text-white w-[230px] h-[275px] rounded-xl bg-white flex flex-col items-center justify-center ">
-                    <button className="flex w-[150px] h-[36px] bg-[#AAE06E] rounded-3xl justify-center mb-2 items-center" >
+                    <button onClick={() => handleBattleRespond("accepted")} className="flex w-[150px] h-[36px] bg-[#AAE06E] rounded-3xl justify-center mb-2 items-center" >
                         Accept <Image src={accept} className="w-[30px] h-[30px] ml-3" alt="accept" />
 
                     </button>
-                    <button className="flex w-[150px] h-[36px] bg-[#FF736C] rounded-3xl mt-2 justify-center items-center">
+                    <button onClick={() => handleBattleRespond("declined")} className="flex w-[150px] h-[36px] bg-[#FF736C] rounded-3xl mt-2 justify-center items-center">
                         Decline <Image src={decline} className="w-[30px] h-[30px] ml-3" alt="decline"/>
                     </button>
                 </div>

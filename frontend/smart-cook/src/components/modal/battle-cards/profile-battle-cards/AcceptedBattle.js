@@ -7,14 +7,14 @@ import {useRouter} from "next/router";
 import {useEffect, useState} from "react";
 
 const AcceptedBattle = ({battle}) => {
-
+    console.log(battle)
     const router = useRouter()
     const [timeLeft, setTimeLeft] = useState('');
 
     useEffect(() => {
         // Function to update the time left
         const updateTimer = () => {
-            const startDate = new Date(battle?.created_at);
+            const startDate = new Date(battle[0]?.created_at);
             const endDate = new Date(Date.UTC(startDate.getUTCFullYear(), startDate.getUTCMonth(), startDate.getUTCDate(), startDate.getUTCHours() + 24, startDate.getUTCMinutes(), startDate.getUTCSeconds()));
 
             const now = new Date();
@@ -49,7 +49,7 @@ const AcceptedBattle = ({battle}) => {
                 alt="Cook Battle"
                 className="w-[50px] h-[50px] mt-5"
             />
-            <div className="text-lg mt-3">Culinary Clash 145</div>
+            <div className="text-lg mt-3">Culinary Clash {battle[0].id}</div>
             <div className="text-3xl text-white mt-2">{battle && battle?.theme}</div>
 
             <div className="w-[150px] h-[36px] bg-[#AAE06E] flex justify-center items-center text-2xl font-bold tracking-wider rounded-3xl mt-4">
@@ -57,9 +57,9 @@ const AcceptedBattle = ({battle}) => {
             </div>
 
             <div className="flex justify-between items-center w-full p-6">
-                <BattleReceiptCard />
+                <BattleReceiptCard user={battle[0].initiator} recipe={battle[0]?.initiator_recipe} />
                 <Image src={vs} alt="vs" className="w-[50px] h-[50px]" />
-                <BattleReceiptCard image={opponentReceiptImage}/>
+                <BattleReceiptCard user={battle[0].opponent} recipe={battle[0]?.opponent_recipe}/>
             </div>
         </div>
     );

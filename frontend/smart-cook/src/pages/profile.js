@@ -19,11 +19,13 @@ import AcceptedBattle from "@/components/modal/battle-cards/profile-battle-cards
 import AIchef from "../components/awards/AIchef";
 import IDidIt from "../components/awards/IDidIt";
 import Superstar from "../components/awards/Superstar";
+import AcceptDecline from "@/components/modal/battle-cards/profile-battle-cards/AcceptDecline";
 
 const Profile = () => {
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [userProfile, setUserProfile] = useState(null);
     const [battle, setBattle] = useState(null);
+
     useEffect(() => {
         const fetchBattle = async () => {
             try {
@@ -44,7 +46,7 @@ const Profile = () => {
         };
 
         fetchBattle();
-    });
+    }, []);
 
     const openModal = () => {
         setIsModalOpen(true);
@@ -191,12 +193,14 @@ const Profile = () => {
                     battle[0]?.status === "pending" &&
                     battle[0]?.initiator === userProfile?.id ? (
                         <WaitingOpponent />
-                    ) : battle &&
-                      battle[0]?.status === "accepted" &&
+                    ) : battle && battle[0]?.initiator !== userProfile?.id && battle[0]?.status ===  "pending" ? (
+                        <AcceptDecline />
+                    ) : battle && battle[0]?.status === "accepted" &&
                       battle[0]?.initiator.id === userProfile?.id ? (
+                        battle &&
                         <AcceptedBattle battle={battle} />
                     ) : battle && battle[0]?.status === "accepted" ? (
-                        <AcceptedBattle />
+                        <AcceptedBattle battle={battle} />
                     ) : battle && battle[0]?.status === "declined" ? (
                         <DeclinedBattle />
                     ) : (
