@@ -250,7 +250,20 @@ const Options = ({ ingredients }) => {
             console.error("Error posting recipe:", error);
         }
     }
-     
+    const reduceImagePromptLength = (text) => {
+        const maxLength = 998; // Maximum allowed length for the prompt text
+    
+        // Check if the input text exceeds the maximum length
+        if (text.length > maxLength) {
+            // If the text exceeds the maximum length, truncate it
+            const truncatedText = text.slice(0, maxLength); // Keep only the first 1000 characters
+            console.warn(`Image prompt text exceeded ${maxLength} characters. It has been truncated.`);
+            return truncatedText;
+        }
+    
+        // If the input text is within the allowed length, return it as is
+        return text;
+    };
 
     const handleSubmit = async () => {
         openModal();
@@ -281,7 +294,8 @@ const Options = ({ ingredients }) => {
             console.log(text);
             setResponseText(text);
 
-            const promptTextForImage = extractImagePrompt(text);
+            let promptTextForImage = extractImagePrompt(text);
+            promptTextForImage = reduceImagePromptLength(promptTextForImage);
             console.log("GENERATION IMAGE PROMT: ");
             console.log(promptTextForImage);
 

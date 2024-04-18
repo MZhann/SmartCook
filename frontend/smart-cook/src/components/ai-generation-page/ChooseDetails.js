@@ -40,6 +40,10 @@ import tomato from "../../../public/images/tomato.png";
 import water from "../../../public/images/water.png";
 import Options from "../ai-generation-page/Options";
 
+
+
+const MAX_INGREDIENTS = 5;
+
 const ChooseDetails = () => {
     const [checkboxes, setCheckboxes] = useState(Array(36).fill(false));
     const [ingredients, setIngredients] = useState([]);
@@ -49,14 +53,30 @@ const ChooseDetails = () => {
         const newCheckboxes = [...checkboxes];
         newCheckboxes[index] = !newCheckboxes[index];
         console.log(newCheckboxes[index]);
-        setCheckboxes(newCheckboxes);
 
-        if (newCheckboxes[index]) {
+
+        const selectedCount = newCheckboxes.filter((checkbox) => checkbox).length;
+        // setCheckboxes(newCheckboxes);
+
+        // if (newCheckboxes[index]) {
+        //     setIngredients((prevIngredients) => [
+        //         ...prevIngredients,
+        //         { name: name },
+        //     ]);
+        // } else {
+        //     setIngredients((prevIngredients) =>
+        //         prevIngredients.filter((ingredient) => ingredient.name !== name)
+        //     );
+        // }
+
+        if (newCheckboxes[index] && selectedCount <= MAX_INGREDIENTS) {
+            setCheckboxes(newCheckboxes);
             setIngredients((prevIngredients) => [
                 ...prevIngredients,
                 { name: name },
             ]);
-        } else {
+        } else if (!newCheckboxes[index]) {
+            setCheckboxes(newCheckboxes);
             setIngredients((prevIngredients) =>
                 prevIngredients.filter((ingredient) => ingredient.name !== name)
             );

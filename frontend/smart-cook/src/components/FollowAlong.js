@@ -17,16 +17,16 @@ const FollowAlong = () => {
                 <div className="text-xs font-bold self-start mb-2">FOLLOW ALONG</div>
                 <div className="flex space-x-5">
                     <Link href="https://pin.it/4igVo3nFH">
-                        <Image src={pinterest} alt="pinterest" />
+                        <Image width={40} src={pinterest} alt="pinterest" />
                     </Link>
                     <Link href="https://wa.me/message/ZHE74PSDF2YMP1">
-                        <Image src={whatsapp} alt="whatsapp" />
+                        <Image width={40} src={whatsapp} alt="whatsapp" />
                     </Link>
                     <Link href="https://www.instagram.com/smartcook_kz?igsh=MWY2c21nN28wMzAzOA%3D%3D&utm_source=qr">
-                        <Image src={instagram} alt="instagram" />
+                        <Image width={40} src={instagram} alt="instagram" />
                     </Link>
                     <Link href="https://www.facebook.com/profile.php?id=61558165319458">
-                        <Image src={facebook} alt="facebook" />
+                        <Image width={40} src={facebook} alt="facebook" />
                     </Link>
                 </div>
             </div>
