@@ -2,8 +2,7 @@ import {useState} from 'react';
 import Image from "next/image";
 import win from "@/../public/images/win.jpg";
 import loss from "@/../public/images/over.jpg";
-import { incrementTokenCount } from "../utils/token";
-
+import {incrementTokenCount} from "@/utils/token";
 
 
 const DynamicQuiz = ({setIsQuizStarted, isQuizStarted}) => {
@@ -98,7 +97,7 @@ const DynamicQuiz = ({setIsQuizStarted, isQuizStarted}) => {
         <div className={`w-[500px] flex-col p-4 mt-14 flex justify-around bg-white rounded-3xl`}>
             <div className={'flex justify-center w-full relative'}>
                 {!quizCompleted && <h1 className={`flex justify-center text-black text-xl mb-3`}>Quiz game</h1>}
-                <div  className={'absolute top-0 right-2 cursor-pointer'} onClick={() => setIsQuizStarted(false)}>
+                <div className={'absolute top-0 right-2 cursor-pointer'} onClick={() => setIsQuizStarted(false)}>
                     <svg width="25" height="25" viewBox="0 0 25 25" fill="none"
                          xmlns="http://www.w3.org/2000/svg">
                         <path
@@ -110,8 +109,8 @@ const DynamicQuiz = ({setIsQuizStarted, isQuizStarted}) => {
             <div className={'h-[90%] p-6 flex-col justify-center '}>
                 {quizCompleted ? (
                     <div className={'flex flex-col gap-5 w-full h-[350px] justify-center items-center text-center'}>
-                        <Image className={'flex justify-center'} src={win} width={150} height={150} alt={'win'}/>
-                        <h1 className={'text-2xl'}>Congratulations!</h1>
+                        <Image className={'flex justify-center items-center'} src={win} width={150} height={150} alt={'win'}/>
+                        <h1 className={'text-2xl text-black flex self-center'}>Congratulations!</h1>
                         <p>You have won <span className={'text-[#80CC2D]'}>+1 chance</span> for additional recipe
                             generation! Use it when you&apos;re ready.</p>
                     </div>
@@ -128,10 +127,10 @@ const DynamicQuiz = ({setIsQuizStarted, isQuizStarted}) => {
                             Start Again
                         </button>
                     </div>
-                    )}
-                </div>
-                    </div>
-                    );
-                };
+                )}
+            </div>
+        </div>
+    );
+};
 
-                export default DynamicQuiz;
+export default DynamicQuiz;

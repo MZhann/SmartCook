@@ -14,7 +14,7 @@ const YouWon = ({setIsMemoryGameHidden, setIsMiniGamesHidden}) => {
     return (
         <div
             className={
-               !isWinHidden ? `flex flex-col gap-5 w-[500px] h-[435px] bg-white rounded-2xl justify-center items-center text-center` : `hidden`
+               !isWinHidden ? `flex flex-col gap-5 text-black w-[500px] h-[435px] bg-white rounded-2xl justify-center items-center text-center` : `hidden`
             }
         >
             
@@ -25,10 +25,10 @@ const YouWon = ({setIsMemoryGameHidden, setIsMiniGamesHidden}) => {
                 height={150}
                 alt={"win"}
             />
-            <div className={"w-full flex justify-center items-center"}>
+            <div className={"w-full flex justify-center text-center items-center"}>
                 <h1
                     className={
-                        "text-2xl font-bold text-black justify-center flex"
+                        "text-2xl font-bold  text-black justify-center flex"
                     }
                 >
                     Congratulations!

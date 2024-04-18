@@ -17,7 +17,7 @@ const Chooser = ({userProfile}) => {
                 }
             });
             setPastBattles(response.data);
-            console.log(response.data); // Make sure to access the response data properly
+            console.log(response.data);
         } catch (error) {
             console.error(error);
         }
@@ -32,7 +32,7 @@ const Chooser = ({userProfile}) => {
                 }
             });
             setMyRecipes(response.data);
-            console.log(response.data); // Make sure to access the response data properly
+            console.log(response.data);
         } catch (error) {
             console.error(error);
         }
@@ -41,7 +41,7 @@ const Chooser = ({userProfile}) => {
     const handleSRClick = async () => {
         setActiveOption('Saved recipe');
         try {
-            const response = await axios.get(`${config.baseUrl}/api/v1/recipes/ai/`, {
+            const response = await axios.get(`${config.baseUrl}/api/v1/user/favorites/`, {
                 headers: {
                     Authorization: 'Bearer ' + localStorage.getItem('accessToken'),
                 }

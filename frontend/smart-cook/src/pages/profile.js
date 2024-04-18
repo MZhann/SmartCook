@@ -186,12 +186,11 @@ const Profile = () => {
                     </div>
                     {battle &&
                     userProfile &&
-                    battle &&
                     battle[0]?.status === "pending" &&
-                    battle[0]?.initiator === userProfile?.id ? (
-                        <WaitingOpponent />
+                    battle[0]?.initiator.id === userProfile?.id ? (
+                        <WaitingOpponent battle={battle[0]}/>
                     ) : battle && battle[0]?.initiator !== userProfile?.id && battle[0]?.status ===  "pending" ? (
-                        <AcceptDecline />
+                        <AcceptDecline battle={battle[0]}/>
                     ) : battle && battle[0]?.status === "accepted" &&
                       battle[0]?.initiator.id === userProfile?.id ? (
                         battle &&

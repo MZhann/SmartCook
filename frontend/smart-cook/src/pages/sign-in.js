@@ -80,16 +80,16 @@ const SignIn = () => {
             <Image
                 src={cook}
                 alt="cook"
-                className="w-[350px] mt-6 mb-8 absolute left-20 top-72"
+                className="w-[350px] mt-6 mb-8 hidden lg:block absolute left-20 top-72"
             />
             <Image
                 src={cooker}
                 alt="cook"
-                className="w-[120px] mt-6 mb-8 absolute right-52 top-72"
+                className="w-[120px] mt-6 hidden lg:block mb-8 absolute right-52 top-72"
             />
             <Image src={logo} alt="logo" className="w-[300px] mt-6 mb-8" />
-            <div className="w-[450px] py-8 bg-white rounded-xl flex justify-center">
-                <div className="w-8/12 text-black flex flex-col">
+            <div className="w-[350px] sm:w-[450px] py-8 bg-white z-10 rounded-xl flex justify-center">
+                <div className="w-10/12 sm:w-8/12 text-black flex flex-col">
                     <h1 className="text-lg text-black font-bold">Log in</h1>
                     <p className="text-xs mt-1">
                         New user?

@@ -22,8 +22,8 @@ const Main = () => {
 
     return (
         <MainContainer>
-            <Image src={bg} className="absolute w-2/3 right-0 top-0 z-0" alt="background"/>
-            <div className=" w-full max-w-[1195px] relative flex flex-col ">
+            <Image src={bg} className="hidden sm:block absolute w-2/3 right-0 top-0 z-0" alt="background"/>
+            <div className="px-3 sm:px-0 w-full max-w-[1195px] relative flex flex-col ">
                 <Navbar/>
                 <WelcomeTry/>
                 <RecentlyAdded/>

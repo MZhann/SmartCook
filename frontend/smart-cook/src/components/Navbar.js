@@ -76,7 +76,7 @@ const Navbar = () => {
                 />
             </Link>
             <div
-                className={`flex space-x-5 ${
+                className={`sm:flex hidden  space-x-5 ${
                     router.pathname === "/" ||
                     router.pathname === "/profile" ||
                     router.pathname === "/challenges" ||

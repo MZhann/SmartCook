@@ -10,9 +10,9 @@ import Link from "next/link";
 const WelcomeTry = () => {
     return (
         <div className="flex items-center w-full justify-between relative">
-            <Image src={cheese} alt="cheese"   className="absolute top-full right-[40%]"/>
-            <Image src={avocado} alt="avocado" className="absolute top-14 left-[45%]"/>
-            <Image src={oil} alt="oil"         className="absolute top-[50%] left-[45%]"/>
+            <Image src={cheese} alt="cheese"   className="absolute hidden sm:block top-full right-[40%]"/>
+            <Image src={avocado} alt="avocado" className="absolute hidden sm:block top-14 left-[45%]"/>
+            <Image src={oil} alt="oil"         className="absolute hidden sm:block top-[50%] left-[45%]"/>
             <div className="mt-10">
                 <div className="text-white text-5xl tracking-wide">Are you ready for <br></br> culinary challenges?</div>
                 <div className="text-white text-xl mt-5 tracking-wide">Welcome to our unique culinary portal<br></br> where taste, creativity and fun meet!</div>
@@ -22,7 +22,7 @@ const WelcomeTry = () => {
                 </div>
             </div>
             <div>
-                <Image className="w-[500px]" src={pan} alt="pan" />
+                <Image className="w-[500px] hidden sm:block" src={pan} alt="pan" />
             </div>
         </div>
     )

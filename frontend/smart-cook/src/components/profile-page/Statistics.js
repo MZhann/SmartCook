@@ -13,16 +13,16 @@ const Statistics = () => {
             <div className={'flex flex-col text-white gap-2 mt-6'}>
                 <div className={'flex flex-row gap-3 items-center'}>
                     <Image src={cookBattle} alt={'cookBattle'} className={'w-[38px] h-[38px]'}/>
-                    <div className={`flex flex-row items-center`}><span className={'text-[20px] font-[600]'}>10</span>&nbsp;<h1>battles</h1></div>
+                    <div className={`flex flex-row items-center`}><span className={'text-[20px] font-[600]'}>10</span>&nbsp;<span>battles</span></div>
                 </div>
                 <div className={'flex flex-row gap-3 items-center'}>
                     <Image src={trophy} alt={'cookBattle'} className={'w-[38px] h-[38px]'}/>
-                    <div className={`flex flex-row items-center`}><span className={'text-[20px] font-[600]'}>10</span>&nbsp;<h1>battles</h1></div>
+                    <div className={`flex flex-row items-center`}><span className={'text-[20px] font-[600]'}>10</span>&nbsp;<span>battles</span></div>
                 </div>
                 <div className={'flex flex-row gap-3 items-center'}>
                     <div className={'w-[38px]'}><Image src={rank} alt={'cookBattle'}
                                                        className={'w-[35.2px] h-[35.2px]'}/></div>
-                    <div className={`flex flex-row items-center`}><span className={'text-[20px] font-[600]'}>10</span>&nbsp;<h1>battles</h1></div>
+                    <div className={`flex flex-row items-center`}><span className={'text-[20px] font-[600]'}>10</span>&nbsp;<span>battles</span></div>
                 </div>
             </div>
             <Link href={'/challenges'}

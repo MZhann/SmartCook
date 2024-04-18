@@ -102,20 +102,20 @@ const SignUp = () => {
     };
 
     return (
-        <div className="w-full flex flex-col items-center bg-[#2A293B] min-h-screen ">
+        <div className="w-full flex -z-10 flex-col items-center bg-[#2A293B] min-h-screen ">
             <Image
                 src={cook}
                 alt="cook"
-                className="w-[350px] mt-6 mb-8 absolute left-20 top-72"
+                className="w-[350px] mt-6 mb-8 hidden lg:block absolute left-20 top-72"
             />
             <Image
                 src={cooker}
                 alt="cook"
-                className="w-[120px] mt-6 mb-8 absolute right-52 top-72"
+                className="w-[120px] mt-6 mb-8 hidden lg:block absolute right-52 top-72"
             />
             <Image src={logo} alt="logo" className="w-[300px] mt-6 mb-8" />
-            <div className="w-[450px] text-black py-8 bg-white rounded-xl flex justify-center">
-                <div className="w-8/12 flex flex-col">
+            <div className="w-[350px] sm:w-[450px] text-black py-8 bg-white z-50 rounded-xl flex justify-center">
+                <div className="w-10/12 sm:w-8/12 flex flex-col">
                     <h1 className="text-lg text-black font-bold">Sign up</h1>
                     <p className="text-xs mt-1">
                         Already have an account?

@@ -34,7 +34,7 @@ const Footer = () => {
                     <div className="text-xs">Almaty, KZ</div>
                 </div>
             </div>
-            <div className="flex space-x-96 text-white mt-14 mb-5">
+            <div className="flex sm:space-x-96 text-white mt-14 mb-5">
                 <div>SmartCook</div>
                 <div className="text-xs">2024 © All rights reserved</div>
             </div>
