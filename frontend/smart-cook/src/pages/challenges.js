@@ -39,7 +39,7 @@ const Challenges = () => {
 
     useEffect(() => {
         const fetchData = () => {
-            axios.get('https://web-production-ad96.up.railway.app/api/v1/clashes/all')
+            axios.get('https://web-production-ad96.up.railway.app/api/v1/clashes/all/')
                 .then((r) => {
                         setClashes(r.data);
                     }
