@@ -1,10 +1,9 @@
 import React, {useState} from "react";
 import Image from "next/image";
-import defaultFood from "../../public/images/defaultFood.png";
+import defaultFood from "@/../public/images/defaultFood.png";
 import Like from "@/components/Like";
 import axios from "axios";
-import {config} from "../../config";
-import aiLogo from "../../public/images/ai-logo.png";
+import aiLogo from "@/../public/images/ai-logo.png";
 import {useRouter} from "next/router";
 import Link from "next/link";
 
@@ -15,8 +14,6 @@ const Recipe = ({recipe}) => {
 
 
     const handleFavClick = async () => {
-        const url = `${config.baseUrl}/api/v1/recipes/${recipe.id}/add_to_favorites/`;
-
         try {
             const config = {
                 headers: {
@@ -54,7 +51,7 @@ const Recipe = ({recipe}) => {
                      onMouseLeave={() => setIsHovered(false)}
                      onClick={(event) => {
                          event.stopPropagation();
-                         handleFavClick()
+                         handleFavClick();
                      }}
                 >
                     <svg

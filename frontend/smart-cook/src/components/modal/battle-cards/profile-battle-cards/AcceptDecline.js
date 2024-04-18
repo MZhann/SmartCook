@@ -7,7 +7,7 @@ import decline from "../../../../../public/images/decline.png";
 import axios from "axios";
 import {config} from "../../../../../config"
 
-const AcceptDecline = () => {
+const AcceptDecline = ({battle}) => {
 
     const handleBattleRespond = (string) => {
         axios.patch(`${config.baseUrl}/api/v1/clashes/respond/`, {
@@ -28,15 +28,15 @@ const AcceptDecline = () => {
                 alt="Cook Battle"
                 className="w-[50px] h-[50px] mt-5"
             />
-            <div className="text-lg mt-3">Culinary Clash 145</div>
-            <div className="text-3xl text-white mt-2">Salads with fruits</div>
+            <div className="text-lg mt-3">Culinary Clash {battle.id}</div>
+            <div className="text-3xl text-white mt-2">{battle.theme}</div>
 
             <div className="w-[150px] h-[36px] bg-[#AAE06E] flex justify-center items-center text-2xl font-bold tracking-wider rounded-3xl mt-4">
                 00:00
             </div>
 
             <div className="flex justify-between items-center w-full p-6">
-                <BattleReceiptCard />
+                <BattleReceiptCard user={battle.initiator}/>
                 <Image src={vs} alt="vs" className="w-[50px] h-[50px]" />
                 <div className="text-white w-[230px] h-[275px] rounded-xl bg-white flex flex-col items-center justify-center ">
                     <button onClick={() => handleBattleRespond("accepted")} className="flex w-[150px] h-[36px] bg-[#AAE06E] rounded-3xl justify-center mb-2 items-center" >

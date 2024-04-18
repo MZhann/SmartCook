@@ -53,7 +53,7 @@ const BattleReceiptCard = ({ image, win, user, recipe }) => {
                 </div>
             </div>
             <div className="text-black text-sm ml-3 tracking-wider">
-                {recipe?.title || 'recipe'}
+                {recipe?.title || 'No recipe yet'}
             </div>
             <div className="flex justify-center ">
                 <Like count={recipe?.likes_count}/>

@@ -44,17 +44,16 @@ const ForgotPassword = () => {
             <Image
                 src={cook}
                 alt="cook"
-                className="w-[350px] mt-6 mb-8 absolute left-20 top-72"
+                className="w-[350px] mt-6 mb-8 hidden -z-10 lg:block absolute left-20 top-72"
             />
             <Image
                 src={cooker}
                 alt="cook"
-                className="w-[120px] mt-6 mb-8 absolute right-52 top-72"
+                className="w-[120px] mt-6 mb-8 hidden -z-10 lg:block absolute right-52 top-72"
             />
-
             <Image src={logo} alt="logo" className="w-[300px] mt-6 mb-24" />
-            <div className="w-[450px] py-4 bg-white rounded-xl flex justify-center">
-                <div className="w-8/12 mt-8 flex flex-col">
+            <div className="sm:w-[450px] w-[350px] py-4 bg-white rounded-xl flex justify-center">
+                <div className="sm:w-8/12 w-10/12 mt-8 flex flex-col">
                     <h1 className="text-2xl font-bold">Forgot password</h1>
                     <p className="text-xs mt-1">
                         New user?
@@ -65,17 +64,17 @@ const ForgotPassword = () => {
                             &nbsp;Sign up&nbsp;
                         </Link>
                     </p>
-
+                    <p className="text-sm mt-5">Email</p>
+                    <input
+                        id="email"
+                        className="w-full rounded-3xl border-2 h-10 shadow-gray-500 text-xs p-3 mt-2"
+                        placeholder="your.email@gmail.com"
+                        type="email"
+                        onChange={(e) => setEmail(e.target.value)}
+                    />
                     {inputs === 'email' ?
                         <>
-                            <p className="text-sm mt-5">Email</p>
-                            <input
-                                id="email"
-                                className="w-full rounded-3xl border-2 h-10 shadow-gray-500 text-xs p-3 mt-2"
-                                placeholder="your.email@gmail.com"
-                                type="email"
-                                onChange={(e) => setEmail(e.target.value)}
-                            />
+
                         </> :
                         <>
                             <p className="text-sm mt-5">Code</p>
