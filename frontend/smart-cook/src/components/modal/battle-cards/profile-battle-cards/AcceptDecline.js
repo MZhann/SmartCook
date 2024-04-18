@@ -18,7 +18,12 @@ const AcceptDecline = ({battle}) => {
             }
         }).then(r => {
             console.log(r);
+            if (string === 'accepted') {
+                window.location.replace("opponent-recipe")
+            }
         }).catch(err => console.error(err));
+
+
     }
 
     return (

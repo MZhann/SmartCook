@@ -4,8 +4,14 @@ import avatar from "../../../../../public/images/edit-profile.png";
 import unlike from "../../../../../public/images/unlike.svg";
 import trophy from "../../../../../public/images/winTrophy.png";
 import Like from "@/components/Like";
+import {useEffect} from "react";
 
 const BattleReceiptCard = ({ image, win, user, recipe }) => {
+
+    useEffect(() => {
+        console.log(recipe);
+    }, [])
+
     return (
         <div className="w-[230px] h-[275px] rounded-xl bg-white">
             {win ? (
@@ -53,7 +59,7 @@ const BattleReceiptCard = ({ image, win, user, recipe }) => {
                 </div>
             </div>
             <div className="text-black text-sm ml-3 tracking-wider">
-                {recipe?.title || 'No recipe yet'}
+                {!recipe?.title ? 'No recipe yet' : recipe?.title}
             </div>
             <div className="flex justify-center ">
                 <Like count={recipe?.likes_count}/>

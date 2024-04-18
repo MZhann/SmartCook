@@ -24,7 +24,7 @@ const SelectTitleCard = ({isModalOpen, onClose, openNext, setTitle}) => {
                 <Image src={close} alt="close" width={24} height={24} className="cursor-pointer absolute top-6 right-6" onClick={onClose} />
                 <Image src={cookBattle} alt="cookBattle" width={80} height={80} className="mt-14" />
                 <div className="font-bold tracking-[0.1px] mt-5 text-lg">
-                    Culinary Clash 145
+                    Culinary Clash
                 </div>
                 <div className="mt-2 mb-6">Step 1: Select a mission for the battle</div>
                 <form onSubmit={handleSubmit} className="flex w-full flex-col items-center mt-6">

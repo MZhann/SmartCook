@@ -65,7 +65,7 @@ const SelectOpponent = ({ isModalOpen, onClose, openNext, setOpponent, goBack })
                            className="cursor-pointer absolute top-6 right-6" onClick={onClose}/>
                     <Image src={cookBattle} alt="cookBattle" width={80} height={80} className="mt-14"/>
                     <div className="font-bold tracking-[0.1px] mt-5 text-lg">
-                        Culinary Clash 145
+                        Culinary Clash
                     </div>
                     <div className="mt-2 mb-6">Step 2: Choose your opponent</div>
                     <form className="flex">
