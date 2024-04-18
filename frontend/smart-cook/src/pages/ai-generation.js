@@ -11,7 +11,7 @@ import ChooseDetails from "@/components/ai-generation-page/ChooseDetails"
 const Main = () => {
     return (
         <MainContainer>
-            <div className=" w-full max-w-[1195px] relative flex flex-col">
+            <div className="pl-2 pr-2 md:p-0 w-full max-w-[1195px] relative flex flex-col">
                 <Navbar textcolor={"white"} loggedin={true}/>
                 <FoodAI />
                 <ChooseDetails />

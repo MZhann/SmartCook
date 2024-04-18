@@ -85,7 +85,7 @@ const ChooseDetails = () => {
 
     return (
         <div>
-            <div className="w-full flex flex-wrap justify-between">
+            <div className="w-full flex flex-wrap justify-between md: px-3">
                 <Ingredient
                     image={apple}
                     name={"apple"}

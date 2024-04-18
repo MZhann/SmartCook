@@ -23,12 +23,12 @@ const CreatingReceipt = ({ isLoading, isModalOpen, onClose, closeModal, recipeId
 
     return (
         <div
-            className={`fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50 ${
+            className={`fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50 mx-2  ${
                 isModalOpen ? "" : "hidden"
             }`}
         >
             {!isHidden && (
-                <div className="w-[500px] h-[428px] bg-white rounded-xl mt-6 relative flex flex-col items-center">
+                <div className="w-[500px] bg-white rounded-xl mt-6 relative flex flex-col items-center pb-5">
                     <Image
                         src={close}
                         onClick={handleClose}
@@ -75,7 +75,7 @@ const CreatingReceipt = ({ isLoading, isModalOpen, onClose, closeModal, recipeId
                     </div>
                 </div>
             )}
-            {!isGamesHidden && <MiniGames setIsHidden={setIsHidden} isGamesHidden={isGamesHidden}  setIsGamesHidden={setIsGamesHidden}/>}
+            {!isGamesHidden && <MiniGames setIsHidden={setIsHidden} isGamesHidden={isGamesHidden}  closeModal={closeModal} setIsGamesHidden={setIsGamesHidden}/>}
         </div>
     );
 };

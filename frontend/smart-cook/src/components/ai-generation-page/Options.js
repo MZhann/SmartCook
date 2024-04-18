@@ -332,11 +332,11 @@ const Options = ({ ingredients }) => {
                     <MiniGames setIsMiniGamesOpen={setIsMiniGamesOpen}/>
                 </div>
             )}
-            <div className="w-full h-[328px] rounded-3xl bg-white mt-20 p-4">
-                <div>
+            <div className="w-full rounded-3xl bg-white mt-20 p-4 md:w-[95%]">
+                <div className="flex flex-col items-center">
                     <div className="font-bold text-3xl">Options</div>
                     <div>You can use these options and filter the result</div>
-                    <div className="flex flex-wrap justify-between mt-14">
+                    <div className="flex flex-wrap justify-center mt-14 md:justify-evenly ">
                         <div>
                             <div>What dish you want to cook?</div>
                             <Dropdown
@@ -353,7 +353,7 @@ const Options = ({ ingredients }) => {
                             />
                         </div>
                         <div>
-                            <div>Are you a good cook?</div>
+                            <div className="mt-5 md:mt-0">Are you a good cook?</div>
                             <Dropdown
                                 options={["Novice", "Intermediate", "Expert"]}
                                 placeholder="Select an option"
@@ -361,7 +361,7 @@ const Options = ({ ingredients }) => {
                             />
                         </div>
                         <div>
-                            <div>Type of dish</div>
+                            <div className="mt-5 md:mt-5 xl:mt-0">Type of dish</div>
                             {/* Type of dish: Vegetarian, Vegan, Healthy, Hearty, Low Carb */}
                             <Dropdown
                                 options={[
@@ -395,20 +395,20 @@ const Options = ({ ingredients }) => {
                             />
                         </div>
                         <div className="mt-5">
-                            <div>Extra ingredients</div>
+                            <div className="mb-2">Extra ingredients</div>
                             <input
                                 type="text"
-                                className="rounded-3xl border-2 border-gray-500 p-2 w-[344px] h-[42px]"
+                                className="rounded-3xl border-2 border-gray-500 p-2 w-[344px] sm:w-[540px] md:w-[344px] lg:w-[375px] xl:w-[344px] h-[42px]"
                                 placeholder="Enter extra ingredients"
                                 value={extraIngredients}
                                 onChange={handleExtraIngredientsChange}
                             />
                         </div>
-                        <div className="mt-5">
-                            <div>Ban ingredients</div>
+                        <div className="mt-5 mb-2">
+                            <div className=" mb-2">Ban ingredients</div>
                             <input
                                 type="text"
-                                className="rounded-3xl border-2 border-gray-500 p-2 w-[344px] h-[42px]"
+                                className="rounded-3xl border-2 border-gray-500 p-2 w-[344px] sm:w-[540px] md:w-[344px] lg:w-[375px] xl:w-[344px] h-[42px]"
                                 placeholder="Enter banned ingredients"
                                 value={banIngredients}
                                 onChange={handleBanIngredientsChange}
@@ -418,7 +418,7 @@ const Options = ({ ingredients }) => {
                 </div>
             </div>
             <button
-                className="flex justify-center items-center mt-10 px-4 py-2 bg-[#AAE06E] w-[450px] h-[60px] rounded-full text-white hover:bg-green-400"
+                className="flex justify-center items-center mt-10 px-4 py-2 bg-[#AAE06E] w-full h-[50px]  md:w-[450px] md:h-[60px] rounded-full text-white hover:bg-green-400"
                 onClick={handleGenerateReceipt}
             >
                 <Image
