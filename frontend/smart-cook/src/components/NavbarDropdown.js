@@ -12,7 +12,7 @@ const NavbarDropdown = ({ photo, name, surname, score }) => {
     const avatar = null;
 
     return (
-        <div className="w-[333px] h-[281px] text-white flex flex-col items-center bg-[#2A293B] absolute top-14 right-0 rounded-2xl">
+        <div className="w-[333px] h-[281px] text-white flex flex-col z-50 items-center bg-gray-500 absolute top-10 right-0 rounded-2xl">
             <div className="w-[285px] flex flex-col ">
                 <Link href={"/profile"} className="flex mt-10 ">
                     <div className="w-[285px] h-[50px] rounded-full flex space-x-5">
@@ -74,8 +74,6 @@ const NavbarDropdown = ({ photo, name, surname, score }) => {
                 <Link
                     onClick={() => {
                         localStorage.removeItem("accessToken");
-
-                        // Reload the page
                         window.location.reload();
                     }}
                     className="self-start w-[282px] text-start py-1 rounded-xl hover:bg-slate-500 "

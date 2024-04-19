@@ -53,6 +53,8 @@ const Profile = () => {
         setIsModalOpen(false);
     };
 
+
+
     useEffect(() => {
         const fetchProfile = () => {
             try {
@@ -80,24 +82,24 @@ const Profile = () => {
 
     return (
         <MainContainer>
-            <div className="w-full max-w-[1195px] relative flex flex-col">
+            <div className="px-4 md:px-0 w-full max-w-[1195px] relative flex flex-col">
                 <Navbar />
                 <div
                     className={`flex justify-center items-center w-full text-black text-[40px] font-[600] mt-7`}
                 >
                     <h1 className={"text-black"}>Profile</h1>
                 </div>
-                <div className={"flex flex-row justify-between mt-4"}>
+                <div className={"flex flex-col space-y-2 lg:flex-row justify-between mt-4"}>
                     <div
                         className={
-                            "w-[278px] h-[546px] px-6 py-5 bg-[#2A293B] rounded-3xl"
+                            "self-center flex flex-col justify-center items-center w-full md:w-[278px] h-[546px] px-6 py-5 bg-[#2A293B] rounded-3xl"
                         }
                     >
-                        <div className={`w-full`}>
+                        <div className={`w-full flex flex-col justify-center items-center`}>
                             {userProfile && userProfile.photo ? (
                                 <Image
                                     className={
-                                        "rounded-full object-fit border-white border-[3px] h-[101px] w-[101px]"
+                                        "rounded-full sm:self-start object-fit border-white border-[3px] h-[101px] w-[101px]"
                                     }
                                     src={userProfile && userProfile?.photo}
                                     width={101}
@@ -107,7 +109,7 @@ const Profile = () => {
                             ) : (
                                 <Image
                                     className={
-                                        "rounded-full object-fit border-white border-[3px] h-[101px] w-[101px]"
+                                        "rounded-full sm:self-start object-fit border-white border-[3px] h-[101px] w-[101px]"
                                     }
                                     src={defaultAvatar}
                                     alt={"default"}
@@ -117,7 +119,7 @@ const Profile = () => {
                         <div className={"w-full flex-col flex gap-0.5 mt-2"}>
                             <div>
                                 <h1
-                                    className={`text-white text-[20px] font-[700]`}
+                                    className={`text-white text-center sm:text-start text-[20px] font-[700]`}
                                 >
                                     {userProfile?.first_name}{" "}
                                     {userProfile?.last_name}
@@ -125,13 +127,13 @@ const Profile = () => {
                             </div>
                             <div>
                                 <p
-                                    className={`text-white text-[12px] font-[400]`}
+                                    className={`text-white text-center sm:text-start text-[12px] font-[400]`}
                                 >
                                     {userProfile?.email}
                                 </p>
                             </div>
                         </div>
-                        <div className={"mt-7"}>
+                        <div className={"mt-7 sm:self-start"}>
                             <div>
                                 <p
                                     className={`text-white text-[12px] font-[600]`}
@@ -149,7 +151,7 @@ const Profile = () => {
                             <button
                                 onClick={openModal}
                                 className={
-                                    "flex bg-white w-[230px] h-[36px] rounded-3xl justify-center items-center"
+                                    "flex bg-white w-[230px] self-center h-[36px] rounded-3xl justify-center items-center"
                                 }
                             >
                                 <svg
@@ -164,13 +166,13 @@ const Profile = () => {
                                         fill="#191919"
                                     />
                                 </svg>
-                                <span className={"ml-2 text-[16px] font-[500]"}>
+                                <span className={"ml-2 text-[16px]  font-[500]"}>
                                     Edit profile
                                 </span>
                             </button>
                             <button
                                 className={
-                                    "flex bg-white w-[230px] h-[36px] rounded-3xl justify-center items-center"
+                                    "flex bg-white w-[230px] self-center h-[36px] rounded-3xl justify-center items-center"
                                 }
                             >
                                 <Image
@@ -202,7 +204,7 @@ const Profile = () => {
                     ) : (
                         <NoBattle />
                     )}
-                    <Statistics />
+                    <Statistics user={userProfile}/>
                     <EditProfile
                         userProfile={userProfile}
                         isModalOpen={isModalOpen}

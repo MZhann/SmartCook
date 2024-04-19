@@ -41,7 +41,7 @@ const AcceptDecline = ({battle}) => {
             </div>
 
             <div className="flex justify-between items-center w-full p-6">
-                <BattleReceiptCard user={battle.initiator}/>
+                <BattleReceiptCard recipe={battle.initiator_recipe} user={battle.initiator}/>
                 <Image src={vs} alt="vs" className="w-[50px] h-[50px]" />
                 <div className="text-white w-[230px] h-[275px] rounded-xl bg-white flex flex-col items-center justify-center ">
                     <button onClick={() => handleBattleRespond("accepted")} className="flex w-[150px] h-[36px] bg-[#AAE06E] rounded-3xl justify-center mb-2 items-center" >

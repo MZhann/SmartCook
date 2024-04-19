@@ -9,11 +9,24 @@ import Link from "next/link";
 const AllReceipts = () => {
     const [recipes, setRecipes] = useState(null);
     const [displayedRecipes, setDisplayedRecipes] = useState(8); // Initial number of recipes displayed
-
+    const [searchValue, setSearchValue] = useState('');
     const loadMoreRecipes = () => {
         setDisplayedRecipes(prevCount => prevCount + 4); // Increment by 4 each time the button is clicked
     };
 
+    const handleSearch = async () => {
+        try {
+            const data = await axios.get(`${config.baseUrl}/api/v1/all-recipes/`, {
+                params: {
+                    search: searchValue,
+                }
+            });
+            setRecipes(data.data);
+            console.log(recipes);
+        } catch (error) {
+            console.error(error);
+        }
+    }
 
     useEffect(() => {
         fetchData();
@@ -21,7 +34,11 @@ const AllReceipts = () => {
 
     const fetchData = async () => {
         try {
-            const data = await axios.get(`${config.baseUrl}/api/v1/all-recipes/`);
+            const data = await axios.get(`${config.baseUrl}/api/v1/all-recipes/`, {
+                params: {
+                    search: searchValue,
+                }
+            });
             setRecipes(data.data);
             console.log(recipes);
         } catch (error) {
@@ -50,8 +67,11 @@ const AllReceipts = () => {
                         type="text"
                         className="px-4 py-2 rounded-full border border-gray-300 focus:outline-none w-1/2 md:w-[375px] h-[42px]"
                         placeholder="Search"
+                        value={searchValue}
+                        onChange={(e) => setSearchValue(e.target.value)}
                     />
                     <button
+                        onClick={handleSearch}
                         className="px-4 py-2 rounded-full bg-[#AAE06E] text-white hover:bg-green-600 focus:outline-none w-[135px] h-[42px]">
                         Search
                     </button>

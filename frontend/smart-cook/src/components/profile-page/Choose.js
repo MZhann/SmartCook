@@ -56,9 +56,9 @@ const Chooser = ({userProfile}) => {
     return (
         <>
             <div
-                className={'w-[1196px] transition-all duration-500 h-[97px] py-[24px] px-[40px] flex flex-row bg-[#2A293B] rounded-3xl mt-6'}>
+                className={'w-full lg:w-[1196px] space-x-4 transition-all duration-500 h-[97px] py-[24px] px-[40px] flex flex-row bg-[#2A293B] rounded-3xl mt-6'}>
                 <div
-                    className={`cursor-pointer px-[38px] w-[220px] h-[49px]  text-[24px] font-[500] flex justify-center items-center rounded-3xl transition-all duration-500 ${
+                    className={`cursor-pointer p-3 text-center md:px-[38px] md:w-[220px] h-[49px] md:text-[24px] font-[500] flex justify-center items-center rounded-3xl transition-all duration-500 ${
                         activeOption === 'Past battles' ? 'bg-gradient-to-r from-[#AAE06E] to-[#CDE7B1] text-[#2A293B]' : 'text-white'
                     }`}
                     onClick={handlePBClick}
@@ -66,7 +66,7 @@ const Chooser = ({userProfile}) => {
                     Past battles
                 </div>
                 <div
-                    className={`cursor-pointer px-[38px] h-[49px] text-[#2A293B] text-[24px] font-[500] flex justify-center items-center rounded-3xl transition-all duration-500 ${
+                    className={`cursor-pointer p-3 text-center md:px-[38px] h-[49px] text-[#2A293B] md:text-[24px] font-[500] flex justify-center items-center rounded-3xl transition-all duration-500 ${
                         activeOption === 'My recipe' ? 'bg-gradient-to-r from-[#AAE06E] to-[#CDE7B1] text-[#2A293B]' : 'text-white'
                     }`}
                     onClick={handleMRClick}
@@ -74,7 +74,7 @@ const Chooser = ({userProfile}) => {
                     My recipe
                 </div>
                 <div
-                    className={`cursor-pointer px-[38px] h-[49px] text-[#2A293B] text-[24px] font-[500] flex justify-center items-center rounded-3xl transition-all duration-500 ${
+                    className={`cursor-pointer p-3 text-center md:px-[38px] h-[49px] text-[#2A293B] md:text-[24px] font-[500] flex justify-center items-center rounded-3xl transition-all duration-500 ${
                         activeOption === 'Saved recipe' ? 'bg-gradient-to-r from-[#AAE06E] to-[#CDE7B1] text-[#2A293B]' : 'text-white'
                     }`}
                     onClick={handleSRClick}

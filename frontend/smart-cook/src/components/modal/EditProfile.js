@@ -119,7 +119,7 @@ const EditProfile = ({isModalOpen, onClose, closeModal, userProfile}) => {
         >
             <div className="w-[408px] p-[32px] bg-white rounded-xl mt-6 relative flex flex-col items-center">
                 <div className={'w-full flex flex-row justify-between'}>
-                    <h1 className={'text-[28px] text-black font-[600]'}>Edit page</h1>
+                    <h1 className={'text-[28px] text-black font-[600]'}>Edit profile</h1>
                     <div className={'justify-center items-center flex'}>
                         <svg onClick={handleClose} width="16" height="16" viewBox="0 0 16 16" fill="none"
                              xmlns="http://www.w3.org/2000/svg">
@@ -211,13 +211,6 @@ const EditProfile = ({isModalOpen, onClose, closeModal, userProfile}) => {
                         type="password"
                         onChange={(e) => setRepeatPassword(e.target.value)}
                     />
-                    <Link
-                        passHref={true}
-                        className="text-[#80CC2D] text-xs mt-2 self-end border-b-2 border-white cursor-pointer hover:border-b-[#AAE06E]"
-                        href={`/forgot-password`}
-                    >
-                        Forgot password?
-                    </Link>
                     <button
                         className={`text-white bg-[#AAE06E] w-full h-10 rounded-3xl mt-5 ${
                             errorMessage && "disabled"

@@ -43,20 +43,20 @@ const AcceptedBattle = ({battle}) => {
         return () => clearInterval(intervalId);
     }, [battle?.created_at]);
     return (
-        <div className={`${router.pathname === '/challenges' && 'mt-4'} w-[574px] h-[546px] rounded-3xl text-white bg-[#2A293B] flex flex-col items-center justify-between`}>
+        <div className={`${router.pathname === '/challenges' && 'mt-4'} max-w-[574px] min-h-[546px] rounded-3xl text-white bg-[#2A293B] flex flex-col items-center justify-between`}>
             <Image
                 src={cookBattle}
                 alt="Cook Battle"
                 className="w-[50px] h-[50px] mt-5"
             />
             <div className="text-lg mt-3">Culinary Clash {battle[0].id}</div>
-            <div className="text-3xl text-white mt-2">{battle && battle?.theme}</div>
+            <div className="text-3xl text-white mt-2">{battle[0]?.theme}</div>
 
             <div className="w-[150px] h-[36px] bg-[#AAE06E] flex justify-center items-center text-2xl font-bold tracking-wider rounded-3xl mt-4">
                 {timeLeft}
             </div>
 
-            <div className="flex justify-between items-center w-full p-6">
+            <div className="flex flex-col md:flex-row justify-between items-center w-full p-6">
                 <BattleReceiptCard user={battle[0].initiator} recipe={battle[0]?.initiator_recipe} />
                 <Image src={vs} alt="vs" className="w-[50px] h-[50px]" />
                 <BattleReceiptCard user={battle[0].opponent} recipe={battle[0]?.opponent_recipe}/>

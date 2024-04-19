@@ -2,7 +2,7 @@ import MainContainer from "@/components/MainContainer";
 import Navbar from "@/components/Navbar";
 import instax from "@/../public/images/instax.jpg";
 import trash from "@/../public/images/trash.jpg";
-import React, {useEffect, useState} from "react";
+import React, {useState} from "react";
 import Image from "next/image";
 import axios from "axios";
 import Footer from "@/components/Footer";
@@ -136,7 +136,7 @@ const RecipeMake = () => {
 
         return (
             <MainContainer>
-                <div className="w-full max-w-[1195px] h-2000vh relative flex flex-col">
+                <div className="px-4 md:px-0 w-full max-w-[1195px] h-2000vh relative flex flex-col">
                     <Navbar/>
                     <div className={"flex w-full justify-center"}>
                         <div className="flex justify-center items-center flex-col w-[750px]">
@@ -155,7 +155,7 @@ const RecipeMake = () => {
                                 </p>
                             </div>
                             <div
-                                className="w-[750px] relative mt-[50px] h-[400px] bg-white flex justify-center items-center rounded-lg">
+                                className="sm:w-[750px] w-[350px] relative mt-[50px] h-[400px] bg-white flex justify-center items-center rounded-lg">
                                 <input
                                     className={'absolute h-[250px] w-[250px] cursor-pointer bg-opacity-0 opacity-0'}
                                     type="file"
@@ -171,11 +171,9 @@ const RecipeMake = () => {
                                 ) : (
                                     <div>
                                         <Image
-                                            className="ml-[18px]"
+                                            className="ml-[18px] w-[250px] h-[250px]"
                                             src={instax}
                                             alt="instax"
-                                            width={250}
-                                            height={250}
                                         />
                                         <h1 className="mt-5 text-black text-[24px]">
                                             Upload finished food photo
@@ -183,7 +181,7 @@ const RecipeMake = () => {
                                     </div>
                                 )}
                             </div>
-                            <div className="w-[750px] mt-[30px] p-[24px]  bg-white flex flex-col rounded-lg ">
+                            <div className="sm:w-[750px] w-[350px] mt-[30px] p-[24px]  bg-white flex flex-col rounded-lg ">
                                 <h1 className={"text-[24px] text-[#2A293B]"}>Dish details</h1>
                                 <div className="">
                                     <div className={"flex flex-col"}>
@@ -274,7 +272,7 @@ const RecipeMake = () => {
                                     </div>
                                 </div>
                             </div>
-                            <div className="w-[750px] mt-[30px] p-[24px] bg-white flex flex-col rounded-lg ">
+                            <div className="sm:w-[750px] w-[350px] mt-[30px] p-[24px] bg-white flex flex-col rounded-lg ">
                                 <h1 className={"text-[24px] text-[#2A293B]"}>Ingredients</h1>
                                 <div className="">
                                     <div className={"flex flex-col"}>
@@ -302,8 +300,7 @@ const RecipeMake = () => {
                                                     />
                                                     <Image
                                                         src={trash}
-                                                        height={24}
-                                                        width={24}
+                                                        className={'w-[24px] h-[24px] cursor-pointer'}
                                                         alt={"trash"}
                                                         onClick={() =>
                                                             handleRemoveIngredient(
@@ -333,7 +330,7 @@ const RecipeMake = () => {
                                 </div>
                             </div>
                             {/* Steps section */}
-                            <div className="w-[750px] mt-[30px] p-[24px] bg-white flex flex-col rounded-lg ">
+                            <div className="sm:w-[750px] w-[350px] mt-[30px] p-[24px] bg-white flex flex-col rounded-lg ">
                                 <h1 className={"text-[24px] text-[#2A293B]"}>Steps</h1>
                                 <div className="">
                                     <div className={"flex flex-col"}>
@@ -355,24 +352,24 @@ const RecipeMake = () => {
                                                                 event
                                                             )
                                                         }
-                                                        className={`w-[650px] rounded-3xl border-2 h-10 shadow-gray-500 text-xs p-3 mt-2`}
+                                                        className={`mb-3 w-[650px] rounded-3xl border-2 h-10 shadow-gray-500 text-xs p-3 mt-2`}
                                                         placeholder="Enter text here"
                                                         type="text"
                                                     />
 
                                                     <Image
                                                         src={trash}
-                                                        height={24}
-                                                        width={24}
+                                                        className={'cursor-pointer w-[24px] h-[24px]'}
                                                         alt={"trash"}
                                                         onClick={() =>
                                                             handleRemoveStep(index)
                                                         }
                                                     />
                                                 </div>
-                                                <div className={""}>
+                                                <div className={"relative"}>
                                                     <input
                                                         type="file"
+                                                        className={'opacity-0 cursor-pointer h-40 absolute'}
                                                         onChange={(event) =>
                                                             handleStepImageChange(
                                                                 index,
@@ -380,14 +377,23 @@ const RecipeMake = () => {
                                                             )
                                                         }
                                                     />
-                                                    {step.image && (
-                                                        <Image
-                                                            src={URL.createObjectURL(step.image)}
-                                                            alt="Main Image"
-                                                            width={250}
-                                                            height={250}
-                                                        />
-                                                    )
+                                                    {step.image ? (
+                                                            <Image
+                                                                src={URL.createObjectURL(step.image)}
+                                                                alt="Main Image"
+                                                                width={150}
+                                                                height={50}
+                                                            />
+                                                        ) :
+                                                        (
+                                                            <Image
+                                                                src={instax}
+                                                                className={'shadow-gray-500 border-2 rounded-3xl'}
+                                                                alt="Main Image"
+                                                                width={150}
+                                                                height={150}
+                                                            />
+                                                        )
                                                     }
                                                 </div>
                                             </div>
@@ -412,27 +418,28 @@ const RecipeMake = () => {
                             </div>
                             {
                                 (title && serves && cookTime && description) ?
-                                <>
-                                    {
-                                        !isLoading ?
-                                            <button
-                                                onClick={handlePublish}
-                                                className={
-                                                    "mb-[100px] self-center mt-7 items-center flex gap-3 text-white text-[28px] justify-center w-[450px] h-[60px] rounded-[30px] bg-[#AAE06E]"
-                                                }
-                                            >
-                                                Publish
-                                            </button> :
-                                            <button
-                                                onClick={handlePublish}
-                                                className={
-                                                    "mb-[100px] self-center mt-7 items-center flex gap-3 text-white text-[28px] justify-center w-[450px] h-[60px] rounded-[30px] bg-[#AAE06E]"
-                                                }
-                                            >
-                                                Publishing....
-                                            </button>
-                                    }
-                                </> : <div className={'text-lg text-[#AAE06E] mt-5'}>For publishing recipe enter title, description, serves and cook time</div>
+                                    <>
+                                        {
+                                            !isLoading ?
+                                                <button
+                                                    onClick={handlePublish}
+                                                    className={
+                                                        "mb-[100px] self-center mt-7 items-center flex gap-3 text-white text-[28px] justify-center w-[450px] h-[60px] rounded-[30px] bg-[#AAE06E]"
+                                                    }
+                                                >
+                                                    Publish
+                                                </button> :
+                                                <button
+                                                    onClick={handlePublish}
+                                                    className={
+                                                        "mb-[100px] self-center mt-7 items-center flex gap-3 text-white text-[28px] justify-center w-[450px] h-[60px] rounded-[30px] bg-[#AAE06E]"
+                                                    }
+                                                >
+                                                    Publishing....
+                                                </button>
+                                        }
+                                    </> : <div className={'text-lg text-[#AAE06E] mt-5 text-center'}>For publishing recipe enter title,
+                                        description, serves and cook time</div>
                             }
                         </div>
                     </div>

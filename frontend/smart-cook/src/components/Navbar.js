@@ -3,9 +3,9 @@ import logo from "../../public/images/SmartCookLogo.png";
 import blogo from "../../public/images/blac-logo.png";
 import Link from "next/link";
 import defaultAvatar from "../../public/images/avatarka.png";
-import { useRouter } from "next/router";
-import { useEffect, useState } from "react";
-import { config } from "../../config";
+import {useRouter} from "next/router";
+import {useEffect, useState} from "react";
+import {config} from "../../config";
 import NavbarDropdown from "./NavbarDropdown";
 
 const Navbar = () => {
@@ -47,7 +47,7 @@ const Navbar = () => {
                 }
 
                 const userData = await response.json();
-                const { first_name, last_name, photo } = userData;
+                const {first_name, last_name, photo} = userData;
 
                 // Update state with the fetched data (only saving required fields)
                 setUserData({
@@ -116,18 +116,23 @@ const Navbar = () => {
                                 strokeLinejoin="round"
                                 transform="translate(3 3)"
                             >
-                                <path d="m6.5 10.5 3-3-3-3" />
+                                <path d="m6.5 10.5 3-3-3-3"/>
                                 <path
                                     d="m5 3v9"
                                     transform="matrix(0 1 -1 0 12.5 2.5)"
                                 />
-                                <path d="m1.5 5.5v-3.0079176c0-1.10147263.89060277-1.99561512 1.99206673-1.99998427l7.95228497-.03160773c1.1045608-.00432011 2.0035361.8875515 2.0079175 1.99211231l.0398162 10.02918369c.0043323 1.1045608-.8875404 2.003535-1.9921012 2.0079309-.0026436 0-.0052873 0-.0079309 0h-7.9920533c-1.1045695 0-2-.8954305-2-2v-2.9897173" />
+                                <path
+                                    d="m1.5 5.5v-3.0079176c0-1.10147263.89060277-1.99561512 1.99206673-1.99998427l7.95228497-.03160773c1.1045608-.00432011 2.0035361.8875515 2.0079175 1.99211231l.0398162 10.02918369c.0043323 1.1045608-.8875404 2.003535-1.9921012 2.0079309-.0026436 0-.0052873 0-.0079309 0h-7.9920533c-1.1045695 0-2-.8954305-2-2v-2.9897173"/>
                             </g>
                         </svg>
                     </Link>
                 ) : (
-                    <button onClick={() => {setIsProfileDropdownOpen(!isProfileDropdownOpen)}}>
-                        {isProfileDropdownOpen && <NavbarDropdown photo={userData.photo} name={userData.firstName} surname={userData.lastName} score={250} /> }
+                    <button onClick={() => {
+                        setIsProfileDropdownOpen(!isProfileDropdownOpen)
+                    }}>
+                        {isProfileDropdownOpen &&
+                            <NavbarDropdown photo={userData.photo} name={userData.firstName} surname={userData.lastName}
+                                            score={250}/>}
                         {userData.photo ? (
                             <Image
                                 className="-mt-1"
@@ -148,17 +153,19 @@ const Navbar = () => {
                     </button>
                 )}
             </div>
-            <div onClick={toggleDropdown} className={`p-3 cursor-pointer md:hidden space-y-1 bg-gray-600 z-10 rounded shadow`}>
+            <div onClick={toggleDropdown}
+                 className={`w-[60px] h-[40px] p-3 cursor-pointer md:hidden space-y-1 bg-gray-600 z-10 rounded shadow`}>
                 {!isDropdownOpen ?
                     <>
                         <span className="block w-8 h-0.5 bg-gray-100 animate-pulse"></span>
                         <span className="block w-8 h-0.5 bg-gray-100 animate-pulse"></span>
                         <span className="block w-8 h-0.5 bg-gray-100 animate-pulse"></span>
-                    </> :
-                    <span className="cursor-pointer">
-                        <span className="block w-5 h-0.5 bg-gray-100 transform rotate-45"></span>
-                        <span className="block -mt-0.5 w-5 h-0.5 bg-gray-100 transform -rotate-45"></span>
-                    </span>
+                    </>
+                    :
+                    <div className={`pt-1.5 pl-1`}>
+                        <span className="block w-7 h-0.5 bg-gray-100 transform rotate-45"></span>
+                        <span className="block -mt-0.5 w-7 h-0.5 bg-gray-100 transform -rotate-45"></span>
+                    </div>
                 }
             </div>
             <div
@@ -180,18 +187,21 @@ const Navbar = () => {
                                 strokeLinejoin="round"
                                 transform="translate(3 3)"
                             >
-                                <path d="m6.5 10.5 3-3-3-3" />
+                                <path d="m6.5 10.5 3-3-3-3"/>
                                 <path
                                     d="m5 3v9"
                                     transform="matrix(0 1 -1 0 12.5 2.5)"
                                 />
-                                <path d="m1.5 5.5v-3.0079176c0-1.10147263.89060277-1.99561512 1.99206673-1.99998427l7.95228497-.03160773c1.1045608-.00432011 2.0035361.8875515 2.0079175 1.99211231l.0398162 10.02918369c.0043323 1.1045608-.8875404 2.003535-1.9921012 2.0079309-.0026436 0-.0052873 0-.0079309 0h-7.9920533c-1.1045695 0-2-.8954305-2-2v-2.9897173" />
+                                <path
+                                    d="m1.5 5.5v-3.0079176c0-1.10147263.89060277-1.99561512 1.99206673-1.99998427l7.95228497-.03160773c1.1045608-.00432011 2.0035361.8875515 2.0079175 1.99211231l.0398162 10.02918369c.0043323 1.1045608-.8875404 2.003535-1.9921012 2.0079309-.0026436 0-.0052873 0-.0079309 0h-7.9920533c-1.1045695 0-2-.8954305-2-2v-2.9897173"/>
                             </g>
                         </svg>
                     </Link>
                 ) : (
                     <button onClick={() => window.location.href = '/profile'}>
-                        {isProfileDropdownOpen && <NavbarDropdown photo={userData.photo} name={userData.firstName} surname={userData.lastName} score={250} /> }
+                        {isProfileDropdownOpen &&
+                            <NavbarDropdown photo={userData.photo} name={userData.firstName} surname={userData.lastName}
+                                            score={250}/>}
                         {userData.photo ? (
                             <Image
                                 className="-mt-1"

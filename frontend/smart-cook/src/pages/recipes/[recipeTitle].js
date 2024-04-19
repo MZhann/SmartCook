@@ -52,19 +52,20 @@ const RecipeTitle = () => {
 
     return (
         <MainContainer>
-            <div className=" w-full max-w-[1195px] relative flex flex-col ">
+            <div className="px-4 md:px-0 w-full max-w-[1195px] relative flex flex-col ">
                 <Navbar/>
                 <div className={`gap-4 mt-5 flex flex-col items-center justify-center text-center text-white`}>
                     <h1 className={`flex self-center text-[40px]`}>Recipe</h1>
                     <p className={'text-[20px] font-[400]'}>You can see the full recipe and preparation of the dish</p>
                 </div>
-                <div className={'mt-8 text-white flex flex-row w-full'}>
+                <div className={'mt-8 text-white flex flex-col sm:flex-row w-full'}>
                     <div className={`flex flex-col gap-3 w-[500px]`}>
                         {recipe && recipe.image ?
-                            (<Image
-                                className={'rounded-tl-[8px] rounded-tr-[8px]'} width={400} height={285}
-                                src={recipe.image}
-                                alt="Food"/>) :
+                            (
+                                <Image
+                                    className={'rounded-tl-[8px] rounded-tr-[8px]'} width={400} height={285}
+                                    src={recipe.image}
+                                    alt="Food"/>) :
                             <Image className={`rounded-[20px]`} src={defaultFood} alt={'food'} width={400}
                                    height={285}/>}
                         <div className={`flex flex-row items-center text-[20px] gap-7 font-[300]`}>
@@ -86,48 +87,49 @@ const RecipeTitle = () => {
                                            className={'object-contain rounded-[534px]'}
                                     /> :
                                     <Image width={60} height={60} src={avatar} alt={"avatar"}
-                                        className={'object-contain rounded-full'}
+                                           className={'object-contain rounded-full'}
                                     />
-                            }
-                            <h1 className={'flex flex-row'}>{recipe?.user.first_name} {recipe?.user.last_name}</h1>
+                                }
+                                <h1 className={'flex flex-row'}>{recipe?.user.first_name} {recipe?.user.last_name}</h1>
+                            </div>
+                            <div className={` flex flex-row gap-4 items-center`}>
+                                {recipe && (
+                                    <Like id={query.recipeTitle} count={recipe.likes_count}/>
+                                )}
+                                <div
+                                    className={'items-center bg-white w-[65px] h-[35px] rounded-3xl flex-row justify-evenly flex'}>
+                                    <Image onClick={handleFavBtnClick} src={fav} alt={'fav'} width={16} height={16}/>
+                                </div>
+                            </div>
                         </div>
-                        <div className={` flex flex-row gap-4 items-center`}>
-                            {recipe && (
-                                <Like id={query.recipeTitle} count={recipe.likes_count}/>
-                            )}
-                            <div
-                                className={'items-center bg-white w-[65px] h-[35px] rounded-3xl flex-row justify-evenly flex'}>
-                                <Image onClick={handleFavBtnClick} src={fav} alt={'fav'} width={16} height={16}/></div>
+                        <div className={`mt-4 leading-tight`}>
+                            <h1 className={`w-[520px] text-[40px] mb-4`}>{recipe && recipe.title}</h1>
+                            <p className={`w-[92%] text-left text-[24px] leading-[36px]`}>{recipe && recipe.description}</p>
                         </div>
                     </div>
-                    <div className={`mt-4 leading-tight`}>
-                        <h1 className={`w-[520px] text-[40px] mb-4`}>{recipe && recipe.title}</h1>
-                        <p className={`w-[92%] text-left text-[24px] leading-[36px]`}>{recipe && recipe.description}</p>
+                </div>
+                <div className={`flex flex-col w-[500px] mt-16`}>
+                    <h1 className={`text-[#AAE06E] text-[28px]`}>Ingredients</h1>
+                    <ul className={`flex flex-col text-white text-[24px] gap-1 font-[400] mt-8`}>
+                        {recipe && recipe.ingredients.map((item, index) => (
+                            <li key={index}>{index + 1}. {item.name}</li>
+                        ))}
+                    </ul>
+                </div>
+                <div className={`flex flex-col w-full mt-8`}>
+                    <h1 className={`text-[#AAE06E] text-[28px]`}>Direction</h1>
+                    <div className={`flex flex-wrap gap-[47px] mt-5`}>
+                        {recipe && recipe.steps.map((item, index) => (
+                            <div key={index}>
+                                <StepCard item={item} index={index}/>
+                            </div>
+                        ))}
                     </div>
                 </div>
             </div>
-            <div className={`flex flex-col w-[500px] mt-16`}>
-                <h1 className={`text-[#AAE06E] text-[28px]`}>Ingredients</h1>
-                <ul className={`flex flex-col text-white text-[24px] gap-1 font-[400] mt-8`}>
-                    {recipe && recipe.ingredients.map((item, index) => (
-                        <li key={index}>{index + 1}. {item.name}</li>
-                    ))}
-                </ul>
-            </div>
-            <div className={`flex flex-col w-full mt-8`}>
-                <h1 className={`text-[#AAE06E] text-[28px]`}>Direction</h1>
-                <div className={`flex flex-wrap gap-[47px] mt-5`}>
-                    {recipe && recipe.steps.map((item, index) => (
-                        <div key={index}>
-                            <StepCard item={item} index={index}/>
-                        </div>
-                    ))}
-                </div>
-            </div>
-        </div>
-</MainContainer>
-)
-    ;
+        </MainContainer>
+    )
+        ;
 };
 
 export default RecipeTitle;
