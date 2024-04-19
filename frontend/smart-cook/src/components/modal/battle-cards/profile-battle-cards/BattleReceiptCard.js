@@ -13,7 +13,7 @@ const BattleReceiptCard = ({ image, win, user, recipe }) => {
     }, [])
 
     return (
-        <Link href="/recipes/[recipeTitle]" as={`/recipes/${recipe.id}`} passHref>
+        <Link href="/recipes/[recipeTitle]" as={`/recipes/${recipe?.id}`} passHref>
             <div className="w-[230px] h-[275px] rounded-xl bg-white">
                 {win ? (
                     <div

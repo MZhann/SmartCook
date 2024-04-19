@@ -25,7 +25,7 @@ const AcceptDecline = ({battle}) => {
 
 
     }
-
+    console.log(battle.winner !== null && battle?.winner.first_name === battle?.initiator.first_name)
     return (
         <div className="w-[574px] h-[546px] rounded-3xl text-white bg-[#2A293B] flex flex-col items-center justify-between">
             <Image

@@ -196,9 +196,9 @@ const Profile = () => {
                     ) : battle && battle[0]?.status === "accepted" &&
                       battle[0]?.initiator.id === userProfile?.id ? (
                         battle &&
-                        <AcceptedBattle battle={battle} />
+                        <AcceptedBattle battle={battle[0]} />
                     ) : battle && battle[0]?.status === "accepted" ? (
-                        <AcceptedBattle battle={battle} />
+                        <AcceptedBattle battle={battle[0]} />
                     ) : battle && battle[0]?.status === "declined" ? (
                         <DeclinedBattle />
                     ) : (
