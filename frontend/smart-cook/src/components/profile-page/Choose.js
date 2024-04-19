@@ -87,8 +87,8 @@ const Chooser = ({userProfile}) => {
                 <ChoiceCards userProfile={userProfile} recipes={activeOption === 'My recipe' ? myRecipes : activeOption === 'Saved recipe' ? savedRecipes : myRecipes}/>
                 :
                 <div className={`w-full grid grid-cols-2 pt-3`}>
-                    {pastBattles?.map((item) => (
-                        <AcceptedBattle battle={item}/>
+                    {pastBattles?.map((item, index) => (
+                        <AcceptedBattle key={index} battle={item}/>
                     ))}
                 </div>
             }
