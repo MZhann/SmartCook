@@ -2,6 +2,7 @@ import {useState} from "react";
 import {config} from "../../../config";
 import axios from "axios";
 import ChoiceCards from "@/components/profile-page/ChoiceCards";
+import AcceptedBattle from "@/components/modal/battle-cards/profile-battle-cards/AcceptedBattle";
 
 const Chooser = ({userProfile}) => {
     const [activeOption, setActiveOption] = useState(null);
@@ -82,7 +83,15 @@ const Chooser = ({userProfile}) => {
                     Saved recipe
                 </div>
             </div>
-            <ChoiceCards userProfile={userProfile} recipes={activeOption === 'My recipe' ? myRecipes : activeOption === 'Saved recipe' ? savedRecipes : myRecipes}/>
+            {activeOption !== 'Past battles' ?
+                <ChoiceCards userProfile={userProfile} recipes={activeOption === 'My recipe' ? myRecipes : activeOption === 'Saved recipe' ? savedRecipes : myRecipes}/>
+                :
+                <div className={`w-full grid grid-cols-2 pt-3`}>
+                    {pastBattles?.map((item, index) => (
+                        <AcceptedBattle key={index} battle={item}/>
+                    ))}
+                </div>
+            }
         </div>
 
     );

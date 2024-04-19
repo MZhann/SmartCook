@@ -19,6 +19,13 @@ const Challenges = () => {
     const goToCreateRecipe = () => setModalStage(3);
     const closeModal = () => setModalStage(0);
     const goBack = () => setModalStage(modalStage - 1);
+    const [displayedRecipes, setDisplayedRecipes] = useState(4);
+
+
+    const loadMoreRecipes = () => {
+        setDisplayedRecipes(prevCount => prevCount + 4); // Increment by 4 each time the button is clicked
+    };
+
     const handleCreateClash = (e) => {
         e.preventDefault();
 
@@ -39,11 +46,9 @@ const Challenges = () => {
         }).finally(() => console.log('hello'))
     }
 
-    const [displayedLeaders, setDisplayedLeaders] = useState(8);
-
     useEffect(() => {
         const fetchData = () => {
-            axios.get('https://web-production-ad96.up.railway.app/api/v1/clashes/all/')
+            axios.get('https://web-production-ad96.up.railway.app/api/v1/clashes/ongoing/')
                 .then((r) => {
                         setClashes(r.data);
                     }
@@ -85,11 +90,12 @@ const Challenges = () => {
                 </h1>
 
                 <div className="grid grid-cols-2 w-full">
-                    {clashes && clashes.slice(0, 4).map((clash, index) => (
-                        <AcceptedBattle key={index}/>
+                    {clashes && clashes.slice(0, displayedRecipes).map((clash, index) => (
+                        <AcceptedBattle key={index} battle={clash && clash}/>
                     ))}
                 </div>
                 <button
+                    onClick={loadMoreRecipes}
                     className="text-white bg-[#AAE06E] self-start w-[250px] h-[48px] rounded-3xl text-lg font-bold mb-20 mt-10">Load
                     More
                 </button>
