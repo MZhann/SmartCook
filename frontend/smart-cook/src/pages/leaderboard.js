@@ -45,19 +45,19 @@ const Leaderboard = () => {
                         </h1>
                     </div>
 
-                    <p className={" font-bold"}>
+                    <p className={" font-bold px-3 sm:p-0"}>
                         See where you stand among culinary enthusiasts! Track
                         your progress, compare<br></br> scores, and strive for
                         the top spot in the ultimate culinary rankings.
                     </p>
                 </div>
-                <div>
+                <div className="w-full flex flex-col items-center">
                     {leaders && leaders.slice(0, displayedLeaders).map((leader, index) => (
                         <LeadersCard index={index} key={index} isLeader={index < 3} name={`${leader.first_name} ${leader.last_name}`} score={leader.score} />
                     ))
                     }
                 </div>
-                <div className="w-[900px]">
+                <div className="w-[250px] md:w-[900px]">
                     <button onClick={handleLoadMore} className="text-white  bg-[#AAE06E] self-start w-[250px] h-[48px] rounded-3xl text-lg font-bold mb-20 mt-10">
                         Load More
                     </button>

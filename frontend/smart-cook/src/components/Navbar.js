@@ -64,7 +64,7 @@ const Navbar = () => {
     }, []);
 
     return (
-        <div className="w-full relative flex items-center justify-between z-10 mt-5 md:px-4">
+        <div className="w-full relative flex items-center justify-between z-10 mt-5 px-2 md:px-4">
             <Link href="/">
                 <Image
                     src={
