@@ -6,7 +6,7 @@ import location from "../../public/images/location.png";
 
 const Footer = () => {
     return (
-        <div>
+        <div className="lg: px-6">
             <div className="hidden w-full text-white lg:flex h-[300px] mt-10">
                 <div className="h-full w-4/12 border-r-2 border-gray-100 flex flex-col justify-center">
                     <div className="">
@@ -34,7 +34,7 @@ const Footer = () => {
                     <div className="text-xs">Almaty, KZ</div>
                 </div>
             </div>
-            <div className="flex sm:space-x-96 text-center items-center gap-2 text-white mt-14 mb-5">
+            <div className="flex sm:space-x-96 text-white mt-14 mb-5">
                 <div>SmartCook</div>
                 <div className="text-xs">2024 © All rights reserved</div>
             </div>

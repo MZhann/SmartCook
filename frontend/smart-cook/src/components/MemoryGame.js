@@ -13,7 +13,6 @@ function MemoryGame({ setIsHidden, setWhatGame, setIsMiniGamesHidden }) {
     const [firstCard, setFirstCard] = useState(null);
     const [secondCard, setSecondCard] = useState(null);
     const [stopFlip, setStopFlip] = useState(false);
-    const [won, setWon] = useState(false);
     const [loss, setLoss] = useState(false);
     const [seconds, setSeconds] = useState(260);
     const [isMemoryGameHidden, setIsMemoryGameHidden] = useState(false);
@@ -68,7 +67,7 @@ function MemoryGame({ setIsHidden, setWhatGame, setIsMiniGamesHidden }) {
                         (unit) => unit.matched
                     );
                     if (isGameWon) {
-                        setWon(true);
+                        setIsWin(true);
                         incrementTokenCount();
                     }
                     return updatedArray;
@@ -94,13 +93,13 @@ function MemoryGame({ setIsHidden, setWhatGame, setIsMiniGamesHidden }) {
         setMoves(0);
         setFirstCard(null);
         setSecondCard(null);
-        setWon(false);
+        setIsWin(false);
         setLoss(false);
         setSeconds(260); // Reset timer
     }
 
     useEffect(() => {
-        if (!won && !loss) {
+        if (!isWin && !loss) {
             const timer = setInterval(() => {
                 setSeconds((prevSeconds) =>
                     prevSeconds > 0 ? prevSeconds - 1 : 0
@@ -108,7 +107,7 @@ function MemoryGame({ setIsHidden, setWhatGame, setIsMiniGamesHidden }) {
             }, 1000);
             return () => clearInterval(timer);
         }
-    }, [won, loss]);
+    }, [isWin, loss]);
     console.log(
         "before return (), isMemoryGameHidden equal to: " + isMemoryGameHidden
     );
@@ -120,7 +119,7 @@ function MemoryGame({ setIsHidden, setWhatGame, setIsMiniGamesHidden }) {
                     : "block container  justify-center relative items-center"
             }`}
         >
-            <div className={"absolute top-4 right-2 w-[40px] h-[40px]"} onClick={handleClose}>
+            <div className={"absolute top-4 right-14 md:right-2 w-[40px] h-[40px] "} onClick={handleClose}>
                 <svg
                     width="25"
                     height="25"
@@ -134,10 +133,11 @@ function MemoryGame({ setIsHidden, setWhatGame, setIsMiniGamesHidden }) {
                     />
                 </svg>
             </div>
-            {won ? (
+            {isWin ? (
                 <YouWon
                     setIsMemoryGameHidden={setIsMemoryGameHidden}
                     setIsMiniGamesHidden={setIsMiniGamesHidden}
+                    setIsWin={setIsWin}
                 />
             ) : loss ? (
                 <div className="flex flex-col gap-5 w-full h-[350px] justify-center items-center text-center">

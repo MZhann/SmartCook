@@ -18,7 +18,7 @@ const Dropdown = ({ options, placeholder, onSelect }) => {
             <div>
                 <button
                     type="button"
-                    className="inline-flex w-[344px] h-[42px]  px-4 py-2 text-sm font-medium text-gray-500 hover:text-white justify-between items-center border-2 border-gray-500 rounded-3xl hover:bg-[#AAE06E] focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75"
+                    className="inline-flex w-[344px] sm:w-[540px] md:w-[344px] lg:w-[375px] xl:w-[344px] h-[42px]  px-4 py-2 text-sm font-medium text-gray-500 hover:text-white justify-between items-center border-2 border-gray-500 rounded-3xl hover:bg-[#AAE06E] focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75"
                     onClick={() => setIsOpen(!isOpen)}
                 >
                     {selectedOption || placeholder}

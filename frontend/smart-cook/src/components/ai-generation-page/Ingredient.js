@@ -8,7 +8,7 @@ const Ingredient = ({ image, name, checked, onChange, id }) => {
 
     return (
         <label
-            className={`cursor-pointer hover:bg-[#AAE06E] transition duration-200 w-[120px] h-[120px] rounded-full ${bgColor} flex justify-center items-center mt-4`}
+            className={`cursor-pointer hover:bg-[#AAE06E] transition duration-200 w-[100px] h-[100px] mb-3 sm:mb-0 sm:w-[120px] sm:h-[120px] m-1 rounded-full ${bgColor} flex justify-center items-center mt-4`}
         >
             <input
                 id={id}

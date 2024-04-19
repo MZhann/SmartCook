@@ -37,7 +37,7 @@ const MiniGames = ({setIsMiniGamesOpen, setIsHidden, setIsGamesHidden, isGamesHi
     };
 
     return (
-        <>
+        <div>
             {!isMiniGamesHidden && (
                 <div className="z-50">
                     {
@@ -51,7 +51,7 @@ const MiniGames = ({setIsMiniGamesOpen, setIsHidden, setIsGamesHidden, isGamesHi
                                     >
                                         <div
                                             className={
-                                                "flex justify-between w-full"
+                                                "flex justify-between w-[400px] sm:w-full"
                                             }
                                         >
                                             <h1 className={"text-[24px]"}>
@@ -126,13 +126,14 @@ const MiniGames = ({setIsMiniGamesOpen, setIsHidden, setIsGamesHidden, isGamesHi
                                 <EightPuzzle
                                     setIsHidden={setIsHidden}
                                     setWhatGame={setWhatGame}
+                                    setIsMiniGamesHidden={setIsMiniGamesHidden}
                                 />
                             ),
                         }[whatGame]
                     }
                 </div>
             )}
-        </>
+        </div>
     );
 };
 

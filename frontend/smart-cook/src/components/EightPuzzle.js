@@ -5,7 +5,7 @@ import YouWon from "./modal/YouWon";
 import { incrementTokenCount } from "../utils/token";
 
 
-const EightPuzzle = ({setIsHidden, setWhatGame}) => {
+const EightPuzzle = ({setIsHidden, setWhatGame, setIsMiniGamesHidden}) => {
     const [isClient, setIsClient] = useState(false);
     const [isWin, setIsWin] = useState(false);
     const [isOpen, setIsOpen] = useState(true);
@@ -48,7 +48,7 @@ const EightPuzzle = ({setIsHidden, setWhatGame}) => {
         }
     }
 
-    shuffle(initialTiles);
+    // shuffle(initialTiles);
 
     const handleTileClick = (index) => {
         const emptyIndex = tiles.indexOf(0);
@@ -125,7 +125,7 @@ const EightPuzzle = ({setIsHidden, setWhatGame}) => {
                         8 Puzzle Game
                     </h1>
                 )}
-                <div className={"absolute top-0 right-2"} onClick={handleClose}>
+                <div className={"absolute top-0 right-14 md:right-2"} onClick={handleClose}>
                     <svg
                         width="25"
                         height="25"
@@ -153,7 +153,7 @@ const EightPuzzle = ({setIsHidden, setWhatGame}) => {
                     </button>
                 </div>
             ) : (
-                <YouWon />
+                <YouWon  setIsMiniGamesHidden={setIsMiniGamesHidden} setIsWin={setIsWin}/>
             )}
         </div>
     );
