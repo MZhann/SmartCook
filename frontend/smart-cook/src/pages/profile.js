@@ -82,24 +82,24 @@ const Profile = () => {
 
     return (
         <MainContainer>
-            <div className="px-4 md:px-0 w-full max-w-[1195px] relative flex flex-col">
+            <div className="mx-8 w-full max-w-[1195px] relative flex flex-col items-center justify-center">
                 <Navbar />
                 <div
                     className={`flex justify-center items-center w-full text-black text-[40px] font-[600] mt-7`}
                 >
                     <h1 className={"text-black"}>Profile</h1>
                 </div>
-                <div className={"flex flex-col space-y-2 lg:flex-row justify-between mt-4"}>
+                <div className={"flex flex-col w-full flex-wrap lg:flex-row lg:space-x-6 justify-between mt-4 md:justify-center"}>
                     <div
                         className={
-                            "self-center flex flex-col justify-center items-center w-full md:w-[278px] h-[546px] px-6 py-5 bg-[#2A293B] rounded-3xl"
+                            "flex flex-col mb-4 justify-center items-center w-full  lg:w-[278px] h-[546px] px-6 py-5 bg-[#2A293B] rounded-3xl"
                         }
                     >
                         <div className={`w-full flex flex-col justify-center items-center`}>
                             {userProfile && userProfile.photo ? (
                                 <Image
                                     className={
-                                        "rounded-full sm:self-start object-fit border-white border-[3px] h-[101px] w-[101px]"
+                                        "rounded-full  object-fit border-white border-[3px] h-[101px] w-[101px]"
                                     }
                                     src={userProfile && userProfile?.photo}
                                     width={101}
@@ -109,7 +109,7 @@ const Profile = () => {
                             ) : (
                                 <Image
                                     className={
-                                        "rounded-full sm:self-start object-fit border-white border-[3px] h-[101px] w-[101px]"
+                                        "rounded-full object-fit border-white border-[3px] h-[101px] w-[101px]"
                                     }
                                     src={defaultAvatar}
                                     alt={"default"}
@@ -119,7 +119,7 @@ const Profile = () => {
                         <div className={"w-full flex-col flex gap-0.5 mt-2"}>
                             <div>
                                 <h1
-                                    className={`text-white text-center sm:text-start text-[20px] font-[700]`}
+                                    className={`text-white text-center  text-[20px] font-[700]`}
                                 >
                                     {userProfile?.first_name}{" "}
                                     {userProfile?.last_name}
@@ -127,13 +127,13 @@ const Profile = () => {
                             </div>
                             <div>
                                 <p
-                                    className={`text-white text-center sm:text-start text-[12px] font-[400]`}
+                                    className={`text-white text-center  text-[12px] font-[400]`}
                                 >
                                     {userProfile?.email}
                                 </p>
                             </div>
                         </div>
-                        <div className={"mt-7 sm:self-start"}>
+                        <div className={"mt-7 sm:self-center"}>
                             <div>
                                 <p
                                     className={`text-white text-[12px] font-[600]`}
@@ -141,7 +141,7 @@ const Profile = () => {
                                     Awards
                                 </p>
                             </div>
-                            <div className={`flex flex-row gap-4 mt-1`}>
+                            <div className={`flex flex-row  gap-4 mt-1`}>
                                 <IDidIt />
                                 <Superstar />
                                 <AIchef />
