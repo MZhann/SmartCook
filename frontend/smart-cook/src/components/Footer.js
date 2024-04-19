@@ -36,7 +36,7 @@ const Footer = () => {
             </div>
             <div className="flex sm:space-x-96 text-white mt-14 mb-5">
                 <div>SmartCook</div>
-                <div className="text-xs">2024 © All rights reserved</div>
+                <div className="mt-1 ml-4 text-xs whitespace-nowrap">2024 © All rights reserved</div>
             </div>
         </div>
     );

@@ -11,6 +11,7 @@ import {useEffect, useState} from "react";
 import axios from "axios";
 import {useRouter} from "next/router";
 import StepCard from "@/components/StepCard";
+import Footer from "@/components/Footer";
 
 const RecipeTitle = () => {
     const [recipe, setRecipe] = useState(null);
@@ -58,8 +59,8 @@ const RecipeTitle = () => {
                     <h1 className={`flex self-center text-[40px]`}>Recipe</h1>
                     <p className={'text-[20px] font-[400]'}>You can see the full recipe and preparation of the dish</p>
                 </div>
-                <div className={'mt-8 text-white flex flex-col sm:flex-row w-full'}>
-                    <div className={`flex flex-col gap-3 w-[500px]`}>
+                <div className={'mt-8 text-white flex flex-col sm:flex-col md:flex-row px-4 w-full items-center md:items-start'}>
+                    <div className={`flex flex-col items-center md:items-start gap-3 w-full md:w-[500px]`}>
                         {recipe && recipe.image ?
                             (
                                 <Image
@@ -79,9 +80,9 @@ const RecipeTitle = () => {
                             </div>
                         </div>
                     </div>
-                    <div className={`flex flex-col w-2/3`}>
-                        <div className={`w-3/5 flex flex-row items-center`}>
-                            <div className={`w-full flex flex-row items-center gap-4`}>
+                    <div className={`flex flex-col w-full md:w-2/3 pl-4`}>
+                        <div className={`w-full flex flex-row items-center `}>
+                            <div className={`w-full flex flex-row items-center gap-4 mt-10 md:mt-0`}>
                                 {recipe && recipe?.user.photo ?
                                     <Image width={60} height={60} src={recipe?.user.photo} alt={"avatar"}
                                            className={'object-contain rounded-[534px]'}
@@ -92,7 +93,7 @@ const RecipeTitle = () => {
                                 }
                                 <h1 className={'flex flex-row'}>{recipe?.user.first_name} {recipe?.user.last_name}</h1>
                             </div>
-                            <div className={` flex flex-row gap-4 items-center`}>
+                            <div className={` flex flex-row gap-4 items-center md:mt-0 mt-10`}>
                                 {recipe && (
                                     <Like id={query.recipeTitle} count={recipe.likes_count}/>
                                 )}
@@ -103,12 +104,12 @@ const RecipeTitle = () => {
                             </div>
                         </div>
                         <div className={`mt-4 leading-tight`}>
-                            <h1 className={`w-[520px] text-[40px] mb-4`}>{recipe && recipe.title}</h1>
+                            <h1 className={`w-full text-[40px] mb-4`}>{recipe && recipe.title}</h1>
                             <p className={`w-[92%] text-left text-[24px] leading-[36px]`}>{recipe && recipe.description}</p>
                         </div>
                     </div>
                 </div>
-                <div className={`flex flex-col w-[500px] mt-16`}>
+                <div className={`flex flex-col w-full  mt-16 px-8 md:px-6 `}>
                     <h1 className={`text-[#AAE06E] text-[28px]`}>Ingredients</h1>
                     <ul className={`flex flex-col text-white text-[24px] gap-1 font-[400] mt-8`}>
                         {recipe && recipe.ingredients.map((item, index) => (
@@ -116,16 +117,18 @@ const RecipeTitle = () => {
                         ))}
                     </ul>
                 </div>
-                <div className={`flex flex-col w-full mt-8`}>
-                    <h1 className={`text-[#AAE06E] text-[28px]`}>Direction</h1>
-                    <div className={`flex flex-wrap gap-[47px] mt-5`}>
+                <div className={`flex w-full  flex-wrap mt-8 px-8 md:px-0`}>
+                    <h1 className={`text-[#AAE06E] w-full px-6 text-[28px]`}>Direction</h1>
+                    <div className={`flex flex-wrap justify-center w-full gap-[47px] mt-5`}>
                         {recipe && recipe.steps.map((item, index) => (
-                            <div key={index}>
+                            <div className="px-6" key={index}>
                                 <StepCard item={item} index={index}/>
                             </div>
                         ))}
                     </div>
                 </div>
+                <Footer />
+
             </div>
         </MainContainer>
     )
