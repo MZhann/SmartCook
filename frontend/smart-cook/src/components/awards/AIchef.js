@@ -20,7 +20,7 @@ const HoverExample = () => {
 
             {/* Conditional rendering for the hidden div */}
             <div
-                className={`absolute top-full w-[200px] h-[130px] left-0 p-4 text-center flex justify-center items-center rounded-2xl bg-white border-black border-2 text-black opacity-0 transition-opacity duration-500 ease-in-out ${
+                className={`absolute top-full w-[200px] h-[130px] left-[-140px] p-4 text-center flex justify-center items-center rounded-2xl bg-white border-black border-2 text-black opacity-0 transition-opacity duration-500 ease-in-out ${
                     isHovered ? 'opacity-100' : 'opacity-0'
                 }`}
                 style={{ marginTop: '10px' }}
