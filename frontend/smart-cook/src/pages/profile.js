@@ -82,7 +82,7 @@ const Profile = () => {
 
     return (
         <MainContainer>
-            <div className="mx-8 w-full max-w-[1195px] relative flex flex-col items-center justify-center">
+            <div className="mx-8 w-full max-w-[1195px] relative flex flex-col items-center">
                 <Navbar />
                 <div
                     className={`flex justify-center items-center w-full text-black text-[40px] font-[600] mt-7`}

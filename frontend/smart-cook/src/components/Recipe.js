@@ -35,7 +35,7 @@ const Recipe = ({recipe}) => {
 
     return (
 
-        <div className="w-[280px] h-[340px] bg-white rounded-lg my-5">
+        <div className="w-[280px] h-[340px] bg-white rounded-lg my-5 ">
             <div className="w-full h-[210px] relative">
                 {recipe.world_cuisine && recipe.dish_type &&
                     <div
@@ -46,7 +46,7 @@ const Recipe = ({recipe}) => {
                             className={'w-[60px] h-[16px] bg-[#FFE3F3] rounded-3xl pt-[3px] text-[#872D51]'}>{recipe?.dish_type}</div>
                     </div>
                 }
-                <div className="absolute right-2 top-2 z-50 hover:cursor-pointer"
+                <div className="absolute right-2 top-2 z-0 hover:cursor-pointer"
                      onMouseEnter={() => setIsHovered(true)}
                      onMouseLeave={() => setIsHovered(false)}
                      onClick={(event) => {

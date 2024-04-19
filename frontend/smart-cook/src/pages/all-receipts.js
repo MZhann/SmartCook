@@ -76,8 +76,8 @@ const AllReceipts = () => {
                         Search
                     </button>
                 </div>
-                <div className={`w-full flex justify-center items-center px-8 md:px-12 lg:px-0`}>
-                    <div className="grid grid-col-1 md:grid-cols-2 self-center lg:grid-cols-4 w-full">
+                <div className={`w-full flex justify-center items-center px-8  lg:px-0 m-3`}>
+                    <div className="grid grid-col-1 md:grid-cols-2 self-center lg:grid-cols-4 w-full place-items-center">
                         {recipes && recipes.slice(0, displayedRecipes).map((recipe, index) => (
 
                             <Recipe recipe={recipe} key={index}/>
