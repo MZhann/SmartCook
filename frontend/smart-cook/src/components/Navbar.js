@@ -137,7 +137,7 @@ const Navbar = () => {
                                             score={userData.score}/>}
                         {userData.photo ? (
                             <Image
-                                className="-mt-1"
+                                className="-mt-1 rounded-full w-[30px] h-[30px] object-cover"
                                 src={userData.photo}
                                 alt="User Photo"
                                 width={30}

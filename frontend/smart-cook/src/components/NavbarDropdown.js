@@ -20,7 +20,7 @@ const NavbarDropdown = ({ photo, name, surname, score }) => {
                             <div className="w-[50px] h-[50px]">
                                 <Image
                                     src={photo}
-                                    className="w-[50px] h-[50px] object-cover"
+                                    className="rounded-full w-[50px] h-[50px] object-cover"
                                     alt="avatar"
                                     width={50}
                                     height={50}
@@ -29,7 +29,7 @@ const NavbarDropdown = ({ photo, name, surname, score }) => {
                         ) : (
                             <div className="w-[50px] h-[50px]">
                                 <Image
-                                    className="-mt-1"
+                                    className="-mt-1 rounded-full object-cover w-[50px] h-[50px]"
                                     src={defaultAvatar}
                                     alt="Default Avatar"
                                     width={50}
