@@ -143,27 +143,35 @@ const EditProfile = ({isModalOpen, onClose, closeModal, userProfile}) => {
                         />
                         {imagePreview ? (
                             <img src={imagePreview} alt="profile"
-                                 className="w-[81px] h-[80px] flex justify-center items-center"/>
+                                 className="w-[81px] rounded-full h-[80px] flex justify-center items-center"/>
                         ) : (
                             <>
                                 {userProfile && userProfile.photo ?
-                                    <Image src={userProfile?.photo} alt={'edit-profile'} width={81} height={81}
-                                           className={'w-[81px] h-[80px] flex justify-center items-center'}/>
+                                    <Image
+                                        src={userProfile?.photo}
+                                        alt={'edit-profile'}
+                                        width={81}
+                                        height={81}
+                                        className={'w-[81px] rounded-full h-[80px] flex justify-center items-center'}
+                                    />
                                     :
-                                    <Image src={editProf} alt={'edit-profile'}
-                                           className={'w-[81px] h-[80px] flex justify-center items-center'}/>
+                                    <Image
+                                        src={editProf}
+                                        alt={'edit-profile'}
+                                        className={'w-[81px] rounded-full h-[80px] flex justify-center items-center'}
+                                    />
                                 }
                             </>
                         )}
                     </div>
                     {errorMessage && <p className={'text-red-700'}>{errorMessage}</p>}
                 </div>
-                <div className={'flex flex-col w-full  '}>
+                <div className={'flex flex-col w-full'}>
                     <p className="text-sm mt-5">First name</p>
                     <input
                         id="email"
-                        className={`w-full rounded-3xl border-2 h-10 shadow-gray-500 text-xs p-3 mt-2`}
-                        placeholder="Enter your surname"
+                        className={`w-full rounded-3xl border-2 h-10 placeholder:text-black shadow-gray-500 text-xs p-3 mt-2`}
+                        placeholder={userProfile?.first_name}
                         type="text"
                         value={firstName}
                         onChange={(e) => setFirstName(e.target.value)}
@@ -171,10 +179,10 @@ const EditProfile = ({isModalOpen, onClose, closeModal, userProfile}) => {
                     <p className="text-sm mt-5">Last name</p>
                     <input
                         id="email"
-                        className={`w-full rounded-3xl border-2 h-10 shadow-gray-500 text-xs p-3 mt-2`}
-                        placeholder="Enter your surname"
+                        className={`w-full rounded-3xl border-2 h-10 placeholder:text-black shadow-gray-500 text-xs p-3 mt-2`}
+                        placeholder={userProfile?.last_name}
                         type="text"
-                        value={lastName} // Use value instead of defaultValue
+                        value={lastName}
                         onChange={(e) => setLastName(e.target.value)}
                     />
                     <div className={'w-full flex flex-col opacity-20'}>
