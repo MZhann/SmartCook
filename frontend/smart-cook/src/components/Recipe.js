@@ -26,7 +26,8 @@ const Recipe = ({recipe}) => {
         return str;
     };
 
-    const handleFavClick = async () => {
+    const handleFavClick = async (event) => {
+        event.preventDefault();
         try {
             const config = {
                 headers: {
@@ -50,7 +51,8 @@ const Recipe = ({recipe}) => {
         }
     };
 
-    const handleRemoveFromFavClick = async () => {
+    const handleRemoveFromFavClick = async (event) => {
+        event.preventDefault();
         try {
             const config = {
                 headers: {
@@ -59,7 +61,7 @@ const Recipe = ({recipe}) => {
             };
             const url = `https://web-production-ad96.up.railway.app/api/v1/recipes/${recipe.id}/remove_from_favorites/`;
 
-            const response = await axios.post(url, recipe.id, config);
+            const response = await axios.delete(url, config);
 
             if (response.status === 200) {
                 const favoriteRecipes = JSON.parse(localStorage.getItem('favoriteRecipes')) || [];
@@ -106,7 +108,7 @@ const Recipe = ({recipe}) => {
                                     </svg>
                                 </button>
                                 :
-                                <button onClick={() => handleRemoveFromFavClick()}>
+                                <button onClick={(event) => handleRemoveFromFavClick(event)}>
                                     <Image src={saved} alt={'saved'}
                                            className={`size-[35px]`}/>
                                 </button>
