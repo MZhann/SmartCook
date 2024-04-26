@@ -19,9 +19,14 @@ const Recipe = ({recipe}) => {
         setIsFavorite(found);
     }, [recipe.id]);
 
-    const handleFavClick = async (event) => {
-        event.preventDefault();
+    const TruncateString = (str) => {
+        if (str.length > 38) {
+            return `${str.slice(0, 37)}...`;
+        }
+        return str;
+    };
 
+    const handleFavClick = async () => {
         try {
             const config = {
                 headers: {
@@ -68,6 +73,7 @@ const Recipe = ({recipe}) => {
     };
 
     return (
+
         <div className="w-[280px] h-[340px] bg-white rounded-lg my-5 ">
             <div className="w-full h-[210px] relative">
                 {recipe.world_cuisine && recipe.dish_type &&
@@ -138,8 +144,8 @@ const Recipe = ({recipe}) => {
                 </div>
                 {recipe &&
                     <>
-                        <div className=" mt-1 text-sm">{recipe.title}</div>
-                        <Like id={recipe.id} count={recipe.likes_count}/>
+                        <div className=" mt-1 text-sm">{TruncateString(recipe.title)}</div>
+                        <Like id={recipe.id} count={recipe.likes_count} />
                     </>
                 }
             </div>
