@@ -12,6 +12,13 @@ const BattleReceiptCard = ({ image, win, user, recipe }) => {
         console.log(recipe);
     }, [])
 
+    const TruncateString = (str) => {
+        if (str.length > 22) {
+            return `${str.slice(0, 22)}...`;
+        }
+        return str;
+    };
+
     return (
         <Link href="/recipes/[recipeTitle]" as={`/recipes/${recipe?.id}`} passHref>
             <div className="w-[230px] h-[275px] rounded-xl bg-white">
@@ -61,7 +68,7 @@ const BattleReceiptCard = ({ image, win, user, recipe }) => {
                     </div>
                 </div>
                 <div className="text-black text-sm ml-3 tracking-wider">
-                    {!recipe?.title ? 'No recipe yet' : recipe?.title}
+                    {!recipe?.title ? 'No recipe yet' : TruncateString(recipe?.title)}
                 </div>
                 <div className="flex z-50 justify-center ">
                     <Like id={recipe?.id} count={recipe?.likes_count}/>

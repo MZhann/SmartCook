@@ -12,6 +12,7 @@ const AcceptedBattle = ({battle}) => {
     const router = useRouter()
     const [timeLeft, setTimeLeft] = useState('');
 
+    
     useEffect(() => {
         const updateTimer = () => {
             const startDate = new Date(battle?.created_at);
