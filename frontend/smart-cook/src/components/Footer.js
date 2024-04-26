@@ -1,5 +1,6 @@
 import React from "react";
 import Image from "next/image";
+import Link from "next/link";
 import mail from "../../public/images/mail.png";
 import phone from "../../public/images/phone.png";
 import location from "../../public/images/location.png";
@@ -19,14 +20,21 @@ const Footer = () => {
                 </div>
 
                 <div className="h-full w-3/12 border-r-2 border-gray-100 flex flex-col justify-center items-center">
-                    <Image src={mail} alt="mail" />
-                    <div className="text-lg mt-3">MAIL</div>
-                    <div className="text-xs">smartcook@gmail.com</div>
+                    <Link
+                        className="flex flex-col items-center justify-center"
+                        href="mailto:smartcook@gmail.com"
+                    >
+                        <Image src={mail} alt="mail" />
+                        <div className="text-lg mt-3">MAIL</div>
+                        <div className="text-xs">smartcook@gmail.com</div>
+                    </Link>
                 </div>
                 <div className="h-full w-3/12 border-r-2 border-gray-100 flex flex-col justify-center items-center">
-                    <Image src={phone} alt="mail" />
-                    <div className="text-lg mt-3">CALL</div>
-                    <div className="text-xs">+7(747)-343-34-34</div>
+                    <Link className="flex flex-col items-center justify-center" href="tel:+77473433434">
+                        <Image src={phone} alt="phone" />
+                        <div className="text-lg mt-3">CALL</div>
+                        <div className="text-xs">+7(747)-343-34-34</div>
+                    </Link>
                 </div>
                 <div className="h-full w-2/12 flex flex-col justify-center items-end">
                     <Image src={location} alt="mail" />
@@ -36,7 +44,9 @@ const Footer = () => {
             </div>
             <div className="flex sm:space-x-96 text-white mt-14 mb-5">
                 <div>SmartCook</div>
-                <div className="mt-1 ml-4 text-xs whitespace-nowrap">2024 © All rights reserved</div>
+                <div className="mt-1 ml-4 text-xs whitespace-nowrap">
+                    2024 © All rights reserved
+                </div>
             </div>
         </div>
     );

@@ -29,7 +29,7 @@ const AiReceipts = () => {
     }
     return (
         <MainContainer>
-            <div className="px-4 lg:px-0 w-full max-w-[1195px] relative flex flex-col items-center">
+            <div className="px-4 lg:px-0 w-full max-w-[1195px] relative flex flex-col items-center mb-56">
                 <Navbar/>
                 <div
                     className={`gap-4 mt-5 flex flex-col items-center justify-center text-center text-white`}
@@ -51,6 +51,7 @@ const AiReceipts = () => {
                     More
                 </button>
             </div>
+            
         </MainContainer>
     );
 };

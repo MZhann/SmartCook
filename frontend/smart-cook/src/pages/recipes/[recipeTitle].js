@@ -11,7 +11,6 @@ import {useEffect, useState} from "react";
 import axios from "axios";
 import {useRouter} from "next/router";
 import StepCard from "@/components/StepCard";
-import Footer from "@/components/Footer";
 
 const RecipeTitle = () => {
     const [recipe, setRecipe] = useState(null);
@@ -127,8 +126,7 @@ const RecipeTitle = () => {
                         ))}
                     </div>
                 </div>
-                <Footer />
-
+                <div className="h-20"></div>
             </div>
         </MainContainer>
     )

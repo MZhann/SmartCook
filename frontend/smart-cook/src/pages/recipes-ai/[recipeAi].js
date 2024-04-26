@@ -9,7 +9,6 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import loading from "../../../public/loading.gif";
-import Footer from "@/components/Footer";
 
 const RecipeAi = () => {
     const [recipe, setRecipe] = useState(null);
@@ -201,8 +200,8 @@ const RecipeAi = () => {
                     <br></br> Always use your best judgement when making
                     AI-generated dishes.
                 </div>
-                <Footer />
             </div>
+            <div className="h-20"></div>
         </MainContainer>
     );
 };
