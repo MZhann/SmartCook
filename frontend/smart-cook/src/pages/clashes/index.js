@@ -358,7 +358,7 @@ const ClashRecipeMake = () => {
                                                                 event
                                                             )
                                                         }
-                                                        className={`w-[650px] rounded-3xl border-2 h-10 shadow-gray-500 text-xs p-3 mt-2`}
+                                                        className={`w-[650px] rounded-3xl mb-3 border-2 h-10 shadow-gray-500 text-xs p-3 mt-2`}
                                                         placeholder="Enter text here"
                                                         type="text"
                                                     />
@@ -373,9 +373,10 @@ const ClashRecipeMake = () => {
                                                         }
                                                     />
                                                 </div>
-                                                <div className={""}>
+                                                <div className={"relative"}>
                                                     <input
                                                         type="file"
+                                                        className={'opacity-0 cursor-pointer h-40 absolute'}
                                                         onChange={(event) =>
                                                             handleStepImageChange(
                                                                 index,
@@ -383,14 +384,23 @@ const ClashRecipeMake = () => {
                                                             )
                                                         }
                                                     />
-                                                    {step.image && (
-                                                        <Image
-                                                            src={URL.createObjectURL(step.image)}
-                                                            alt="Main Image"
-                                                            width={250}
-                                                            height={250}
-                                                        />
-                                                    )
+                                                    {step.image ? (
+                                                            <Image
+                                                                src={URL.createObjectURL(step.image)}
+                                                                alt="Main Image"
+                                                                width={150}
+                                                                height={50}
+                                                            />
+                                                        ) :
+                                                        (
+                                                            <Image
+                                                                src={instax}
+                                                                className={'shadow-gray-500 border-2 rounded-3xl'}
+                                                                alt="Main Image"
+                                                                width={150}
+                                                                height={150}
+                                                            />
+                                                        )
                                                     }
                                                 </div>
                                             </div>
