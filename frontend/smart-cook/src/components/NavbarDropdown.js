@@ -14,7 +14,7 @@ const NavbarDropdown = ({ photo, name, surname, score }) => {
     return (
         <div className="w-[333px] h-[281px] text-white flex flex-col z-50 items-center bg-gray-500 absolute top-10 right-0 rounded-2xl">
             <div className="w-[285px] flex flex-col ">
-                <Link href={"/profile"} className="flex mt-10 ">
+                <Link href={"/profile"} className="flex mt-10 mb-3">
                     <div className="w-[285px] h-[50px] rounded-full flex space-x-5">
                         {photo ? (
                             <div className="w-[50px] h-[50px]">
@@ -37,17 +37,17 @@ const NavbarDropdown = ({ photo, name, surname, score }) => {
                                 />
                             </div>
                         )}
-                        <div className=" ">
-                            <div className="flex">
+                        <div className="flex flex-col items-start">
+                            <div className="flex text-left">
                                 {name} {surname}
                             </div>
-                            <div className="flex">
+                            <div className="flex items-center">
                                 <Image
                                     src={coin}
                                     className="w-[16px] h-[16px]"
                                     alt="coin"
                                 />
-                                &nbsp; {score}
+                                <div className="text-left ">&nbsp; {score}</div>
                             </div>
                         </div>
                     </div>

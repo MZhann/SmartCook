@@ -47,13 +47,15 @@ const Navbar = () => {
                 }
 
                 const userData = await response.json();
-                const {first_name, last_name, photo} = userData;
+                console.log(userData);
+                const {first_name, last_name, photo, score} = userData;
 
                 // Update state with the fetched data (only saving required fields)
                 setUserData({
                     firstName: first_name,
                     lastName: last_name,
                     photo: photo,
+                    score: score
                 });
 
             } catch (error) {
@@ -132,7 +134,7 @@ const Navbar = () => {
                     }}>
                         {isProfileDropdownOpen &&
                             <NavbarDropdown photo={userData.photo} name={userData.firstName} surname={userData.lastName}
-                                            score={250}/>}
+                                            score={userData.score}/>}
                         {userData.photo ? (
                             <Image
                                 className="-mt-1"
