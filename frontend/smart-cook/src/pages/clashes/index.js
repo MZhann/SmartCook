@@ -440,8 +440,8 @@ const ClashRecipeMake = () => {
                             }
                         </div>
                     </div>
-                    <Footer/>
                 </div>
+                <div className="h-40"></div>
             </MainContainer>
         );
     }
