@@ -13,7 +13,9 @@ const Recipe = ({recipe}) => {
     const router = useRouter();
     const [isHovered, setIsHovered] = useState(false);
     const [isFavorite, setIsFavorite] = useState(false);
-    const [favorites, setFavorites] = useState()
+    const [favorites, setFavorites] = useState();
+
+
     useEffect(() => {
         const fetchUserFavorites = () => {
             axios.get(`${config.baseUrl}/api/v1/user/favorites/`, {
@@ -25,6 +27,8 @@ const Recipe = ({recipe}) => {
 
         fetchUserFavorites();
     }, []);
+
+
 
     useEffect(() => {
         const favoriteRecipes = favorites || [];
@@ -88,8 +92,7 @@ const Recipe = ({recipe}) => {
     };
 
     return (
-
-        <div className="w-[280px] h-[340px] bg-white rounded-lg my-5 ">
+        <div className={`w-[280px] h-[340px] ${router.pathname === "/profile" ? 'bg-[#2A293B]' : 'bg-white'}  rounded-lg my-5 `}>
             <div className="w-full h-[210px] relative">
                 {recipe.world_cuisine && recipe.dish_type &&
                     <div
@@ -160,7 +163,7 @@ const Recipe = ({recipe}) => {
                                        className="mr-2 object-contain rounded-5xl" alt="profile avatar"/> :
                                 <Image src={defaultFood} alt={'avatar'} className={'object-contain size-[40px]'}/>
                             }
-                            <div className="text-xs">{recipe.user.first_name} {recipe.user.last_name}</div>
+                            <div className={`text-xs ${router.pathname === "/profile" ? 'text-white' : 'text-black'}`}>{recipe.user.first_name} {recipe.user.last_name}</div>
                         </>) :
                         (<>
                             <Image width={20} height={20} src={aiLogo} className="mr-2 rounded-5xl"
@@ -171,8 +174,8 @@ const Recipe = ({recipe}) => {
                 </div>
                 {recipe &&
                     <>
-                        <div className=" mt-1 text-sm">{TruncateString(recipe.title)}</div>
-                        <Like id={recipe.id} count={recipe.likes_count} />
+                        <div className={`mt-1 mb-1 text-sm ${router.pathname === "/profile" ? 'text-white' : 'text-black'}`}>{TruncateString(recipe.title)}</div>
+                        <Like id={recipe.id} count={recipe?.likes_count} />
                     </>
                 }
             </div>

@@ -128,6 +128,7 @@ const AiRecipe = () => {
                             <button
                                 onClick={() => {
                                     localStorage.removeItem("recipe");
+                                    window.location.href = "/ai-generation"
                                 }}
                                 className="w-[210px] h-[48px] text-white text-lg bg-[#FF5858] flex justify-center items-center rounded-full mt-10"
                             >

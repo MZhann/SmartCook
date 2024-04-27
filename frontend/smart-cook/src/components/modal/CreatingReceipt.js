@@ -56,7 +56,7 @@ const CreatingReceipt = ({ isLoading, isModalOpen, onClose, closeModal, recipeId
                             <div className="text-3xl font-bold text-[#AAE06E]">
                                 Your Recipe is Created
                             </div>
-                            <Link href={`/recipes-ai/[recipeAi]`} as={`/recipes-ai/${recipeId && recipeId}`} passHref className="mt-4 w-[250px] h-[35px] bg-[#AAE06E] flex justify-center items-center text-white rounded-2xl hover:bg-green-500">
+                            <Link href={`/ai-recipe`} passHref className="mt-4 w-[250px] h-[35px] bg-[#AAE06E] flex justify-center items-center text-white rounded-2xl hover:bg-green-500">
                                 See Result
                             </Link>
                         </div>

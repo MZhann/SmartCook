@@ -48,7 +48,7 @@ const EightPuzzle = ({setIsHidden, setWhatGame, setIsMiniGamesHidden}) => {
         }
     }
 
-    // shuffle(initialTiles);
+    shuffle(initialTiles);
 
     const handleTileClick = (index) => {
         const emptyIndex = tiles.indexOf(0);
