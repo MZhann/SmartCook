@@ -61,7 +61,7 @@ const Challenges = () => {
 
     return (
         <MainContainer>
-            <div className=" w-full max-w-[1195px] relative flex flex-col items-center">
+            <div className=" w-full max-w-[1195px] relative flex flex-col items-center px-4">
                 <Navbar/>
                 <div
                     className={`gap-4 mt-5 flex flex-col items-center justify-center text-center `}
@@ -69,7 +69,7 @@ const Challenges = () => {
                     <h1 className={`flex self-center text-black text-3xl mt-3 font-black`}>
                         Culinary Clash: Battle Royale of Flavors
                     </h1>
-                    <p className={"font-[400]"}>
+                    <p className={"font-[400] text-pretty"}>
                         Take part in heated culinary duels, where the most
                         mouth-watering recipes compete for<br></br> supremacy.
                         Show your support by liking your favorite dueling dishes
@@ -80,7 +80,7 @@ const Challenges = () => {
 
                 <div className="flex items-center space-x-4 mt-10">
                     <button onClick={openModal}
-                            className="px-4 py-2 rounded-full bg-[#AAE06E] hover:bg-green-500 focus:outline-none w-[450px] text-white text-xl font-bold h-[60px]">
+                            className="px-4 py-2 rounded-full bg-[#AAE06E] hover:bg-green-500 focus:outline-none w-[300px] sm:w-[450px] text-white text-xl font-bold h-[60px]">
                         Let&apos;s Battle
                     </button>
                 </div>
@@ -89,7 +89,7 @@ const Challenges = () => {
                     Current Battles
                 </h1>
 
-                <div className="grid grid-cols-2 w-full">
+                <div className="flex flex-wrap  w-full">
                     {clashes && clashes.slice(0, displayedRecipes).map((clash, index) => (
                         <AcceptedBattle key={index} battle={clash && clash}/>
                     ))}

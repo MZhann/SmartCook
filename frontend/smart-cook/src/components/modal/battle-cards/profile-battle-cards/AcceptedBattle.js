@@ -44,7 +44,7 @@ const AcceptedBattle = ({battle}) => {
     }, [battle?.created_at]);
     console.log(battle.winner !== null && battle?.winner.first_name === battle?.initiator.first_name);
     return (
-        <div className={`${router.pathname === '/challenges' && 'mt-4'} max-w-[574px] min-h-[546px] rounded-3xl text-white bg-[#2A293B] flex flex-col items-center justify-between`}>
+        <div className={`${router.pathname === '/challenges' && 'mt-4'} w-full sm:max-w-[574px] sm:min-h-[546px] rounded-3xl text-white bg-[#2A293B] flex flex-col items-center justify-between`}>
             <Image
                 src={cookBattle}
                 alt="Cook Battle"
@@ -52,10 +52,10 @@ const AcceptedBattle = ({battle}) => {
             />
             <div className="text-lg mt-3">Culinary Clash {battle.id}</div>
             <div className="text-3xl text-white mt-2">{battle?.theme}</div>
-            <div className="w-[150px] h-[36px] bg-[#AAE06E] flex justify-center items-center text-2xl font-bold tracking-wider rounded-3xl mt-4">
+            <div className="w-72 p-3 sm:p-0 sm:w-[150px] sm:h-[36px] bg-[#AAE06E] flex justify-center items-center text-2xl font-bold tracking-wider rounded-3xl mt-4">
                 {timeLeft}
             </div>
-            <div className="flex flex-col md:flex-row justify-between items-center w-full p-6">
+            <div className="flex flex-col sm:flex-row justify-between items-center w-full p-6">
                 <BattleReceiptCard user={battle.initiator} recipe={battle?.initiator_recipe} win={battle.winner !== null && battle?.winner.first_name === battle?.initiator.first_name}/>
                 <Image src={vs} alt="vs" className="w-[50px] h-[50px]" />
                 <BattleReceiptCard user={battle.opponent} recipe={battle?.opponent_recipe} win={battle.winner !== null && battle?.winner.first_name === battle?.opponent.first_name}/>
