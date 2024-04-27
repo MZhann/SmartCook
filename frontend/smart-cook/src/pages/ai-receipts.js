@@ -4,7 +4,6 @@ import Recipe from "@/components/Recipe";
 import axios from "axios";
 import {config} from "../../config";
 import {useEffect, useState} from "react";
-import Link from "next/link";
 
 const AiReceipts = () => {
     const [recipes, setRecipes] = useState(null);
@@ -17,7 +16,7 @@ const AiReceipts = () => {
 
     useEffect(() => {
         fetchData().catch(err => console.error(err));
-    }, [])
+    })
 
     const fetchData = async () => {
         try {
