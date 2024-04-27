@@ -3,9 +3,9 @@ import potato from "../../public/images/potato.jpg";
 
 const StepCard = ({item, index}) => {
     return (
-            <div className={`bg-white flex flex-col sm:w-[500px] xl:w-[524px] pb-4 rounded-3xl`}>
+            <div className={`bg-white flex flex-col w-full sm:w-[500px] xl:w-[524px] pb-4 rounded-3xl`}>
                 {item && item.image ?
-                    <Image className={`object-cover rounded-t-3xl h-[382px] w-[524px]`} width={574} height={382} src={item.image}
+                    <Image className={`object-contain rounded-t-3xl h-320px sm:h-[382px] sm:w-[524px]`} width={574} height={382} src={item.image}
                            alt={'potato'}/>
                     :
                     <Image className={`object-cover rounded-t-3xl`} src={potato} alt={'potato'} width={574} height={382}/>

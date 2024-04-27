@@ -38,10 +38,11 @@ const Recipe = ({recipe}) => {
 
     const TruncateString = (str) => {
         if (str.length > 38) {
-            return `${str.slice(0, 37)}...`;
+            return `${str.slice(0, 37)}...`.toLowerCase();
         }
-        return str;
+        return str.toLowerCase();
     };
+    
 
     const handleFavClick = async (event) => {
         event.preventDefault();
