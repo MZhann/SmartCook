@@ -9,6 +9,7 @@ import Link from "next/link";
 const AiReceipts = () => {
     const [recipes, setRecipes] = useState(null);
     const [displayedRecipes, setDisplayedRecipes] = useState(8); // Initial number of recipes displayed
+    const [recipesCount, setRecipesCount] = useState(0);
 
     const loadMoreRecipes = () => {
         setDisplayedRecipes(prevCount => prevCount + 4); // Increment by 4 each time the button is clicked
@@ -23,6 +24,7 @@ const AiReceipts = () => {
             const data = await axios.get(`${config.baseUrl}/api/v1/recipes/ai/all`);
             setRecipes(data.data);
             console.log(recipes)
+            setRecipesCount(data.data.length)
         } catch (error) {
             console.error(error);
         }
@@ -35,7 +37,7 @@ const AiReceipts = () => {
                     className={`gap-4 mt-5 flex flex-col items-center justify-center text-center text-white`}
                 >
                     <h1 className={`flex flex-col md:flex-row self-center text-3xl mt-3`}>
-                        Discover &nbsp;<span className="text-[#AAE06E]">2534</span>&nbsp; AI-Generated Recipes
+                        Discover &nbsp;<span className="text-[#AAE06E]">{recipesCount}</span>&nbsp; AI-Generated Recipes
                     </h1>
                 </div>
 
