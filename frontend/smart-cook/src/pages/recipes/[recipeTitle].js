@@ -126,7 +126,7 @@ const RecipeTitle = () => {
                         ))}
                     </div>
                 </div>
-                <div className="h-20"></div>
+                <div className="h-40"></div>
             </div>
         </MainContainer>
     )

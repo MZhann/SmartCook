@@ -116,7 +116,16 @@ const Recipe = ({recipe}) => {
                         </>
                     }
                 </div>
-                <Link href="/recipes/[recipeTitle]" as={`/recipes/${recipe.id}`} passHref>
+                {router.pathname === "/ai-receipts" ? 
+                <Link href="/recipes-ai/[recipeAi]" as={`/recipes-ai/${recipe.id}`} passHref>
+                {recipe && recipe.image ?
+                    (<Image width={280} height={211}
+                            className={'w-[px] z-0 h-[211px] rounded-tl-[8px] rounded-tr-[8px]'} src={recipe.image}
+                            alt="Food"/>
+                    ) :
+                    (<Image className="w-[280xp] h-[211px] object-cover" src={defaultFood} alt="Food"/>)
+                }
+            </Link> :  <Link href="/recipes/[recipeTitle]" as={`/recipes/${recipe.id}`} passHref>
                     {recipe && recipe.image ?
                         (<Image width={280} height={211}
                                 className={'w-[px] z-0 h-[211px] rounded-tl-[8px] rounded-tr-[8px]'} src={recipe.image}
@@ -124,7 +133,10 @@ const Recipe = ({recipe}) => {
                         ) :
                         (<Image className="w-[280xp] h-[211px] object-cover" src={defaultFood} alt="Food"/>)
                     }
-                </Link>
+                </Link>                   
+
+                }
+               
             </div>
             <div className="relative w-full h-[107px] rounded-b-lg p-4">
                 <div className="flex items-center">

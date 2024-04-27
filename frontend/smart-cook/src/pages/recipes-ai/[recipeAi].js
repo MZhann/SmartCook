@@ -68,7 +68,7 @@ const RecipeAi = () => {
                         Your Custom AI-Generation Recipe is Ready - Bon Appetit
                     </p>
                 </div>
-                <div className={"mt-8 text-white flex flex-row w-full"}>
+                <div className={"mt-8 text-white flex flex-row w-full "}>
                     <div className={`flex flex-col gap-3 w-[500px]`}>
                         {isLoading == "loading" ? (
                             <div className="h-[400px] w-[400px] flex justify-center items-center">

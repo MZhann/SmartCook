@@ -43,9 +43,9 @@ const AiReceipts = () => {
 
                 <div className="grid grid-cols-1 place-items-center md:grid-cols-2 px-8 md:px-0 lg:grid-cols-4 w-full">
                     {recipes && recipes.slice(0, displayedRecipes).map((recipe, index) => (
-                        <Link key={index} href="/recipes-ai/[recipeAi]" as={`/recipes-ai/${recipe.id}`} passHref>
+                        // <Link key={index} href="/recipes-ai/[recipeAi]" as={`/recipes-ai/${recipe.id}`} passHref>
                             <Recipe recipe={recipe}/>
-                        </Link>
+                        // </Link>
                     ))}
                 </div>
                 <button onClick={loadMoreRecipes}
