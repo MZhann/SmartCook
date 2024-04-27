@@ -54,7 +54,7 @@ const RecipeAi = () => {
     console.log(query.recipeAi);
     return (
         <MainContainer>
-            <div className=" w-full max-w-[1195px] relative flex flex-col ">
+            <div className=" w-full max-w-[1195px] relative flex flex-col pl-4 pr-4">
                 <Navbar />
                 <div
                     className={`gap-4 mt-5 flex flex-col items-center justify-center text-center text-white`}
@@ -68,10 +68,10 @@ const RecipeAi = () => {
                         Your Custom AI-Generation Recipe is Ready - Bon Appetit
                     </p>
                 </div>
-                <div className={"mt-8 text-white flex flex-row w-full "}>
-                    <div className={`flex flex-col gap-3 w-[500px]`}>
+                <div className={"mt-8 text-white flex flex-col items-center w-full lg:flex-row lg:items-start"}>
+                    <div className={`flex flex-col gap-3 lg:w-[500px] w-full items-center justify-center`}>
                         {isLoading == "loading" ? (
-                            <div className="h-[400px] w-[400px] flex justify-center items-center">
+                            <div className="lg:h-[350px] lg:w-[350px] w-[300px] h-[300px] flex justify-center items-center">
                                 <Image
                                     src={loading}
                                     width={100}
@@ -81,7 +81,7 @@ const RecipeAi = () => {
                                 />
                             </div>
                         ) : (
-                            <div>
+                            <div className="flex justify-center lg:justify-start">
                                 {recipe?.image ? (
                                     <Image
                                         width={400}
@@ -101,12 +101,12 @@ const RecipeAi = () => {
                         )}
 
                         <div
-                            className={`flex flex-row items-center text-[20px] gap-7 font-[300]`}
+                            className={`flex flex-row items-center justify-center lg:justify-start text-[20px] gap-7 mb-10 mr-5 lg:mr-0 lg:mb-0`}
                         >
                             <div
                                 className={`ml-3 flex flex-row items-center gap-3`}
                             >
-                                <Image src={clock} alt={"clocl"} />
+                                <Image src={clock} alt={"clock"} />
                                 <p>{recipe?.cook_time} minutes</p>
                             </div>
                             <div className={`flex flex-row items-center gap-3`}>
@@ -115,9 +115,9 @@ const RecipeAi = () => {
                             </div>
                         </div>
                     </div>
-                    <div className={`flex flex-col w-2/3`}>
+                    <div className={`flex flex-col lg:w-2/3 w-11/12`}>
                         <div
-                            className={`w-3/5 flex flex-row items-center space-x-4`}
+                            className={`lg:w-3/5 w-full flex flex-row items-center lg:p-0 pl-20 space-x-4`}
                         >
                             <div className="w-[100[x] h-[36px] bg-[#DAE8FF] text-[#203878] text-lg flex justify-center items-center rounded-full p-4">
                                 {recipe?.world_cuisine}
@@ -126,14 +126,14 @@ const RecipeAi = () => {
                                 {recipe?.dish_type}
                             </div>
                         </div>
-                        <div className={`mt-4 leading-tight`}>
+                        <div className={`flex flex-col items-center  text-center lg:flex lg:items-start lg:text-start mt-4 leading-tight`}>
                             <h1
-                                className={`w-[520px] text-[40px] mb-4 mt-5 tracking-wider`}
+                                className={`w-full lg:w-[550px] text-3xl lg:text-[40px] mb-4 mt-5 lg:tracking-wider text-pretty leading-snug`}
                             >
                                 {recipe?.title}
                             </h1>
                             <p
-                                className={`w-[92%] text-left text-2xl tracking-wider leading-[36px]`}
+                                className={`w-full lg:w-[92%] lg:text-left text-2xl tracking-wider leading-[36px] text-justify`}
                             >
                                 {recipe?.description}
                             </p>
@@ -166,9 +166,10 @@ const RecipeAi = () => {
                         </div>
                     </div>
                 </div>
-                <div className="flex">
-                    <div className={`flex flex-col w-[500px] mt-16`}>
-                        <h1 className={`text-[#AAE06E] text-[28px]`}>
+                <div className="flex flex-col items-center lg:items-start lg:flex-row">
+                    
+                    <div className={`flex flex-col lg:w-[500px] w-[90%] mt-16 lg:ml-0`}>
+                        <h1 className={`text-[#AAE06E] text-[28px]  `}>
                             Ingredients
                         </h1>
                         <ul
@@ -182,10 +183,10 @@ const RecipeAi = () => {
                                 ))}
                         </ul>
                     </div>
-                    <div className={`flex flex-col w-full mt-16 ml-24`}>
+                    <div className={`flex flex-col w-[85%] lg:w-full mt-16  ml-0 lg:ml-24`}>
                         <h1 className={`text-[#AAE06E] text-[28px]`}>
                             Direction
-                            <ol className="list-decimal text-white w-[630px] text-xl">
+                            <ol className="list-decimal text-white lg:w-[630px] w-[90%] text-xl">
                                 {recipe &&
                                     recipe.steps.map((item, index) => (
                                         <li key={index}>{item.step_text}</li>
@@ -194,7 +195,7 @@ const RecipeAi = () => {
                         </h1>
                     </div>
                 </div>
-                <div className="w-[953px] h-[75px] border-2 border-[#AAE06E] rounded-2xl self-center mt-16 mb-16 text-center text-[#AAE06E] text-md flex justify-center items-center">
+                <div className="lg:w-full w-[90%]  lg:h-[75px] h-auto p-2 border-2 border-[#AAE06E] rounded-2xl self-center mt-16 mb-16 text-center text-[#AAE06E] text-md flex justify-center items-center">
                     NOTE: This recipe is AI-generated and DishGen has not
                     verified it for accuracy or safety. It may contain errors.{" "}
                     <br></br> Always use your best judgement when making
