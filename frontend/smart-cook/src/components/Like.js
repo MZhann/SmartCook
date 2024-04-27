@@ -35,7 +35,6 @@ const Like = ({ count, id }) => {
         try {
             await axios.delete(
                 `${config.baseUrl}/api/v1/recipes/${id}/like/`,
-                id,
                 {
                     headers: {
                         Authorization:

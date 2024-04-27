@@ -50,7 +50,6 @@ const AiReceipts = () => {
                     More
                 </button>
             </div>
-            
         </MainContainer>
     );
 };

@@ -1,7 +1,6 @@
 import React from "react";
 import Ingredient from "./Ingredient";
 import { useState } from "react";
-import Image from "next/image";
 import apple from "../../../public/images/apple.png";
 import avocado from "../../../public/images/avocado.png";
 import banana from "../../../public/images/banana.png";
@@ -56,18 +55,6 @@ const ChooseDetails = () => {
 
 
         const selectedCount = newCheckboxes.filter((checkbox) => checkbox).length;
-        // setCheckboxes(newCheckboxes);
-
-        // if (newCheckboxes[index]) {
-        //     setIngredients((prevIngredients) => [
-        //         ...prevIngredients,
-        //         { name: name },
-        //     ]);
-        // } else {
-        //     setIngredients((prevIngredients) =>
-        //         prevIngredients.filter((ingredient) => ingredient.name !== name)
-        //     );
-        // }
 
         if (newCheckboxes[index] && selectedCount <= MAX_INGREDIENTS) {
             setCheckboxes(newCheckboxes);

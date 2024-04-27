@@ -1,17 +1,12 @@
-import React, { useEffect } from "react";
-import { useState } from "react";
+import React, {useEffect, useState} from "react";
 import Dropdown from "./Dropdown";
 import magic from "../../../public/images/magic.png";
 import Image from "next/image";
-import { config } from "../../../config";
+import {config} from "../../../config";
 import CreatingReceipt from "../modal/CreatingReceipt";
-import { OpenAI } from "openai";
-import Link from "next/link";
 import MiniGames from "../modal/MiniGames";
-
-
-
-import { getTokenCount, decrementTokenCount } from "../../utils/token";
+import {decrementTokenCount, getTokenCount} from "@/utils/token";
+import {error} from "next/dist/build/output/log";
 
 const Options = ({ ingredients }) => {
     const [isModalOpen, setIsModalOpen] = useState(false);
@@ -29,22 +24,14 @@ const Options = ({ ingredients }) => {
     const [isMiniGamesOpen, setIsMiniGamesOpen] = useState(false);
     const [tokenCount, setTokenCount] = useState(0); //TOKEN
 
-
-    //TOKEN LOGIC
-    
-    
     useEffect(() => {
         const initialCount = getTokenCount();
         setTokenCount(initialCount);
     }, []);
 
     const handleGenerateReceipt = () => {
-        // Check if tokens are available
         if (tokenCount > 0) {
-            handleSubmit();
-            // Call API to generate receipt
-            // Assuming an API call here to generate receipt
-            // After successful generation, decrement token count
+            handleSubmit().catch(err => console.error(err));
             decrementTokenCount();
             setTokenCount((prevCount) => prevCount - 1);
         } else {
@@ -54,7 +41,6 @@ const Options = ({ ingredients }) => {
             setIsMiniGamesOpen(true);
         }
     };
-    //TOKEN LOGIC END
 
     const openModal = () => {
         setIsModalOpen(true);
@@ -74,8 +60,6 @@ const Options = ({ ingredients }) => {
     const handleBanIngredientsChange = (event) => {
         setBanIngredients(event.target.value);
     };
-
-    // Image generation Started
 
     const generateImage = async (promptTextForImage) => {
         const options = {
@@ -122,8 +106,6 @@ const Options = ({ ingredients }) => {
 
         if (startIndex === -1 || endIndex === -1 || startIndex >= endIndex) {
             startIndex = recipeText.indexOf("description");
-            // endIndex = recipeText.indexOf("ingredients")
-            // return "Directions and description not found.";
         }
         const directions = recipeText
             .substring(directionsStartIndex + "Directions:".length)
@@ -133,9 +115,8 @@ const Options = ({ ingredients }) => {
             .trim();
 
         const firstWords = "GENERATE A PHOTO OF A DISH with these Ingredients: "
-        
-        const text = firstWords + directions + ". " + description;
-        return text;
+
+        return firstWords + directions + ". " + description;
     };
 
     // Image generation Ended
@@ -218,37 +199,13 @@ const Options = ({ ingredients }) => {
         console.log("parsedRecipe is below");
         console.log(parsedRecipe);
         console.log("recipe", recipe);
-        postReceipt(parsedRecipe);
+        postReceipt(parsedRecipe).catch(err => console.error(err));
     };
 
     const postReceipt = async (parsedReceipt) => {
         console.log("posting this recipe:");
         console.log(parsedReceipt);
-        try {
-            const response = await fetch(
-                `${config.baseUrl}/api/v1/recipes/ai/`,
-                {
-                    method: "POST",
-                    headers: {
-                        Authorization:
-                            `Bearer ` + localStorage.getItem("accessToken"),
-                        "Content-Type": "application/json",
-                    },
-                    body: JSON.stringify(parsedReceipt),
-                }
-            );
-
-            if (response.ok) {
-                const data = await response.json();
-                console.log("Recipe posted successfully:", data);
-                console.log("data id: " + data.id);
-                setRecipeId(data.id);
-            } else {
-                console.error("Failed to post recipe:", response.statusText);
-            }
-        } catch (error) {
-            console.error("Error posting recipe:", error);
-        }
+        localStorage.setItem("recipe", JSON.stringify(parsedReceipt))
     }
     const reduceImagePromptLength = (text) => {
         const maxLength = 998; // Maximum allowed length for the prompt text

@@ -54,7 +54,7 @@ const CreatingReceipt = ({ isLoading, isModalOpen, onClose, closeModal, recipeId
                     ) : (
                         <div className="flex flex-col justify-center items-center h-[280px]">
                             <div className="text-3xl font-bold text-[#AAE06E]">
-                                Your Receipt is Created
+                                Your Recipe is Created
                             </div>
                             <Link href={`/recipes-ai/[recipeAi]`} as={`/recipes-ai/${recipeId && recipeId}`} passHref className="mt-4 w-[250px] h-[35px] bg-[#AAE06E] flex justify-center items-center text-white rounded-2xl hover:bg-green-500">
                                 See Result

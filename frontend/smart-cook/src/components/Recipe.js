@@ -7,17 +7,30 @@ import aiLogo from "@/../public/images/ai-logo.png";
 import {useRouter} from "next/router";
 import Link from "next/link";
 import saved from "@/../public/images/bluesaved.png"
+import {config} from "../../config";
 
 const Recipe = ({recipe}) => {
     const router = useRouter();
     const [isHovered, setIsHovered] = useState(false);
     const [isFavorite, setIsFavorite] = useState(false);
+    const [favorites, setFavorites] = useState()
+    useEffect(() => {
+        const fetchUserFavorites = () => {
+            axios.get(`${config.baseUrl}/api/v1/user/favorites/`, {
+                headers: {
+                    Authorization: "Bearer " + localStorage.getItem("accessToken"),
+                }
+            }).then(r => setFavorites(r.data)).catch(err => console.error(err));
+        }
+
+        fetchUserFavorites();
+    }, []);
 
     useEffect(() => {
-        const favoriteRecipes = JSON.parse(localStorage.getItem('favoriteRecipes')) || [];
+        const favoriteRecipes = favorites || [];
         const found = favoriteRecipes.some(favRecipe => favRecipe.id === recipe.id);
         setIsFavorite(found);
-    }, [recipe.id]);
+    }, [favorites, recipe.id]);
 
     const TruncateString = (str) => {
         if (str.length > 38) {
