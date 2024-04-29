@@ -4,7 +4,7 @@ import BattleReceiptCard from "./BattleReceiptCard";
 import vs from "../../../../../public/images/vs.png";
 import time from "../../../../../public/images/time.png";
 
-const WaitingOpponent = ({battle}) => {
+const WaitingOpponent = ({battle, doNotShow}) => {
     return (
         <div className="w-full lg:w-[574px] mb-4 rounded-3xl text-white bg-[#2A293B] flex flex-col items-center justify-between">
             <Image
@@ -20,7 +20,7 @@ const WaitingOpponent = ({battle}) => {
             </div>
 
             <div className="flex justify-between items-center w-full flex-col sm:flex-row md:justify-center md:space-x-6  p-6">
-                <BattleReceiptCard recipe={battle?.initiator_recipe} user={battle?.initiator}/>
+                <BattleReceiptCard recipe={battle?.initiator_recipe} user={battle?.initiator} doNotShow={doNotShow}/>
                 <Image src={vs} alt="vs" className="w-[50px] h-[50px]" />
                 <div className="w-[230px] h-[275px] rounded-xl bg-white flex flex-col items-center justify-center ">
                     <div className="text-black text-lg font-bold mb-3">Waiting for Opponent</div>

@@ -424,7 +424,7 @@ const RecipeMake = () => {
                                                 <button
                                                     onClick={handlePublish}
                                                     className={
-                                                        "mb-[100px] self-center mt-7 items-center flex gap-3 text-white text-[28px] justify-center w-[450px] h-[60px] rounded-[30px] bg-[#AAE06E]"
+                                                        "mb-[100px] self-center mt-7 items-center flex gap-3 text-white text-lg md:text-[28px] justify-center w-[300px] md:w-[450px] h-[40px] md:h-[60px] rounded-[30px] bg-[#AAE06E]"
                                                     }
                                                 >
                                                     Publish
@@ -432,7 +432,7 @@ const RecipeMake = () => {
                                                 <button
                                                     onClick={handlePublish}
                                                     className={
-                                                        "mb-[100px] self-center mt-7 items-center flex gap-3 text-white text-[28px] justify-center w-[450px] h-[60px] rounded-[30px] bg-[#AAE06E]"
+                                                        "mb-[100px] self-center mt-7 items-center flex gap-3 text-white text-xl md:text-[28px] justify-center w-[300px] md:w-[450px] h-[40px] md:h-[60px] rounded-[30px] bg-[#AAE06E]"
                                                     }
                                                 >
                                                     Publishing....

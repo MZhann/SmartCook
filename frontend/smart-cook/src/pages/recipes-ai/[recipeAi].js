@@ -57,7 +57,7 @@ const RecipeAi = () => {
                                     width={100}
                                     height={100}
                                     className="rounded-[20px] object-cover"
-                                    alt="food"
+                                    alt="loading-gif"
                                 />
                             </div>
                         ) : (

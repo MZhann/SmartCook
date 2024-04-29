@@ -42,7 +42,6 @@ const Recipe = ({recipe}) => {
         }
         return str.toLowerCase();
     };
-    
 
     const handleFavClick = async (event) => {
         event.preventDefault();
@@ -161,7 +160,7 @@ const Recipe = ({recipe}) => {
                         (<>
                             {recipe.user.photo ?
                                 <Image src={recipe?.user.photo} height={40} width={40}
-                                       className="mr-2 object-contain rounded-5xl" alt="profile avatar"/> :
+                                       className="mr-2 rounded-full w-[30px] h-[30px] object-cover rounded-5xl" alt="profile avatar"/> :
                                 <Image src={defaultFood} alt={'avatar'} className={'object-contain size-[40px]'}/>
                             }
                             <div className={`text-xs ${router.pathname === "/profile" ? 'text-white' : 'text-black'}`}>{recipe.user.first_name} {recipe.user.last_name}</div>

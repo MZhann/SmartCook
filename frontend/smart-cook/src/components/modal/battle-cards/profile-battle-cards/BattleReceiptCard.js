@@ -6,7 +6,7 @@ import Like from "@/components/Like";
 import {useEffect} from "react";
 import Link from "next/link";
 
-const BattleReceiptCard = ({ image, win, user, recipe }) => {
+const BattleReceiptCard = ({ image, win, user, recipe, doNotShow }) => {
 
     useEffect(() => {
         console.log(recipe);
@@ -70,9 +70,10 @@ const BattleReceiptCard = ({ image, win, user, recipe }) => {
                 <div className="text-black text-sm ml-3 tracking-wider">
                     {!recipe?.title ? 'No recipe yet' : TruncateString(recipe?.title)}
                 </div>
-                <div className="flex z-50 justify-center ">
+                {!doNotShow ? <div className="flex z-50 justify-center ">
                     <Like id={recipe?.id} count={recipe?.likes_count}/>
-                </div>
+                </div> : <div className="h-10"></div> }
+                
             </div>
         </Link>
     );

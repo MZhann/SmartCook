@@ -142,9 +142,15 @@ const Profile = () => {
                                 </p>
                             </div>
                             <div className={`flex flex-row  gap-4 mt-1`}>
-                                <IDidIt />
-                                <Superstar />
-                                <AIchef />
+                                
+                                {userProfile?.awardBurger && <IDidIt /> }
+                                {userProfile?.top_ten_achievement && <Superstar />}
+                                {userProfile?.awardBake && <AIchef />}
+
+                                {(userProfile?.awardBurger !== false && userProfile?.top_ten_achievement !== false && userProfile?.awardBake !== false) ? null : <div className="text-white text-xs">There are no awards yet</div>}
+
+
+                                
                             </div>
                         </div>
                         <div className={`flex gap-3 flex-col mt-[160px]`}>
@@ -190,7 +196,7 @@ const Profile = () => {
                     userProfile &&
                     battle[0]?.status === "pending" &&
                     battle[0]?.initiator.id === userProfile?.id ? (
-                        <WaitingOpponent battle={battle[0]}/>
+                        <WaitingOpponent battle={battle[0]} doNotShow={true}/>
                     ) : battle && battle[0]?.initiator !== userProfile?.id && battle[0]?.status ===  "pending" ? (
                         <AcceptDecline battle={battle[0]}/>
                     ) : battle && battle[0]?.status === "accepted" &&
