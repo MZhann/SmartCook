@@ -185,11 +185,11 @@ const Recipe = ({recipe}) => {
                             <div className="text-xs">SmartCook</div>
                         </>)
                     }
-                    {showModal && (
-                        <Modal onClose={(e) => unshowProfileModal(e)}>
-                            <UserInfo id={recipe.user.id}/>
-                        </Modal>
-                    )} 
+                    {/*{showModal && router.pathname !== '/ai-reciepts' (*/}
+                    {/*    <Modal onClose={(e) => unshowProfileModal(e)}>*/}
+                    {/*        <UserInfo id={recipe.user.id}/>*/}
+                    {/*    </Modal>*/}
+                    {/*)} */}
                 </div>
                 {recipe &&
                     <>
