@@ -32,8 +32,6 @@ const UserInfo = ({ id }) => {
         return <div>Loading...</div>;
     }
 
-    console.log("user:", user);
-
     return (
         <div className="flex flex-col z-50">
             <div
@@ -92,7 +90,6 @@ const UserInfo = ({ id }) => {
                         </div>
                     </div>
                 </Link>
-                {/* Rest of your component */}
             </div>
             <div>
               <Statistics user={user} />

@@ -100,7 +100,8 @@ const Recipe = ({recipe}) => {
         setShowModal(true)
     }
 
-    const unshowProfileModal = () => {
+    const unshowProfileModal = (e) => {
+        e.preventDefault();
         setShowModal(false)
     }
 
@@ -185,7 +186,7 @@ const Recipe = ({recipe}) => {
                         </>)
                     }
                     {showModal && (
-                        <Modal onClose={unshowProfileModal}>
+                        <Modal onClose={(e) => unshowProfileModal(e)}>
                             <UserInfo id={recipe.user.id}/>
                         </Modal>
                     )} 
