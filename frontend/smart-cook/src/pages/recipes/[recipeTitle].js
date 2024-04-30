@@ -11,12 +11,24 @@ import {useEffect, useState} from "react";
 import axios from "axios";
 import {useRouter} from "next/router";
 import StepCard from "@/components/StepCard";
+import Modal from '../../components/modal/Modal';
+import UserInfo from "../../components/modal/UserInfo";
 
 const RecipeTitle = () => {
     const [recipe, setRecipe] = useState(null);
     const {query} = useRouter();
     const [favButtonClicked, setFavButtonClicked] = useState(false);
     console.log(query.recipeTitle);
+    const [showModal, setShowModal] = useState(false);
+
+    const showProfileModal = () => {
+        setShowModal(true)
+    }
+
+    const unshowProfileModal = () => {
+        setShowModal(false)
+    }
+
     const handleFavBtnClick = async () => {
         try {
             const config = {
@@ -79,10 +91,15 @@ const RecipeTitle = () => {
                     </div>
                     <div className={`flex flex-col w-full md:w-2/3 sm:pl-4`}>
                         <div className={`w-full flex flex-row items-center `}>
-                            <div className={`w-full flex flex-row items-center gap-4 mt-10 md:mt-0`}>
+                            <div className={`w-full flex flex-row items-center gap-4 mt-10 md:mt-0`} onMouseEnter={showProfileModal} onMouseLeave={unshowProfileModal}>
+                            {showModal && (
+                        <Modal onClose={unshowProfileModal}>
+                            <UserInfo id={recipe?.user.id}/>
+                        </Modal>
+                    )}  
                                 {recipe && recipe?.user.photo ?
                                     <Image width={60} height={60} src={recipe?.user.photo} alt={"avatar"}
-                                           className={'object-contain rounded-[534px]'}
+                                           className={'object-cover w-[60px] h-[60px] rounded-full'}
                                     /> :
                                     <Image width={60} height={60} src={avatar} alt={"avatar"}
                                            className={'object-contain rounded-full'}

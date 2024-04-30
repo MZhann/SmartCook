@@ -8,12 +8,17 @@ import {useRouter} from "next/router";
 import Link from "next/link";
 import saved from "@/../public/images/bluesaved.png"
 import {config} from "../../config";
+import Modal from './modal/Modal';
+import UserInfo from "./modal/UserInfo";
 
 const Recipe = ({recipe}) => {
     const router = useRouter();
     const [isHovered, setIsHovered] = useState(false);
     const [isFavorite, setIsFavorite] = useState(false);
     const [favorites, setFavorites] = useState();
+    const [showModal, setShowModal] = useState(false);
+    
+    
 
 
     useEffect(() => {
@@ -91,6 +96,14 @@ const Recipe = ({recipe}) => {
         }
     };
 
+    const showProfileModal = () => {
+        setShowModal(true)
+    }
+
+    const unshowProfileModal = () => {
+        setShowModal(false)
+    }
+
     return (
         <div className={`w-[280px] h-[340px] ${router.pathname === "/profile" ? 'bg-[#2A293B]' : 'bg-white'}  rounded-lg my-5 `}>
             <div className="w-full h-[210px] relative">
@@ -155,22 +168,27 @@ const Recipe = ({recipe}) => {
                
             </div>
             <div className="relative w-full h-[107px] rounded-b-lg p-4">
-                <div className="flex items-center">
+                <div className="flex items-center" onMouseEnter={showProfileModal} onMouseLeave={unshowProfileModal}>
                     {recipe && router.pathname !== '/ai-receipts' ?
                         (<>
                             {recipe.user.photo ?
                                 <Image src={recipe?.user.photo} height={40} width={40}
                                        className="mr-2 rounded-full w-[30px] h-[30px] object-cover rounded-5xl" alt="profile avatar"/> :
-                                <Image src={defaultFood} alt={'avatar'} className={'object-contain size-[40px]'}/>
+                                <Image src={defaultFood} alt={'avatar'} className={'object-contain w-[30px] h-[30px]'}/>
                             }
-                            <div className={`text-xs ${router.pathname === "/profile" ? 'text-white' : 'text-black'}`}>{recipe.user.first_name} {recipe.user.last_name}</div>
+                            <div  className={`text-xs ${router.pathname === "/profile" ? 'text-white' : 'text-black'}`}>{recipe.user.first_name} {recipe.user.last_name}</div>
                         </>) :
                         (<>
-                            <Image width={20} height={20} src={aiLogo} className="mr-2 rounded-5xl"
+                            <Image width={30} height={30} src={aiLogo} className="mr-2 rounded-full object-cover w-[30px] h-[30px]"
                                    alt="profile avatar"/>
                             <div className="text-xs">SmartCook</div>
                         </>)
                     }
+                    {showModal && (
+                        <Modal onClose={unshowProfileModal}>
+                            <UserInfo id={recipe.user.id}/>
+                        </Modal>
+                    )} 
                 </div>
                 {recipe &&
                     <>

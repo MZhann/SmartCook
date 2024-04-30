@@ -5,6 +5,9 @@ import trophy from "../../../../../public/images/winTrophy.png";
 import Like from "@/components/Like";
 import {useEffect} from "react";
 import Link from "next/link";
+import Modal from '../../Modal';
+import UserInfo from "../../UserInfo";
+import { useState } from "react";
 
 const BattleReceiptCard = ({ image, win, user, recipe, doNotShow }) => {
 
@@ -18,6 +21,17 @@ const BattleReceiptCard = ({ image, win, user, recipe, doNotShow }) => {
         }
         return str;
     };
+     
+    const [showModal, setShowModal] = useState(false);
+
+    const showProfileModal = () => {
+        setShowModal(true)
+    }
+
+    const unshowProfileModal = () => {
+        setShowModal(false)
+    }
+
 
     return (
         <Link href="/recipes/[recipeTitle]" as={`/recipes/${recipe?.id}`} passHref>
@@ -49,7 +63,20 @@ const BattleReceiptCard = ({ image, win, user, recipe, doNotShow }) => {
                         className="rounded-t-xl w-full sm:w-[230px] sm:h-[173px] object-cover"
                     />
                 )}
-                <div className="flex items-center m-3">
+                {/* <div onMouseEnter={showProfileModal} onMouseLeave={unshowProfileModal} className="text-white ml-4 text-xl">
+                    {name}
+                    {showModal && (
+                        <Modal onClose={unshowProfileModal}>
+                            <UserInfo id={id}/>
+                        </Modal>
+                    )}    
+                </div> */}
+                <div className="flex items-center m-3" onMouseEnter={showProfileModal} onMouseLeave={unshowProfileModal}>
+                {showModal && (
+                        <Modal onClose={unshowProfileModal}>
+                            <UserInfo id={user.id}/>
+                        </Modal>
+                    )}  
                     {user && user?.photo ? (
                         <Image
                             width={20}

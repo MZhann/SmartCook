@@ -7,11 +7,12 @@ import {useEffect, useState} from "react";
 import axios from "axios";
 import {config} from "../../../../../config";
 
+
 const AcceptedBattle = ({battle}) => {
     console.log(battle)
     const router = useRouter()
     const [timeLeft, setTimeLeft] = useState('');
-
+    
     
     useEffect(() => {
         const updateTimer = () => {
