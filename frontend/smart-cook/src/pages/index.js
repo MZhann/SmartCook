@@ -15,6 +15,7 @@ const Main = () => {
     const [isQuizOpen, setIsQuizOpen] = useState(false);
     const closeQuiz = () => {
         setIsQuizOpen(false);
+        console.log('closeQuiz called')
     }
 
     return (
