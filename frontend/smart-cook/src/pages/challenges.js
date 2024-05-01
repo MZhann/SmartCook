@@ -89,7 +89,7 @@ const Challenges = () => {
                     Current Battles
                 </h1>
 
-                <div className="flex flex-wrap  w-full">
+                <div className="flex flex-wrap justify-between w-full">
                     {clashes && clashes.slice(0, displayedRecipes).map((clash, index) => (
                         <AcceptedBattle key={index} battle={clash && clash}/>
                     ))}
