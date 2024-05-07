@@ -42,7 +42,7 @@ const BattleReceiptCard = ({ image, win, user, recipe, doNotShow }) => {
                         <Image
                             src={trophy}
                             alt="win"
-                            className="w-[150px] h-[150px]"
+                            className="w-[150px] opacity-100 h-[150px]"
                         />
                     </div>
                 ) : (
@@ -63,14 +63,14 @@ const BattleReceiptCard = ({ image, win, user, recipe, doNotShow }) => {
                         className="rounded-t-xl w-full sm:w-[230px] sm:h-[173px] object-cover"
                     />
                 )}
-                {/* <div onMouseEnter={showProfileModal} onMouseLeave={unshowProfileModal} className="text-white ml-4 text-xl">
+                <div onClick={showProfileModal} onMouseLeave={unshowProfileModal} className="text-white ml-4 text-xl">
                     {name}
                     {showModal && (
                         <Modal onClose={unshowProfileModal}>
                             <UserInfo id={id}/>
                         </Modal>
-                    )}    
-                </div> */}
+                    )}
+                </div>
                 <div className="flex items-center m-3" onMouseEnter={showProfileModal} onMouseLeave={unshowProfileModal}>
                 {showModal && (
                         <Modal onClose={unshowProfileModal}>

@@ -24,7 +24,7 @@ const SelectOpponent = ({ isModalOpen, onClose, openNext, setOpponent, goBack })
                 console.error(err);
             }
         };
-        fetchData();
+        fetchData().catch(e => console.error(e));
     }, []);
 
     const handleSubmit = (event) => {
@@ -51,6 +51,11 @@ const SelectOpponent = ({ isModalOpen, onClose, openNext, setOpponent, goBack })
             console.log(inputValue)
         }
     };
+
+    const handleSearch = (e) => {
+        e.preventDefault();
+
+    }
 
 
     return (
@@ -79,7 +84,7 @@ const SelectOpponent = ({ isModalOpen, onClose, openNext, setOpponent, goBack })
                             />
                             <button
                                 className="w-[50px] h-[36px] flex justify-center bg-[#AAE06E] items-center rounded-e-3xl">
-                                <Image src={search} className="w-[20px] h-[20px]" alt={'search'}/>
+                                <Image src={search} onClick={(e) => handleSearch(e)} className="w-[20px] h-[20px]" alt={'search'}/>
                             </button>
                         </div>
 
