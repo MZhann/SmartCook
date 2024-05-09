@@ -30,8 +30,6 @@ const AcceptedBattle = ({battle}) => {
             const minutes = Math.floor((difference / 1000 / 60) % 60);
             const seconds = Math.floor((difference / 1000) % 60);
 
-            console.log(hours, minutes, seconds);
-
             const formattedTime = `${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
             setTimeLeft(formattedTime);
         };
@@ -62,12 +60,12 @@ const AcceptedBattle = ({battle}) => {
             <div className="text-lg mt-3">Culinary Clash {battle.id}</div>
             <div className="text-3xl text-white mt-2">{battle?.theme}</div>
             <div className="p-3 px-4 sm:h-[36px] bg-[#AAE06E] flex justify-center items-center text-2xl font-bold tracking-wider rounded-3xl mt-4">
-                {timeLeft === "00:00:00" ? `Completed ${addOneDayAndFormat(battle?.created_at)}` : timeLeft}
+                {battle?.status === "completed" ? `Completed ${addOneDayAndFormat(battle?.created_at)}` : timeLeft}
             </div>
             <div className="flex flex-col sm:flex-row justify-between items-center w-full p-6">
-                <BattleReceiptCard user={battle.initiator} recipe={battle?.initiator_recipe} win={battle.winner !== null && battle?.winner.first_name === battle?.initiator.first_name}/>
+                <BattleReceiptCard user={battle.initiator} draw={battle?.status === "completed" && battle?.winner === null} recipe={battle?.initiator_recipe} win={battle.winner !== null && battle?.winner.first_name === battle?.initiator.first_name}/>
                 <Image src={vs} alt="vs" className="w-[50px] h-[50px]" />
-                <BattleReceiptCard user={battle.opponent} recipe={battle?.opponent_recipe} win={battle.winner !== null && battle?.winner.first_name === battle?.opponent.first_name}/>
+                <BattleReceiptCard user={battle.opponent} draw={battle?.status === "completed" && battle?.winner === null} recipe={battle?.opponent_recipe} win={battle.winner !== null && battle?.winner.first_name === battle?.opponent.first_name}/>
             </div>
         </div>
     );

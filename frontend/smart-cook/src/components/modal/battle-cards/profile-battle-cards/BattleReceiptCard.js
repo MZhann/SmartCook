@@ -2,18 +2,14 @@ import Image from "next/image";
 import photo from "../../../../../public/images/defaultFood.png";
 import avatar from "../../../../../public/images/edit-profile.png";
 import trophy from "../../../../../public/images/winTrophy.png";
+import drawHands from "../../../../../public/images/handshake.png";
 import Like from "@/components/Like";
-import {useEffect} from "react";
 import Link from "next/link";
 import Modal from '../../Modal';
 import UserInfo from "../../UserInfo";
 import { useState } from "react";
 
-const BattleReceiptCard = ({ image, win, user, recipe, doNotShow }) => {
-
-    useEffect(() => {
-        console.log(recipe);
-    }, [])
+const BattleReceiptCard = ({ draw, win, user, recipe, doNotShow }) => {
 
     const TruncateString = (str) => {
         if (str.length > 22) {
@@ -33,16 +29,30 @@ const BattleReceiptCard = ({ image, win, user, recipe, doNotShow }) => {
         <Link href="/recipes/[recipeTitle]" as={`/recipes/${recipe?.id}`} passHref>
             <div className=" sm:w-[230px] w-72 sm:h-[275px] rounded-xl bg-white">
                 {win ? (
-                    <div
-                        className="w-[300px] sm:w-[230px] sm:h-[173px] bg-black absolute rounded-t-xl opacity-70 flex justify-center items-center">
+                    <div className={`relative`}>
+                        <div
+                            className="w-[300px] sm:w-[230px] sm:h-[173px] bg-black absolute rounded-t-xl opacity-70 flex justify-center items-center">
+                        </div>
                         <Image
                             src={trophy}
                             alt="win"
-                            className="w-[150px] opacity-100 h-[150px]"
+                            className="w-[150px] z-50 absolute left-[45px] top-[20px] opacity-100 h-[150px]"
+                        />
+                    </div>
+                ) : draw ? (
+                    <div className={`relative`}>
+                        <div
+                            className="w-[300px] sm:w-[230px] sm:h-[173px] bg-black absolute rounded-t-xl opacity-70 flex justify-center items-center">
+                        </div>
+                        <Image
+                            src={drawHands}
+                            alt="win"
+                            className="w-[150px] z-50 absolute left-[45px] top-[20px] opacity-100 h-[150px]"
                         />
                     </div>
                 ) : (
-                    <></>
+                    <>
+                    </>
                 )}
                 {recipe && recipe?.image ? (
                     <Image

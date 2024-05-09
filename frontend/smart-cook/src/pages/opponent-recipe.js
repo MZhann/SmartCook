@@ -373,9 +373,10 @@ const OpponentMakeRecipe = () => {
                                                         }
                                                     />
                                                 </div>
-                                                <div className={""}>
+                                                <div className={"relative pt-2"}>
                                                     <input
                                                         type="file"
+                                                        className={'opacity-0 cursor-pointer h-40 absolute'}
                                                         onChange={(event) =>
                                                             handleStepImageChange(
                                                                 index,
@@ -383,14 +384,23 @@ const OpponentMakeRecipe = () => {
                                                             )
                                                         }
                                                     />
-                                                    {step.image && (
-                                                        <Image
-                                                            src={URL.createObjectURL(step.image)}
-                                                            alt="Main Image"
-                                                            width={250}
-                                                            height={250}
-                                                        />
-                                                    )
+                                                    {step.image ? (
+                                                            <Image
+                                                                src={URL.createObjectURL(step.image)}
+                                                                alt="Main Image"
+                                                                width={150}
+                                                                height={50}
+                                                            />
+                                                        ) :
+                                                        (
+                                                            <Image
+                                                                src={instax}
+                                                                className={'shadow-gray-500 border-2 rounded-3xl'}
+                                                                alt="Main Image"
+                                                                width={150}
+                                                                height={150}
+                                                            />
+                                                        )
                                                     }
                                                 </div>
                                             </div>
