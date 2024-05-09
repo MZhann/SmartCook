@@ -7,6 +7,7 @@ import SelectOpponent from "@/components/modal/battle-cards/choose-opponent-card
 import CreateReceiptCard from "@/components/modal/battle-cards/choose-opponent-cards/CreateReceiptCard";
 import axios from "axios";
 import {config} from "../../config";
+import {error} from "next/dist/build/output/log";
 
 const Challenges = () => {
     const [clashes, setClashes] = useState(null)
@@ -20,7 +21,30 @@ const Challenges = () => {
     const closeModal = () => setModalStage(0);
     const goBack = () => setModalStage(modalStage - 1);
     const [displayedRecipes, setDisplayedRecipes] = useState(4);
+    const [currentClash, setCurrentClash] = useState([]);
 
+    useEffect(() => {
+        const fetchBattle = async () => {
+            try {
+                const res = await axios.get(
+                    `${config.baseUrl}/api/v1/clashes/current/`,
+                    {
+                        headers: {
+                            Authorization:
+                                "Bearer " + localStorage.getItem("accessToken"),
+                        },
+                    }
+                );
+
+                setCurrentClash(res.data);
+                console.log(res.data);
+            } catch (error) {
+                console.error(error);
+            }
+        };
+
+        fetchBattle().catch(err => console.error(err));
+    })
 
     const loadMoreRecipes = () => {
         setDisplayedRecipes(prevCount => prevCount + 4); // Increment by 4 each time the button is clicked
@@ -79,10 +103,16 @@ const Challenges = () => {
                 </div>
 
                 <div className="flex items-center space-x-4 mt-10">
-                    <button onClick={openModal}
-                            className="px-4 py-2 rounded-full bg-[#AAE06E] hover:bg-green-500 focus:outline-none w-[300px] sm:w-[450px] text-white text-xl font-bold h-[60px]">
-                        Let&apos;s Battle
-                    </button>
+                    {currentClash?.length !== 0 ?
+                        <div
+                                className="px-4 py-3 items-center text-center rounded-full bg-[#AAE06E] focus:outline-none w-[300px] sm:w-[450px] text-white text-xl font-bold h-[60px]">
+                            You&apos;re already in battle
+                        </div> :
+                        <button onClick={openModal}
+                                className="px-4 py-2 rounded-full bg-[#AAE06E] hover:bg-green-500 focus:outline-none w-[300px] sm:w-[450px] text-white text-xl font-bold h-[60px]">
+                            Let&apos;s Battle
+                        </button>
+                    }
                 </div>
 
                 <h1 className={`self-start text-black text-3xl mt-10 font-bold`}>
