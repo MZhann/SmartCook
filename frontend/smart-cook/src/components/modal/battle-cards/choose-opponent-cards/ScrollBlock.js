@@ -29,7 +29,7 @@ const ScrollBlock = ({setOpponent, filteredUsers}) => {
     };
 
     return (
-        <div>
+        <div className="w-[95%] flex flex-col items-center sm:w-full">
             <div>
                 <button
                     className="absolute bottom-[100px] left-0 p-[8px]  border-none cursor-pointer transform -translate-y-1/2"
@@ -52,9 +52,9 @@ const ScrollBlock = ({setOpponent, filteredUsers}) => {
                     />
                 </button>
             </div>
-            <div className="flex items-center w-[450px] overflow-hidden relative justify-center mt-7">
+            <div className="flex items-center w-[370px] sm:w-[450px] overflow-hidden relative justify-center mt-7">
                 <div
-                    className="overflow-x-scroll w-[420px] p-4 scrollbar-hide"
+                    className="overflow-x-scroll w-[270px] flex justify-center sm:w-[420px] p-3 scrollbar-hide"
                     ref={scrollRef}
                 >
                     <div className={`flex`}>

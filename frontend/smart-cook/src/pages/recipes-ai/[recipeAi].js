@@ -51,12 +51,10 @@ const RecipeAi = () => {
                 <div className={"mt-8 text-white flex flex-col items-center w-full lg:flex-row lg:items-start"}>
                     <div className={`flex flex-col gap-3 lg:w-[500px] w-full items-center justify-center`}>
                         {isLoading === "loading" ? (
-                            <div className="lg:h-[350px] lg:w-[350px] w-[300px] h-[300px] flex justify-center items-center">
+                            <div className="lg:h-[350px] lg:w-[350px] w-[300px] h-[200px] flex justify-center items-center">
                                 <Image
                                     src={loading}
-                                    width={100}
-                                    height={100}
-                                    className="rounded-[20px] object-cover"
+                                    className="rounded-[20px] w-[120px] md:w-[150px] lg:w-[170px] object-cover"
                                     alt="loading-gif"
                                 />
                             </div>

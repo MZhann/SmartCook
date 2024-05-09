@@ -4,10 +4,10 @@ import trophy from "../../../public/images/trophy.png";
 import rank from "../../../public/images/ranking.png";
 import Link from "next/link";
 
-const Statistics = ({user}) => {
+const Statistics = ({user, mt}) => {
     console.log("user info", user)
     return (
-        <div className={'md:w-[278px] self-center md:self-start w-full h-[302px] px-6 py-5 md:p-5 bg-[#2A293B] rounded-3xl'}>
+        <div className={`md:w-[278px] self-center md:self-start w-full h-[302px] px-6 py-5 md:p-5 bg-[#2A293B] rounded-3xl xl:mt-0 ${mt && 'mt-[10px]'}`}>
             <div className={'w-full'}>
                 <h1 className={`font-[700] text-white text-[20px]`}>Statistics</h1>
             </div>

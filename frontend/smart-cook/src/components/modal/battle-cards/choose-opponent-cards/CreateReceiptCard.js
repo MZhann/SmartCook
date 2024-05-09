@@ -24,9 +24,9 @@ const CreateReceiptCard = ({isModalOpen, handleCreateRecipe, onClose}) => {
         <div
             className={`overflow-auto fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50 ${isModalOpen ? "" : "hidden"}`}
         >
-            <div className={'absolute z-50'}>
+            <div className={'absolute z-50 flex flex-col items-center'}>
                 <div
-                    className={`w-[500px] h-[412px] bg-white rounded-xl relative flex flex-col items-center ${isModalOpen ? '' : "hidden"}`}
+                    className={`w-[370px] sm:w-[500px] h-[412px] bg-white rounded-xl relative flex flex-col items-center ${isModalOpen ? '' : "hidden"}`}
                 >
                     <Image
                         onClick={onClose}

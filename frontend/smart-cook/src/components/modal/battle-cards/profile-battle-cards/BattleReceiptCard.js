@@ -25,11 +25,7 @@ const BattleReceiptCard = ({ image, win, user, recipe, doNotShow }) => {
     const [showModal, setShowModal] = useState(false);
 
     const showProfileModal = () => {
-        setShowModal(true)
-    }
-
-    const unshowProfileModal = () => {
-        setShowModal(false)
+        setShowModal(!showModal)
     }
 
 
@@ -63,17 +59,10 @@ const BattleReceiptCard = ({ image, win, user, recipe, doNotShow }) => {
                         className="rounded-t-xl w-full sm:w-[230px] sm:h-[173px] object-cover"
                     />
                 )}
-                {/* <div onMouseEnter={showProfileModal} onMouseLeave={unshowProfileModal} className="text-white ml-4 text-xl">
-                    {name}
-                    {showModal && (
-                        <Modal onClose={unshowProfileModal}>
-                            <UserInfo id={id}/>
-                        </Modal>
-                    )}    
-                </div> */}
-                <div className="flex items-center m-3" onMouseEnter={showProfileModal} onMouseLeave={unshowProfileModal}>
+               
+                <div className="flex items-center m-3 z-50" onClick={showProfileModal}>
                 {showModal && (
-                        <Modal onClose={unshowProfileModal}>
+                        <Modal onClose={showProfileModal}>
                             <UserInfo id={user.id}/>
                         </Modal>
                     )}  

@@ -45,7 +45,7 @@ const AcceptedBattle = ({battle}) => {
     }, [battle?.created_at]);
     console.log(battle.winner !== null && battle?.winner.first_name === battle?.initiator.first_name);
     return (
-        <div className={`${router.pathname === '/challenges' && 'mt-4'} w-full sm:max-w-[574px] sm:min-h-[546px] rounded-3xl text-white bg-[#2A293B] flex flex-col items-center justify-between`}>
+        <div className={`${router.pathname === '/challenges' && 'mt-4'} w-full sm:max-w-[570px] sm:min-h-[546px] rounded-3xl text-white bg-[#2A293B] m-[5px] flex flex-col items-center justify-between`}>
             <Image
                 src={cookBattle}
                 alt="Cook Battle"

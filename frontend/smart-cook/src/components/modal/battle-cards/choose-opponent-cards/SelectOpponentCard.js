@@ -57,9 +57,9 @@ const SelectOpponent = ({ isModalOpen, onClose, openNext, setOpponent, goBack })
         <div
             className={`overflow-auto fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50 ${isModalOpen ? "" : "hidden"}`}
         >
-            <div className={'absolute z-50'}>
+            <div className={'absolute z-50 flex flex-col items-center'}>
                 <div
-                    className={` z-50 w-[500px] h-[512px] bg-white rounded-xl relative flex flex-col items-center mt-5`}
+                    className={` z-50 w-[98%] sm:w-[500px] h-[512px] bg-white rounded-xl relative flex flex-col items-center mt-5`}
                 >
                     <Image src={close} alt="close" width={24} height={24}
                            className="cursor-pointer absolute top-6 right-6" onClick={onClose}/>
@@ -72,7 +72,7 @@ const SelectOpponent = ({ isModalOpen, onClose, openNext, setOpponent, goBack })
                         <div className="flex w-5/6">
                             <input
                                 type="text"
-                                className="border-2 border-gray-300 pl-3 w-[250px] h-[36px] py-1 rounded-l-3xl"
+                                className="border-2 border-gray-300 pl-3 w-[180px] sm:w-[250px] h-[36px] py-1 rounded-l-3xl"
                                 value={inputValue}
                                 onChange={(e) => setInputValue(e.target.value)}
                                 placeholder="Find Opponent"
@@ -85,16 +85,16 @@ const SelectOpponent = ({ isModalOpen, onClose, openNext, setOpponent, goBack })
 
                         <button
                             onClick={(e) => handleRandomClick(e)}
-                            className="w-[135px] h-[36px] bg-[#AAE06E] flex justify-center items-center font-bold text-white rounded-3xl self-center hover:bg-green-500">
+                            className="w-[100px] sm:w-[135px] h-[36px] bg-[#AAE06E] flex justify-center items-center font-bold text-white rounded-3xl self-center hover:bg-green-500">
                             Random
                         </button>
                     </form>
                     <ScrollBlock filteredUsers={filteredUsers} users={users} inputValue={inputValue} setOpponent={setOpponent}/>
                     <div className="flex space-x-5">
                         <button onClick={goBack}
-                                className="border-2 border-[#AAE06E] text-[#AAE06E] w-[150px] h-[36px] rounded-full">Back
+                                className="border-2 border-[#AAE06E] text-[#AAE06E] w-[120px] sm:w-[150px] h-[36px] rounded-full">Back
                         </button>
-                        <button onClick={handleSubmit} className="border-2 text-white w-[150px] bg-[#AAE06E] h-[36px] rounded-full">Next
+                        <button onClick={handleSubmit} className="border-2 text-white w-[120px] sm:w-[150px] bg-[#AAE06E] h-[36px] rounded-full">Next
                         </button>
                     </div>
                 </div>

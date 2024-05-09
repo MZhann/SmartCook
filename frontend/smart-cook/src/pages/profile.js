@@ -210,7 +210,7 @@ const Profile = () => {
                     ) : (
                         <NoBattle />
                     )}
-                    <Statistics user={userProfile}/>
+                    <Statistics mt={true} user={userProfile}/>
                     <EditProfile
                         userProfile={userProfile}
                         isModalOpen={isModalOpen}

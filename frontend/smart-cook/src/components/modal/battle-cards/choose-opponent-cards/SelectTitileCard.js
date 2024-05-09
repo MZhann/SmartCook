@@ -20,7 +20,7 @@ const SelectTitleCard = ({isModalOpen, onClose, openNext, setTitle}) => {
         <div
             className={`overflow-auto fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50 ${isModalOpen ? "" : "hidden"}`}
         >
-            <div className={`w-[500px] h-[412px] bg-white rounded-xl relative flex flex-col items-center `}>
+            <div className={`w-[95%] md:w-[500px] h-[412px] bg-white rounded-xl relative flex flex-col items-center `}>
                 <Image src={close} alt="close" width={24} height={24} className="cursor-pointer absolute top-6 right-6" onClick={onClose} />
                 <Image src={cookBattle} alt="cookBattle" width={80} height={80} className="mt-14" />
                 <div className="font-bold tracking-[0.1px] mt-5 text-lg">

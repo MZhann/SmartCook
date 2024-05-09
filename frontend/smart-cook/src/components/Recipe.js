@@ -97,13 +97,9 @@ const Recipe = ({recipe}) => {
     };
 
     const showProfileModal = () => {
-        setShowModal(true)
+        setShowModal(!show)
     }
 
-    const unshowProfileModal = (e) => {
-        e.preventDefault();
-        setShowModal(false)
-    }
 
     return (
         <div className={`w-[280px] h-[340px] ${router.pathname === "/profile" ? 'bg-[#2A293B]' : 'bg-white'}  rounded-lg my-5 `}>
@@ -169,7 +165,7 @@ const Recipe = ({recipe}) => {
                
             </div>
             <div className="relative w-full h-[107px] rounded-b-lg p-4">
-                <div className="flex items-center" onMouseEnter={showProfileModal} onMouseLeave={unshowProfileModal}>
+                <div className="flex items-center" onClick={showProfileModal}>
                     {recipe && router.pathname !== '/ai-receipts' ?
                         (<>
                             {recipe.user.photo ?

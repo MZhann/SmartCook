@@ -22,11 +22,7 @@ const RecipeTitle = () => {
     const [showModal, setShowModal] = useState(false);
 
     const showProfileModal = () => {
-        setShowModal(true)
-    }
-
-    const unshowProfileModal = () => {
-        setShowModal(false)
+        setShowModal(!showModal)
     }
 
     const handleFavBtnClick = async () => {
@@ -91,9 +87,9 @@ const RecipeTitle = () => {
                     </div>
                     <div className={`flex flex-col w-full md:w-2/3 sm:pl-4`}>
                         <div className={`w-full flex flex-row items-center `}>
-                            <div className={`w-full flex flex-row items-center gap-4 mt-10 md:mt-0`} onMouseEnter={showProfileModal} onMouseLeave={unshowProfileModal}>
+                            <div className={`w-full flex flex-row items-center gap-4 mt-10 md:mt-0 cursor-pointer`} onClick={showProfileModal}>
                             {showModal && (
-                        <Modal onClose={unshowProfileModal}>
+                        <Modal onClose={showProfileModal}>
                             <UserInfo id={recipe?.user.id}/>
                         </Modal>
                     )}  
@@ -133,9 +129,9 @@ const RecipeTitle = () => {
                 </div>
                 <div className={`flex w-full  flex-wrap sm:mt-8 sm:px-8 md:px-0`}>
                     <h1 className={`text-[#AAE06E] w-full mt-8 sm:mt-0 sm:px-6 text-[28px]`}>Direction</h1>
-                    <div className={`flex flex-wrap justify-center w-full gap-[47px] mt-5`}>
+                    <div className={`flex flex-wrap w-full mt-5 gap-x-5 gap-y-16 justify-center lg:justify-between  pl-5 pr-5`}>
                         {recipe && recipe.steps.map((item, index) => (
-                            <div className="sm:px-6 w-[130%] md:w-full flex justify-center md:justify-start" key={index}>
+                            <div key={index}>
                                 <StepCard item={item} index={index}/>
                             </div>
                         ))}
