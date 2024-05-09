@@ -14,7 +14,7 @@ const ForgotPassword = () => {
     const [inputs, setInputs] = useState('email')
     const handleSendEmail = () => {
         try {
-            const res = axios.post('https://web-production-ad96.up.railway.app/api/v1/password-reset-request/', {
+            const res = axios.post('https://web-production-d3136.up.railway.app/api/v1/password-reset-request/', {
                 email: email
             })
             console.log(res)
@@ -27,7 +27,7 @@ const ForgotPassword = () => {
     }
     const handleConfirm = () => {
         try {
-            const res = axios.post('https://web-production-ad96.up.railway.app/api/v1/password-reset-confirm/', {
+            const res = axios.post('https://web-production-d3136.up.railway.app/api/v1/password-reset-confirm/', {
                 reset_token: code,
                 new_password: password
             })

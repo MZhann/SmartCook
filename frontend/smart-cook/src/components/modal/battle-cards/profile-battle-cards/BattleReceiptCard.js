@@ -36,18 +36,19 @@ const BattleReceiptCard = ({ draw, win, user, recipe, doNotShow }) => {
                         <Image
                             src={trophy}
                             alt="win"
-                            className="w-[150px] z-50 absolute left-[45px] top-[20px] opacity-100 h-[150px]"
+                            className="w-[150px] z-50 absolute left-[70px] sm:left-[45px] top-[20px] opacity-100 h-[150px]"
                         />
                     </div>
                 ) : draw ? (
                     <div className={`relative`}>
                         <div
-                            className="w-[300px] sm:w-[230px] sm:h-[173px] bg-black absolute rounded-t-xl opacity-70 flex justify-center items-center">
+                            className="w-[288px] h-[173px] sm:w-[230px] sm:h-[173px] bg-black absolute rounded-t-xl opacity-70 flex justify-center items-center">
+
                         </div>
                         <Image
                             src={drawHands}
                             alt="win"
-                            className="w-[150px] z-50 absolute left-[45px] top-[20px] opacity-100 h-[150px]"
+                            className="w-[150px] z-50 absolute left-[70px] sm:left-[40px] top-[20px] opacity-100 h-[150px]"
                         />
                     </div>
                 ) : (

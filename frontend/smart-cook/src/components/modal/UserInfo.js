@@ -7,6 +7,8 @@ import AIchef from "../../components/awards/AIchef";
 import IDidIt from "../../components/awards/IDidIt";
 import Superstar from "../../components/awards/Superstar";
 import Statistics from "../../components/profile-page/Statistics"
+import {config} from '../../../config'
+
 
 const axios = require("axios");
 
@@ -17,7 +19,7 @@ const UserInfo = ({ id }) => {
         const fetchUserData = async () => {
             try {
                 const response = await axios.get(
-                    `https://web-production-ad96.up.railway.app/api/v1/users/${id}/`
+                    `${config.baseUrl}/api/v1/users/${id}/`
                 );
                 setUser(response.data);
             } catch (error) {

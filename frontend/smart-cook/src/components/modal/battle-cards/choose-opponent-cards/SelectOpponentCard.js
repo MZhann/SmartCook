@@ -5,6 +5,7 @@ import close from "../../../../../public/images/Close.svg";
 import search from "../../../../../public/images/Search.png";
 import ScrollBlock from "./ScrollBlock";
 import axios from "axios";
+import {config} from '../../../../../config';
 
 const SelectOpponent = ({ isModalOpen, onClose, openNext, setOpponent, goBack }) => {
     const [inputValue, setInputValue] = useState("");
@@ -17,7 +18,7 @@ const SelectOpponent = ({ isModalOpen, onClose, openNext, setOpponent, goBack })
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const res = await axios.get('https://web-production-ad96.up.railway.app/api/v1/users/all/');
+                const res = await axios.get(`${config.baseUrl}/api/v1/users/all/`);
                 setUsers(res.data);
                 console.log(res.data);
             } catch (err) {

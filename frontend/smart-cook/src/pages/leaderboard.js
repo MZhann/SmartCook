@@ -12,7 +12,7 @@ const Leaderboard = () => {
 
     useEffect(() => {
         const fetchData = () => {
-            axios.get('https://web-production-ad96.up.railway.app/api/v1/users/top/').then((r) => {
+            axios.get('https://web-production-d3136.up.railway.app/api/v1/users/top/').then((r) => {
                 setLeaders(r.data);
         }
             ).catch((err) => console.log(err));

@@ -7,8 +7,8 @@ import Image from "next/image";
 import axios from "axios";
 
 const initiatorCreateUrl =
-    "https://web-production-ad96.up.railway.app/api/v1/clashes/initiator/create/";
-const apiUrl = "https://web-production-ad96.up.railway.app/api/v1/recipes/";
+    "https://web-production-d3136.up.railway.app/api/v1/clashes/initiator/create/";
+const apiUrl = "https://web-production-d3136.up.railway.app/api/v1/recipes/";
 
 const ClashRecipeMake = () => {
     const [steps, setSteps] = useState([{ step_text: "", image: null }]);

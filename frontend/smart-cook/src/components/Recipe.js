@@ -52,7 +52,7 @@ const Recipe = ({recipe}) => {
                 },
             };
             const response = await axios.post(
-                `https://web-production-ad96.up.railway.app/api/v1/recipes/${recipe.id}/add_to_favorites/`, recipe.id, config
+                `${config.baseUrl}/api/v1/recipes/${recipe.id}/add_to_favorites/`, recipe.id, config
             );
 
             if (response.status === 200) {
@@ -76,7 +76,7 @@ const Recipe = ({recipe}) => {
                     Authorization: `Bearer ${localStorage.getItem('accessToken')}`,
                 },
             };
-            const url = `https://web-production-ad96.up.railway.app/api/v1/recipes/${recipe.id}/remove_from_favorites/`;
+            const url = `${config.baseUrl}/api/v1/recipes/${recipe.id}/remove_from_favorites/`;
 
             const response = await axios.delete(url, config);
 
