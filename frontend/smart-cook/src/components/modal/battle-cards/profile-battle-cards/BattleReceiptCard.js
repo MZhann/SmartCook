@@ -34,7 +34,7 @@ const BattleReceiptCard = ({ image, win, user, recipe, doNotShow }) => {
             <div className=" sm:w-[230px] w-72 sm:h-[275px] rounded-xl bg-white">
                 {win ? (
                     <div
-                        className="w-[300px] sm:w-[230px] sm:h-[173px] bg-black absolute rounded-t-xl opacity-70 flex justify-center items-center">
+                        className="w-[288px] h-[173px] sm:w-[230px] sm:h-[173px] bg-black absolute rounded-t-xl opacity-70 flex justify-center items-center">
                         <Image
                             src={trophy}
                             alt="win"
@@ -50,13 +50,15 @@ const BattleReceiptCard = ({ image, win, user, recipe, doNotShow }) => {
                         width={230}
                         height={173}
                         alt="receipt photo"
-                        className="rounded-t-xl w-full sm:w-[230px] sm:h-[173px] object-cover"
+                        className="rounded-t-xl w-[100%] h-[173px] sm:w-[230px] sm:h-[173px] object-cover"
                     />
                 ) : (
                     <Image
+                        width={230}
+                        height={173}
                         src={photo}
                         alt="receipt photo"
-                        className="rounded-t-xl w-full sm:w-[230px] sm:h-[173px] object-cover"
+                        className="rounded-t-xl w-[100%] h-[173px] sm:w-[230px] sm:h-[173px] object-cover"
                     />
                 )}
                

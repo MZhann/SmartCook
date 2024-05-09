@@ -64,7 +64,7 @@ const NavbarDropdown = ({ photo, name, surname, score }) => {
                             </div>
 
                             {isCoinModalOpen && (
-                                <div className="absolute top-14 rounded-xl border-2 border-black flex flex-col items-center justify-center text-center w-40 text-xs text-black p-2 bg-white">
+                                <div className="absolute top-16 rounded-xl border-2 border-black flex flex-col items-center justify-center text-center w-40 text-xs text-black p-2 bg-white">
                                     Coins are awarded for participating in
                                     culinary battles. <br></br>
                                     <div className="flex flex-col text-center">

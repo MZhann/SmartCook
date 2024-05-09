@@ -375,7 +375,8 @@ const Options = ({ ingredients }) => {
                 </div>
             </div>
             <button
-                className="flex justify-center items-center mt-10 px-4 py-2 bg-[#AAE06E] w-full h-[50px]  md:w-[450px] md:h-[60px] rounded-full text-white hover:bg-green-400"
+                className={`flex justify-center items-center mt-10 px-4 py-2  w-full h-[50px]  md:w-[450px] md:h-[60px] rounded-full text-white ${tokenCount == 0 ? 'hover:bg-gray-600' : 'hover:bg-green-400'} ${tokenCount==0 ? 'bg-gray-500' : 'bg-[#AAE06E]'}`}
+                disabled={tokenCount === 0}
                 onClick={handleGenerateReceipt}
             >
                 <Image

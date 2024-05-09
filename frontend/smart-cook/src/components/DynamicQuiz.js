@@ -12,34 +12,128 @@ const DynamicQuiz = ({setIsQuizStarted, isQuizStarted}) => {
     const [quizCompleted, setQuizCompleted] = useState(false);
     const [correctCount, setCorrectCount] = useState(0);
 
-    const questions = [{
-        question: 'What is the capital of France?',
-        options: ['Paris', 'London', 'Berlin', 'Rome', 'Madrid'],
-        correctAnswer: 'Paris'
-    }, {
-        question: 'Who painted the Mona Lisa?',
-        options: ['Pablo Picasso', 'Vincent van Gogh', 'Leonardo da Vinci', 'Michelangelo', 'Claude Monet'],
-        correctAnswer: 'Leonardo da Vinci'
-    }, {
-        question: 'Which planet is known as the Red Planet?',
-        options: ['Earth', 'Mars', 'Venus', 'Jupiter', 'Saturn'],
-        correctAnswer: 'Mars'
-    }, {
-        question: 'Who wrote the play "Romeo and Juliet"?',
-        options: ['William Shakespeare', 'Jane Austen', 'Charles Dickens', 'Mark Twain', 'F. Scott Fitzgerald'],
-        correctAnswer: 'William Shakespeare'
-    }, {
-        question: 'What is the tallest mountain in the world?',
-        options: ['Mount Everest', 'K2', 'Kangchenjunga', 'Lhotse', 'Makalu'],
-        correctAnswer: 'Mount Everest'
-    }];
+    // const questions0 = [{
+    //     question: 'What is the capital of France?',
+    //     options: ['Paris', 'London', 'Berlin', 'Rome', 'Madrid'],
+    //     correctAnswer: 'Paris'
+    // }, {
+    //     question: 'Who painted the Mona Lisa?',
+    //     options: ['Pablo Picasso', 'Vincent van Gogh', 'Leonardo da Vinci', 'Michelangelo', 'Claude Monet'],
+    //     correctAnswer: 'Leonardo da Vinci'
+    // }, {
+    //     question: 'Which planet is known as the Red Planet?',
+    //     options: ['Earth', 'Mars', 'Venus', 'Jupiter', 'Saturn'],
+    //     correctAnswer: 'Mars'
+    // }, {
+    //     question: 'Who wrote the play "Romeo and Juliet"?',
+    //     options: ['William Shakespeare', 'Jane Austen', 'Charles Dickens', 'Mark Twain', 'F. Scott Fitzgerald'],
+    //     correctAnswer: 'William Shakespeare'
+    // }, {
+    //     question: 'What is the tallest mountain in the world?',
+    //     options: ['Mount Everest', 'K2', 'Kangchenjunga', 'Lhotse', 'Makalu'],
+    //     correctAnswer: 'Mount Everest'
+    // }];
+
+    const questions1 = [
+        {
+            question: 'What dish is considered traditional in Italian cuisine?',
+            options: ['Sushi', 'Paella', 'Pizza', 'Hummus'],
+            correctAnswer: 'Pizza'
+        },
+        {
+            question: 'Which of these ingredients is not used in making guacamole?',
+            options: ['Avocado', 'Onion', 'Tomato', 'Banana'],
+            correctAnswer: 'Banana'
+        },
+        {
+            question: 'What type of meat is most commonly used in making a "Burger"?',
+            options: ['Chicken', 'Beef', 'Rabbit', 'Shrimp'],
+            correctAnswer: 'Beef'
+        },
+        {
+            question: 'What dish is traditional in Japanese cuisine?',
+            options: ['Taco', 'Sushi', 'Fondue', 'Borscht'],
+            correctAnswer: 'Sushi'
+        },
+        {
+            question: 'Which of these ingredients is typically used in making kimchi?',
+            options: ['Cabbage', 'Cucumber', 'Carrot', 'Apples'],
+            correctAnswer: 'Cabbage'
+        }
+    ];
+    
+    const questions2 = [
+        {
+            question: 'Which of the following is a traditional ingredient in the Indian dish "Tandoori Chicken"?',
+            options: ['Cheese', 'Yogurt', 'Chocolate', 'Coconut'],
+            correctAnswer: 'Yogurt'
+        },
+        {
+            question: 'Which herb is commonly used in Italian cuisine and often paired with tomatoes and garlic?',
+            options: ['Basil', 'Mint', 'Parsley', 'Cilantro'],
+            correctAnswer: 'Basil'
+        },
+        {
+            question: 'Which dish is considered the national dish of Georgia?',
+            options: ['Sushi', 'Paella', 'Khachapuri', 'Fondue'],
+            correctAnswer: 'Khachapuri'
+        },
+        {
+            question: 'Which dish is traditional in Chinese cuisine?',
+            options: ['Pizza', 'Sushi', 'Noodles', 'Hummu'],
+            correctAnswer: 'Noodles'
+        },
+        {
+            question: 'In which country did the popular dish "Poutine" originate?',
+            options: ['France', 'Canada', 'Germany', 'United States'],
+            correctAnswer: 'Canada'
+        }
+    ];
+    
+    const questions3 = [
+        {
+            question: 'Which popular dessert is made from layers of sponge cake soaked in coffee and mascarpone cheese, topped with cocoa powder?',
+            options: ['Tiramisu', 'Crème brûlée', 'Pavlova', 'Baklava'],
+            correctAnswer: 'Tiramisu'
+        },
+        {
+            question: 'What is the primary ingredient in the Japanese dish "Tempura"?',
+            options: ['Rice', 'Noodles', 'Seafood or vegetables', 'Tofu'],
+            correctAnswer: 'Seafood or vegetables'
+        },
+        {
+            question: 'What unique ingredient gives the Korean dish "Bibimbap" its signature spicy kick?',
+            options: ['Gochujang', 'Wasabi', 'Sriracha', 'Harissa'],
+            correctAnswer: 'Gochujang'
+        },
+        {
+            question: 'In the popular dish "Ratatouille," what type of vegetable is typically not included?',
+            options: ['Eggplant', 'Zucchini', 'Bell Pepper', 'Potato'],
+            correctAnswer: 'Potato'
+        },
+        {
+            question: 'Which ancient civilization is credited with inventing the first known form of chocolate?',
+            options: ['Mayans', 'Egyptians', 'Greeks', 'Romans'],
+            correctAnswer: 'Mayans'
+        }
+    ];
+    
+    const questionSets = [questions1, questions2, questions3];
+
+    // Randomly select a question set index
+    const randomIndex = Math.floor(Math.random() * questionSets.length);
+
+    // Access the randomly selected question set
+    const currentQuestions = questionSets[randomIndex];
+
+    console.log('currentQuestions: ',currentQuestions); 
 
     const checkAnswer = (selectedOption) => {
-        const currentQuestion = questions[currentQuestionIndex];
+        const currentQuestion = currentQuestions[currentQuestionIndex];
         if (!currentQuestion) return;
 
         if (selectedOption === currentQuestion.correctAnswer) {
-            if (currentQuestionIndex === questions.length - 1) {
+            if (currentQuestionIndex === currentQuestions.length - 1) {
                 setQuizCompleted(true);
                 incrementTokenCount();
 
@@ -64,18 +158,18 @@ const DynamicQuiz = ({setIsQuizStarted, isQuizStarted}) => {
     };
 
     const loadNextQuestion = () => {
-        const currentQuestion = questions[currentQuestionIndex];
+        const currentQuestion = currentQuestions[currentQuestionIndex];
         if (!currentQuestion) return;
         return (
             <>
                 <h2 className="text-2xl mb-4 items-center">Question {currentQuestionIndex + 1}: <span
                     className={'text-red-600 text-sm mb-3'}>{errorMessage}</span></h2>
                 <p className="mb-4">{currentQuestion.question}</p>
-                <div className="flex flex-col gap-4 ">
+                <div className="flex flex-col gap-4 items-center ">
                     {currentQuestion.options.map((option) => (
                         <button
                             key={option}
-                            className="w-36 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded cursor-pointer"
+                            className="w-56 bg-green-400 hover:bg-green-500 text-white font-bold py-2 px-4 rounded cursor-pointer"
                             onClick={() => console.log(checkAnswer(option))}
                         >
                             {option}
@@ -136,126 +230,3 @@ const DynamicQuiz = ({setIsQuizStarted, isQuizStarted}) => {
 
 export default DynamicQuiz;
 
-
-
-// import { useState, useEffect } from 'react';
-// import axios from 'axios';
-
-// const DynamicQuiz = () => {
-//   const [quizQuestions, setQuizQuestions] = useState([]);
-//   const [userAnswers, setUserAnswers] = useState({1: 1, });
-//   const [submissionResult, setSubmissionResult] = useState(null);
-//   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(1);
-//   const [showQuiz, setShowQuiz] = useState(true);
-
-//   // Function to fetch quiz questions
-//   const fetchQuestions = async () => {
-//     try {
-//       const response = await axios.get('https://web-production-ad96.up.railway.app/api/v1/questions/');
-//       setQuizQuestions(response.data);
-//     } catch (error) {
-//       console.error('Error fetching questions:', error);
-//     }
-//   };
-
-//   useEffect(() => {
-//     fetchQuestions();
-//   }, []);   
-//   useEffect(() => {
-//     console.log('submissionResult:', submissionResult);
-//   }, [submissionResult]);
-  
-//   // Function to handle answer selection
-//   const handleAnswerClick = (questionId, answerId) => {
-//     setUserAnswers({ ...userAnswers, [questionId]: answerId });
-//     console.log('setUserAnswers: ', userAnswers)
-//     moveToNextQuestion();
-//   };
-
-//   // Function to move to the next question
-//   const moveToNextQuestion = () => {
-//     if (currentQuestionIndex < quizQuestions.length - 1) {
-//       setCurrentQuestionIndex(currentQuestionIndex + 1);
-//     } else {
-//       // Last question submitted, submit answers
-//       submitAnswers();
-//     }
-//   };
-
-//   // Function to submit answers to the backend
-//   const submitAnswers = async () => {
-//     try {
-//       const accessToken = 'Bearer ' + localStorage.getItem('accessToken');
-//       const response = await axios.post(
-//         'https://web-production-ad96.up.railway.app/api/v1/submit-test/',
-//         {
-//           answers: Object.entries(userAnswers).map(([question_id, answer_id]) => ({
-//             question_id: parseInt(question_id),
-//             answer_id: answer_id,
-//           })),
-//         },
-//         {
-//           headers: {
-//             "Content-Type": "application/json",
-//             "Authorization": accessToken,
-//           },
-//         }
-//       );
-//       setSubmissionResult(response.data);
-//       console.log('submissionResult', submissionResult)
-//     } catch (error) {
-//       console.error('Error submitting answers:', error);
-//     }
-//   };
-
-//   const handleCloseQuiz = () => {
-//     setShowQuiz(false);
-    
-
-    
-// };
-  
-
-//   return (
-//     <>
-//     {showQuiz && (
-//       <div className='fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50'>
-//         <div className="container mx-auto mt-8 px-4 py-6 bg-gray-100 rounded-lg shadow-lg max-w-md relative">
-//           <button
-//             className="absolute top-2 right-2 text-gray-600"
-//             onClick={handleCloseQuiz}
-//           >
-//             Close
-//           </button>
-//           {submissionResult ? (
-//             <div className="p-4 bg-green-200 rounded-md mb-4">
-//               {submissionResult.correct_answers > 1 ? (
-//                 <p>Congratulations! You got full points and achieved 1 generation token.</p>
-//               ) : (
-//                 <p>Sorry, you did not get all the answers correct.</p>
-//               )}
-//             </div>
-//           ) : (
-//             <div>
-//               <p className="font-semibold">Question {currentQuestionIndex + 1}: {quizQuestions[currentQuestionIndex]?.text}</p>
-//               <div className="mt-2 space-y-2">
-//                 {quizQuestions[currentQuestionIndex]?.answers.map(answer => (
-//                   <button
-//                     key={answer.id}
-//                     className={`block w-full py-2 px-4 rounded-md bg-blue-500 text-white hover:bg-blue-600 focus:outline-none focus:bg-blue-600`}
-//                     onClick={() => handleAnswerClick(quizQuestions[currentQuestionIndex].id, answer.id)}
-//                   >
-//                     {answer.text}
-//                   </button>
-//                 ))}
-//               </div>
-//             </div>
-//           )}
-//         </div>
-//       </div>
-//     )}
-//   </>
-//   );
-// };
-
-// export default DynamicQuiz;

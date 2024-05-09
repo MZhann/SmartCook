@@ -26,7 +26,7 @@ const UserInfo = ({ id }) => {
         };
 
         fetchUserData();
-    }, [id]); // Ensure fetchUserData runs when id changes
+    }, []); // Ensure fetchUserData runs when id changes
 
     if (!user) {
         return <div>Loading...</div>;
@@ -81,7 +81,7 @@ const UserInfo = ({ id }) => {
                                     {user?.awardBurger !== false &&
                                     user?.top_ten_achievement !== false &&
                                     user?.awardBake !== false ? null : (
-                                        <div className="text-white text-xs">
+                                        <div className="text-black text-xs">
                                             There are no awards yet
                                         </div>
                                     )}

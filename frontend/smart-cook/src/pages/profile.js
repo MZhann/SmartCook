@@ -136,18 +136,20 @@ const Profile = () => {
                         <div className={"mt-7 sm:self-center"}>
                             <div>
                                 <p
-                                    className={`text-white text-[12px] font-[600]`}
+                                    className={`text-white text-[12px] font-[600] -ml-10 mb-3`}
                                 >
                                     Awards
                                 </p>
                             </div>
-                            <div className={`flex flex-row  gap-4 mt-1`}>
+                            <div className={`flex flex-row justify-start -ml-10  gap-4 mt-1`}>
                                 
                                 {userProfile?.awardBurger && <IDidIt /> }
                                 {userProfile?.top_ten_achievement && <Superstar />}
                                 {userProfile?.awardBake && <AIchef />}
 
-                                {(userProfile?.awardBurger !== false && userProfile?.top_ten_achievement !== false && userProfile?.awardBake !== false) ? null : <div className="text-white text-xs">There are no awards yet</div>}
+                                {(userProfile?.awardBurger == false && userProfile?.top_ten_achievement == false && userProfile?.awardBake == false) ? <div className="text-white text-xs">There are no awards yet</div>: <div></div>}
+
+                                {(userProfile?.awardBurger !== false && userProfile?.top_ten_achievement !== false && userProfile?.awardBake !== false) ? <div className="text-white text-xs">There are no awards yet</div> : <></>}
 
 
                                 
