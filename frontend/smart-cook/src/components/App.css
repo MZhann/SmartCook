@@ -57,10 +57,12 @@ h1 {
     margin-top: 3rem;
     grid-template-columns: repeat(4, 95px);
     place-items: center;
-    row-gap: 11px;
-    background-color: #AAE06E;
+    row-gap: 15px;
+    column-gap: 2px;
+    background-color: white;
     width: 411px;
-    height: 320px;
+    height: 360px;
+    place-content: center;
     justify-items: center;
     justify-content: center;
     border-radius: 5px;
@@ -78,8 +80,11 @@ h1 {
 .face {
     height: 83px;
     width: 83px;
-    background: #FFFFFF;
+    background-color: #AAE06E;
     border-radius: 5px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .back {
