@@ -9,10 +9,8 @@ import {config} from "../../../../../config";
 
 
 const AcceptedBattle = ({battle}) => {
-    console.log(battle)
     const router = useRouter()
     const [timeLeft, setTimeLeft] = useState('');
-
 
     useEffect(() => {
         const updateTimer = () => {
@@ -31,8 +29,6 @@ const AcceptedBattle = ({battle}) => {
             const hours = Math.floor((difference / (1000 * 60 * 60)) % 24);
             const minutes = Math.floor((difference / 1000 / 60) % 60);
             const seconds = Math.floor((difference / 1000) % 60);
-
-            console.log(hours, minutes, seconds);
 
             const formattedTime = `${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
             setTimeLeft(formattedTime);
@@ -69,9 +65,9 @@ const AcceptedBattle = ({battle}) => {
                 
             </div>
             <div className="flex flex-col sm:flex-row justify-between items-center w-full p-6">
-                <BattleReceiptCard user={battle.initiator} recipe={battle?.initiator_recipe} win={battle.winner !== null && battle?.winner.first_name === battle?.initiator.first_name}/>
+                <BattleReceiptCard user={battle.initiator} draw={battle?.status === "completed" && battle?.winner === null} recipe={battle?.initiator_recipe} win={battle.winner !== null && battle?.winner.first_name === battle?.initiator.first_name}/>
                 <Image src={vs} alt="vs" className="w-[50px] h-[50px]" />
-                <BattleReceiptCard user={battle.opponent} recipe={battle?.opponent_recipe} win={battle.winner !== null && battle?.winner.first_name === battle?.opponent.first_name}/>
+                <BattleReceiptCard user={battle.opponent} draw={battle?.status === "completed" && battle?.winner === null} recipe={battle?.opponent_recipe} win={battle.winner !== null && battle?.winner.first_name === battle?.opponent.first_name}/>
             </div>
         </div>
     );

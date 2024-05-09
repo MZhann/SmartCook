@@ -8,8 +8,6 @@ import {useRouter} from "next/router";
 import Link from "next/link";
 import saved from "@/../public/images/bluesaved.png"
 import {config} from "../../config";
-import Modal from './modal/Modal';
-import UserInfo from "./modal/UserInfo";
 
 const Recipe = ({recipe}) => {
     const router = useRouter();
@@ -17,9 +15,6 @@ const Recipe = ({recipe}) => {
     const [isFavorite, setIsFavorite] = useState(false);
     const [favorites, setFavorites] = useState();
     const [showModal, setShowModal] = useState(false);
-    
-    
-
 
     useEffect(() => {
         const fetchUserFavorites = () => {

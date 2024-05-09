@@ -13,12 +13,10 @@ const Like = ({ count, id }) => {
 
     useEffect(() => {
         const likedRecipes = likes || [];
-        const found = likedRecipes.some(likeRecipe => likeRecipe.id === id || router.query.recipeTitle);
+        const found = likedRecipes.some(likeRecipe => likeRecipe.id === id);
         setIsLiked(found);
-        console.log(found)
     }, [likes, id]);
 
-    console.log(router.query.recipeTitle);
 
     useEffect(() => {
         const fetchUserLikes = () => {
@@ -28,12 +26,11 @@ const Like = ({ count, id }) => {
                 }
             }).then(r => {
                 setLikes(r.data)
-                console.log(likes)
             }).catch(err => console.error(err));
         }
 
         fetchUserLikes();
-    }, []);
+    }, [likes]);
 
     const handleLike = async (event) => {
         event.preventDefault();
