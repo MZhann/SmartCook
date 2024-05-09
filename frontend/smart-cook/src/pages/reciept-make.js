@@ -443,7 +443,6 @@ const RecipeMake = () => {
                             }
                         </div>
                     </div>
-                    <Footer/>
                 </div>
             </MainContainer>
         );

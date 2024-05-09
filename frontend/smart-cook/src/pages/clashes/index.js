@@ -2,11 +2,10 @@ import MainContainer from "@/components/MainContainer";
 import Navbar from "@/components/Navbar";
 import instax from "@/../public/images/instax.jpg";
 import trash from "@/../public/images/trash.jpg";
-import React, {useEffect, useState} from "react";
+import React, {useState} from "react";
 import Image from "next/image";
 import axios from "axios";
-import Footer from "@/components/Footer";
-import {useRouter} from "next/router";
+
 
 const initiatorCreateUrl = "https://web-production-ad96.up.railway.app/api/v1/clashes/initiator/create/";
 const apiUrl = "https://web-production-ad96.up.railway.app/api/v1/recipes/";
@@ -58,9 +57,7 @@ const ClashRecipeMake = () => {
         const handleMainImageChange = (event) => {
             setMainImage(event.target.files[0]);
         };
-        const handleMainImageRemove = () => {
-            setMainImage(null);
-        };
+
         const handleAddStep = () => {
             setSteps([...steps, {"step_text": "", image: null}]);
         };
@@ -93,7 +90,7 @@ const ClashRecipeMake = () => {
 
             const config = {
                 headers: {
-                    "Authorization": 'Bearer ' + localStorage.getItem('accessToken'),
+                    Authorization: 'Bearer ' + localStorage.getItem('accessToken'),
                 },
             };
             const accessToken = 'Bearer ' + localStorage.getItem('accessToken');

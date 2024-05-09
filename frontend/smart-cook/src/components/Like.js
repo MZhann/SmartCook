@@ -13,9 +13,12 @@ const Like = ({ count, id }) => {
 
     useEffect(() => {
         const likedRecipes = likes || [];
-        const found = likedRecipes.some(likeRecipe => likeRecipe.id === id);
+        const found = likedRecipes.some(likeRecipe => likeRecipe.id === id || router.query.recipeTitle);
         setIsLiked(found);
+        console.log(found)
     }, [likes, id]);
+
+    console.log(router.query.recipeTitle);
 
     useEffect(() => {
         const fetchUserLikes = () => {
@@ -23,7 +26,10 @@ const Like = ({ count, id }) => {
                 headers: {
                     Authorization: "Bearer " + localStorage.getItem("accessToken"),
                 }
-            }).then(r => setLikes(r.data)).catch(err => console.error(err));
+            }).then(r => {
+                setLikes(r.data)
+                console.log(likes)
+            }).catch(err => console.error(err));
         }
 
         fetchUserLikes();

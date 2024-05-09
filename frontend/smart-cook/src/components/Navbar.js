@@ -171,7 +171,7 @@ const Navbar = () => {
                 }
             </div>
             <div
-                className={`bg-gray-600 flex ${isDropdownOpen ? 'block' : 'hidden '} flex-col justify-center items-center absolute top-5 right-4 w-[44%] rounded-2xl py-4 space-y-4 text-white`}>
+                className={`bg-gray-600 flex ${isDropdownOpen ? 'block' : 'hidden '} flex-col justify-center items-center absolute top-5 right-4 w-[50%] rounded-2xl py-4 space-y-4 text-white`}>
                 {!isLoggedIn ? (
                     <Link href={"/sign-in"}>
                         <svg
@@ -206,7 +206,7 @@ const Navbar = () => {
                                             score={250}/>}
                         {userData.photo ? (
                             <Image
-                                className="-mt-1"
+                                className="-mt-1 rounded-full"
                                 src={userData.photo}
                                 alt="User Photo"
                                 width={50}

@@ -38,7 +38,7 @@ const BattleReceiptCard = ({ image, win, user, recipe, doNotShow }) => {
                         <Image
                             src={trophy}
                             alt="win"
-                            className="w-[150px] h-[150px]"
+                            className="w-[150px] opacity-100 h-[150px]"
                         />
                     </div>
                 ) : (
