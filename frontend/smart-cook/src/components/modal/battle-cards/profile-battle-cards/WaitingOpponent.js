@@ -23,7 +23,7 @@ const WaitingOpponent = ({battle, doNotShow}) => {
                 <BattleReceiptCard recipe={battle?.initiator_recipe} user={battle?.initiator} doNotShow={doNotShow}/>
                 <Image src={vs} alt="vs" className="w-[50px] h-[50px]" />
                 <div className="w-[230px] h-[275px] rounded-xl bg-white flex flex-col items-center justify-center ">
-                    <div className="text-black text-lg font-bold mb-3">Waiting for Opponent</div>
+                    <div className="text-black text-lg text-center font-bold mb-3">Waiting for Opponent</div>
                     <div className="text-black text-lg font-bold mb-3">{battle?.opponent.first_name + " " + battle?.opponent.last_name}</div>
                     <Image src={time} alt="time" className="w-[50px] h-[50px]" />
                 </div>
