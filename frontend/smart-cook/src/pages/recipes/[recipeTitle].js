@@ -30,7 +30,7 @@ const RecipeTitle = () => {
     useEffect(() => {
         const fetchRecipe = async () => {
             try {
-                const response = await axios.get(`https://web-production-d3136.up.railway.app/api/v1/recipes/${query.recipeTitle}`, query.recipeTitle);
+                const response = await axios.get(`https://web-production-ad96.up.railway.app/api/v1/recipes/${query.recipeTitle}`, query.recipeTitle);
                 setRecipe(response.data);
                 console.log(response);
             } catch (error) {
@@ -68,7 +68,7 @@ const RecipeTitle = () => {
                 },
             };
             const response = await axios.post(
-                `https://web-production-d3136.up.railway.app/api/v1/recipes/${recipe.id}/add_to_favorites/`, recipe.id, config
+                `https://web-production-ad96.up.railway.app/api/v1/recipes/${recipe.id}/add_to_favorites/`, recipe.id, config
             );
 
             if (response.status === 200) {
@@ -92,7 +92,7 @@ const RecipeTitle = () => {
                     Authorization: `Bearer ${localStorage.getItem('accessToken')}`,
                 },
             };
-            const url = `https://web-production-d3136.up.railway.app/api/v1/recipes/${recipe.id}/remove_from_favorites/`;
+            const url = `https://web-production-ad96.up.railway.app/api/v1/recipes/${recipe.id}/remove_from_favorites/`;
 
             const response = await axios.delete(url, config);
 

@@ -94,7 +94,7 @@ const UserInfo = ({ id }) => {
                 </Link>
             </div>
             <div>
-              <Statistics user={user} />
+              <Statistics fromInfo={true} user={user} />
             </div>
         </div>
     );

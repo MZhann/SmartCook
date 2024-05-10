@@ -19,7 +19,7 @@ const RecipeAi = () => {
             try {
                 setIsLoading("loading");
                 const response = await axios.get(
-                    `https://web-production-d3136.up.railway.app/api/v1/recipes/ai/${query.recipeAi}`,
+                    `https://web-production-ad96.up.railway.app/api/v1/recipes/ai/${query.recipeAi}`,
                     query.recipeAi
                 );
                 setRecipe(response.data);

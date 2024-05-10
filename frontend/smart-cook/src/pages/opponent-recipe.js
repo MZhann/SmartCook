@@ -9,8 +9,8 @@ import Footer from "@/components/Footer";
 import { useRouter } from "next/router";
 
 const opponentCreateUrl =
-    "https://web-production-d3136.up.railway.app/api/v1/clashes/opponent/create/";
-const apiUrl = "https://web-production-d3136.up.railway.app/api/v1/recipes/";
+    "https://web-production-ad96.up.railway.app/api/v1/clashes/opponent/create/";
+const apiUrl = "https://web-production-ad96.up.railway.app/api/v1/recipes/";
 
 const OpponentMakeRecipe = () => {
     const [steps, setSteps] = useState([{ step_text: "", image: null }]);

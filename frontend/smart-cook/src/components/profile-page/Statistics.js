@@ -4,7 +4,7 @@ import trophy from "../../../public/images/trophy.png";
 import rank from "../../../public/images/ranking.png";
 import Link from "next/link";
 
-const Statistics = ({user, mt}) => {
+const Statistics = ({user, mt, fromInfo}) => {
     console.log("user info", user)
     return (
         <div className={`md:w-[278px] self-center md:self-start w-full h-[302px] px-6 py-5 md:p-5 bg-[#2A293B] rounded-3xl xl:mt-0 ${mt && 'mt-[10px]'}`}>
@@ -26,10 +26,12 @@ const Statistics = ({user, mt}) => {
                     <div className={`flex flex-row items-center`}><span className={'text-[20px] font-[600] ml-3'}>{user?.position}</span>&nbsp;<span>rank</span></div>
                 </div>
             </div>
-            <Link href={'/challenges'}
-                  className={'mt-8 flex bg-[#AAE06E] w-[230px] h-[36px] rounded-3xl justify-center items-center'}>
-                <span className={'text-[16px] font-[500] text-white'}>Challenge</span>
-            </Link>
+            {!fromInfo && 
+                <Link href={'/challenges'} className={'mt-8 flex bg-[#AAE06E] w-[230px] h-[36px] rounded-3xl justify-center items-center'}>
+                    <span className={'text-[16px] font-[500] text-white'}>Challenge</span>
+                </Link>
+            }
+           
         </div>
     );
 };

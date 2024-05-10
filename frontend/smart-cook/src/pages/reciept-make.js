@@ -7,7 +7,7 @@ import Image from "next/image";
 import axios from "axios";
 import Footer from "@/components/Footer";
 
-const apiUrl = "https://web-production-d3136.up.railway.app/api/v1/recipes/";
+const apiUrl = "https://web-production-ad96.up.railway.app/api/v1/recipes/";
 
 const RecipeMake = () => {
         const [steps, setSteps] = useState([{step_text: "", image: null}]);

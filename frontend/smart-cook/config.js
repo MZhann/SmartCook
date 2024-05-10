@@ -1,3 +1,3 @@
 export const config = {
-    baseUrl: "https://web-production-d3136.up.railway.app",
+    baseUrl: "https://web-production-ad96.up.railway.app",
 }
