@@ -3,84 +3,84 @@ const Data = [
         id: 1,
         name: "avocado",
         img:
-            "/images/avocado.png",
+            "/images/icons/avocado.png",
         matched: false,
     },
     {
         id: 2,
         name: "banana",
         img:
-            "/images/banana.png",
+            "/images/icons/bananas.png",
         matched: false,
     },
     {
         id: 3,
-        name: "eggplant",
+        name: "steak",
         img:
-            "/images/eggplant.png",
+            "/images/icons/steak.png",   //eggplant
         matched: false,
     },
     {
         id: 4,
-        name: "tomato",
+        name: "cucumber",
         img:
-            "/images/tomato.png",
+            "/images/icons/cucumber.png",  //tomato
         matched: false,
     },
     {
         id: 5,
-        name: "olive",
+        name: "corn",
         img:
-            "/images/olive.png",
+            "/images/icons/corn.png",  //olive
         matched: false,
     },
     {
         id: 6,
-        name: "mushroom",
+        name: "broccoli",
         img:
-            "/images/mushroom.png",
+            "/images/icons/broccoli.png", //mushroom
         matched: false,
     },
     {
         id: 7,
         name: "avocado",
         img:
-            "/images/avocado.png",
+            "/images/icons/avocado.png",
         matched: false,
     },
     {
         id: 8,
         name: "banana",
         img:
-            "/images/banana.png",
+            "/images/icons/bananas.png",
         matched: false,
     },
     {
         id: 9,
-        name: "eggplant",
+        name: "steak",
         img:
-            "/images/eggplant.png",
+            "/images/icons/steak.png",
         matched: false,
     },
     {
         id: 10,
-        name: "tomato",
+        name: "cucumber",
         img:
-            "/images/tomato.png",
+            "/images/icons/cucumber.png",
         matched: false,
     },
     {
         id: 11,
-        name: "olive",
+        name: "corn",
         img:
-            "/images/olive.png",
+            "/images/icons/corn.png",
         matched: false,
     },
     {
         id: 12,
-        name: "mushroom",
+        name: "broccoli",
         img:
-            "/images/mushroom.png",
+            "/images/icons/broccoli.png",
         matched: false,
     },
 ];
