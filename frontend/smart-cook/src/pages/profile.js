@@ -6,9 +6,9 @@ import logout from "../../public/images/Logout.png";
 import WaitingOpponent from "@/components/modal/battle-cards/profile-battle-cards/WaitingOpponent";
 import Statistics from "@/components/profile-page/Statistics";
 import Chooser from "@/components/profile-page/Choose";
-import { config } from "../../config.js";
+import {config} from "../../config.js";
 import axios from "axios";
-import { useEffect, useState } from "react";
+import {useEffect, useState} from "react";
 import EditProfile from "@/components/modal/EditProfile";
 import NoBattle from "@/components/modal/battle-cards/profile-battle-cards/NoBattle";
 import DeclinedBattle from "@/components/modal/battle-cards/profile-battle-cards/DeclinedBattle";
@@ -54,7 +54,6 @@ const Profile = () => {
     };
 
 
-
     useEffect(() => {
         const fetchProfile = () => {
             try {
@@ -83,13 +82,14 @@ const Profile = () => {
     return (
         <MainContainer>
             <div className="mx-8 w-full max-w-[1195px] relative flex flex-col items-center">
-                <Navbar />
+                <Navbar/>
                 <div
                     className={`flex justify-center items-center w-full text-black text-[40px] font-[600] mt-7`}
                 >
                     <h1 className={"text-black"}>Profile</h1>
                 </div>
-                <div className={"flex flex-col w-full flex-wrap lg:flex-row lg:space-x-6 justify-between mt-4 md:justify-center"}>
+                <div
+                    className={"flex flex-col w-full flex-wrap lg:flex-row lg:space-x-6 justify-between mt-4 md:justify-center"}>
                     <div
                         className={
                             "flex flex-col mb-4 justify-center items-center w-full  lg:w-[278px] h-[546px] px-6 py-5 bg-[#2A293B] rounded-3xl"
@@ -142,17 +142,17 @@ const Profile = () => {
                                 </p>
                             </div>
                             <div className={`flex flex-row justify-start -ml-10  gap-4 mt-1`}>
-                                
-                                {userProfile?.awardBurger && <IDidIt /> }
-                                {userProfile?.top_ten_achievement && <Superstar />}
-                                {userProfile?.awardBake && <AIchef />}
-
-                                {(userProfile?.awardBurger == false && userProfile?.top_ten_achievement == false && userProfile?.awardBake == false) ? <div className="text-white text-xs">There are no awards yet</div>: <div></div>}
-
-                                {(userProfile?.awardBurger !== false && userProfile?.top_ten_achievement !== false && userProfile?.awardBake !== false) ? <div className="text-white text-xs">There are no awards yet</div> : <></>}
-
-
-                                
+                                {userProfile?.awardBurger || userProfile?.top_ten_achievement || userProfile?.awardBake ?
+                                    (
+                                        <>
+                                            {userProfile?.awardBurger && <IDidIt/>}
+                                            {userProfile?.top_ten_achievement && <Superstar/>}
+                                            {userProfile?.awardBake && <AIchef/>}
+                                        </>
+                                    ) : (
+                                        <div className="text-white text-xs">There are no awards yet</div>
+                                    )
+                                }
                             </div>
                         </div>
                         <div className={`flex gap-3 flex-col mt-[160px]`}>
@@ -199,18 +199,18 @@ const Profile = () => {
                     battle[0]?.status === "pending" &&
                     battle[0]?.initiator.id === userProfile?.id ? (
                         <WaitingOpponent battle={battle[0]} doNotShow={true}/>
-                    ) : battle && battle[0]?.initiator !== userProfile?.id && battle[0]?.status ===  "pending" ? (
+                    ) : battle && battle[0]?.initiator !== userProfile?.id && battle[0]?.status === "pending" ? (
                         <AcceptDecline battle={battle[0]}/>
                     ) : battle && battle[0]?.status === "accepted" &&
-                      battle[0]?.initiator.id === userProfile?.id ? (
+                    battle[0]?.initiator.id === userProfile?.id ? (
                         battle &&
-                        <AcceptedBattle battle={battle[0]} />
+                        <AcceptedBattle battle={battle[0]}/>
                     ) : battle && battle[0]?.status === "accepted" ? (
-                        <AcceptedBattle battle={battle[0]} />
+                        <AcceptedBattle battle={battle[0]}/>
                     ) : battle && battle[0]?.status === "declined" ? (
-                        <DeclinedBattle />
+                        <DeclinedBattle/>
                     ) : (
-                        <NoBattle />
+                        <NoBattle/>
                     )}
                     <Statistics mt={true} user={userProfile}/>
                     <EditProfile
@@ -220,7 +220,7 @@ const Profile = () => {
                         closeModal={closeModal}
                     />
                 </div>
-                <Chooser userProfile={userProfile} />
+                <Chooser userProfile={userProfile}/>
             </div>
         </MainContainer>
     );
