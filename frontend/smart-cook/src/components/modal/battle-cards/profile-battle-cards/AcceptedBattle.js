@@ -60,8 +60,9 @@ const AcceptedBattle = ({battle}) => {
             <div className="text-lg mt-3">Culinary Clash {battle.id}</div>
             <div className="text-3xl text-white mt-2 text-center">{battle?.theme}</div>
             <div className="p-3 px-4 sm:h-[36px] bg-[#AAE06E] flex justify-center items-center text-2xl font-bold tracking-wider rounded-3xl mt-4">
-                {timeLeft === "00:00:00" && `Completed ${addOneDayAndFormat(battle?.created_at)}`}
-                {timeLeft !== "00:00:00" && timeLeft}
+                {/* {timeLeft === "00:00:00" && `Completed ${addOneDayAndFormat(battle?.created_at)}`}
+                {timeLeft !== "00:00:00" && timeLeft} */}
+                {battle?.status == 'completed' ? `Completed ${addOneDayAndFormat(battle?.created_at)}` :  timeLeft}
                 
             </div>
             <div className="flex flex-col sm:flex-row justify-between items-center w-full p-6">
