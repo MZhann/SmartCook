@@ -26,7 +26,7 @@ const HoverExample = () => {
                 }`}
                 style={{ marginTop: '10px' }}
             >
-                Superstar<br></br>Awarded to the top 10 chefs on the leaderboard who have actively participated in culinary battles.
+                Superstar<br></br>Awarded to the top 3 chefs on the leaderboard who have actively participated in culinary battles.
             </div>
         </div>
     );

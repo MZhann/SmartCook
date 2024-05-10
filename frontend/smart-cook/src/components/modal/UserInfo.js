@@ -80,13 +80,13 @@ const UserInfo = ({ id }) => {
                                     {user?.top_ten_achievement && <Superstar />}
                                     {user?.awardBake && <AIchef />}
 
-                                    {user?.awardBurger !== false &&
-                                    user?.top_ten_achievement !== false &&
-                                    user?.awardBake !== false ? null : (
+                                    {user?.awardBurger == false &&
+                                    user?.top_ten_achievement == false &&
+                                    user?.awardBake == false ? (
                                         <div className="text-black text-xs">
                                             There are no awards yet
                                         </div>
-                                    )}
+                                    ): <div></div>}
                                 </div>
                             </div>
                         </div>
